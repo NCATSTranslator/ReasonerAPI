@@ -277,7 +277,7 @@ definitions:
         description: "JSON-LD context URI"
       type:
         type: "string"
-        example: "medical_translator_query_result"
+        example: "medical_translator_query_response"
         description: "Entity type of this response"
       id:
         type: "string"
@@ -285,7 +285,7 @@ definitions:
         description: "URI for this response"
       tool_version:
         type: "string"
-        example: "RTX 0.6.0"
+        example: "RTX 0.5.1"
         description: "Version label of the tool that generated this response"
       schema_version:
         type: "string"
