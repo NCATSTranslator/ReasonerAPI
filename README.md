@@ -6,7 +6,7 @@ NCATS Biomedical Translator Reasoners Standard API
 
 ## Earlier versions (NOW OBSOLETE)
 - Version 0.6 API Standard format specification - further discussions:
-https://docs.google.com/document/d/10QIIRjcTVPDMbdZnukp1KHWdreivu6rWwvwwWf7C-a0/edit
+https://docs.google.com/document/d/1vOitEIjAnEeUS6nRPhBqD2IxDTAMSLIBa1BuOQ59EWE/edit#
 - Version 0.5 Initial API Standard format specification as implemented by Team X-ray and ??:
 https://docs.google.com/document/d/10QIIRjcTVPDMbdZnukp1KHWdreivu6rWwvwwWf7C-a0/edit
 - Version 0.4 API Standard format specification from January 2018 Hackathon:
