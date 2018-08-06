@@ -352,7 +352,7 @@ definitions:
       query_type_id:
         type: "string"
         example: "Q2"
-        description: "The query type id if one is known for the query/response (as defined in https://docs.google.com/spreadsheets/d/18zW81wteUfOn3rFRVG0z8mW-ecNhdsfD_6s73ETJnUw/edit#gid=1742835901 )"
+        description: "The query type id if one is known for the query/response (as defined in https://docs.google.com/spreadsheets/d/1Gna_yCbHj14Brp-8GBY50Mq36nwKGl5T5z4REUQQsfw/edit )"
       terms:
         type: "object"
         example: "{ 'disease': 'malaria' }"
