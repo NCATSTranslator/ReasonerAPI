@@ -6,17 +6,46 @@ facilitate comparison among reasoners and chaining of queries to different reaso
 achieve an aggregated result.
 
 ## Previous versions
-- Previous versions of the draft standard may be found at https://github.com/NCATS-Tangerine/NCATS-ReasonerStdAPI/tree/master/API
+- Previous and potentially newer versions of the draft standard may be found at https://github.com/NCATS-Tangerine/NCATS-ReasonerStdAPI/tree/master/API
 - Early Google-doc based discussion may be found at https://drive.google.com/drive/folders/1kTIW6W7sLdSAhH9qBBeSAEZ4ouAViI4x
-- Emerging KG Standard: https://docs.google.com/document/d/1TrvqJPe_HwmRJ5HCwZ7fsi9_mwGcwLOZ53Fnjo8Sh4E/edit#
+- Emerging KG Standard: https://docs.google.com/document/d/1TrvqJPe_HwmRJ5HCwZ7fsi9_mwGcwLOZ53Fnjo8Sh4E
 
 ## Notes
 - The target output is intended to be JSON-LD
 
-# Specification
-Below is a description of the elements of the JSON format.
+# INPUT Specification
+Below is a description of the elements of the JSON formatted input to the /query endpoint.
+Note that at present all parameters are optional and the endpoint handler will look at what
+is provided and decide if it can proceed with the input given.
 
-## Top level (Response)
+## Top level (Query class)
+- **query_type_id** - string - Identifier string of the intended query (e.g. Q15, WF1M2)
+- **terms** - object - Dict of terms needed by the specific query type (Dict keys are suggested to be bioentity types, but are not currently constrained at all). (e.g., { "disease": "malaria", "chemical_substance": "ibuprofen" } )
+- **options** - string - A string of options that can be sent with the query. Options are tool specific and not stipulated here
+- **query_plan** - array - List of node types and edge types in a series that constitute a query plan. Experimental.
+
+- **max_results** - integer - Maximum number of individual results to return
+- **page_size** - integer - Split the results into pages with this number of results each
+- **page_number** - integer - Page number of results when the number of results exceeds the page_size
+
+- **bypass_cache** - string - Set to 'true' in order to bypass any possible cached response and try to answer the query over again
+- **asynchronous** - string - Set to 'true' in order to receive an incomplete response_id if the query will take a while. Client can then periodically request that response_id for a status update and eventual complete response
+- **reasoner_ids** - array - List of reasoners to consult for the query (intended for support for an endpoint that can forward a query to one or more of the registered Translator Reasoners and further process the result for the user)
+
+- **original_question** - string - Natural English question entered by the user (not needed, but included for completeness)
+- **restated_question** - string - Natural English question restated by the interpreter based on what it understood (not needed, but included for completeness)
+- **message** - string - Response message from the interpreter back to the user (not needed, but included for completeness)
+
+- **known_query_type_id** - string - DEPRECATED form of what is now query_type_id
+
+
+
+
+
+# OUTPUT Specification
+Below is a description of the elements of the JSON formatted output.
+
+## Top level (Response class)
 - **context** - URI - URL of the JSON-LD context file of this document. An actual context file remains yet been developed.
 - **type** - string - Type definition of this response object. Should always be "medical_translator_query_result"
 - **id** - URI - URI of this Reasoning Tools response if it is persisted somewhere.
