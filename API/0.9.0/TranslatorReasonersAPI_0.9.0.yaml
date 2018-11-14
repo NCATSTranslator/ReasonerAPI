@@ -256,9 +256,9 @@ definitions:
         type: "object"
         description: "Container for one or more Message objects or identifiers for one or more Messages along with a processing plan for how those messages should be processed and returned"
         items:
-          $ref: "#/definitions/MessageEnvelope"
+          $ref: "#/definitions/PreviousMessageProcessingPlan"
     additionalProperties: true
-  MessageEnvelope:
+  PreviousMessageProcessingPlan:
     type: "object"
     properties:
       previous_message_uris:
@@ -375,14 +375,17 @@ definitions:
           $ref: "#/definitions/Result"
       query_graph:
         type: "object"
+        description: "QueryGraph object that contains a serialization of a query in the form of a graph"
         items:
           $ref: "#/definitions/QueryGraph"
       knowledge_graph:
         type: "object"
+        description: "KnowledgeGraph object that contains all the nodes and edges referenced in any of the possible answers to the query"
         items:
           $ref: "#/definitions/KnowledgeGraph"
       remote_knowledge_graph:
         type: "object"
+        description: "Connection information for a remote knowledge graph that is a substitute for local KnowledgeGraph contained in this Message"
         items:
           $ref: "#/definitions/RemoteKnowledgeGraph"
     additionalProperties: true
@@ -450,12 +453,13 @@ definitions:
         example: "reasoner"
         description: "Identifier string of the reasoner that provided this result (e.g., reasoner, Robokop, Indigo, Integrator)"
       result_graph:
+        type: "object"
+        description: "A graph that describes the thought pattern of this result (i.e. answer to the query)"
         $ref: "#/definitions/KnowledgeGraph"
       knowledge_map:
-        type: "array"
-        items:
-          $ref: "#/definitions/NodeEdgeNodeTriple"
-    additionalProperties: true
+        type: "object"
+        description: "Lookup dict that maps QNode and QEdge identifiers in the QueryGraph to Node and Edge identifiers in the KnowledgeGraph"
+        additionalProperties: true
   KnowledgeGraph:
     type: "object"
     description: "A thought graph associated with this result. This will commonly be a linear path subgraph from one concept to another, but related items aside of the path may be included."
@@ -552,35 +556,6 @@ definitions:
         type: "boolean"
         example: "true"
         description: "Boolean that if set to true, indicates the edge statement is negated i.e. is not true"
-    additionalProperties: true
-  NodeEdgeNodeTriple:
-    type: "object"
-    description: "A node-edge-node triple binding a result to both the QueryGraph and KnowledgeGraph"
-    properties:
-      nodeA_QG_node_id:
-        type: "string"
-        example: "n00"
-        description: "QueryGraph internal identifier for a QNode"
-      nodeA_KG_id:
-        type: "string"
-        example: "OMIM:603903"
-        description: "CURIE identifier for this node in the KnowledgeGraph"
-      nodeB_QG_node_id:
-        type: "string"
-        example: "n01"
-        description: "QueryGraph internal identifier for a QNode"
-      nodeB_KG_id:
-        type: "string"
-        example: "UNIPROT:P01234"
-        description: "CURIE identifier for this node in the KnowledgeGraph"
-      edge_QG_edge_id:
-        type: "string"
-        example: "e00"
-        description: "QueryGraph internal identifier for a QEdge"
-      edge_KG_id:
-        type: "string"
-        example: "553903"
-        description: "Local identifier for this node which is unique within this KnowledgeGraph, and perhaps within the source reasoner's knowledge graph"
     additionalProperties: true
   Node:
     type: "object"
