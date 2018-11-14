@@ -12,7 +12,7 @@ achieve an aggregated result.
 - The target output is intended to be JSON-LD
 
 
-# WARNING: This markdown file has not yet been updated to version 0.9.0.! The .yaml file and the .pptx file are in sync and represent 0.9.0, but the below doc has not yet caught up! In process...
+# WARNING: This markdown file has not yet been fully updated to version 0.9.0! The .yaml file and the .pptx file are up to date 0.9.0, but the below doc has not yet caught up! In process...
 
 
 
