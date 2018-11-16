@@ -227,15 +227,15 @@ definitions:
         description: "Set to true in order to bypass any possible cached message and try to answer the query over again"
       asynchronous:
         type: "string"
-        example: "False"
+        example: "false"
         description: "Set to true in order to receive an incomplete message_id if the query will take a while. Client can then periodically request that message_id for a status update and eventual complete message"
       max_results:
         type: "integer"
-        example: "100"
+        example: 100
         description: "Maximum number of individual results to return"
       page_size:
         type: "integer"
-        example: 100
+        example: 20
         description: "Split the results into pages with this number of results each"
       page_number:
         type: "integer"
@@ -243,7 +243,7 @@ definitions:
         description: "Page number of results when the number of results exceeds the page_size"
       reasoner_ids:
         type: "array"
-        example: [ "reasoner", "Robokop", "Indigo" ]
+        example: [ "RTX", "Robokop" ]
         description: "List of reasoners to consult for the query"
         items:
           type: "string"
@@ -293,19 +293,19 @@ definitions:
         description: "JSON-LD context URI"
       type:
         type: "string"
-        example: "medical_translator_query_result"
+        example: "translator_reasoner_message"
         description: "Entity type of this message"
       id:
         type: "string"
-        example: "https://rtx.ncats.io/api/rtx/v1/message/1234"
+        example: "https://rtx.ncats.io/api/rtx/v1/message/123"
         description: "URI for this message"
       reasoner_id:
         type: "string"
         example: "reasoner"
-        description: "Identifier string of the reasoner that provided this message (e.g., reasoner, Robokop, Indigo, Integrator)"
+        description: "Identifier string of the reasoner that provided this message (one of RTX, Robokop, Indigo, Integrator, etc.)"
       tool_version:
         type: "string"
-        example: "reasoner 0.5.0"
+        example: "RTX 0.5.0"
         description: "Version label of the tool that generated this message"
       schema_version:
         type: "string"
@@ -314,11 +314,11 @@ definitions:
       datetime:
         type: "string"
         example: "2018-01-09 12:34:45"
-        description: "ISO standard datetime string for the time that this message was generated"
+        description: "Datetime string for the time that this message was generated"
       n_results:
         type: "integer"
         example: 42
-        description: "Total number of results in the message (which may be less than what is returned if limits were placed on the results to return)"
+        description: "Total number of results from the query (which may be less than what is returned if limits were placed on the number of results to return)"
       message_code:
         type: "string"
         example: "OK"
@@ -370,6 +370,7 @@ definitions:
         example: "{coalesce=True,threshold=0.9}"
         description: "Dict of options that can be sent with the query. Options are tool specific and not stipulated here"
       results:
+        description: "List of all returned potential answers for the query posed"
         type: "array"
         items:
           $ref: "#/definitions/Result"
@@ -395,7 +396,7 @@ definitions:
     properties:
       id:
         type: "string"
-        example: "https://rtx.ncats.io/api/rtx/v1/result/2345"
+        example: "https://rtx.ncats.io/api/rtx/v1/result/234"
         description: "URI for this message"
       description:
         type: "string"
@@ -421,23 +422,23 @@ definitions:
         type: "number"
         format: "float"
         example: 163.233
-        description: "Any type of score associated with this result (highest confidence)"
+        description: "Any type of score associated with this result"
       score_name:
         type: "string"
         example: "Jaccard distance"
         description: "Name for the score"
       score_direction:
         type: "string"
-        example: "Jaccard distance"
+        example: "lower_is_better"
         description: "Sorting indicator for the score: one of higher_is_better or lower_is_better"
       confidence:
         type: "number"
         format: "float"
         example: 0.9234
-        description: "Confidence metric for this result, a value 0.0 (no confidence) and 1.0 (highest confidence)"
+        description: "Confidence metric for this result, a value between (inclusive) 0.0 (no confidence) and 1.0 (highest confidence)"
       result_type:
         type: "string"
-        example: "answer"
+        example: "individual query answer"
         description: "One of several possible result types: 'individual query answer', 'neighborhood graph', 'type summary graph'"
       result_group:
         type: "integer"
@@ -450,8 +451,8 @@ definitions:
         description: "A score that denotes the similarity of this result to other members of the result_group"
       reasoner_id:
         type: "string"
-        example: "reasoner"
-        description: "Identifier string of the reasoner that provided this result (e.g., reasoner, Robokop, Indigo, Integrator)"
+        example: "RTX"
+        description: "Identifier string of the reasoner that provided this result (e.g., RTX, Robokop, Indigo, Integrator)"
       result_graph:
         type: "object"
         description: "A graph that describes the thought pattern of this result (i.e. answer to the query)"
@@ -466,10 +467,12 @@ definitions:
     properties:
       nodes:
         type: "array"
+        description: "List of nodes in the KnowledgeGraph"
         items:
           $ref: "#/definitions/Node"
       edges:
         type: "array"
+        description: "List of edges in the KnowledgeGraph"
         items:
           $ref: "#/definitions/Edge"
     additionalProperties: true
@@ -480,23 +483,26 @@ definitions:
       url:
         type: "string"
         example: "http://robokop.renci.org/api/kg"
-        description: "URL that provides programmatic access to the knowledge graph"
+        description: "URL that provides programmatic access to the remote knowledge graph"
       credentials:
         type: "object"
+        description: "Credentials needed for programmatic access to the remote knowledge graph"
         items:
           $ref: "#/definitions/Credentials"
     additionalProperties: true
   Credentials:
-    description: "Credentials"
+    description: "Credentials needed for programmatic access to the remote knowledge graph"
     type: "object"
     required:
       - username
       - password
     properties:
       username:
+        description: "Username needed for programmatic access to the remote knowledge graph"
         type: string
       password:
         type: string
+        description: "Password needed for programmatic access to the remote knowledge graph"
     additionalProperties: true
   QueryGraph:
     type: "object"
@@ -504,10 +510,12 @@ definitions:
     properties:
       nodes:
         type: "array"
+        description: "List of nodes in the QueryGraph"
         items:
           $ref: "#/definitions/QNode"
       edges:
         type: "array"
+        description: "List of edges in the QueryGraph"
         items:
           $ref: "#/definitions/QEdge"
     additionalProperties: true
@@ -542,7 +550,7 @@ definitions:
         description: "Higher-level relationship type of this edge"
       relation:
         type: "string"
-        example: "affects"
+        example: "upregulates"
         description: "Lower-level relationship type of this edge"
       source_id:
         type: "string"
@@ -628,7 +636,7 @@ definitions:
         description: "Higher-level relationship type of this edge"
       relation:
         type: "string"
-        example: "affects"
+        example: "upregulates"
         description: "Lower-level relationship type of this edge"
       source_id:
         type: "string"
@@ -654,7 +662,12 @@ definitions:
         type: "number"
         format: "float"
         example: 0.99
-        description: "Confidence metric for this edge, a value 0.0 (no confidence) and 1.0 (highest confidence)"
+        description: "Confidence metric for this edge, a value between (inclusive) 0.0 (no confidence) and 1.0 (highest confidence)"
+      weight:
+        type: "number"
+        format: "float"
+        example: 0.99
+        description: "Weight metric for this edge, with no upper bound. Perhaps useful when formal confidence metrics are not available"
       publications:
         type: "array"
         description: "List of CURIEs for publications associated with this edge"
@@ -706,11 +719,11 @@ definitions:
     properties:
       id:
         type: "string"
-        example: "https://rtx.ncats.io/api/rtx/v1/result/2345/feedback/4567"
+        example: "https://rtx.ncats.io/api/rtx/v1/result/234/feedback/56"
         description: "URI for this feedback item"
       result_id:
         type: "string"
-        example: "https://rtx.ncats.io/api/rtx/v1/result/2345"
+        example: "https://rtx.ncats.io/api/rtx/v1/result/234"
         description: "URI for the result that this feedback corresponds to"
       expertise_level_id:
         type: "integer"
@@ -742,6 +755,7 @@ definitions:
     properties:
       feedback_list:
         type: "array"
+        description: "List of feedback posts for this result"
         items:
           $ref: "#/definitions/Feedback"
   MessageFeedback:
@@ -750,5 +764,6 @@ definitions:
     properties:
       feedback_list:
         type: "array"
+        description: "List of feedback posts for this entire message"
         items:
           $ref: "#/definitions/Feedback"

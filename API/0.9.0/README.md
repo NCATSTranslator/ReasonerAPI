@@ -10,10 +10,7 @@ achieve an aggregated result.
 
 ## Notes
 - The target output is intended to be JSON-LD
-
-
-# WARNING: This markdown file has not yet been fully updated to version 0.9.0! The .yaml file and the .pptx file are up to date 0.9.0, but the below doc has not yet caught up! In process...
-
+- Updated 2018-11-16
 
 
 # INPUT Specification
@@ -22,19 +19,20 @@ Note that at present all parameters are optional and the endpoint handler will l
 is provided and decide if it can proceed with the input given.
 
 ## Top level (Query class)
-- **max_results** - integer - Maximum number of individual results to return
-- **page_size** - integer - Split the results into pages with this number of results each
-- **page_number** - integer - Page number of results when the number of results exceeds the page_size
+- **bypass_cache** - string - Set to true in order to bypass any possible cached message and try to answer the query over again (e.g.:  "true")                                             
+- **asynchronous** - string - Set to true in order to receive an incomplete message_id if the query will take a while. Client can then periodically request that message_id for a status update and eventual complete message (e.g.:  "false")                                                                                                                                          
+- **max_results** - integer - Maximum number of individual results to return (e.g.:  100)                                                                                                   
+- **page_size** - integer - Split the results into pages with this number of results each (e.g.:  20)                                                                                       
+- **page_number** - integer - Page number of results when the number of results exceeds the page_size (e.g.:  1)                                                                            
+- **reasoner_ids** - array - List of reasoners to consult for the query (e.g.:  [ "RTX", "Robokop" ])                                                                                       
+- **query_message** - object - Message object that represents the query to be answered (e.g.: )                                                                                             
+- **previous_message_processing_plan** - object - Container for one or more Message objects or identifiers for one or more Messages along with a processing plan for how those messages should be processed and returned (e.g.: )                                                                                                                                                       
 
-- **bypass_cache** - string - Set to 'true' in order to bypass any possible cached response and try to answer the query over again
-- **asynchronous** - string - Set to 'true' in order to receive an incomplete message_id if the query will take a while. Client can then periodically request that message_id for a status update and eventual complete message
-- **reasoner_ids** - array - List of reasoners to consult for the query (intended for support for an endpoint that can forward a query to one or more of the registered Translator Reasoners and further process the result for the user)
-
-- **query_message** - object - Message object that represents the query to be answered
-- **previous_message_processing_plan** - object - Container for one or more Message objects or identifiers for one or more Messages along with a processing plan for how those messages should be processed and returned
-
-
-
+## PreviousMessageProcessingPlan
+- **previous_message_uris** - array - List of URIs for Message objects to fetch and process (e.g.:  [ "https://rtx.ncats.io/api/rtx/v1/message/300" ])
+- **previous_messages** - array - List of Message objects to process (e.g.: )
+- **processing_actions** - array - List of order-dependent actions to guide what happens with the Message object(s) (e.g.:  [ "mod45filter", "redirect2RTX" ])
+- **options** - object - Dict of options that apply during processing in an order independent fashion (e.g.:  [ "topNMostFrequent" ])
 
 
 
@@ -42,83 +40,124 @@ is provided and decide if it can proceed with the input given.
 Below is a description of the elements of the JSON formatted output.
 
 ## Top level (Message class)
-- **context** - URI - URL of the JSON-LD context file of this document. An actual context file remains yet been developed.
-- **type** - string - Type definition of this message object. Should always be "medical_translator_query_result"
-- **id** - URI - URI of this message if it is persisted somewhere.
-- **reasoner_id** - string - String identifier of the reasoner providing the response ("RTX", "Robokop", "Indigo", "Integrator", etc.)
-- **tool_version** - string - The version string of the reasoning tool that provided this response.
-- **schema_version** - string - The API standard will likely evolve over time. This encodes the schema version used in this response.
-- **datetime** - datetime - The datetime stamp when this response was provided to a user.
-- **n_results** - int - Total number of results in the message (which may be less than what is returned if limits were placed on the results to return)
-- **message_code** - string - A terse code indicating success or error message for the query overall. OK is normal completion. Available error codes are not yet defined. These probably should be mapped to HTTP error codes in the YAML or entirely replaced by YAML-defined error codes.
-- **code_description** - string - A detailed message from the Reasoning Tool to the user about degree of success of answering the query. If there are no results returned, then this message should detail why there are no results. If there are results returned, the Reasoning Tool may still provide some commentary to the user about how act of addressing the query result went. This is NOT intended to describe and answer/result, but rather just for the Reasoning Tool to provide information external to any specific result to the user.
-- **original_question** - string - The exact text question that the original user provided to the reasoning tool
-- **restated_question** - string - A restatement of the question that the reasoning tool understood and is answering with this response. This may not match the intent of the original_question_text.
-- **query_type_id** - string - The query type id if one is known for the query/response (as defined in https://docs.google.com/spreadsheets/d/1Gna_yCbHj14Brp-8GBY50Mq36nwKGl5T5z4REUQQsfw/edit)
-- **terms** - object - A dict/hash/object of the terms needed to convert the referenced **query_type_id** into a specific instance of a question. For example: "{ 'disease': 'malaria' }"
-- **query_options** - object - Dict of options that can be sent with the query. Options are tool specific and not stipulated here
-- **table_column_names** - array - List of column names that corresponds to the row_data for each result. Example: '[ "chemical_substance.name", "chemical_substance.id" ]'
-- **results** - array - A response from a tool may contain multiple results, where a result is an independent potential answer to the query.
-- **query_graph** - object - Some reasoners may not work from an English text question, but may begin with a series of notes or node types. This section is intended to encode such a beginning. It is still not completely specified. There is some initial work on this in the QuerySpecification doc in the NCATS Hackathon 44/51 folder. To be fleshed out later with appropriate input from groups who want this functionality.
-- **knowledge_graph** - object - KnowledgeGraph object that contains all the nodes and edges referenced in any of the possible answers to the query
-- **remote_knowledge_graph** - object - Connection information for a remote knowledge graph that is a substitute for local KnowledgeGraph contained in this Message
+- **context** - string - JSON-LD context URI (e.g.:  "https://rtx.ncats.io/ns/translator.jsonld")
+- **type** - string - Entity type of this message (e.g.:  "translator_reasoner_message")
+- **id** - string - URI for this message (e.g.:  "https://rtx.ncats.io/api/rtx/v1/message/123")
+- **reasoner_id** - string - Identifier string of the reasoner that provided this message (one of RTX, Robokop, Indigo, Integrator, etc.) (e.g.:  "reasoner")
+- **tool_version** - string - Version label of the tool that generated this message (e.g.:  "RTX 0.5.0")
+- **schema_version** - string - Version label of this JSON-LD schema (e.g.:  "0.9.0")
+- **datetime** - string - Datetime string for the time that this message was generated (e.g.:  "2018-01-09 12:34:45")
+- **n_results** - integer - Total number of results from the query (which may be less than what is returned if limits were placed on the number of results to return) (e.g.:  42)
+- **message_code** - string - Set to OK for success, or some other short string to indicate and error (e.g., KGUnavailable, TermNotFound, etc.) (e.g.:  "OK")
+- **code_description** - string - Extended description denoting the success or mode of failure in the generation of the message (e.g.:  "9 results found")
+- **table_column_names** - array - List of column names that corresponds to the row_data for each result (e.g.:  [ "chemical_substance.name", "chemical_substance.id" ])
+- **original_question** - string - The original question text typed in by the user (e.g.:  "what proteins are affected by sickle cell anemia")
+- **restated_question** - string - A precise restatement of the question, as understood by the Translator, for which the answer applies. The user should verify that the restated question matches the intent of their original question (it might not). (e.g.:  "Which proteins are affected by sickle cell anemia?")
+- **query_type_id** - string - The query type id if one is known for the query/message (as defined in https://docs.google.com/spreadsheets/d/18zW81wteUfOn3rFRVG0z8mW-ecNhdsfD_6s73ETJnUw/edit#gid=1742835901 ) (e.g.:  "Q2")
+- **terms** - object - Dict of terms needed by the specific query type (e.g.: )
+- **query_options** - object - Dict of options that can be sent with the query. Options are tool specific and not stipulated here (e.g.:  "{coalesce=True,threshold=0.9}")
+- **results** - array - List of all returned potential answers for the query posed (e.g.: )
+- **query_graph** - object - QueryGraph object that contains a serialization of a query in the form of a graph (e.g.: )
+- **knowledge_graph** - object - KnowledgeGraph object that contains all the nodes and edges referenced in any of the possible answers to the query (e.g.: )
+- **remote_knowledge_graph** - object - Connection information for a remote knowledge graph that is a substitute for local KnowledgeGraph contained in this Message (e.g.: )
 
 
 ## Result (each object within results)
-- **id** - URI - URI of this specific result if it is persisted somewhere.
-- **description** - string - A free text field describing this result (answer to the query).
-- **essence** - string - A single string that is the terse essence of the result (useful for simple answers)
-- **essence_type** - string - A Translator bioentity type of the essence
-- **row_data** - array - An arbitrary list of values that captures the essence of the result that can be turned into a tabular result across all answers (each result is a row) for a user that wants tabular output
-- **score** - number - Any type of score associated with this result (highest confidence)
-- **score_name** - string - Name for the score (e.g. "Jaccard distance")
-- **score_direction** - string - Sorting indicator for the score: one of higher_is_better or lower_is_better
-- **confidence** - float - A numerical confidence score for this result, where 1.0 denotes the highest confidence and 0.0 denote no confidence.
-- **result_type** - string - One of several possible result types: 'individual query answer', 'neighborhood graph', 'type summary graph'
-- **result_group** - integer - An integer group number for results for use in cases where several results should be grouped together. Also useful to control sorting ascending. The intended use for this is when multiple reasoner outputs are merged with similar answers grouped together.
-- **result_group_similarity_score** - number - A score that denotes the similarity of this result to other members of the result_group
-- **reasoner_id** - string - String identifier of the reasoner providing the response ("RTX", "Robokop", "Indigo", "Integrator", etc.)
-- **result_graph** - object - A serialization of a KnowledgeGraph object, which is a thought pattern or graph path for this result (answer to the query).
-- **knowledge_map** - object - Lookup dict that maps QNode and QEdge identifiers in the QueryGraph to Node and Edge identifiers in the KnowledgeGraph
+- **id** - string - URI for this message (e.g.:  "https://rtx.ncats.io/api/rtx/v1/result/234")
+- **description** - string - A free text description of this result answer from the reasoner (e.g.:  "The genetic condition sickle cell anemia may provide protection\)
+- **essence** - string - A single string that is the terse essence of the result (useful for simple answers) (e.g.:  "ibuprofen")
+- **essence_type** - string - A Translator bioentity type of the essence (e.g.:  "drug")
+- **row_data** - array - An arbitrary list of values that captures the essence of the result that can be turned into a tabular result across all answers (each result is a row) for a user that wants tabular output (e.g.:  [ "ibuprofen", "CHEMBL:CHEMBL521" ])
+- **score** - number - Any type of score associated with this result (e.g.:  163.233)
+- **score_name** - string - Name for the score (e.g.:  "Jaccard distance")
+- **score_direction** - string - Sorting indicator for the score: one of higher_is_better or lower_is_better (e.g.:  "lower_is_better")
+- **confidence** - number - Confidence metric for this result, a value between (inclusive) 0.0 (no confidence) and 1.0 (highest confidence) (e.g.:  0.9234)
+- **result_type** - string - One of several possible result types: 'individual query answer', 'neighborhood graph', 'type summary graph' (e.g.:  "individual query answer")
+- **result_group** - integer - An integer group number for results for use in cases where several results should be grouped together. Also useful to control sorting ascending. (e.g.:  "1")
+- **result_group_similarity_score** - number - A score that denotes the similarity of this result to other members of the result_group (e.g.:  0.95)
+- **reasoner_id** - string - Identifier string of the reasoner that provided this result (e.g., RTX, Robokop, Indigo, Integrator) (e.g.:  "RTX")
+- **result_graph** - object - A graph that describes the thought pattern of this result (i.e. answer to the query) (e.g.: )
+- **knowledge_map** - object - Lookup dict that maps QNode and QEdge identifiers in the QueryGraph to Node and Edge identifiers in the KnowledgeGraph (e.g.: )
 
-## KnowledgeGraph (a container for nodes and edges)
-- **node_list** - array - An array container for multiple node objects in arbitrary order
-- **edge_list** - array - an array container for multiple edge objects in arbitrary order
+## KnowledgeGraph
+- **nodes** - array - List of nodes in the KnowledgeGraph (e.g.: )
+- **edges** - array - List of edges in the KnowledgeGraph (e.g.: )
 
-## Node (each object within nodes{})
-- **id** - string - CURIE corresponding to the bioentity
-- **uri** - URI - Full URI corresponding to the bioentity
-- **name** - string - bioentity name of the node
-- **type** - array - bioentity types of the node, as defined by the KG standard
-- **description** - Full 1+ sentence description/definition of the bioentity
-- **symbol** - string - Equivalent symbol for this bioentity. This is most common with the protein or gene bioentity types, but other types may also have symbols or abbreviations
-- **node_attributes** - array - container for a series of node_property objects
+## RemoteKnowledgeGraph
+- **url** - string - URL that provides programmatic access to the remote knowledge graph (e.g.:  "http://robokop.renci.org/api/kg")
+- **credentials** - object - Credentials needed for programmatic access to the remote knowledge graph (e.g.: )
 
-## NodeAttribute (each object within node_attributes)
-- **type** - string - controlled type of the property
-- **name** - string - name of the node property
-- **value** - any - value associate with the name and type
-- **url** - URI - URL associated with this node property
+## Credentials
+- **username** -  string - Username needed for programmatic access to the remote knowledge graph (e.g.: )
+- **password** -  string - Password needed for programmatic access to the remote knowledge graph (e.g.: )
 
-## Edge (each object within edges)
-- **id** - string - Local identifier for this node which is unique within this KnowledgeGraph, and perhaps within the source reasoner's knowledge graph
-- **type** - string - controlled edge type / predicate from the KG standard minimum list
-- **relation** - string - controlled edge type / predicate from the KG standard maximal list
-- **source** - string - id of the source node
-- **target** - string - id of the target node
-- **is_defined_by** - string - A CURIE/URI for the translator group that made the KG
-- **defined_datetime** - string - Datetime at which the KG builder/updater pulled the information from the original source. Used as a freshness indicator.
-- **provided_by** - string - A CURIE/URI for the knowledge source that defined this edge
-- **confidence** - float - Confidence metric for this relationship/assertion/edge. 1.0 indicates the highest confidence. 0.0 indicates no confidence. The confidence may come directly from a knowledge source, or may come from come from the KG builder or even Reasoning Tool based on other contextual information. (NOTE: This is not in the KG standard, but is being proposed as an addition there)
-- **publications** - array - Array of CURIEs for publications associated with this edge
-- **evidence_type** - string - A CURIE/URI for class of evidence supporting the statement made in an edge - typically a class from the ECO ontology (e.g. ECO:0000220)
-- **qualifiers** - string - Terms representing qualifiers that modify or qualify the meaning of the statement made in an edge
-- **negated** - boolean - Boolean that if set to true, indicates the edge statement is negated i.e. is not true
-- **edge_attributes** - array - A list of additional attributes for this edge
+## QueryGraph
+- **nodes** - array - List of nodes in the QueryGraph (e.g.: )
+- **edges** - array - List of edges in the QueryGraph (e.g.: )
 
-## EdgeAttribute (each object within a edge_attributes)
-- **type** - string - controlled type of the property
-- **name** - string - name of the edge property
-- **value** - any - value associate with the name and type
-- **url** - URI - URL associated with this edge property
+## QNode
+- **node_id** - string - QueryGraph internal identifier for this QNode. Recommended form: n00, n01, n02, etc. (e.g.:  "n00")
+- **curie** - string - CURIE identifier for this node (e.g.:  "OMIM:603903")
+- **type** - string - Entity type of this node (e.g., protein, disease, etc.) (e.g.:  "disease")
 
+## QEdge
+- **edge_id** - string - QueryGraph internal identifier for this QEdge. Recommended form: e00, e01, e02, etc. (e.g.:  "e00")
+- **type** - string - Higher-level relationship type of this edge (e.g.:  "affects")
+- **relation** - string - Lower-level relationship type of this edge (e.g.:  "upregulates")
+- **source_id** - string - Corresponds to the @id of source node of this edge (e.g.:  "https://omim.org/entry/603903")
+- **target_id** - string - Corresponds to the @id of target node of this edge (e.g.:  "https://www.uniprot.org/uniprot/P00738")
+- **negated** - boolean - Boolean that if set to true, indicates the edge statement is negated i.e. is not true (e.g.:  "true")
+
+## Node
+- **id** - string - CURIE identifier for this node (e.g.:  "OMIM:603903")
+- **uri** - string -  URI identifier for this node (e.g.:  "https://www.uniprot.org/uniprot/P00738")
+- **name** - string - Formal name of the entity (e.g.:  "Haptoglobin")
+- **type** - array - Entity type of this node (e.g., protein, disease, etc.) (e.g.:  [ "protein" ])
+- **description** - string - One to three sentences of description/definition of this entity (e.g.:  "Haptoglobin captures, and combines with free plasma hemoglobin...")
+- **symbol** - string - Short abbreviation or symbol for this entity (e.g.:  "HP")
+- **node_attributes** - array - A list of arbitrary attributes for the node (e.g.: )
+
+## NodeAttribute
+- **type** - string - Entity type of this attribute (e.g.:  "article")
+- **name** - string - Formal name of the attribute (e.g.:  "Wikipedia article")
+- **value** - string - Value of the attribute (e.g.:  "7.23e-12")
+- **url** - string - A URL corresponding to this attribute (e.g.:  "https://en.wikipedia.org/wiki/Malaria")
+
+## Edge
+- **id** - string - Local identifier for this node which is unique within this KnowledgeGraph, and perhaps within the source reasoner's knowledge graph (e.g.:  "553903")
+- **type** - string - Higher-level relationship type of this edge (e.g.:  "affects")
+- **relation** - string - Lower-level relationship type of this edge (e.g.:  "upregulates")
+- **source_id** - string - Corresponds to the @id of source node of this edge (e.g.:  "https://omim.org/entry/603903")
+- **target_id** - string - Corresponds to the @id of target node of this edge (e.g.:  "https://www.uniprot.org/uniprot/P00738")
+- **is_defined_by** - string - A CURIE/URI for the translator group that made the KG (e.g.:  "reasoner")
+- **defined_datetime** - string - Datetime at which the KG builder/updater pulled the information from the original source. Used as a freshness indicator. (e.g.:  "2018-11-03 15:34:23")
+- **provided_by** - string - A CURIE/URI for the knowledge source that defined this edge (e.g.:  "OMIM")
+- **confidence** - number - Confidence metric for this edge, a value between (inclusive) 0.0 (no confidence) and 1.0 (highest confidence) (e.g.:  0.99)
+- **weight** - number - Weight metric for this edge, with no upper bound. Perhaps useful when formal confidence metrics are not available (e.g.:  0.99)
+- **publications** - array - List of CURIEs for publications associated with this edge (e.g.:  [ "PMID:12345562" ])
+- **evidence_type** - string - A CURIE/URI for class of evidence supporting the statement made in an edge - typically a class from the ECO ontology (e.g.:  "ECO:0000220")
+- **qualifiers** - string - Terms representing qualifiers that modify or qualify the meaning of the statement made in an edge (e.g.:  "ECO:0000220")
+- **negated** - boolean - Boolean that if set to true, indicates the edge statement is negated i.e. is not true (e.g.:  "true")
+- **edge_attributes** - array - A list of additional attributes for this edge (e.g.: )
+
+## EdgeAttribute
+- **type** - string - Entity type of this attribute (e.g.:  "localization")
+- **name** - string - Formal name of the attribute (e.g.:  "Cell type limitation")
+- **value** - string - Value of the attribute. While all attributes should have a name, many will not have a value (e.g.:  "MFC cells")
+- **url** - string - A URL corresponding to this attribute (e.g.:  "https://www.ncbi.nlm.nih.gov/pubmed/29309293")
+
+## Feedback
+- **id** - string - URI for this feedback item (e.g.:  "https://rtx.ncats.io/api/rtx/v1/result/234/feedback/56")
+- **result_id** - string - URI for the result that this feedback corresponds to (e.g.:  "https://rtx.ncats.io/api/rtx/v1/result/234")
+- **expertise_level_id** - integer - Integer identifier of the claimed expertise level (e.g.:  "1")
+- **rating_id** - integer - Integer identifier of the applied rating (e.g.:  "1")
+- **commenter_id** - integer - Integer identifier of the commenter (e.g.:  "1")
+- **commenter_full_name** - string - Full name of the commenter (e.g.:  "John Smith")
+- **datetime** - string - Datetime when the feedback was provided (e.g.:  "2018-05-08 12:00")
+- **comment** - string - A free text comment about this result (e.g.:  "This is a great result because...")
+
+## ResultFeedback
+- **feedback_list** - array - List of feedback posts for this result (e.g.: )
+
+## MessageFeedback
+- **feedback_list** - array - List of feedback posts for this entire message (e.g.: )
