@@ -70,6 +70,8 @@ paths:
       responses:
         200:
           description: "successful operation"
+          schema:
+            $ref: "#/definitions/Ratings"
       x-swagger-router-controller: "swagger_server.controllers.feedback_controller"
   /feedback/expertise_levels:
     get:
@@ -83,6 +85,8 @@ paths:
       responses:
         200:
           description: "successful operation"
+          schema:
+            $ref: "#/definitions/ExpertiseLevels"
       x-swagger-router-controller: "swagger_server.controllers.feedback_controller"
   /feedback/all:
     get:
@@ -214,10 +218,67 @@ paths:
       responses:
         200:
           description: "successful operation"
+          schema:
+            $ref: "#/definitions/FeedbackResponse"
         400:
           description: "Invalid status value"
       x-swagger-router-controller: "swagger_server.controllers.result_controller"
 definitions:
+  FeedbackResponse:
+    type: object
+    properties:
+      detail:
+        type: string
+      status:
+        type: integer
+      title:
+        type: string
+      type:
+        type: string
+  Ratings:
+    type: object
+    properties:
+      ratings:
+        type: array
+        items:
+          $ref: '#/definitions/Rating'
+      n_ratings:
+        type: integer
+  Rating:
+    type: object
+    properties:
+      description:
+        type: string
+      rating_id:
+        type: integer
+      name:
+        type: string
+      score:
+        type: number
+      tag:
+        type: string
+  ExpertiseLevels:
+    type: object
+    properties:
+      expertise_levels:
+        type: array
+        items:
+          $ref: '#/definitions/ExpertiseLevel'
+      n_expertise_levels:
+        type: integer
+  ExpertiseLevel:
+    type: object
+    properties:
+      description:
+        type: string
+      expertise_level_id:
+        type: integer
+      name:
+        type: string
+      score:
+        type: number
+      tag:
+        type: string
   Query:
     type: "object"
     properties:
