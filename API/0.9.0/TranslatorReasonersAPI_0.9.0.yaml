@@ -468,7 +468,9 @@ components:
           additionalProperties: true
         query_options:
           type: object
-          example: '{coalesce=True,threshold=0.9}'
+          example: 
+            coalesce: true
+            threshold: 0.9
           description: >-
             Dict of options that can be sent with the query. Options are tool
             specific and not stipulated here
@@ -565,7 +567,7 @@ components:
             'neighborhood graph', 'type summary graph'
         result_group:
           type: integer
-          example: '1'
+          example: 1
           description: >-
             An integer group number for results for use in cases where several
             results should be grouped together. Also useful to control sorting
@@ -710,7 +712,7 @@ components:
           description: Corresponds to the @id of target node of this edge
         negated:
           type: boolean
-          example: 'true'
+          example: true
           description: >-
             Boolean that if set to true, indicates the edge statement is negated
             i.e. is not true
@@ -849,7 +851,7 @@ components:
             the statement made in an edge
         negated:
           type: boolean
-          example: 'true'
+          example: true
           description: >-
             Boolean that if set to true, indicates the edge statement is negated
             i.e. is not true
@@ -896,15 +898,15 @@ components:
           description: URI for the result that this feedback corresponds to
         expertise_level_id:
           type: integer
-          example: '1'
+          example: 1
           description: Integer identifier of the claimed expertise level
         rating_id:
           type: integer
-          example: '1'
+          example: 1
           description: Integer identifier of the applied rating
         commenter_id:
           type: integer
-          example: '1'
+          example: 1
           description: Integer identifier of the commenter
         commenter_full_name:
           type: string
