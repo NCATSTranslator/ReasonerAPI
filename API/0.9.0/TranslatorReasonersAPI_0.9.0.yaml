@@ -362,7 +362,7 @@ components:
         options:
           type: object
           example:
-            - topNMostFrequent
+            topNMostFrequent: 1
           description: >-
             Dict of options that apply during processing in an order independent
             fashion
