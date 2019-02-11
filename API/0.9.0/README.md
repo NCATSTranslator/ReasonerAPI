@@ -5,6 +5,11 @@ any of the reasoners may be made using the same API with the same result format,
 facilitate comparison among reasoners and chaining of queries to different reasoners to
 achieve an aggregated result.
 
+## Two versions
+- The main TranslatorReasonersAPI_0.9.0.yaml file is now OpenAPI 3.0.1 formatting
+- The secondary TranslatorReasonersAPI_0.9.0_swagger2.0.yaml remains on the Swagger 2.0 formatting
+- The Swagger 2.0 formatting is retained for now since some tools do not support OpenAPI 3.0.1 yet
+
 ## Previous versions
 - Previous and potentially newer versions of the draft standard may be found at https://github.com/NCATS-Tangerine/NCATS-ReasonerStdAPI/tree/master/API
 
