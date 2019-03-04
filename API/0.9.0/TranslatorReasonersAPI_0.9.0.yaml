@@ -484,7 +484,7 @@ components:
           description: >-
             QueryGraph object that contains a serialization of a query in the form
             of a graph
-            $ref: '#/components/schemas/QueryGraph'
+          $ref: '#/components/schemas/QueryGraph'
         knowledge_graph:
           type: object
           description: >-
