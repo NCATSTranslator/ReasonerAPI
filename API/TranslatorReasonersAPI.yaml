@@ -484,22 +484,16 @@ components:
           description: >-
             QueryGraph object that contains a serialization of a query in the form
             of a graph
-          items:
-            $ref: '#/components/schemas/QueryGraph'
+          $ref: '#/components/schemas/QueryGraph'
         knowledge_graph:
           type: object
           description: >-
             KnowledgeGraph object that contains all the nodes and edges referenced
-            in any of the possible answers to the query
-          items:
-            $ref: '#/components/schemas/KnowledgeGraph'
-        remote_knowledge_graph:
-          type: object
-          description: >-
-            Connection information for a remote knowledge graph that is a
-            substitute for local KnowledgeGraph contained in this Message
-          items:
-            $ref: '#/components/schemas/RemoteKnowledgeGraph'
+            in any of the possible answers to the query OR connection information
+            for a remote knowledge graph
+          oneOf:
+            - $ref: '#/components/schemas/KnowledgeGraph'
+            - $ref: '#/components/schemas/RemoteKnowledgeGraph'
       additionalProperties: true
     Result:
       type: object
