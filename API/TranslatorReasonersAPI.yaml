@@ -614,6 +614,9 @@ components:
           items:
             $ref: '#/components/schemas/Edge'
       additionalProperties: true
+      required:
+        - nodes
+        - edges
     RemoteKnowledgeGraph:
       type: object
       description: >-
