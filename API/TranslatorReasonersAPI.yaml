@@ -590,7 +590,12 @@ components:
           description: >-
             Lookup dict that maps QNode and QEdge identifiers in the QueryGraph to
             Node and Edge identifiers in the KnowledgeGraph
-          additionalProperties: true
+          additionalProperties:
+            oneOf:
+              - type: string
+              - type: array
+                items:
+                  type: string
     KnowledgeGraph:
       type: object
       description: >-
