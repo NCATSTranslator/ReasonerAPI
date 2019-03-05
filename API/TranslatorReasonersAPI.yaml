@@ -762,6 +762,8 @@ components:
           items:
             $ref: '#/components/schemas/NodeAttribute'
       additionalProperties: true
+      required:
+        - id
     NodeAttribute:
       type: object
       description: A generic attribute for a node
@@ -870,6 +872,7 @@ components:
             $ref: '#/components/schemas/EdgeAttribute'
       additionalProperties: true
       required:
+        - id
         - source_id
         - target_id
     EdgeAttribute:
