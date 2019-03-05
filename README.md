@@ -1,6 +1,9 @@
 # NCATS-ReasonerStdAPI
 NCATS Biomedical Translator Reasoners Standard API
 
+## Reorganization Note
+- On 2019-03-05, all older versions were removed from the repo (still available in history), and 0.9.0 tagged as a release
+
 ## Related Documents
 - Emerging KG Standard: https://docs.google.com/document/d/1TrvqJPe_HwmRJ5HCwZ7fsi9_mwGcwLOZ53Fnjo8Sh4E/edit#
 
