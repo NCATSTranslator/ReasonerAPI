@@ -722,6 +722,9 @@ components:
             Boolean that if set to true, indicates the edge statement is negated
             i.e. is not true
       additionalProperties: true
+      required:
+        - source_id
+        - target_id
     Node:
       type: object
       description: A node in the thought subgraph
