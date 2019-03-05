@@ -667,6 +667,9 @@ components:
           items:
             $ref: '#/components/schemas/QEdge'
       additionalProperties: true
+      required:
+        - nodes
+        - edges
     QNode:
       type: object
       description: A node in the QueryGraph
