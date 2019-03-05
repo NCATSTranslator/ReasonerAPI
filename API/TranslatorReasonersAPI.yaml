@@ -869,6 +869,9 @@ components:
           items:
             $ref: '#/components/schemas/EdgeAttribute'
       additionalProperties: true
+      required:
+        - source_id
+        - target_id
     EdgeAttribute:
       type: object
       description: A generic additional attribute for an edge
