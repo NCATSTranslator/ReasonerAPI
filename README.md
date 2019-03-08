@@ -1,16 +1,15 @@
 # NCATS-ReasonerStdAPI
 NCATS Biomedical Translator Reasoners Standard API
 
-## Reorganization Note
-- On 2019-03-05, all older versions were removed from the repo (still available in history), and 0.9.0 tagged as a release
+## Recent Changes
+- 2019-03-05: all older versions were removed from the repo (still available in history), and 0.9.0 tagged as a release
+- 2019-03-08: Documentation update and tagged as the 0.9.1 release
 
 ## Related Documents
-- Emerging KG Standard: https://docs.google.com/document/d/1TrvqJPe_HwmRJ5HCwZ7fsi9_mwGcwLOZ53Fnjo8Sh4E/edit#
+- Current state of implementations by reasoners: https://docs.google.com/document/d/1sinAFbZjK7dMx6b2vl_9BGX1O17YNRtQuIUyvHoIBKY
+- Chapel Hill hackathon summary presentation (2019-03-08): https://docs.google.com/presentation/d/1dtRe_Ax-xR2FOARO8ORRTtc_q9IMKsAnBVt9ljUlkL0
+- KnowledgeGraph standard: https://biolink.github.io/biolink-model/docs/NamedThing.html
 
 ## Earlier versions (NOW OBSOLETE)
-- Version 0.6 API Standard format specification - further discussions:
-https://docs.google.com/document/d/1vOitEIjAnEeUS6nRPhBqD2IxDTAMSLIBa1BuOQ59EWE/edit#
-- Version 0.5 Initial API Standard format specification as implemented by Team X-ray and ??:
-https://docs.google.com/document/d/10QIIRjcTVPDMbdZnukp1KHWdreivu6rWwvwwWf7C-a0/edit
-- Version 0.4 API Standard format specification from January 2018 Hackathon:
-https://docs.google.com/document/d/1O6_sVSdSjgMmXacyI44JJfEVQLATagal9ydWLBgi-vE/edit
+- History of earlier versions may be found in the history of the repository: https://github.com/NCATS-Tangerine/NCATS-ReasonerStdAPI/tree/7205051d69e50d2c8137d88598346e185f920ea4/API
+
