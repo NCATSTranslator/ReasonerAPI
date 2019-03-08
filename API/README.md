@@ -1,21 +1,22 @@
 # NCATS Translator Reasoners API
-This API specification represents a version 0.9.0 draft of the NCATS Translator Reasoners API.
+This API specification represents a version 0.9.1 draft of the NCATS Translator Reasoners API.
 It is intended that the various reasoner tools will support this API so that remote calls to
-any of the reasoners may be made using the same API with the same result format, which will
+any of the reasoners (and other related Translator resources) may be made using the same API
+with the same result format, which will
 facilitate comparison among reasoners and chaining of queries to different reasoners to
 achieve an aggregated result.
 
 ## Two versions
-- The main TranslatorReasonersAPI_0.9.0.yaml file is now OpenAPI 3.0.1 formatting
-- The secondary TranslatorReasonersAPI_0.9.0_swagger2.0.yaml remains on the Swagger 2.0 formatting
+- The main TranslatorReasonersAPI.yaml file is now in OpenAPI 3.0.1 formatting
+- The secondary TranslatorReasonersAPI_swagger2.0.yaml remains on the Swagger 2.0 formatting, which is less descriptive
 - The Swagger 2.0 formatting is retained for now since some tools do not support OpenAPI 3.0.1 yet
 
 ## Previous versions
-- Previous and potentially newer versions of the draft standard may be found at https://github.com/NCATS-Tangerine/NCATS-ReasonerStdAPI/tree/master/API
+- Previous versions of the draft standard may be found at https://github.com/NCATS-Tangerine/NCATS-ReasonerStdAPI/tree/7205051d69e50d2c8137d88598346e185f920ea4/API
 
 ## Notes
 - The target output is intended to be JSON-LD
-- Updated 2018-11-16
+- Updated 2019-03-08
 
 
 # INPUT Specification
@@ -63,8 +64,7 @@ Below is a description of the elements of the JSON formatted output.
 - **query_options** - object - Dict of options that can be sent with the query. Options are tool specific and not stipulated here (e.g.:  "{coalesce=True,threshold=0.9}")
 - **results** - array - List of all returned potential answers for the query posed (e.g.: )
 - **query_graph** - object - QueryGraph object that contains a serialization of a query in the form of a graph (e.g.: )
-- **knowledge_graph** - object - KnowledgeGraph object that contains all the nodes and edges referenced in any of the possible answers to the query (e.g.: )
-- **remote_knowledge_graph** - object - Connection information for a remote knowledge graph that is a substitute for local KnowledgeGraph contained in this Message (e.g.: )
+- **knowledge_graph** - object - KnowledgeGraph object that contains all the nodes and edges referenced in any of the possible answers to the query (e.g.: ) **OR** a RemoteKnowledgeGraph object that contains connection information for a remote knowledge graph that is a substitute for local KnowledgeGraph contained in this Message (e.g.: )
 
 
 ## Result (each object within results)
@@ -82,7 +82,8 @@ Below is a description of the elements of the JSON formatted output.
 - **result_group_similarity_score** - number - A score that denotes the similarity of this result to other members of the result_group (e.g.:  0.95)
 - **reasoner_id** - string - Identifier string of the reasoner that provided this result (e.g., RTX, Robokop, Indigo, Integrator) (e.g.:  "RTX")
 - **result_graph** - object - A graph that describes the thought pattern of this result (i.e. answer to the query) (e.g.: )
-- **knowledge_map** - object - Lookup dict that maps QNode and QEdge identifiers in the QueryGraph to Node and Edge identifiers in the KnowledgeGraph (e.g.: )
+- **node_bindings** - object - Lookup dict that maps QNode (internal) identifiers in the QueryGraph to Node identifiers (CURIEs) in the KnowledgeGraph (e.g.: { "n00": [ "HP:0001878" ] })
+- **edge_bindings** - object - Lookup dict that maps QEdge (internal) identifiers in the QueryGraph to Edge (internal) identifiers in the KnowledgeGraph (e.g.: { "e00": [ "0001" ] })
 
 ## KnowledgeGraph
 - **nodes** - array - List of nodes in the KnowledgeGraph (e.g.: )
