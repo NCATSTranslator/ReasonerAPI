@@ -283,6 +283,7 @@ components:
         tag:
           type: string
     Query:
+      x-body-name: request_body
       type: object
       properties:
         bypass_cache:
@@ -910,6 +911,7 @@ components:
           description: A URL corresponding to this attribute
       additionalProperties: true
     Feedback:
+      x-body-name: feedback
       type: object
       description: A single unit of Feedback
       properties:
