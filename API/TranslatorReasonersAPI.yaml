@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   description: OpenAPI for NCATS Biomedical Translator Reasoners
-  version: 0.9.0
+  version: 0.9.1
   title: OpenAPI for NCATS Biomedical Translator Reasoners
   contact:
     email: edeutsch@systemsbiology.org
