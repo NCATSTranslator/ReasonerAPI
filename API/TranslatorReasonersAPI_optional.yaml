@@ -1,8 +1,8 @@
 openapi: 3.0.1
 info:
-  description: OpenAPI for NCATS Biomedical Translator Reasoners
+  description: (Optional) OpenAPI for NCATS Biomedical Translator Reasoners
   version: 0.9.1
-  title: OpenAPI for NCATS Biomedical Translator Reasoners
+  title: (Optional) OpenAPI for NCATS Biomedical Translator Reasoners
   contact:
     email: edeutsch@systemsbiology.org
   license:
@@ -12,26 +12,78 @@ externalDocs:
   description: Documentation for the NCATS Biomedical Translator Reasoners web services
   url: 'https://github.com/NCATS-Tangerine/NCATS-ReasonerStdAPI'
 tags:
-  - name: query
-    description: Query reasoner using a predefined question type
+  - name: message
+    description: Request stored messages and feedback for messages
     externalDocs:
-      description: Documentation for the reasoner query function
-      url: 'http://reasonerhost.ncats.io/overview.html#query'
+      description: Documentation for the reasoner message function
+      url: 'https://reasonerhost.ncats.io/overview.html#message'
+  - name: result
+    description: Request stored results and feedback for results
+    externalDocs:
+      description: Documentation for the reasoner result function
+      url: 'http://reasonerhost.ncats.io/overview.html#result'
 paths:
-  /query:
-    post:
+  /feedback/ratings:
+    get:
       tags:
-        - query
-      summary: Query reasoner via one of several inputs
+        - feedback
+      summary: Request a list of allowable ratings
       description: ''
-      operationId: query
-      requestBody:
-        description: Query information to be submitted
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Query'
+      operationId: get_feedback_ratings
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ratings'
+      x-swagger-router-controller: swagger_server.controllers.feedback_controller
+  /feedback/expertise_levels:
+    get:
+      tags:
+        - feedback
+      summary: Request a list of allowable expertise levels
+      description: ''
+      operationId: get_feedback_expertise_levels
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpertiseLevels'
+      x-swagger-router-controller: swagger_server.controllers.feedback_controller
+  /feedback/all:
+    get:
+      tags:
+        - feedback
+      summary: Request a list of all feedback provided thus far
+      description: ''
+      operationId: get_feedback_all
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Feedback'
+      x-swagger-router-controller: swagger_server.controllers.feedback_controller
+  '/message/{message_id}':
+    get:
+      tags:
+        - message
+      summary: Request stored messages and results from reasoner
+      description: ''
+      operationId: get_message
+      parameters:
+        - in: path
+          name: message_id
+          description: Integer identifier of the message to return
+          required: true
+          schema:
+            type: integer
       responses:
         '200':
           description: successful operation
@@ -39,98 +91,168 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Message'
+        '404':
+          description: Message_id not found
+      x-swagger-router-controller: swagger_server.controllers.message_controller
+  '/message/{message_id}/feedback':
+    get:
+      tags:
+        - message
+      summary: Request stored feedback for this message from reasoner
+      description: ''
+      operationId: get_message_feedback
+      parameters:
+        - in: path
+          name: message_id
+          description: Integer identifier of the message to return
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageFeedback'
+        '404':
+          description: Message_id not found
+      x-swagger-router-controller: swagger_server.controllers.message_controller
+  '/result/{result_id}':
+    get:
+      tags:
+        - result
+      summary: Request stored result
+      description: ''
+      operationId: get_result
+      parameters:
+        - in: path
+          name: result_id
+          description: Integer identifier of the result to return
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+        '404':
+          description: result_id not found
+      x-swagger-router-controller: swagger_server.controllers.result_controller
+  '/result/{result_id}/feedback':
+    get:
+      tags:
+        - result
+      summary: Request stored feedback for this result
+      description: ''
+      operationId: get_result_feedback
+      parameters:
+        - in: path
+          name: result_id
+          description: Integer identifier of the result to return
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResultFeedback'
+        '404':
+          description: result_id not found
+      x-swagger-router-controller: swagger_server.controllers.result_controller
+    post:
+      tags:
+        - result
+      summary: Store feedback for a particular result
+      description: ''
+      operationId: post_result_feedback
+      parameters:
+        - in: path
+          name: result_id
+          description: Integer identifier of the result to return
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Comment information
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Feedback'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeedbackResponse'
         '400':
           description: Invalid status value
-      x-swagger-router-controller: swagger_server.controllers.query_controller
+      x-swagger-router-controller: swagger_server.controllers.result_controller
 components:
   schemas:
-    Query:
-      x-body-name: request_body
+    FeedbackResponse:
       type: object
       properties:
-        bypass_cache:
+        detail:
           type: string
-          example: 'true'
-          description: >-
-            Set to true in order to bypass any possible cached message and try to
-            answer the query over again
-        asynchronous:
+        status:
+          type: integer
+        title:
           type: string
-          example: 'false'
-          description: >-
-            Set to true in order to receive an incomplete message_id if the query
-            will take a while. Client can then periodically request that
-            message_id for a status update and eventual complete message
-        max_results:
-          type: integer
-          example: 100
-          description: Maximum number of individual results to return
-        page_size:
-          type: integer
-          example: 20
-          description: Split the results into pages with this number of results each
-        page_number:
-          type: integer
-          example: 1
-          description: >-
-            Page number of results when the number of results exceeds the
-            page_size
-        reasoner_ids:
-          type: array
-          example:
-            - RTX
-            - Robokop
-          description: List of reasoners to consult for the query
-          items:
-            type: string
-        query_message:
-          type: object
-          description: Message object that represents the query to be answered
-          items:
-            $ref: '#/components/schemas/Message'
-        previous_message_processing_plan:
-          type: object
-          description: >-
-            Container for one or more Message objects or identifiers for one or
-            more Messages along with a processing plan for how those messages
-            should be processed and returned
-          items:
-            $ref: '#/components/schemas/PreviousMessageProcessingPlan'
-      additionalProperties: true
-    PreviousMessageProcessingPlan:
+        type:
+          type: string
+    Ratings:
       type: object
       properties:
-        previous_message_uris:
+        ratings:
           type: array
-          example:
-            - 'https://rtx.ncats.io/api/rtx/v1/message/300'
-          description: List of URIs for Message objects to fetch and process
           items:
-            type: string
-        previous_messages:
+            $ref: '#/components/schemas/Rating'
+        n_ratings:
+          type: integer
+    Rating:
+      type: object
+      properties:
+        description:
+          type: string
+        rating_id:
+          type: integer
+        name:
+          type: string
+        score:
+          type: number
+        tag:
+          type: string
+    ExpertiseLevels:
+      type: object
+      properties:
+        expertise_levels:
           type: array
-          description: List of Message objects to process
           items:
-            $ref: '#/components/schemas/Message'
-        processing_actions:
-          type: array
-          example:
-            - mod45filter
-            - redirect2RTX
-          description: >-
-            List of order-dependent actions to guide what happens with the Message
-            object(s)
-          items:
-            type: string
-        options:
-          type: object
-          example:
-            topNMostFrequent: 1
-          description: >-
-            Dict of options that apply during processing in an order independent
-            fashion
-          additionalProperties: true
-      additionalProperties: true
+            $ref: '#/components/schemas/ExpertiseLevel'
+        n_expertise_levels:
+          type: integer
+    ExpertiseLevel:
+      type: object
+      properties:
+        description:
+          type: string
+        expertise_level_id:
+          type: integer
+        name:
+          type: string
+        score:
+          type: number
+        tag:
+          type: string
     Message:
       type: object
       properties:
@@ -672,3 +794,58 @@ components:
           example: 'https://www.ncbi.nlm.nih.gov/pubmed/29309293'
           description: A URL corresponding to this attribute
       additionalProperties: true
+    Feedback:
+      x-body-name: feedback
+      type: object
+      description: A single unit of Feedback
+      properties:
+        id:
+          type: string
+          example: 'https://rtx.ncats.io/api/rtx/v1/result/234/feedback/56'
+          description: URI for this feedback item
+        result_id:
+          type: string
+          example: 'https://rtx.ncats.io/api/rtx/v1/result/234'
+          description: URI for the result that this feedback corresponds to
+        expertise_level_id:
+          type: integer
+          example: 1
+          description: Integer identifier of the claimed expertise level
+        rating_id:
+          type: integer
+          example: 1
+          description: Integer identifier of the applied rating
+        commenter_id:
+          type: integer
+          example: 1
+          description: Integer identifier of the commenter
+        commenter_full_name:
+          type: string
+          example: John Smith
+          description: Full name of the commenter
+        datetime:
+          type: string
+          example: '2018-05-08 12:00'
+          description: Datetime when the feedback was provided
+        comment:
+          type: string
+          example: This is a great result because...
+          description: A free text comment about this result
+    ResultFeedback:
+      type: object
+      description: Feedback for one result
+      properties:
+        feedback_list:
+          type: array
+          description: List of feedback posts for this result
+          items:
+            $ref: '#/components/schemas/Feedback'
+    MessageFeedback:
+      type: object
+      description: Feedback for all the results corresponding to this message
+      properties:
+        feedback_list:
+          type: array
+          description: List of feedback posts for this entire message
+          items:
+            $ref: '#/components/schemas/Feedback'
