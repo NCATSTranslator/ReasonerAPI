@@ -55,6 +55,8 @@ components:
           items:
             $ref: '#/components/schemas/Message'
       additionalProperties: true
+      required:
+        - query_message
     Message:
       type: object
       properties:
@@ -105,6 +107,9 @@ components:
               - type: array
                 items:
                   type: string
+      required:
+        - node_bindings
+        - edge_bindings
     KnowledgeGraph:
       type: object
       description: >-
@@ -198,6 +203,8 @@ components:
           description: 'Entity type of this node (e.g., protein, disease, etc.)'
           example: disease
       additionalProperties: true
+      required:
+        - node_id
     QEdge:
       type: object
       description: An edge in the QueryGraph
@@ -222,6 +229,7 @@ components:
           description: Corresponds to the @id of target node of this edge
       additionalProperties: true
       required:
+        - edge_id
         - source_id
         - target_id
     Node:
