@@ -195,7 +195,7 @@ components:
           description: CURIE identifier for this node
         type:
           type: string
-          description: 'Entity type of this node (e.g., protein, disease, etc.). Should be a class names from biolink-model (snake_case)'
+          description: 'Entity type of this node (e.g., protein, disease, etc.). Should be a class name from biolink-model (snake_case)'
           example: disease
       additionalProperties: true
     QEdge:
@@ -211,7 +211,7 @@ components:
         type:
           type: string
           example: affects
-          description: Higher-level relationship type of this edge
+          description: 'Higher-level relationship type of this edge. Should be an edge_label from biolink-model (snake_case)'
         source_id:
           type: string
           example: 'https://omim.org/entry/603903'
@@ -238,7 +238,7 @@ components:
           description: Formal name of the entity
         type:
           type: array
-          description: 'Entity type of this node (e.g., protein, disease, etc.). Should be a class names from biolink-model (snake_case)''
+          description: 'Entity type of this node (e.g., protein, disease, etc.). Should be a class name from biolink-model (snake_case)''
           example:
             - protein
           items:
