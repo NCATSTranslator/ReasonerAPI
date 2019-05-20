@@ -84,27 +84,43 @@ components:
       description: One of potentially several results or answers for a query
       properties:
         node_bindings:
-          type: object
-          description: >-
-            Lookup dict that maps QNode identifiers in the QueryGraph to
-            Node identifiers in the KnowledgeGraph
-          additionalProperties:
-            oneOf:
-              - type: string
-              - type: array
-                items:
-                  type: string
+          type: array
+          description: List of QNode-KNode bindings.
+          items:
+            $ref: '#/components/schemas/NodeBinding'
         edge_bindings:
-          type: object
-          description: >-
-            Lookup dict that maps QEdge identifiers in the QueryGraph to
-            Edge identifiers in the KnowledgeGraph
-          additionalProperties:
-            oneOf:
-              - type: string
-              - type: array
-                items:
-                  type: string
+          type: array
+          description: List of QEdge-KEdge bindings.
+          items:
+            $ref: '#/components/schemas/EdgeBinding'
+    NodeBinding:
+      type: object
+      properties:
+        qid:
+          type: string
+        kid:
+          oneOf:
+            - type: string
+            - type: array
+              items:
+                type: string
+      required:
+        - qid
+        - kid
+    EdgeBinding:
+      type: object
+      properties:
+        qid:
+          type: string
+        kid:
+          oneOf:
+            - type: string
+            - type: array
+              items:
+                type: string
+      required:
+        - qid
+        - kid
     KnowledgeGraph:
       type: object
       description: >-
