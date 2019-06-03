@@ -98,12 +98,14 @@ components:
       properties:
         qid:
           type: string
+          description: Query node id, i.e. the `node_id` of a QNode
         kid:
           oneOf:
             - type: string
             - type: array
               items:
                 type: string
+          description: One or more knowledge-graph node ids, i.e. the `id` of a KNode
       required:
         - qid
         - kid
@@ -112,12 +114,14 @@ components:
       properties:
         qid:
           type: string
+          description: Query edge id, i.e. the `edge_id` of a QEdge
         kid:
           oneOf:
             - type: string
             - type: array
               items:
                 type: string
+          description: One or more knowledge-graph edge ids, i.e. the `id` of a KEdge
       required:
         - qid
         - kid
