@@ -28,10 +28,10 @@ paths:
           content:
             application/json:
               schema:
-                description: Target map
+                description: Source map
                 type: object
                 additionalProperties:
-                  description: Source map
+                  description: Target map
                   type: object
                   additionalProperties:
                     description: Array of predicates
@@ -39,8 +39,8 @@ paths:
                     items:
                       type: string
                 example:
-                  gene:
-                    chemical_substance:
+                  chemical_substance:
+                    gene:
                       - directly_interacts_with
                       - decreases_activity_of
   /query:
