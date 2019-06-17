@@ -96,10 +96,10 @@ components:
     NodeBinding:
       type: object
       properties:
-        qid:
+        qg_id:
           type: string
-          description: Query node id, i.e. the `node_id` of a QNode
-        kid:
+          description: Query-graph node id, i.e. the `node_id` of a QNode
+        kg_id:
           oneOf:
             - type: string
             - type: array
@@ -107,15 +107,15 @@ components:
                 type: string
           description: One or more knowledge-graph node ids, i.e. the `id` of a KNode
       required:
-        - qid
-        - kid
+        - qq_id
+        - kg_id
     EdgeBinding:
       type: object
       properties:
-        qid:
+        qg_id:
           type: string
-          description: Query edge id, i.e. the `edge_id` of a QEdge
-        kid:
+          description: Query-graph edge id, i.e. the `edge_id` of a QEdge
+        kg_id:
           oneOf:
             - type: string
             - type: array
@@ -123,8 +123,8 @@ components:
                 type: string
           description: One or more knowledge-graph edge ids, i.e. the `id` of a KEdge
       required:
-        - qid
-        - kid
+        - qg_id
+        - kg_id
     KnowledgeGraph:
       type: object
       description: >-
