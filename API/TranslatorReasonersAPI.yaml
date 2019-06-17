@@ -19,6 +19,30 @@ tags:
       description: Documentation for the reasoner query function
       url: 'http://reasonerhost.ncats.io/overview.html#query'
 paths:
+  /predicates:
+    get:
+      summary: Get supported relationships by source and target
+      responses:
+        '200':
+          description: Predicates by source and target
+          content:
+            application/json:
+              schema:
+                description: Source map
+                type: object
+                additionalProperties:
+                  description: Target map
+                  type: object
+                  additionalProperties:
+                    description: Array of predicates
+                    type: array
+                    items:
+                      type: string
+                example:
+                  chemical_substance:
+                    gene:
+                      - directly_interacts_with
+                      - decreases_activity_of
   /query:
     post:
       tags:
