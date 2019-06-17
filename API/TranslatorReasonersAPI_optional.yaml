@@ -471,27 +471,47 @@ components:
             to the query)
           $ref: '#/components/schemas/KnowledgeGraph'
         node_bindings:
-          type: object
-          description: >-
-            Lookup dict that maps QNode identifiers in the QueryGraph to
-            Node identifiers in the KnowledgeGraph
-          additionalProperties:
-            oneOf:
-              - type: string
-              - type: array
-                items:
-                  type: string
+          type: array
+          description: List of QNode-KNode bindings.
+          items:
+            $ref: '#/components/schemas/NodeBinding'
         edge_bindings:
-          type: object
-          description: >-
-            Lookup dict that maps QEdge identifiers in the QueryGraph to
-            Edge identifiers in the KnowledgeGraph
-          additionalProperties:
-            oneOf:
-              - type: string
-              - type: array
-                items:
-                  type: string
+          type: array
+          description: List of QEdge-KEdge bindings.
+          items:
+            $ref: '#/components/schemas/EdgeBinding'
+    NodeBinding:
+      type: object
+      properties:
+        qg_id:
+          type: string
+          description: Query-graph node id, i.e. the `node_id` of a QNode
+        kg_id:
+          oneOf:
+            - type: string
+            - type: array
+              items:
+                type: string
+          description: One or more knowledge-graph node ids, i.e. the `id` of a KNode
+      required:
+        - qq_id
+        - kg_id
+    EdgeBinding:
+      type: object
+      properties:
+        qg_id:
+          type: string
+          description: Query-graph edge id, i.e. the `edge_id` of a QEdge
+        kg_id:
+          oneOf:
+            - type: string
+            - type: array
+              items:
+                type: string
+          description: One or more knowledge-graph edge ids, i.e. the `id` of a KEdge
+      required:
+        - qg_id
+        - kg_id
     KnowledgeGraph:
       type: object
       description: >-
