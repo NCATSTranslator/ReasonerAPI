@@ -73,7 +73,7 @@ components:
       x-body-name: request_body
       type: object
       properties:
-        query_message:
+        message:
           type: object
           description: Message object that represents the query to be answered
           items:
@@ -227,7 +227,7 @@ components:
       type: object
       description: A node in the QueryGraph
       properties:
-        node_id:
+        id:
           type: string
           example: n00
           description: >-
@@ -246,7 +246,7 @@ components:
       type: object
       description: An edge in the QueryGraph
       properties:
-        edge_id:
+        id:
           type: string
           example: e00
           description: >-
