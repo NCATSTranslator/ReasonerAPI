@@ -194,9 +194,7 @@ components:
           example: 'OMIM:603903'
           description: CURIE identifier for this node
         type:
-          type: string
-          description: 'Entity type of this node (e.g., protein, disease, etc.). Should be a class name from biolink-model (snake_case)'
-          example: disease
+          $ref: '#/components/schemas/BiolinkEntity'
       additionalProperties: true
     QEdge:
       type: object
@@ -209,9 +207,7 @@ components:
             QueryGraph internal identifier for this QEdge. Recommended form: e00,
             e01, e02, etc.
         type:
-          type: string
-          example: affects
-          description: 'Higher-level relationship type of this edge. Should be an edge_label from biolink-model (snake_case)'
+          $ref: '#/components/schemas/BiolinkRelation'
         source_id:
           type: string
           example: 'https://omim.org/entry/603903'
@@ -238,11 +234,8 @@ components:
           description: Formal name of the entity
         type:
           type: array
-          description: 'Entity type of this node (e.g., protein, disease, etc.). Should be a class name from biolink-model (snake_case)''
-          example:
-            - protein
           items:
-            type: string
+            $ref: '#/components/schemas/BiolinkEntity'
       additionalProperties: true
       required:
         - id
@@ -258,9 +251,7 @@ components:
             KnowledgeGraph, and perhaps within the source reasoner's knowledge
             graph
         type:
-          type: string
-          example: affects
-          description: Higher-level relationship type of this edge
+          $ref: '#/components/schemas/BiolinkRelation'
         source_id:
           type: string
           example: 'https://omim.org/entry/603903'
@@ -274,3 +265,17 @@ components:
         - id
         - source_id
         - target_id
+    BiolinkEntity:
+      description: A subclass of named_thing (snake_case)
+      type: string
+      externalDocs:
+        description: Biolink model entities
+        url: https://biolink.github.io/biolink-model/docs/NamedThing.html
+      example: disease
+    BiolinkRelation:
+      description: A relation, i.e. child of related_to (snake_case)
+      type: string
+      externalDocs:
+        description: Biolink model relations
+        url: https://biolink.github.io/biolink-model/docs/related_to.html
+      example: affects
