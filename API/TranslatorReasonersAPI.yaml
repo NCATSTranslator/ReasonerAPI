@@ -74,10 +74,7 @@ components:
       type: object
       properties:
         message:
-          type: object
-          description: Message object that represents the query to be answered
-          items:
-            $ref: '#/components/schemas/Message'
+          $ref: '#/components/schemas/Message'
       additionalProperties: true
     Message:
       type: object
