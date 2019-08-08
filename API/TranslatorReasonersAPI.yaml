@@ -128,7 +128,7 @@ components:
                 type: string
           description: One or more knowledge-graph node ids, i.e. the `id` of a KNode
       required:
-        - qq_id
+        - qg_id
         - kg_id
     EdgeBinding:
       type: object
