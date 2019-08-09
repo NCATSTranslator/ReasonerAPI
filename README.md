@@ -1,4 +1,7 @@
 # NCATS-ReasonerStdAPI
+
+[![Hermes build status on Travis CI](https://travis-ci.com/NCATS-Gamma/hermes.svg?branch=master)](https://travis-ci.com/NCATS-Gamma/hermes)
+
 NCATS Biomedical Translator Reasoners Standard API
 
 ## Recent Changes
