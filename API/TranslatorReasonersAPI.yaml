@@ -185,7 +185,11 @@ components:
             graph
           items:
             $ref: '#/components/schemas/Credentials'
-      additionalProperties: true
+        protocol:
+          type: string
+          default: neo4j
+      required:
+        - url
     Credentials:
       description: Credentials needed for programmatic access to the remote knowledge graph
       type: object
