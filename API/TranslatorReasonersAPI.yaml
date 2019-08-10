@@ -185,6 +185,9 @@ components:
             graph
           items:
             $ref: '#/components/schemas/Credentials'
+        protocol:
+          type: string
+          default: neo4j
       required:
         - url
     Credentials:
