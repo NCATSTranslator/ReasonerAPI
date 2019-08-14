@@ -41,6 +41,8 @@ tags:
 paths:
   /predicates:
     get:
+      tags:
+        - predicates
       summary: Get supported relationships by source and target
       responses:
         '200':
