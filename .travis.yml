@@ -2,6 +2,8 @@ dist: xenial
 language: python
 python:
   - "3.7"
+before_install:
+  - sudo apt-get install -y diffstat
 install:
   - pip install tox
 script: 
