@@ -76,6 +76,8 @@ components:
         message:
           $ref: '#/components/schemas/Message'
       additionalProperties: true
+      required:
+        - message
     Message:
       type: object
       properties:
@@ -114,6 +116,9 @@ components:
           description: List of QEdge-KEdge bindings.
           items:
             $ref: '#/components/schemas/EdgeBinding'
+      required:
+        - node_bindings
+        - edge_bindings
     NodeBinding:
       type: object
       properties:
@@ -241,6 +246,8 @@ components:
         type:
           $ref: '#/components/schemas/BiolinkEntity'
       additionalProperties: true
+      required:
+        - id
     QEdge:
       type: object
       description: An edge in the QueryGraph
@@ -263,6 +270,7 @@ components:
           description: Corresponds to the @id of target node of this edge
       additionalProperties: true
       required:
+        - id
         - source_id
         - target_id
     Node:
