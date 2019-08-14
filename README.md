@@ -1,4 +1,7 @@
 # NCATS-ReasonerStdAPI
+
+[![NCATS-ReasonerStdAPI build status on Travis CI](https://travis-ci.com/NCATS-Tangerine/NCATS-ReasonerStdAPI.svg?branch=master)](https://travis-ci.com/NCATS-Tangerine/NCATS-ReasonerStdAPI)
+
 NCATS Biomedical Translator Reasoners Standard API
 
 ## Recent Changes
