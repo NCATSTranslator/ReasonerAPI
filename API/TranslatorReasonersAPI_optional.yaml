@@ -510,6 +510,9 @@ components:
           description: List of QEdge-KEdge bindings.
           items:
             $ref: '#/components/schemas/EdgeBinding'
+      required:
+        - node_bindings
+        - edge_bindings
     NodeBinding:
       type: object
       properties:
@@ -635,10 +638,10 @@ components:
           example: 'OMIM:603903'
           description: CURIE identifier for this node
         type:
-          type: string
-          description: 'Entity type of this node (e.g., protein, disease, etc.)'
-          example: disease
+          $ref: '#/components/schemas/BiolinkEntity'
       additionalProperties: true
+      required:
+        - id
     QEdge:
       type: object
       description: An edge in the QueryGraph
@@ -650,9 +653,7 @@ components:
             QueryGraph internal identifier for this QEdge. Recommended form: e00,
             e01, e02, etc.
         type:
-          type: string
-          example: affects
-          description: Higher-level relationship type of this edge
+          $ref: '#/components/schemas/BiolinkRelation'
         relation:
           type: string
           example: upregulates
@@ -673,6 +674,7 @@ components:
             i.e. is not true
       additionalProperties: true
       required:
+        - id
         - source_id
         - target_id
     Node:
@@ -697,7 +699,7 @@ components:
           example:
             - protein
           items:
-            type: string
+            $ref: '#/components/schemas/BiolinkEntity'
         description:
           type: string
           example: 'Haptoglobin captures, and combines with free plasma hemoglobin...'
@@ -747,9 +749,7 @@ components:
             KnowledgeGraph, and perhaps within the source reasoner's knowledge
             graph
         type:
-          type: string
-          example: affects
-          description: Higher-level relationship type of this edge
+          $ref: '#/components/schemas/BiolinkRelation'
         relation:
           type: string
           example: upregulates
@@ -903,3 +903,17 @@ components:
           description: List of feedback posts for this entire message
           items:
             $ref: '#/components/schemas/Feedback'
+    BiolinkEntity:
+      description: A subclass of named_thing (snake_case)
+      type: string
+      externalDocs:
+        description: Biolink model entities
+        url: https://biolink.github.io/biolink-model/docs/NamedThing.html
+      example: disease
+    BiolinkRelation:
+      description: A relation, i.e. child of related_to (snake_case)
+      type: string
+      externalDocs:
+        description: Biolink model relations
+        url: https://biolink.github.io/biolink-model/docs/related_to.html
+      example: affects
