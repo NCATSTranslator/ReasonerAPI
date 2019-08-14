@@ -695,9 +695,6 @@ components:
           description: Formal name of the entity
         type:
           type: array
-          description: 'Entity type of this node (e.g., protein, disease, etc.)'
-          example:
-            - protein
           items:
             $ref: '#/components/schemas/BiolinkEntity'
         description:
