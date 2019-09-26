@@ -247,11 +247,19 @@ components:
             QueryGraph internal identifier for this QNode. Recommended form: n00,
             n01, n02, etc.
         curie:
-          type: string
+          oneOf:
+            - type: string
+            - type: array
+              items:
+                type: string
           example: 'OMIM:603903'
           description: CURIE identifier for this node
         type:
-          $ref: '#/components/schemas/BiolinkEntity'
+          oneOf:
+            - $ref: '#/components/schemas/BiolinkEntity'
+            - type: array
+              items:
+                $ref: '#/components/schemas/BiolinkEntity'
       additionalProperties: true
       required:
         - id
@@ -266,7 +274,11 @@ components:
             QueryGraph internal identifier for this QEdge. Recommended form: e00,
             e01, e02, etc.
         type:
-          $ref: '#/components/schemas/BiolinkRelation'
+          oneOf:
+            - $ref: '#/components/schemas/BiolinkRelation'
+            - type: array
+              items:
+                $ref: '#/components/schemas/BiolinkRelation'
         source_id:
           type: string
           example: 'https://omim.org/entry/603903'
@@ -293,9 +305,11 @@ components:
           example: Haptoglobin
           description: Formal name of the entity
         type:
-          type: array
-          items:
-            $ref: '#/components/schemas/BiolinkEntity'
+          oneOf:
+            - type: string
+            - type: array
+              items:
+                $ref: '#/components/schemas/BiolinkEntity'
       additionalProperties: true
       required:
         - id
