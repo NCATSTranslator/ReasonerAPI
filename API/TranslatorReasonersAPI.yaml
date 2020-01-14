@@ -321,7 +321,7 @@ components:
           type: string
           example: '553903'
           description: >-
-            Local identifier for this node which is unique within this
+            Local identifier for this edge which is unique within this
             KnowledgeGraph, and perhaps within the source reasoner's knowledge
             graph
         type:
@@ -340,7 +340,7 @@ components:
         - source_id
         - target_id
     BiolinkEntity:
-      description: A subclass of named_thing (snake_case)
+      description: A subclass of category named_thing (snake_case)
       type: string
       externalDocs:
         description: Biolink model entities
