@@ -629,7 +629,7 @@ definitions:
       id:
         type: "string"
         example: "553903"
-        description: "Local identifier for this node which is unique within this KnowledgeGraph, and perhaps within the source reasoner's knowledge graph"
+        description: "Local identifier for this edge which is unique within this KnowledgeGraph, and perhaps within the source reasoner's knowledge graph"
       type:
         type: "string"
         example: "affects"
