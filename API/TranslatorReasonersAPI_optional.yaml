@@ -451,9 +451,7 @@ components:
             KnowledgeGraph object that contains all the nodes and edges referenced
             in any of the possible answers to the query OR connection information
             for a remote knowledge graph
-          oneOf:
-            - $ref: '#/components/schemas/KnowledgeGraph'
-            - $ref: '#/components/schemas/RemoteKnowledgeGraph'
+          $ref: '#/components/schemas/KnowledgeGraph'
       additionalProperties: true
     Result:
       type: object
@@ -611,43 +609,6 @@ components:
       required:
         - nodes
         - edges
-    RemoteKnowledgeGraph:
-      type: object
-      description: >-
-        A thought graph associated with this result that is not repeated here, but
-        stored elsewhere in a way that can be remotely accessed by the reader of
-        this Message
-      properties:
-        url:
-          type: string
-          example: 'http://robokop.renci.org/api/kg'
-          description: URL that provides programmatic access to the remote knowledge graph
-        credentials:
-          type: object
-          description: >-
-            Credentials needed for programmatic access to the remote knowledge
-            graph
-          items:
-            $ref: '#/components/schemas/Credentials'
-        protocol:
-          type: string
-          default: neo4j
-      required:
-        - url
-    Credentials:
-      description: Credentials needed for programmatic access to the remote knowledge graph
-      type: object
-      required:
-        - username
-        - password
-      properties:
-        username:
-          description: Username needed for programmatic access to the remote knowledge graph
-          type: string
-        password:
-          type: string
-          description: Password needed for programmatic access to the remote knowledge graph
-      additionalProperties: true
     QueryGraph:
       type: object
       description: >-
