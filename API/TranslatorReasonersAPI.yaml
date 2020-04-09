@@ -114,14 +114,14 @@ components:
       description: One of potentially several results or answers for a query
       properties:
         node_bindings:
-          type: array
+          type: object
           description: List of QNode-KNode bindings.
-          items:
+          additionalProperties:
             $ref: '#/components/schemas/NodeBinding'
         edge_bindings:
-          type: array
+          type: object
           description: List of QEdge-KEdge bindings.
-          items:
+          additionalProperties:
             $ref: '#/components/schemas/EdgeBinding'
       required:
         - node_bindings
@@ -129,9 +129,6 @@ components:
     NodeBinding:
       type: object
       properties:
-        qg_id:
-          type: string
-          description: Query-graph node id, i.e. the `node_id` of a QNode
         kg_id:
           oneOf:
             - type: string
@@ -140,14 +137,10 @@ components:
                 type: string
           description: One or more knowledge-graph node ids, i.e. the `id` of a KNode
       required:
-        - qg_id
         - kg_id
     EdgeBinding:
       type: object
       properties:
-        qg_id:
-          type: string
-          description: Query-graph edge id, i.e. the `edge_id` of a QEdge
         kg_id:
           oneOf:
             - type: string
@@ -156,7 +149,6 @@ components:
                 type: string
           description: One or more knowledge-graph edge ids, i.e. the `id` of a KEdge
       required:
-        - qg_id
         - kg_id
     KnowledgeGraph:
       type: object
