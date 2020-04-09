@@ -117,12 +117,16 @@ components:
           type: object
           description: List of QNode-KNode bindings.
           additionalProperties:
-            $ref: '#/components/schemas/NodeBinding'
+            type: array
+            items:
+              $ref: '#/components/schemas/NodeBinding'
         edge_bindings:
           type: object
           description: List of QEdge-KEdge bindings.
           additionalProperties:
-            $ref: '#/components/schemas/EdgeBinding'
+            type: array
+            items:
+              $ref: '#/components/schemas/EdgeBinding'
       required:
         - node_bindings
         - edge_bindings
