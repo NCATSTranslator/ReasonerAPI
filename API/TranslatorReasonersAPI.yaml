@@ -166,14 +166,14 @@ components:
         of the path may be included.
       properties:
         nodes:
-          type: array
+          type: object
           description: List of nodes in the KnowledgeGraph
-          items:
+          additionalProperties:
             $ref: '#/components/schemas/Node'
         edges:
-          type: array
+          type: object
           description: List of edges in the KnowledgeGraph
-          items:
+          additionalProperties:
             $ref: '#/components/schemas/Edge'
       additionalProperties: true
       required:
@@ -296,10 +296,6 @@ components:
       type: object
       description: A node in the thought subgraph
       properties:
-        id:
-          type: string
-          example: 'OMIM:603903'
-          description: CURIE identifier for this node
         name:
           type: string
           example: Haptoglobin
@@ -311,19 +307,10 @@ components:
               items:
                 $ref: '#/components/schemas/BiolinkEntity'
       additionalProperties: true
-      required:
-        - id
     Edge:
       type: object
       description: An edge in the thought subgraph linking two nodes
       properties:
-        id:
-          type: string
-          example: '553903'
-          description: >-
-            Local identifier for this edge which is unique within this
-            KnowledgeGraph, and perhaps within the source reasoner's knowledge
-            graph
         type:
           $ref: '#/components/schemas/BiolinkRelation'
         source_id:
@@ -336,7 +323,6 @@ components:
           description: Corresponds to the @id of target node of this edge
       additionalProperties: true
       required:
-        - id
         - source_id
         - target_id
     BiolinkEntity:
