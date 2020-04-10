@@ -23,6 +23,21 @@ tags:
     externalDocs:
       description: Documentation for the reasoner query function
       url: 'http://reasonerhost.ncats.io/overview.html#query'
+  - name: feedback
+    description: Get or submit feedback regarding a query result
+    externalDocs:
+      description: Documentation for the reasoner feedback function
+      url: 'http://reasonerhost.ncats.io/overview.html#feedback'
+  - name: message
+    description: Request stored messages and feedback for messages
+    externalDocs:
+      description: Documentation for the reasoner message function
+      url: 'https://reasonerhost.ncats.io/overview.html#message'
+  - name: result
+    description: Request stored results and feedback for results
+    externalDocs:
+      description: Documentation for the reasoner result function
+      url: 'http://reasonerhost.ncats.io/overview.html#result'
 paths:
   /predicates:
     get:
@@ -74,6 +89,179 @@ paths:
         '400':
           description: Invalid status value
       x-swagger-router-controller: swagger_server.controllers.query_controller
+  /feedback/ratings:
+    get:
+      tags:
+        - feedback
+      summary: Request a list of allowable ratings
+      description: ''
+      operationId: get_feedback_ratings
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ratings'
+      x-swagger-router-controller: swagger_server.controllers.feedback_controller
+  /feedback/expertise_levels:
+    get:
+      tags:
+        - feedback
+      summary: Request a list of allowable expertise levels
+      description: ''
+      operationId: get_feedback_expertise_levels
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpertiseLevels'
+      x-swagger-router-controller: swagger_server.controllers.feedback_controller
+  /feedback/all:
+    get:
+      tags:
+        - feedback
+      summary: Request a list of all feedback provided thus far
+      description: ''
+      operationId: get_feedback_all
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Feedback'
+      x-swagger-router-controller: swagger_server.controllers.feedback_controller
+  '/message/{message_id}':
+    get:
+      tags:
+        - message
+      summary: Request stored messages and results from reasoner
+      description: ''
+      operationId: get_message
+      parameters:
+        - in: path
+          name: message_id
+          description: Integer identifier of the message to return
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        '404':
+          description: Message_id not found
+      x-swagger-router-controller: swagger_server.controllers.message_controller
+  '/message/{message_id}/feedback':
+    get:
+      tags:
+        - message
+      summary: Request stored feedback for this message from reasoner
+      description: ''
+      operationId: get_message_feedback
+      parameters:
+        - in: path
+          name: message_id
+          description: Integer identifier of the message to return
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageFeedback'
+        '404':
+          description: Message_id not found
+      x-swagger-router-controller: swagger_server.controllers.message_controller
+  '/result/{result_id}':
+    get:
+      tags:
+        - result
+      summary: Request stored result
+      description: ''
+      operationId: get_result
+      parameters:
+        - in: path
+          name: result_id
+          description: Integer identifier of the result to return
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+        '404':
+          description: result_id not found
+      x-swagger-router-controller: swagger_server.controllers.result_controller
+  '/result/{result_id}/feedback':
+    get:
+      tags:
+        - result
+      summary: Request stored feedback for this result
+      description: ''
+      operationId: get_result_feedback
+      parameters:
+        - in: path
+          name: result_id
+          description: Integer identifier of the result to return
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResultFeedback'
+        '404':
+          description: result_id not found
+      x-swagger-router-controller: swagger_server.controllers.result_controller
+    post:
+      tags:
+        - result
+      summary: Store feedback for a particular result
+      description: ''
+      operationId: post_result_feedback
+      parameters:
+        - in: path
+          name: result_id
+          description: Integer identifier of the result to return
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Comment information
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Feedback'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeedbackResponse'
+        '400':
+          description: Invalid status value
+      x-swagger-router-controller: swagger_server.controllers.result_controller
 components:
   schemas:
     Query:
@@ -85,9 +273,167 @@ components:
       additionalProperties: true
       required:
         - message
+    FeedbackResponse:
+      type: object
+      properties:
+        detail:
+          type: string
+        status:
+          type: integer
+        title:
+          type: string
+        type:
+          type: string
+    Ratings:
+      type: object
+      properties:
+        ratings:
+          type: array
+          items:
+            $ref: '#/components/schemas/Rating'
+        n_ratings:
+          type: integer
+    Rating:
+      type: object
+      properties:
+        description:
+          type: string
+        rating_id:
+          type: integer
+        name:
+          type: string
+        score:
+          type: number
+        tag:
+          type: string
+    ExpertiseLevels:
+      type: object
+      properties:
+        expertise_levels:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExpertiseLevel'
+        n_expertise_levels:
+          type: integer
+    ExpertiseLevel:
+      type: object
+      properties:
+        description:
+          type: string
+        expertise_level_id:
+          type: integer
+        name:
+          type: string
+        score:
+          type: number
+        tag:
+          type: string
     Message:
       type: object
       properties:
+        context:
+          type: string
+          example: 'https://rtx.ncats.io/ns/translator.jsonld'
+          description: JSON-LD context URI
+        type:
+          type: string
+          example: translator_reasoner_message
+          description: Entity type of this message
+        id:
+          type: string
+          example: 'https://rtx.ncats.io/api/rtx/v1/message/123'
+          description: URI for this message
+        reasoner_id:
+          type: string
+          example: reasoner
+          description: >-
+            Identifier string of the reasoner that provided this message (one of
+            RTX, Robokop, Indigo, Integrator, etc.)
+        tool_version:
+          type: string
+          example: RTX 0.5.0
+          description: Version label of the tool that generated this message
+        schema_version:
+          type: string
+          example: 0.9.0
+          description: Version label of this JSON-LD schema
+        datetime:
+          type: string
+          example: '2018-01-09 12:34:45'
+          description: Datetime string for the time that this message was generated
+        n_results:
+          type: integer
+          example: 42
+          description: >-
+            Total number of results from the query (which may be less than what is
+            returned if limits were placed on the number of results to return)
+        message_code:
+          type: string
+          example: OK
+          description: >-
+            Set to OK for success, or some other short string to indicate and
+            error (e.g., KGUnavailable, TermNotFound, etc.)
+        code_description:
+          type: string
+          example: 9 results found
+          description: >-
+            Extended description denoting the success or mode of failure in the
+            generation of the message
+        table_column_names:
+          type: array
+          example:
+            - chemical_substance.name
+            - chemical_substance.id
+          description: List of column names that corresponds to the row_data for each result
+          items:
+            type: string
+        original_question:
+          type: string
+          example: what proteins are affected by sickle cell anemia
+          description: The original question text typed in by the user
+        restated_question:
+          type: string
+          example: Which proteins are affected by sickle cell anemia?
+          description: >-
+            A precise restatement of the question, as understood by the
+            Translator, for which the answer applies. The user should verify that
+            the restated question matches the intent of their original question
+            (it might not).
+        query_type_id:
+          type: string
+          example: Q2
+          description: >-
+            The query type id if one is known for the query/message (as defined in
+            https://docs.google.com/spreadsheets/d/18zW81wteUfOn3rFRVG0z8mW-ecNhdsfD_6s73ETJnUw/edit#gid=1742835901
+            )
+        terms:
+          type: object
+          description: Dict of terms needed by the specific query type
+          properties:
+            disease:
+              type: string
+              example: malaria
+            protein:
+              type: string
+              example: P12345
+            anatomical_entity:
+              type: string
+              example: liver
+            chemical_substance:
+              type: string
+              example: ibuprofen
+            metabolite:
+              type: string
+              example: ibuprofen
+          additionalProperties: true
+        query_options:
+          type: object
+          example: 
+            coalesce: true
+            threshold: 0.9
+          description: >-
+            Dict of options that can be sent with the query. Options are tool
+            specific and not stipulated here
         results:
           description: List of all returned potential answers for the query posed
           type: array
@@ -113,6 +459,92 @@ components:
       type: object
       description: One of potentially several results or answers for a query
       properties:
+        id:
+          type: string
+          example: 'https://rtx.ncats.io/api/rtx/v1/result/234'
+          description: URI for this message
+        description:
+          type: string
+          example: >-
+            The genetic condition sickle cell anemia may provide protection from
+            cerebral malaria via genetic alterations of proteins HBB (P68871) and
+            HMOX1 (P09601).
+          description: A free text description of this result answer from the reasoner
+        essence:
+          type: string
+          example: ibuprofen
+          description: >-
+            A single string that is the terse essence of the result (useful for
+            simple answers)
+        essence_type:
+          type: string
+          example: drug
+          description: A Translator bioentity type of the essence
+        row_data:
+          type: array
+          example:
+            - ibuprofen
+            - 'CHEMBL:CHEMBL521'
+          description: >-
+            An arbitrary list of values that captures the essence of the result
+            that can be turned into a tabular result across all answers (each
+            result is a row) for a user that wants tabular output
+          items:
+            type: string
+        score:
+          type: number
+          format: float
+          example: 163.233
+          description: Any type of score associated with this result
+        score_name:
+          type: string
+          example: Jaccard distance
+          description: Name for the score
+        score_direction:
+          type: string
+          example: lower_is_better
+          description: >-
+            Sorting indicator for the score: one of higher_is_better or
+            lower_is_better
+        confidence:
+          type: number
+          format: float
+          example: 0.9234
+          description: >-
+            Confidence metric for this result, a value between (inclusive) 0.0 (no
+            confidence) and 1.0 (highest confidence)
+        result_type:
+          type: string
+          example: individual query answer
+          description: >-
+            One of several possible result types: 'individual query answer',
+            'neighborhood graph', 'type summary graph'
+        result_group:
+          type: integer
+          example: 1
+          description: >-
+            An integer group number for results for use in cases where several
+            results should be grouped together. Also useful to control sorting
+            ascending.
+        result_group_similarity_score:
+          type: number
+          format: float
+          example: 0.95
+          description: >-
+            A score that denotes the similarity of this result to other members of
+            the result_group
+        reasoner_id:
+          type: string
+          example: RTX
+          description: >-
+            Identifier string of the reasoner that provided this result (e.g.,
+            RTX, Robokop, Indigo, Integrator)
+        result_graph:
+          type: object
+          description: >-
+            A graph that describes the thought pattern of this result (i.e. answer
+            to the query)
+          $ref: '#/components/schemas/KnowledgeGraph'
         node_bindings:
           type: array
           description: List of QNode-KNode bindings.
@@ -279,6 +711,10 @@ components:
             - type: array
               items:
                 $ref: '#/components/schemas/BiolinkRelation'
+        relation:
+          type: string
+          example: upregulates
+          description: Lower-level relationship type of this edge
         source_id:
           type: string
           example: 'https://omim.org/entry/603903'
@@ -287,6 +723,12 @@ components:
           type: string
           example: 'https://www.uniprot.org/uniprot/P00738'
           description: Corresponds to the @id of target node of this edge
+        negated:
+          type: boolean
+          example: true
+          description: >-
+            Boolean that if set to true, indicates the edge statement is negated
+            i.e. is not true
       additionalProperties: true
       required:
         - id
@@ -300,6 +742,10 @@ components:
           type: string
           example: 'OMIM:603903'
           description: CURIE identifier for this node
+        uri:
+          type: string
+          example: 'https://www.uniprot.org/uniprot/P00738'
+          description: URI identifier for this node"
         name:
           type: string
           example: Haptoglobin
@@ -310,9 +756,43 @@ components:
             - type: array
               items:
                 $ref: '#/components/schemas/BiolinkEntity'
+        description:
+          type: string
+          example: 'Haptoglobin captures, and combines with free plasma hemoglobin...'
+          description: One to three sentences of description/definition of this entity
+        symbol:
+          type: string
+          example: HP
+          description: Short abbreviation or symbol for this entity
+        node_attributes:
+          type: array
+          description: A list of arbitrary attributes for the node
+          items:
+            $ref: '#/components/schemas/NodeAttribute'
       additionalProperties: true
       required:
         - id
+    NodeAttribute:
+      type: object
+      description: A generic attribute for a node
+      properties:
+        type:
+          type: string
+          example: article
+          description: Entity type of this attribute
+        name:
+          type: string
+          example: Wikipedia article
+          description: Formal name of the attribute
+        value:
+          type: string
+          example: '7.23e-12'
+          description: Value of the attribute
+        url:
+          type: string
+          example: 'https://en.wikipedia.org/wiki/Malaria'
+          description: A URL corresponding to this attribute
+      additionalProperties: true
     Edge:
       type: object
       description: An edge in the thought subgraph linking two nodes
@@ -326,6 +806,10 @@ components:
             graph
         type:
           $ref: '#/components/schemas/BiolinkRelation'
+        relation:
+          type: string
+          example: upregulates
+          description: Lower-level relationship type of this edge
         source_id:
           type: string
           example: 'https://omim.org/entry/603903'
@@ -334,11 +818,147 @@ components:
           type: string
           example: 'https://www.uniprot.org/uniprot/P00738'
           description: Corresponds to the @id of target node of this edge
+        is_defined_by:
+          type: string
+          example: reasoner
+          description: A CURIE/URI for the translator group that made the KG
+        defined_datetime:
+          type: string
+          example: '2018-11-03 15:34:23'
+          description: >-
+            Datetime at which the KG builder/updater pulled the information from
+            the original source. Used as a freshness indicator.
+        provided_by:
+          type: string
+          example: OMIM
+          description: A CURIE/URI for the knowledge source that defined this edge
+        confidence:
+          type: number
+          format: float
+          example: 0.99
+          description: >-
+            Confidence metric for this edge, a value between (inclusive) 0.0 (no
+            confidence) and 1.0 (highest confidence)
+        weight:
+          type: number
+          format: float
+          example: 0.99
+          description: >-
+            Weight metric for this edge, with no upper bound. Perhaps useful when
+            formal confidence metrics are not available
+        publications:
+          type: array
+          description: List of CURIEs for publications associated with this edge
+          example:
+            - 'PMID:12345562'
+          items:
+            type: string
+        evidence_type:
+          type: string
+          example: 'ECO:0000220'
+          description: >-
+            A CURIE/URI for class of evidence supporting the statement made in an
+            edge - typically a class from the ECO ontology
+        qualifiers:
+          type: string
+          example: 'ECO:0000220'
+          description: >-
+            Terms representing qualifiers that modify or qualify the meaning of
+            the statement made in an edge
+        negated:
+          type: boolean
+          example: true
+          description: >-
+            Boolean that if set to true, indicates the edge statement is negated
+            i.e. is not true
+        edge_attributes:
+          type: array
+          description: A list of additional attributes for this edge
+          items:
+            $ref: '#/components/schemas/EdgeAttribute'
       additionalProperties: true
       required:
         - id
         - source_id
         - target_id
+    EdgeAttribute:
+      type: object
+      description: A generic additional attribute for an edge
+      properties:
+        type:
+          type: string
+          example: localization
+          description: Entity type of this attribute
+        name:
+          type: string
+          example: Cell type limitation
+          description: Formal name of the attribute
+        value:
+          type: string
+          example: MFC cells
+          description: >-
+            Value of the attribute. While all attributes should have a name, many
+            will not have a value
+        url:
+          type: string
+          example: 'https://www.ncbi.nlm.nih.gov/pubmed/29309293'
+          description: A URL corresponding to this attribute
+      additionalProperties: true
+    Feedback:
+      x-body-name: feedback
+      type: object
+      description: A single unit of Feedback
+      properties:
+        id:
+          type: string
+          example: 'https://rtx.ncats.io/api/rtx/v1/result/234/feedback/56'
+          description: URI for this feedback item
+        result_id:
+          type: string
+          example: 'https://rtx.ncats.io/api/rtx/v1/result/234'
+          description: URI for the result that this feedback corresponds to
+        expertise_level_id:
+          type: integer
+          example: 1
+          description: Integer identifier of the claimed expertise level
+        rating_id:
+          type: integer
+          example: 1
+          description: Integer identifier of the applied rating
+        commenter_id:
+          type: integer
+          example: 1
+          description: Integer identifier of the commenter
+        commenter_full_name:
+          type: string
+          example: John Smith
+          description: Full name of the commenter
+        datetime:
+          type: string
+          example: '2018-05-08 12:00'
+          description: Datetime when the feedback was provided
+        comment:
+          type: string
+          example: This is a great result because...
+          description: A free text comment about this result
+    ResultFeedback:
+      type: object
+      description: Feedback for one result
+      properties:
+        feedback_list:
+          type: array
+          description: List of feedback posts for this result
+          items:
+            $ref: '#/components/schemas/Feedback'
+    MessageFeedback:
+      type: object
+      description: Feedback for all the results corresponding to this message
+      properties:
+        feedback_list:
+          type: array
+          description: List of feedback posts for this entire message
+          items:
+            $ref: '#/components/schemas/Feedback'
     BiolinkEntity:
       description: A subclass of category named_thing (snake_case)
       type: string
