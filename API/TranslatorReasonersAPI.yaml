@@ -134,24 +134,16 @@ components:
       type: object
       properties:
         kg_id:
-          oneOf:
-            - type: string
-            - type: array
-              items:
-                type: string
-          description: One or more knowledge-graph node ids, i.e. the `id` of a KNode
+          type: string
+          description: A knowledge-graph node id, i.e. the `id` of a KNode
       required:
         - kg_id
     EdgeBinding:
       type: object
       properties:
         kg_id:
-          oneOf:
-            - type: string
-            - type: array
-              items:
-                type: string
-          description: One or more knowledge-graph edge ids, i.e. the `id` of a KEdge
+          type: string
+          description: A knowledge-graph edge id, i.e. the `id` of a KEdge
       required:
         - kg_id
     KnowledgeGraph:
