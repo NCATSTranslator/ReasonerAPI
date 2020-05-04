@@ -105,58 +105,44 @@ components:
             KnowledgeGraph object that contains all the nodes and edges referenced
             in any of the possible answers to the query OR connection information
             for a remote knowledge graph
-          oneOf:
-            - $ref: '#/components/schemas/KnowledgeGraph'
-            - $ref: '#/components/schemas/RemoteKnowledgeGraph'
+          $ref: '#/components/schemas/KnowledgeGraph'
       additionalProperties: true
     Result:
       type: object
       description: One of potentially several results or answers for a query
       properties:
         node_bindings:
-          type: array
+          type: object
           description: List of QNode-KNode bindings.
-          items:
-            $ref: '#/components/schemas/NodeBinding'
+          additionalProperties:
+            type: array
+            items:
+              $ref: '#/components/schemas/NodeBinding'
         edge_bindings:
-          type: array
+          type: object
           description: List of QEdge-KEdge bindings.
-          items:
-            $ref: '#/components/schemas/EdgeBinding'
+          additionalProperties:
+            type: array
+            items:
+              $ref: '#/components/schemas/EdgeBinding'
       required:
         - node_bindings
         - edge_bindings
     NodeBinding:
       type: object
       properties:
-        qg_id:
-          type: string
-          description: Query-graph node id, i.e. the `node_id` of a QNode
         kg_id:
-          oneOf:
-            - type: string
-            - type: array
-              items:
-                type: string
-          description: One or more knowledge-graph node ids, i.e. the `id` of a KNode
+          type: string
+          description: A knowledge-graph node id, i.e. the `id` of a KNode
       required:
-        - qg_id
         - kg_id
     EdgeBinding:
       type: object
       properties:
-        qg_id:
-          type: string
-          description: Query-graph edge id, i.e. the `edge_id` of a QEdge
         kg_id:
-          oneOf:
-            - type: string
-            - type: array
-              items:
-                type: string
-          description: One or more knowledge-graph edge ids, i.e. the `id` of a KEdge
+          type: string
+          description: A knowledge-graph edge id, i.e. the `id` of a KEdge
       required:
-        - qg_id
         - kg_id
     KnowledgeGraph:
       type: object
@@ -166,56 +152,19 @@ components:
         of the path may be included.
       properties:
         nodes:
-          type: array
+          type: object
           description: List of nodes in the KnowledgeGraph
-          items:
+          additionalProperties:
             $ref: '#/components/schemas/Node'
         edges:
-          type: array
+          type: object
           description: List of edges in the KnowledgeGraph
-          items:
+          additionalProperties:
             $ref: '#/components/schemas/Edge'
       additionalProperties: true
       required:
         - nodes
         - edges
-    RemoteKnowledgeGraph:
-      type: object
-      description: >-
-        A thought graph associated with this result that is not repeated here, but
-        stored elsewhere in a way that can be remotely accessed by the reader of
-        this Message
-      properties:
-        url:
-          type: string
-          example: 'http://robokop.renci.org/api/kg'
-          description: URL that provides programmatic access to the remote knowledge graph
-        credentials:
-          type: object
-          description: >-
-            Credentials needed for programmatic access to the remote knowledge
-            graph
-          items:
-            $ref: '#/components/schemas/Credentials'
-        protocol:
-          type: string
-          default: neo4j
-      required:
-        - url
-    Credentials:
-      description: Credentials needed for programmatic access to the remote knowledge graph
-      type: object
-      required:
-        - username
-        - password
-      properties:
-        username:
-          description: Username needed for programmatic access to the remote knowledge graph
-          type: string
-        password:
-          type: string
-          description: Password needed for programmatic access to the remote knowledge graph
-      additionalProperties: true
     QueryGraph:
       type: object
       description: >-
@@ -223,14 +172,14 @@ components:
         answer the question. This graph is a representation of a question.
       properties:
         nodes:
-          type: array
+          type: object
           description: List of nodes in the QueryGraph
-          items:
+          additionalProperties:
             $ref: '#/components/schemas/QNode'
         edges:
-          type: array
+          type: object
           description: List of edges in the QueryGraph
-          items:
+          additionalProperties:
             $ref: '#/components/schemas/QEdge'
       additionalProperties: true
       required:
@@ -240,12 +189,6 @@ components:
       type: object
       description: A node in the QueryGraph
       properties:
-        id:
-          type: string
-          example: n00
-          description: >-
-            QueryGraph internal identifier for this QNode. Recommended form: n00,
-            n01, n02, etc.
         curie:
           oneOf:
             - type: string
@@ -261,18 +204,10 @@ components:
               items:
                 $ref: '#/components/schemas/BiolinkEntity'
       additionalProperties: true
-      required:
-        - id
     QEdge:
       type: object
       description: An edge in the QueryGraph
       properties:
-        id:
-          type: string
-          example: e00
-          description: >-
-            QueryGraph internal identifier for this QEdge. Recommended form: e00,
-            e01, e02, etc.
         type:
           oneOf:
             - $ref: '#/components/schemas/BiolinkRelation'
@@ -289,17 +224,12 @@ components:
           description: Corresponds to the @id of target node of this edge
       additionalProperties: true
       required:
-        - id
         - source_id
         - target_id
     Node:
       type: object
       description: A node in the thought subgraph
       properties:
-        id:
-          type: string
-          example: 'OMIM:603903'
-          description: CURIE identifier for this node
         name:
           type: string
           example: Haptoglobin
@@ -311,19 +241,10 @@ components:
               items:
                 $ref: '#/components/schemas/BiolinkEntity'
       additionalProperties: true
-      required:
-        - id
     Edge:
       type: object
       description: An edge in the thought subgraph linking two nodes
       properties:
-        id:
-          type: string
-          example: '553903'
-          description: >-
-            Local identifier for this edge which is unique within this
-            KnowledgeGraph, and perhaps within the source reasoner's knowledge
-            graph
         type:
           $ref: '#/components/schemas/BiolinkRelation'
         source_id:
@@ -336,7 +257,6 @@ components:
           description: Corresponds to the @id of target node of this edge
       additionalProperties: true
       required:
-        - id
         - source_id
         - target_id
     BiolinkEntity:
