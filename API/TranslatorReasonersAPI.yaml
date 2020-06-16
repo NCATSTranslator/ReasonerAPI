@@ -240,6 +240,10 @@ components:
             - type: array
               items:
                 $ref: '#/components/schemas/BiolinkEntity'
+        url:
+          type: string
+          description: Human-consumable URL for the concept
+          example: 'https://en.wikipedia.org/wiki/Attention_deficit_hyperactivity_disorder'
       additionalProperties: true
     Edge:
       type: object
