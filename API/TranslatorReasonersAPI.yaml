@@ -240,7 +240,37 @@ components:
             - type: array
               items:
                 $ref: '#/components/schemas/BiolinkEntity'
-      additionalProperties: true
+        node_attributes:
+          type: array
+          description: A list of attributes describing the node
+          items:
+            $ref: '#/components/schemas/NodeAttribute'
+      additionalProperties: false
+    NodeAttribute:
+      type: object
+      description: A generic attribute for a node
+      properties:
+        name:
+          type: string
+          description: Name for the attribute
+          example: PubMed Identifier
+        value:
+          type: any
+          example: 32529952
+          description: Value of the attribute
+        type:
+          type: string
+          description: CURIE of the semantic type of the attribute
+          example: 'data:1187'
+        url:
+          type: string
+          description: Human consumable URL for the attribute
+          example: 'https://pubmed.ncbi.nlm.nih.gov/32529952'
+        source:
+          type: string
+          description: Source of the attribute
+          example: UniProtKB
+      additionalProperties: false
     Edge:
       type: object
       description: An edge in the thought subgraph linking two nodes
