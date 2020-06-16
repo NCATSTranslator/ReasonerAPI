@@ -240,6 +240,10 @@ components:
             - type: array
               items:
                 $ref: '#/components/schemas/BiolinkEntity'
+        symbol:
+          type: string
+          description: Short abbreviation/acronym for the concept, such as a gene symbol
+          example: ADHD
       additionalProperties: true
     Edge:
       type: object
