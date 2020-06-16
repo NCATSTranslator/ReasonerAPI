@@ -240,6 +240,10 @@ components:
             - type: array
               items:
                 $ref: '#/components/schemas/BiolinkEntity'
+        description:
+          type: string
+          description: Free-text description of the concept
+          example: 'A disorder characterized by a marked pattern of inattention and/or hyperactivity-impulsivity that is inconsistent with developmental level and clearly interferes with functioning in at least two settings (e.g. at home and at school). At least some of the symptoms must be present before the age of 7 years.'
       additionalProperties: true
     Edge:
       type: object
