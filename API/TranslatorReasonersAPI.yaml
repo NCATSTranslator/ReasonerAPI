@@ -228,7 +228,7 @@ components:
         - target_id
     Node:
       type: object
-      description: A node in the thought subgraph
+      description: A node in the knowledge graph
       properties:
         name:
           type: string
