@@ -255,7 +255,6 @@ components:
           description: Name for the attribute
           example: PubMed Identifier
         value:
-          type: any
           example: 32529952
           description: Value of the attribute
         type:
