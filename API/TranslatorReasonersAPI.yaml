@@ -269,6 +269,9 @@ components:
           type: string
           description: Source of the NodeAttribute, as a CURIE prefix.
           example: UniProtKB
+      required:
+        - type
+        - value
       additionalProperties: false
     Edge:
       type: object
