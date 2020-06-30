@@ -296,7 +296,7 @@ components:
           type: string
           example: 'UniProtKB:P00738'
           description: Corresponds to the map key CURIE of the target node of this edge
-        edge_attributes:
+        attributes:
           type: "array"
           description: "A list of additional attributes for this edge"
           items:
