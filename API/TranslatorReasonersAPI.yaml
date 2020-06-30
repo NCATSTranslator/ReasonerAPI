@@ -243,22 +243,89 @@ components:
       additionalProperties: true
     Edge:
       type: object
-      description: An edge in the thought subgraph linking two nodes
+      description: An edge in the knowledge graph linking two nodes
       properties:
         type:
           $ref: '#/components/schemas/BiolinkRelation'
         source_id:
           type: string
-          example: 'https://omim.org/entry/603903'
-          description: Corresponds to the @id of source node of this edge
+          example: 'OMIM:603903'
+          description: Corresponds to the map key CURIE of the source node of this edge
         target_id:
           type: string
-          example: 'https://www.uniprot.org/uniprot/P00738'
-          description: Corresponds to the @id of target node of this edge
-      additionalProperties: true
+          example: 'UniProtKB:P00738'
+          description: Corresponds to the map key CURIE of the target node of this edge
+        edge_attributes:
+          type: "array"
+          description: "A list of additional attributes for this edge"
+          items:
+            $ref: "#/components/EdgeAttribute"
+        negated:
+          type: "boolean"
+          example: "true"
+          description: "Boolean that if set to true, indicates the edge assertion is negated i.e. is asserted to NOT be true"
+        is_defined_by:
+          type: "string"
+          example: "reasoner"
+          description: "A CURIE prefix for the Translator Knowledge Provider (KP) that maintains the assertion"
+        defined_datetime:
+          type: "string"
+          example: "2018-11-03 15:34:23"
+          description: "Datetime at which the KP pulled the information from the original source. Used as a freshness indicator."
+        provided_by:
+          type: "string"
+          example: "OMIM"
+          description: "A CURIE prefix for the Knowledge Source (KS) that originally defined this edge"
+        confidence:
+          type: "number"
+          format: "float"
+          example: 0.99
+          description: "Confidence metric for this assertion, a value between (inclusive) 0.0 (no confidence) and 1.0 (highest confidence)"
+        evidence_type:
+          type: "string"
+          example: "ECO:0007003"
+          description: "CURIE for class of evidence supporting the edge assertion - typically a class from the ECO ontology"
+        relation:
+          type: "string"
+          example: "upregulates"
+          description: "Lower-level relationship type of this edge"
+        publications:
+          type: "array"
+          description: "List of CURIEs for publications associated with this edge"
+          example: [ "PMID:12345562" ]
+          items:
+            type: "string"
+      additionalProperties: false
       required:
         - source_id
         - target_id
+    EdgeAttribute:
+      type: object
+      description: Generic attribute for an edge
+      properties:
+        name:
+          type: string
+          description: Human-readable name or label for the attribute. Should be the name of the semantic type term.
+          example: PubMed Identifier
+        value:
+          example: 32529952
+          description: Value of the attribute. May be any data type, including a list.
+        type:
+          type: string
+          description: CURIE of the semantic type of the attribute, from the EDAM ontology if possible.
+          example: 'EDAM:data_1187'
+        url:
+          type: string
+          description: Human-consumable URL to link out and read about the attribute (not the Node).
+          example: 'https://pubmed.ncbi.nlm.nih.gov/32529952'
+        source:
+          type: string
+          description: Source of the attribute, as a CURIE prefix.
+          example: UniProtKB
+      required:
+        - type
+        - value
+      additionalProperties: false
     BiolinkEntity:
       description: A subclass of category named_thing (snake_case)
       type: string
