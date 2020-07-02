@@ -260,11 +260,11 @@ components:
         type:
           type: string
           description: CURIE of the semantic type of the attribute, from the EDAM ontology if possible.
-          example: 'EDAM:data_1187'
+          example: EDAM:data_1187
         url:
           type: string
           description: Human-consumable URL to link out and read about the NodeAttribute (not the Node).
-          example: 'https://pubmed.ncbi.nlm.nih.gov/32529952'
+          example: https://pubmed.ncbi.nlm.nih.gov/32529952
         source:
           type: string
           description: Source of the NodeAttribute, as a CURIE prefix.
