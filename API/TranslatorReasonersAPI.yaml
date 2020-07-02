@@ -258,7 +258,7 @@ components:
           example: PubMed Identifier
         value:
           example: 32529952
-          description: >- 
+          description: >-
             Value of the attribute. May be any data type, including a list.
         type:
           type: string
