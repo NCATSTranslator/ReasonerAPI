@@ -10,7 +10,8 @@ info:
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
   termsOfService: "{{url}}"
 externalDocs:
-  description: Documentation for the NCATS Biomedical Translator Reasoners web services
+  description: >-
+    Documentation for the NCATS Biomedical Translator Reasoners web services
   url: 'https://github.com/NCATS-Tangerine/NCATS-ReasonerStdAPI'
 tags:
   - name: predicates
@@ -89,22 +90,23 @@ components:
       type: object
       properties:
         results:
-          description: List of all returned potential answers for the query posed
+          description: >-
+            List of all returned potential answers for the query posed
           type: array
           items:
             $ref: '#/components/schemas/Result'
         query_graph:
           type: object
           description: >-
-            QueryGraph object that contains a serialization of a query in the form
-            of a graph
+            QueryGraph object that contains a serialization of a query in the
+            form of a graph
           $ref: '#/components/schemas/QueryGraph'
         knowledge_graph:
           type: object
           description: >-
-            KnowledgeGraph object that contains all the nodes and edges referenced
-            in any of the possible answers to the query OR connection information
-            for a remote knowledge graph
+            KnowledgeGraph object that contains all the nodes and edges
+            referenced in any of the possible answers to the query OR
+            connection information for a remote knowledge graph
           $ref: '#/components/schemas/KnowledgeGraph'
       additionalProperties: true
     Result:
@@ -148,8 +150,8 @@ components:
       type: object
       description: >-
         A thought graph associated with this result. This will commonly be a
-        linear path subgraph from one concept to another, but related items aside
-        of the path may be included.
+        linear path subgraph from one concept to another, but related items
+        aside of the path may be included.
       properties:
         nodes:
           type: object
