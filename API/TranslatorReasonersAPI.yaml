@@ -290,17 +290,17 @@ components:
           $ref: '#/components/schemas/BiolinkRelation'
         source_id:
           type: string
-          example: 'OMIM:603903'
+          example: OMIM:603903
           description: Corresponds to the map key CURIE of the source node of this edge
         target_id:
           type: string
-          example: 'UniProtKB:P00738'
+          example: UniProtKB:P00738
           description: Corresponds to the map key CURIE of the target node of this edge
         attributes:
-          type: "array"
-          description: "A list of additional attributes for this edge"
+          type: array
+          description: A list of additional attributes for this edge
           items:
-            $ref: "#/components/Attribute"
+            $ref: '#/components/Attribute'
       additionalProperties: false
       required:
         - source_id
