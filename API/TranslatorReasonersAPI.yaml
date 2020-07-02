@@ -252,18 +252,25 @@ components:
       properties:
         name:
           type: string
-          description: Human-readable name or label for the NodeAttribute. Should be the name of the semantic type term.
+          description: >-
+            Human-readable name or label for the NodeAttribute. Should be the
+            name of the semantic type term.
           example: PubMed Identifier
         value:
           example: 32529952
-          description: Value of the attribute. May be any data type, including a list.
+          description: >- 
+            Value of the attribute. May be any data type, including a list.
         type:
           type: string
-          description: CURIE of the semantic type of the attribute, from the EDAM ontology if possible.
+          description: >-
+            CURIE of the semantic type of the attribute, from the EDAM ontology
+            if possible.
           example: EDAM:data_1187
         url:
           type: string
-          description: Human-consumable URL to link out and read about the NodeAttribute (not the Node).
+          description: >-
+            Human-consumable URL to link out and read about the NodeAttribute
+            (not the Node).
           example: https://pubmed.ncbi.nlm.nih.gov/32529952
         source:
           type: string
