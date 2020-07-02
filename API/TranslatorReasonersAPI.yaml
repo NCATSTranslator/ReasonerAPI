@@ -7,23 +7,23 @@ info:
     email: edeutsch@systemsbiology.org
   license:
     name: Apache 2.0
-    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
-  termsOfService: "{{url}}"
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: {{url}}
 externalDocs:
   description: >-
     Documentation for the NCATS Biomedical Translator Reasoners web services
-  url: 'https://github.com/NCATS-Tangerine/NCATS-ReasonerStdAPI'
+  url: https://github.com/NCATS-Tangerine/NCATS-ReasonerStdAPI
 tags:
   - name: predicates
     description: Get supported relationships by source and target
     externalDocs:
       description: Documentation for the reasoner predicates function
-      url: 'http://reasonerhost.ncats.io/overview.html#predicates'
+      url: http://reasonerhost.ncats.io/overview.html#predicates
   - name: query
     description: Query reasoner using a predefined question type
     externalDocs:
       description: Documentation for the reasoner query function
-      url: 'http://reasonerhost.ncats.io/overview.html#query'
+      url: http://reasonerhost.ncats.io/overview.html#query
 paths:
   /predicates:
     get:
@@ -197,7 +197,7 @@ components:
             - type: array
               items:
                 type: string
-          example: 'OMIM:603903'
+          example: OMIM:603903
           description: CURIE identifier for this node
         type:
           oneOf:
@@ -218,11 +218,11 @@ components:
                 $ref: '#/components/schemas/BiolinkRelation'
         source_id:
           type: string
-          example: 'https://omim.org/entry/603903'
+          example: https://omim.org/entry/603903
           description: Corresponds to the @id of source node of this edge
         target_id:
           type: string
-          example: 'https://www.uniprot.org/uniprot/P00738'
+          example: https://www.uniprot.org/uniprot/P00738
           description: Corresponds to the @id of target node of this edge
       additionalProperties: true
       required:
@@ -251,11 +251,11 @@ components:
           $ref: '#/components/schemas/BiolinkRelation'
         source_id:
           type: string
-          example: 'https://omim.org/entry/603903'
+          example: https://omim.org/entry/603903
           description: Corresponds to the @id of source node of this edge
         target_id:
           type: string
-          example: 'https://www.uniprot.org/uniprot/P00738'
+          example: https://www.uniprot.org/uniprot/P00738
           description: Corresponds to the @id of target node of this edge
       additionalProperties: true
       required:
