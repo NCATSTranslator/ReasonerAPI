@@ -255,8 +255,8 @@ components:
         name:
           type: string
           description: >-
-            Human-readable name or label for the NodeAttribute. Should be the
-            name of the semantic type term.
+            Human-readable name or label for the attribute. Should be the name
+            of the semantic type term.
           example: PubMed Identifier
         value:
           example: 32529952
@@ -273,12 +273,12 @@ components:
         url:
           type: string
           description: >-
-            Human-consumable URL to link out and read about the NodeAttribute
-            (not the Node).
+            Human-consumable URL to link out and read about the attribute (not
+            the node).
           example: https://pubmed.ncbi.nlm.nih.gov/32529952
         source:
           type: string
-          description: Source of the NodeAttribute, as a CURIE prefix.
+          description: Source of the attribute, as a CURIE prefix.
           example: UniProtKB
       required:
         - type
