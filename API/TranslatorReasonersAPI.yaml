@@ -205,6 +205,10 @@ components:
             - type: array
               items:
                 $ref: '#/components/schemas/BiolinkEntity'
+        is_set:
+          type: boolean
+          description: "Boolean that if set to true, indicates the QNode represent entities that should be considered as sets, rather than individually. Default is false"
+          example: true
       additionalProperties: true
     QEdge:
       type: object
