@@ -6,7 +6,7 @@ This document described development and release policies for the NCATS Translato
 
 ## Repository branches
 - The repository shall have two primary branches, `master` and `experimental`
-- The `master` branch shall contain the current core API schema, both in development and tagged releases
+- The `master` branch shall contain the current core API schema, both in-development changes and tagged releases
 - The `experimental` branch shall contain the current extended API schema, a definition of additional properties that are used and promoted by at least one team
 
 ## Version Numbering
