@@ -108,7 +108,37 @@ components:
             referenced in any of the possible answers to the query OR
             connection information for a remote knowledge graph
           $ref: '#/components/schemas/KnowledgeGraph'
-      additionalProperties: true
+        context:
+          type: string
+          example: https://rtx.ncats.io/ns/translator.jsonld
+          description: JSON-LD context URI
+        type:
+          type: string
+          example: translator_reasoner_message
+          description: Entity type of this message
+        id:
+          type: string
+          example: https://arax.rtx.ai/api/rtx/v1/message/2476
+          description: URI for this message
+        reasoner_id:
+          type: string
+          example: reasoner
+          description: >-
+            Identifier string of the reasoner that provided this message (one of
+            ARAX, ARAGORN, Indigo, Integrator, etc.)
+        tool_version:
+          type: string
+          example: ARAX 0.7.4
+          description: Version label of the tool that generated this message
+        schema_version:
+          type: string
+          example: 0.9.3dev
+          description: Version tag of the Translator API schema used by this document
+        datetime:
+          type: string
+          example: '2018-01-09 12:34:45'
+          description: Datetime string for the time that this message was generated
+          additionalProperties: true
     Result:
       type: object
       description: One of potentially several results or answers for a query
