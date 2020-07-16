@@ -138,7 +138,7 @@ components:
           type: string
           example: '2018-01-09 12:34:45'
           description: Datetime string for the time that this message was generated
-          additionalProperties: true
+      additionalProperties: true
     Result:
       type: object
       description: One of potentially several results or answers for a query
