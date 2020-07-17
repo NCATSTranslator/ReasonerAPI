@@ -110,7 +110,7 @@ components:
           $ref: '#/components/schemas/KnowledgeGraph'
         context:
           type: string
-          example: https://rtx.ncats.io/ns/translator.jsonld
+          example: https://raw.githubusercontent.com/biolink/biolink-model/master/context.jsonld
           description: JSON-LD context URI
         type:
           type: string
