@@ -9,9 +9,8 @@ This document described development and release policies for the NCATS Translato
 
 ## Version Numbering
 - After a tagged release, the very next commit to the `master` branch will receive an increment to the next minor version number with '-dev' appended
-  (e.g. 0.9.3dev)
+  (e.g. 0.9.3-dev)
 - In the process of tagging a release, the version number shall be incremented again to the next minor version number or major version numbers as appropriate,
   with no suffix (e.g. 0.9.4 or 1.0.0)
-
 
 
