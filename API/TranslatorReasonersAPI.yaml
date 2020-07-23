@@ -25,7 +25,7 @@ tags:
       description: Documentation for the reasoner query function
       url: http://reasonerhost.ncats.io/overview.html#query
   - name: translator
-  - name: reasoner 
+  - name: reasoner
 paths:
   /predicates:
     get:
