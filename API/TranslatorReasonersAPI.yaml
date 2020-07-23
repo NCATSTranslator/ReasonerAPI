@@ -246,17 +246,17 @@ components:
           type: array
           description: A list of attributes describing the node
           items:
-            $ref: '#/components/schemas/NodeAttribute'
+            $ref: '#/components/schemas/Attribute'
       additionalProperties: false
-    NodeAttribute:
+    Attribute:
       type: object
       description: Generic attribute for a node
       properties:
         name:
           type: string
           description: >-
-            Human-readable name or label for the NodeAttribute. Should be the
-            name of the semantic type term.
+            Human-readable name or label for the attribute. Should be the name
+            of the semantic type term.
           example: PubMed Identifier
         value:
           example: 32529952
@@ -266,17 +266,19 @@ components:
           type: string
           description: >-
             CURIE of the semantic type of the attribute, from the EDAM ontology
-            if possible.
+            if possible. If a suitable identifier does not exist, enter a
+            descriptive phrase here and submit the new type for consideration
+            by the appropriate authority.
           example: EDAM:data_1187
         url:
           type: string
           description: >-
-            Human-consumable URL to link out and read about the NodeAttribute
-            (not the Node).
+            Human-consumable URL to link out and read about the attribute (not
+            the node).
           example: https://pubmed.ncbi.nlm.nih.gov/32529952
         source:
           type: string
-          description: Source of the NodeAttribute, as a CURIE prefix.
+          description: Source of the attribute, as a CURIE prefix.
           example: UniProtKB
       required:
         - type
@@ -284,19 +286,26 @@ components:
       additionalProperties: false
     Edge:
       type: object
-      description: An edge in the thought subgraph linking two nodes
+      description: An edge in the knowledge graph linking two nodes
       properties:
         type:
           $ref: '#/components/schemas/BiolinkRelation'
         source_id:
           type: string
-          example: https://omim.org/entry/603903
-          description: Corresponds to the @id of source node of this edge
+          example: OMIM:603903
+          description: >-
+            Corresponds to the map key CURIE of the source node of this edge
         target_id:
           type: string
-          example: https://www.uniprot.org/uniprot/P00738
-          description: Corresponds to the @id of target node of this edge
-      additionalProperties: true
+          example: UniProtKB:P00738
+          description: >-
+            Corresponds to the map key CURIE of the target node of this edge
+        attributes:
+          type: array
+          description: A list of additional attributes for this edge
+          items:
+            $ref: '#/components/Attribute'
+      additionalProperties: false
       required:
         - source_id
         - target_id
