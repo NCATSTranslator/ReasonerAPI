@@ -1,28 +1,29 @@
 openapi: 3.0.1
 info:
   description: OpenAPI for NCATS Biomedical Translator Reasoners
-  version: 0.9.2
+  version: 0.9.3-dev
   title: OpenAPI for NCATS Biomedical Translator Reasoners
   contact:
     email: edeutsch@systemsbiology.org
   license:
     name: Apache 2.0
-    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
-  termsOfService: "{{url}}"
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: INSERT-URL-HERE
 externalDocs:
-  description: Documentation for the NCATS Biomedical Translator Reasoners web services
-  url: 'https://github.com/NCATS-Tangerine/NCATS-ReasonerStdAPI'
+  description: >-
+    Documentation for the NCATS Biomedical Translator Reasoners web services
+  url: https://github.com/NCATS-Tangerine/NCATS-ReasonerStdAPI
 tags:
   - name: predicates
     description: Get supported relationships by source and target
     externalDocs:
       description: Documentation for the reasoner predicates function
-      url: 'http://reasonerhost.ncats.io/overview.html#predicates'
+      url: http://reasonerhost.ncats.io/overview.html#predicates
   - name: query
     description: Query reasoner using a predefined question type
     externalDocs:
       description: Documentation for the reasoner query function
-      url: 'http://reasonerhost.ncats.io/overview.html#query'
+      url: http://reasonerhost.ncats.io/overview.html#query
   - name: translator
   - name: reasoner 
 paths:
@@ -91,22 +92,23 @@ components:
       type: object
       properties:
         results:
-          description: List of all returned potential answers for the query posed
+          description: >-
+            List of all returned potential answers for the query posed
           type: array
           items:
             $ref: '#/components/schemas/Result'
         query_graph:
           type: object
           description: >-
-            QueryGraph object that contains a serialization of a query in the form
-            of a graph
+            QueryGraph object that contains a serialization of a query in the
+            form of a graph
           $ref: '#/components/schemas/QueryGraph'
         knowledge_graph:
           type: object
           description: >-
-            KnowledgeGraph object that contains all the nodes and edges referenced
-            in any of the possible answers to the query OR connection information
-            for a remote knowledge graph
+            KnowledgeGraph object that contains all the nodes and edges
+            referenced in any of the possible answers to the query OR
+            connection information for a remote knowledge graph
           $ref: '#/components/schemas/KnowledgeGraph'
       additionalProperties: true
     Result:
@@ -150,8 +152,8 @@ components:
       type: object
       description: >-
         A thought graph associated with this result. This will commonly be a
-        linear path subgraph from one concept to another, but related items aside
-        of the path may be included.
+        linear path subgraph from one concept to another, but related items
+        aside of the path may be included.
       properties:
         nodes:
           type: object
@@ -197,7 +199,7 @@ components:
             - type: array
               items:
                 type: string
-          example: 'OMIM:603903'
+          example: OMIM:603903
           description: CURIE identifier for this node
         type:
           oneOf:
@@ -218,11 +220,11 @@ components:
                 $ref: '#/components/schemas/BiolinkRelation'
         source_id:
           type: string
-          example: 'https://omim.org/entry/603903'
+          example: https://omim.org/entry/603903
           description: Corresponds to the @id of source node of this edge
         target_id:
           type: string
-          example: 'https://www.uniprot.org/uniprot/P00738'
+          example: https://www.uniprot.org/uniprot/P00738
           description: Corresponds to the @id of target node of this edge
       additionalProperties: true
       required:
@@ -242,22 +244,70 @@ components:
             - type: array
               items:
                 $ref: '#/components/schemas/BiolinkEntity'
-      additionalProperties: true
+        attributes:
+          type: array
+          description: A list of attributes describing the node
+          items:
+            $ref: '#/components/schemas/Attribute'
+      additionalProperties: false
+    Attribute:
+      type: object
+      description: Generic attribute for a node
+      properties:
+        name:
+          type: string
+          description: >-
+            Human-readable name or label for the attribute. Should be the name
+            of the semantic type term.
+          example: PubMed Identifier
+        value:
+          example: 32529952
+          description: >-
+            Value of the attribute. May be any data type, including a list.
+        type:
+          type: string
+          description: >-
+            CURIE of the semantic type of the attribute, from the EDAM ontology
+            if possible. If a suitable identifier does not exist, enter a
+            descriptive phrase here and submit the new type for consideration
+            by the appropriate authority.
+          example: EDAM:data_1187
+        url:
+          type: string
+          description: >-
+            Human-consumable URL to link out and read about the attribute (not
+            the node).
+          example: https://pubmed.ncbi.nlm.nih.gov/32529952
+        source:
+          type: string
+          description: Source of the attribute, as a CURIE prefix.
+          example: UniProtKB
+      required:
+        - type
+        - value
+      additionalProperties: false
     Edge:
       type: object
-      description: An edge in the thought subgraph linking two nodes
+      description: An edge in the knowledge graph linking two nodes
       properties:
         type:
           $ref: '#/components/schemas/BiolinkRelation'
         source_id:
           type: string
-          example: 'https://omim.org/entry/603903'
-          description: Corresponds to the @id of source node of this edge
+          example: OMIM:603903
+          description: >-
+            Corresponds to the map key CURIE of the source node of this edge
         target_id:
           type: string
-          example: 'https://www.uniprot.org/uniprot/P00738'
-          description: Corresponds to the @id of target node of this edge
-      additionalProperties: true
+          example: UniProtKB:P00738
+          description: >-
+            Corresponds to the map key CURIE of the target node of this edge
+        attributes:
+          type: array
+          description: A list of additional attributes for this edge
+          items:
+            $ref: '#/components/Attribute'
+      additionalProperties: false
       required:
         - source_id
         - target_id

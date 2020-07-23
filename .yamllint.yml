@@ -1,0 +1,11 @@
+extends: default
+
+rules:
+  document-start: disable
+  empty-values:
+    forbid-in-block-mappings: true
+  line-length:
+    max: 79
+  quoted-strings:
+    quote-type: single
+    required: only-when-needed
