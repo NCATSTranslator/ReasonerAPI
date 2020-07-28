@@ -270,6 +270,16 @@ components:
       properties:
         message:
           $ref: '#/components/schemas/Message'
+        asynchronous:
+          type: string
+          example: 'true'
+          description: >-
+            Set to 'true' in order to receive an incomplete message_id if the query
+            will take a long time. The client can then periodically poll with that
+            message_id for a status update and to receive an eventual complete message.
+            Set to 'stream' in order to receive newline-delimited logging messages
+            describing progress in answering the query, with the last line being
+            the resulting message in its entirety.
       additionalProperties: true
       required:
         - message
