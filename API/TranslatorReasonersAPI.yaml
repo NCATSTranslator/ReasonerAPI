@@ -270,6 +270,12 @@ components:
       properties:
         message:
           $ref: '#/components/schemas/Message'
+        bypass_cache:
+          type: string
+          example: 'true'
+          description: >-
+            Set to true in order to bypass any possible cached message and try to
+            answer the query over again
       additionalProperties: true
       required:
         - message
