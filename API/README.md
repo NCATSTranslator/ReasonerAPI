@@ -1,26 +1,28 @@
-# NCATS Translator Reasoners API
+# NCATS Translator Graph API
 
 [![NCATS-ReasonerStdAPI build status on Travis CI](https://travis-ci.com/NCATS-Tangerine/NCATS-ReasonerStdAPI.svg?branch=master)](https://travis-ci.com/NCATS-Tangerine/NCATS-ReasonerStdAPI)
 
-This API specification represents a version 0.9.1 draft of the NCATS Translator Reasoners API.
-It is intended that the various reasoner tools will support this API so that remote calls to
-any of the reasoners (and other related Translator resources) may be made using the same API
+This API specification represents a version 0.9.3-dev draft of the NCATS Translator Graph API.
+Previous releases (e.g. 0.9.2, 0.9.1) are tagged.
+It is intended that NCATS Translator ARS, Autonomous Reasoning Agents (ARAs), and Knowledge Providers (KPs)
+will support this API so that remote calls to
+any of these services (and other related Translator resources) may be made using the same API
 with the same result format, which will
 facilitate comparison among reasoners and chaining of queries to different reasoners to
 achieve an aggregated result.
 
-## Two versions
-- The main TranslatorReasonersAPI.yaml file is now in OpenAPI 3.0.1 formatting
-- The secondary TranslatorReasonersAPI_swagger2.0.yaml remains on the Swagger 2.0 formatting, which is less descriptive
-- The Swagger 2.0 formatting is retained for now since some tools do not support OpenAPI 3.0.1 yet
+## The Core and Extended
+- The `master` branch contains the core schema, a minimal schema that all implementations must have code to handle
+- The `extended` branch contains extensions to the schema that enable the encoding of substantially more information,
+  but clients and servers are not required to implement handling for these items.
 
 ## Previous versions
 - Previous versions of the draft standard may be found at https://github.com/NCATS-Tangerine/NCATS-ReasonerStdAPI/tree/7205051d69e50d2c8137d88598346e185f920ea4/API
 
 ## Notes
+- The following documentation is now badly out of date, but generally reflects the year-old state of the `extended` schema
 - The target output is intended to be JSON-LD
 - Updated 2019-03-08
-
 
 # INPUT Specification
 Below is a description of the elements of the JSON formatted input to the /query endpoint.
