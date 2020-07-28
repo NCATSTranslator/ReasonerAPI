@@ -270,9 +270,50 @@ components:
       properties:
         message:
           $ref: '#/components/schemas/Message'
+        previous_message_processing_plan:
+          type: object
+          description: >-
+            Container for one or more Message objects or identifiers for one or
+            more Messages along with a processing plan for how those messages
+            should be processed and returned
+          items:
+            $ref: '#/components/schemas/PreviousMessageProcessingPlan'
       additionalProperties: true
       required:
         - message
+    PreviousMessageProcessingPlan:
+      type: object
+      properties:
+        previous_message_uris:
+          type: array
+          example:
+            - 'https://rtx.ncats.io/api/rtx/v1/message/300'
+          description: List of URIs for Message objects to fetch and process
+          items:
+            type: string
+        previous_messages:
+          type: array
+          description: List of Message objects to process
+          items:
+            $ref: '#/components/schemas/Message'
+        processing_actions:
+          type: array
+          example:
+            - mod45filter
+            - redirect2RTX
+          description: >-
+            List of order-dependent actions to guide what happens with the Message
+            object(s)
+          items:
+            type: string
+        options:
+          type: object
+          example:
+            topNMostFrequent: 1
+          description: >-
+            Dict of options that apply during processing in an order independent
+            fashion
+      additionalProperties: true
     FeedbackResponse:
       type: object
       properties:
