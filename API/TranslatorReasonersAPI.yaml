@@ -85,6 +85,13 @@ components:
       properties:
         message:
           $ref: '#/components/schemas/Message'
+        use_core_schema:
+          type: string
+          example: 'true'
+          description: >-
+            Set to true in order to receive a Message that is limited only to named properties
+            in the core schema. Properties from the `extended` schema and other additional
+            properties must not be transmitted.
       additionalProperties: true
       required:
         - message
