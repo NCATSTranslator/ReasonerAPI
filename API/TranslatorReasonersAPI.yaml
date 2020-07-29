@@ -314,6 +314,7 @@ components:
     BiolinkEntity:
       description: An Biolink class, NamedThing or a child thereof (PascalCase)
       type: string
+      pattern: [A-Z][a-zA-Z]*
       externalDocs:
         description: Biolink model entities
         url: https://biolink.github.io/biolink-model/docs/NamedThing.html
@@ -321,6 +322,7 @@ components:
     BiolinkRelation:
       description: A Biolink slot, related_to or a child thereof (snake_case)
       type: string
+      pattern: [a-z][a-z_]*
       externalDocs:
         description: Biolink model relations
         url: https://biolink.github.io/biolink-model/docs/related_to.html
