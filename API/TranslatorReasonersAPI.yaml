@@ -312,16 +312,16 @@ components:
         - source_id
         - target_id
     BiolinkEntity:
-      description: A subclass of category named_thing (snake_case)
+      description: An Biolink class, NamedThing or a child thereof (PascalCase)
       type: string
       externalDocs:
         description: Biolink model entities
         url: https://biolink.github.io/biolink-model/docs/NamedThing.html
-      example: disease
+      example: PhenotypicFeature
     BiolinkRelation:
-      description: A relation, i.e. child of related_to (snake_case)
+      description: A Biolink slot, related_to or a child thereof (snake_case)
       type: string
       externalDocs:
         description: Biolink model relations
         url: https://biolink.github.io/biolink-model/docs/related_to.html
-      example: affects
+      example: interacts_with
