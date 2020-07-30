@@ -319,7 +319,7 @@ components:
       externalDocs:
         description: Biolink model entities
         url: https://biolink.github.io/biolink-model/docs/NamedThing.html
-      example: PhenotypicFeature
+      example: biolink:PhenotypicFeature
     BiolinkRelation:
       description: >-
         CURIE for a Biolink slot, related_to or a child thereof (snake_case)
@@ -328,4 +328,4 @@ components:
       externalDocs:
         description: Biolink model relations
         url: https://biolink.github.io/biolink-model/docs/related_to.html
-      example: interacts_with
+      example: biolink:interacts_with
