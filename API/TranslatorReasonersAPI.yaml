@@ -69,13 +69,35 @@ paths:
               $ref: '#/components/schemas/Query'
       responses:
         '200':
-          description: successful operation
+          description: Successful operation
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Message'
         '400':
-          description: Invalid status value
+          description: Bad request. One or more specified parameters or objects are not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        '404':
+          description: No results found for the specified parameters and objects
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        '500':
+          description: Server error. The specified parameters and objects may be valid but the server was unable to service the request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        '501':
+          description: Not implemented. This end point is not implemented by this resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
       x-swagger-router-controller: swagger_server.controllers.query_controller
 components:
   schemas:
