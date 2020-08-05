@@ -72,6 +72,14 @@ paths:
       summary: Query reasoner via one of several inputs
       description: ''
       operationId: query
+      parameters:
+        - name: bypass_cache
+          in: query
+          description: Set to true in order to bypass any possible cached result message and try to answer the query over again
+          required: false
+          type: boolean
+          default: false
+          example: true
       requestBody:
         description: Query information to be submitted
         required: true
