@@ -49,8 +49,8 @@ paths:
                     items:
                       type: string
                 example:
-                  chemical_substance:
-                    gene:
+                  ChemicalSubstance:
+                    Gene:
                       - directly_interacts_with
                       - decreases_activity_of
   /query:
