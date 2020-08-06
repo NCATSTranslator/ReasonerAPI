@@ -75,11 +75,11 @@ paths:
       parameters:
         - name: bypass_cache
           in: query
-          description: Set to true in order to bypass any possible cached result message and try to answer the query over again
-          required: false
-          type: boolean
-          default: false
-          example: true
+          description: >
+            Set to true in order to bypass any possible cached result
+            message and try to answer the query over again
+          schema:
+            type: boolean
       requestBody:
         description: Query information to be submitted
         required: true
