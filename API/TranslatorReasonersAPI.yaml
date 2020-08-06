@@ -75,25 +75,34 @@ paths:
               schema:
                 $ref: '#/components/schemas/Message'
         '400':
-          description: Bad request. One or more specified parameters or objects are not valid
+          description: >
+            Bad request. One or more specified
+            parameters or objects are not valid
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Message'
         '404':
-          description: No results found for the specified parameters and objects
+          description: >
+            No results found for the specified
+            parameters and objects
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Message'
         '500':
-          description: Server error. The specified parameters and objects may be valid but the server was unable to service the request
+          description: >
+            Server error. The specified parameters and
+            objects may be valid but the server was
+            unable to service the request
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Message'
         '501':
-          description: Not implemented. This end point is not implemented by this resource
+          description: >
+            Not implemented. This end point is not
+            implemented by this resource
           content:
             application/json:
               schema:
