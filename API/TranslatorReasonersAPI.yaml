@@ -312,7 +312,7 @@ components:
         - source_id
         - target_id
     BiolinkEntity:
-      description: An Biolink class, NamedThing or a child thereof (PascalCase)
+      description: A Biolink class, NamedThing or a child thereof (PascalCase)
       type: string
       pattern: '[A-Z][a-zA-Z]*'
       externalDocs:
