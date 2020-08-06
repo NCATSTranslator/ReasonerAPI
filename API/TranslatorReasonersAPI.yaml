@@ -78,9 +78,9 @@ paths:
           description: >
             Set to true in order to bypass any possible cached result
             message and try to answer the query over again
-          default: false
           schema:
             type: boolean
+            default: false
       requestBody:
         description: Query information to be submitted
         required: true
