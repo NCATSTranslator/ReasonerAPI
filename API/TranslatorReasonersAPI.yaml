@@ -49,10 +49,10 @@ paths:
                     items:
                       type: string
                 example:
-                  chemical_substance:
-                    gene:
-                      - directly_interacts_with
-                      - decreases_activity_of
+                  'biolink:ChemicalSubstance':
+                    'biolink:Gene':
+                      - biolink:directly_interacts_with
+                      - biolink:decreases_activity_of
   /query:
     post:
       tags:
