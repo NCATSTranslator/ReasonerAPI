@@ -69,44 +69,36 @@ paths:
               $ref: '#/components/schemas/Query'
       responses:
         '200':
-          description: Successful operation
+          description: >-
+            OK. There may or may not be results. Note that some of the provided
+            identifiers may not have been recognized.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Message'
         '400':
           description: >-
-            Bad request. One or more specified
-            parameters or objects are not valid
+            Bad request. The request is invalid according to this OpenAPI
+            schema OR a specific identifier is believed to be invalid somehow
+            (not just unrecognized).
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
-        '404':
-          description: >-
-            No results found for the specified
-            parameters and objects
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Message'
+                type: string
         '500':
           description: >-
-            Server error. The specified parameters and
-            objects may be valid but the server was
-            unable to service the request
+            Internal server error.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
+                type: string
         '501':
           description: >-
-            Not implemented. This end point is not
-            implemented by this resource
+            Not implemented.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
+                type: string
       x-swagger-router-controller: swagger_server.controllers.query_controller
 components:
   schemas:
