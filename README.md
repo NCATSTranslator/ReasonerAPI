@@ -1,9 +1,7 @@
-# NCATS-ReasonerStdAPI
+# Project Summary
 
-NCATS Translator Reasoner API
-
-The current NCATS Translator Reasoner API is defined by a OpenAPI YAML file in this repository.
-The core schema is defined in the `master` branch. And extended schema is defined in the `extended` branch.
+The current NCATS Translator Reasoner API is defined by an OpenAPI YAML file in this repository.
+The core schema is defined in the `master` branch. An extended schema is defined in the `extended` branch.
 
 ## Recent Changes
 - 2020-08-04: Active development and changes ongoing. The `master` branch is labeled 0.9.3-dev and reflects substantial changes since release 0.9.2
