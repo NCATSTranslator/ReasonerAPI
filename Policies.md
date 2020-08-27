@@ -1,6 +1,6 @@
-# NCATS Translator API Policies
+# Translator Reasoner API Policies
 
-This document described development and release policies for the NCATS Translator API
+This document described development and release policies for the Translator Reasoner API.
 
 ## Repository branches
 - The repository has two primary branches, `master` and `extended`

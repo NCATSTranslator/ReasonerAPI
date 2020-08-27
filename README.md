@@ -1,5 +1,7 @@
 # Translator Reasoner API
 
+[![ReasonerAPI build status on Travis CI](https://travis-ci.org/NCATSTranslator/ReasonerAPI.svg?branch=master)](https://travis-ci.org/NCATSTranslator/ReasonerAPI)
+
 The current NCATS Translator Reasoner API is defined by an OpenAPI YAML file in this repository.
 The core schema is defined in the `master` branch. An extended schema is defined in the `extended` branch.
 
