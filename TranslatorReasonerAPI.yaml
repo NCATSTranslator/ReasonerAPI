@@ -230,6 +230,20 @@ components:
             - type: array
               items:
                 $ref: '#/components/schemas/BiolinkEntity'
+        is_set:
+          type: boolean
+          description: >-
+            Boolean that if set to true, indicates that this QNode MAY have
+            multiple KnowledgeGraph Nodes bound to it within each Result.
+            The nodes in a set should be considered as a set of independent
+            nodes, rather than a set of dependent nodes, i.e., the answer
+            would still be valid if the nodes in the set were instead returned
+            individually. Multiple QNodes may have is_set=True. If a QNode
+            (n1) with is_set=True is connected to a QNode (n2) with
+            is_set=False, each n1 must be connected to n2. If a QNode (n1)
+            with is_set=True is connected to a QNode (n2) with is_set=True,
+            each n1 must be connected to at least one n2.
+          default: false
       additionalProperties: true
     QEdge:
       type: object
