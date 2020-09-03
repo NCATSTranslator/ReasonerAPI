@@ -329,7 +329,7 @@ components:
           type: array
           description: A list of additional attributes for this edge
           items:
-            $ref: '#/components/Attribute'
+            $ref: '#/components/schemas/Attribute'
       additionalProperties: false
       required:
         - source_id
