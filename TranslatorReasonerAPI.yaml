@@ -66,7 +66,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Query'
+              $ref: '#/components/schemas/Request'
       responses:
         '200':
           description: >-
@@ -75,7 +75,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
+                $ref: '#/components/schemas/Response'
         '400':
           description: >-
             Bad request. The request is invalid according to this OpenAPI
@@ -102,16 +102,22 @@ paths:
       x-swagger-router-controller: swagger_server.controllers.query_controller
 components:
   schemas:
-    Query:
+    Request:
       x-body-name: request_body
       type: object
       properties:
-        message:
-          $ref: '#/components/schemas/Message'
-      additionalProperties: true
+        data:
+          $ref: '#/components/schemas/Data'
       required:
-        - message
-    Message:
+        - data
+    Response:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Data'
+      required:
+        - data
+    Data:
       type: object
       properties:
         results:
@@ -133,7 +139,7 @@ components:
             referenced in any of the possible answers to the query OR
             connection information for a remote knowledge graph
           $ref: '#/components/schemas/KnowledgeGraph'
-      additionalProperties: true
+      additionalProperties: false
     Result:
       type: object
       description: One of potentially several results or answers for a query
