@@ -115,6 +115,10 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/Data'
+        logs:
+          type: array
+          items:
+            $ref: '#/components/schema/LogEntry'
       required:
         - data
     Data:
@@ -140,6 +144,30 @@ components:
             connection information for a remote knowledge graph
           $ref: '#/components/schemas/KnowledgeGraph'
       additionalProperties: false
+    LogEntry:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+          description: Timestamp in ISO 8601 format
+          example: '2020-09-03T18:13:49+00:00'
+        level:
+          type: string
+          description: Logging level
+          enum:
+            - ERROR
+            - WARNING
+            - INFO
+            - DEBUG
+        code:
+          type: string
+          description: >-
+            One of a standardized set of short codes
+            e.g. QueryNotTraversable, KPNotAvailable, KPResponseMalformed
+        message:
+          type: string
+          description: A human-readable log message
     Result:
       type: object
       description: One of potentially several results or answers for a query
