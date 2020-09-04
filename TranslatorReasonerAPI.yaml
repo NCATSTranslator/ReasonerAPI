@@ -108,6 +108,8 @@ components:
       properties:
         message:
           $ref: '#/components/schemas/Message'
+	callback:
+		type: url
       additionalProperties: true
       required:
         - message
