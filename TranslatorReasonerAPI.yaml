@@ -109,7 +109,9 @@ components:
         message:
           $ref: '#/components/schemas/Message'
         callback:
-          type: url
+          type: string
+          format: uri
+          pattern: ^https?://
       additionalProperties: true
       required:
         - message
