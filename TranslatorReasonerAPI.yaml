@@ -75,7 +75,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
+                $ref: '#/components/schemas/Response'
         '400':
           description: >-
             Bad request. The request is invalid according to this OpenAPI
@@ -111,6 +111,13 @@ components:
       additionalProperties: true
       required:
         - message
+    Response:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/Message'
+      required:
+        - message
     Message:
       type: object
       properties:
@@ -133,7 +140,7 @@ components:
             referenced in any of the possible answers to the query OR
             connection information for a remote knowledge graph
           $ref: '#/components/schemas/KnowledgeGraph'
-      additionalProperties: true
+      additionalProperties: false
     Result:
       type: object
       description: One of potentially several results or answers for a query
