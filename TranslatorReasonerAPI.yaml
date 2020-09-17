@@ -425,7 +425,60 @@ components:
             with is_set=True is connected to a QNode (n2) with is_set=True,
             each n1 must be connected to at least one n2.
           default: false
-      additionalProperties: true
+        additionalProperties:
+          $ref: '#/components/schemas/PropertyConstraint'
+    PropertyConstraint:
+      description: Additional property constraint
+      oneOf:
+        - description: >-
+            Simple property constraint using an implicit equal_to operator
+          not:
+            - type: object
+        - description: Numerical property constraint
+          type: object
+          properties:
+            operator:
+              type: string
+              enum:
+                - equal_to
+                - not_equal_to
+                - greater_than
+                - less_than
+              default: equal_to
+            value:
+              type: number
+          required:
+            - value
+        - description: One-of property constraint
+          type: object
+          properties:
+            operator:
+              type: string
+              enum:
+                - one_of
+            value:
+              type: array
+              items:
+                not:
+                  - type: object
+          required:
+            - operator
+            - value
+        - description: Regex property constraint
+          type: object
+          properties:
+            operator:
+              type: string
+              enum:
+                - matches
+            value:
+              type: string
+              description: >-
+                A regular expression, which should be valid according to the
+                ECMA 262 dialect.
+          required:
+            - operator
+            - value
     QEdge:
       type: object
       description: >-
@@ -466,10 +519,11 @@ components:
             Corresponds to the map key identifier of the
             object concept node anchoring the query filter
             pattern for the query relationship edge.
-      additionalProperties: true
       required:
         - subject
         - object
+      additionalProperties:
+        $ref: '#/components/schemas/PropertyConstraint'
     Node:
       type: object
       description: >-
