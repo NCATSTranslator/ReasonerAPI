@@ -433,7 +433,7 @@ components:
         - description: >-
             Simple property constraint using an implicit equal_to operator
           not:
-            - type: object
+            type: object
         - description: Numerical property constraint
           type: object
           properties:
@@ -462,7 +462,7 @@ components:
               type: array
               items:
                 not:
-                  - type: object
+                  type: object
           required:
             - operator
             - values
