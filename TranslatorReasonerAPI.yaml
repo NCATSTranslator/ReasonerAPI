@@ -456,14 +456,14 @@ components:
               type: string
               enum:
                 - in
-            value:
+            values:
               type: array
               items:
                 not:
                   - type: object
           required:
             - operator
-            - value
+            - values
         - description: Regex property constraint
           type: object
           properties:
