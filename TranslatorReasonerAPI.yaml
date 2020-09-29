@@ -441,11 +441,11 @@ components:
               type: string
               enum:
                 - '='
-                - '<>'
+                - <>
                 - '>'
-                - '<'
+                - <
                 - '>='
-                - '<='
+                - <=
               default: '='
             value:
               type: number
