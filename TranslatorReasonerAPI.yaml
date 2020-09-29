@@ -440,11 +440,11 @@ components:
             operator:
               type: string
               enum:
-                - equal_to
-                - not_equal_to
-                - greater_than
-                - less_than
-              default: equal_to
+                - '='
+                - '<>'
+                - '>'
+                - '<'
+              default: '='
             value:
               type: number
           required:
@@ -455,7 +455,7 @@ components:
             operator:
               type: string
               enum:
-                - one_of
+                - in
             value:
               type: array
               items:
