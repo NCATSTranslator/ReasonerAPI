@@ -262,6 +262,10 @@ components:
             - type: array
               items:
                 $ref: '#/components/schemas/BiolinkRelation'
+        relation:
+          type: string
+          example: upregulates
+          description: Lower-level relationship type of this edge
         source_id:
           type: string
           example: https://omim.org/entry/603903
@@ -336,6 +340,10 @@ components:
       properties:
         type:
           $ref: '#/components/schemas/BiolinkRelation'
+        relation:
+          type: string
+          example: upregulates
+          description: Lower-level relationship type of this edge
         source_id:
           type: string
           example: OMIM:603903
