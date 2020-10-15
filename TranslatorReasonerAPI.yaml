@@ -267,7 +267,7 @@ components:
                 type: string
           example: OMIM:603903
           description: CURIE identifier for this node
-        type:
+        category:
           oneOf:
             - $ref: '#/components/schemas/BiolinkEntity'
             - type: array
@@ -302,18 +302,18 @@ components:
           type: string
           example: upregulates
           description: Lower-level relationship type of this edge
-        source_id:
+        subject:
           type: string
           example: https://omim.org/entry/603903
-          description: Corresponds to the @id of source node of this edge
-        target_id:
+          description: Corresponds to the id of subject node of this edge
+        object:
           type: string
           example: https://www.uniprot.org/uniprot/P00738
-          description: Corresponds to the @id of target node of this edge
+          description: Corresponds to the id of object node of this edge
       additionalProperties: true
       required:
-        - source_id
-        - target_id
+        - subject
+        - object
     Node:
       type: object
       description: A node in the knowledge graph
@@ -322,7 +322,7 @@ components:
           type: string
           example: Haptoglobin
           description: Formal name of the entity
-        type:
+        category:
           oneOf:
             - type: string
             - type: array
@@ -374,22 +374,22 @@ components:
       type: object
       description: An edge in the knowledge graph linking two nodes
       properties:
-        type:
+        predicate:
           $ref: '#/components/schemas/BiolinkRelation'
         relation:
           type: string
           example: upregulates
           description: Lower-level relationship type of this edge
-        source_id:
+        subject:
           type: string
           example: OMIM:603903
           description: >-
-            Corresponds to the map key CURIE of the source node of this edge
-        target_id:
+            Corresponds to the map key CURIE of the subject node of this edge
+        object:
           type: string
           example: UniProtKB:P00738
           description: >-
-            Corresponds to the map key CURIE of the target node of this edge
+            Corresponds to the map key CURIE of the object node of this edge
         attributes:
           type: array
           description: A list of additional attributes for this edge
@@ -397,8 +397,8 @@ components:
             $ref: '#/components/schemas/Attribute'
       additionalProperties: false
       required:
-        - source_id
-        - target_id
+        - subject
+        - object
     BiolinkEntity:
       description: >-
         CURIE for a Biolink class, NamedThing or a child thereof (PascalCase)
