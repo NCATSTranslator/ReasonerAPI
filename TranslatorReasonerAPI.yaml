@@ -292,7 +292,7 @@ components:
       type: object
       description: An edge in the QueryGraph
       properties:
-        type:
+        predicate:
           oneOf:
             - $ref: '#/components/schemas/BiolinkRelation'
             - type: array
