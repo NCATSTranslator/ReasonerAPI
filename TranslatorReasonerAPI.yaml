@@ -324,7 +324,7 @@ components:
           description: Formal name of the entity
         category:
           oneOf:
-            - type: string
+            - $ref: '#/components/schemas/BiolinkEntity'
             - type: array
               items:
                 $ref: '#/components/schemas/BiolinkEntity'
