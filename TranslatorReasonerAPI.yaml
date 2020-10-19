@@ -259,7 +259,7 @@ components:
       type: object
       description: A node in the QueryGraph
       properties:
-        curie:
+        id:
           oneOf:
             - type: string
             - type: array
