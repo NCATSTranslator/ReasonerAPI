@@ -179,7 +179,12 @@ components:
           description: A human-readable log message
     Result:
       type: object
-      description: One of potentially several results or answers for a query
+      description: >-
+        A Result object specifies a knowledge graph that satisfies the
+        structure or conditions of a user-submitted query graph. It must
+        contain a NodeBindings object (list of query graph node to knowledge
+        graph node mappings) and an EdgeBindings object (list of query graph
+        edge to knowledge graph edge mappings).
       properties:
         node_bindings:
           type: object
