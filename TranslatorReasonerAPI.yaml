@@ -201,19 +201,19 @@ components:
     NodeBinding:
       type: object
       properties:
-        kg_id:
-          type: string
+        id:
+          $ref: '#/components/schemas/CURIE'
           description: A knowledge-graph node id, i.e. the `id` of a KNode
       required:
-        - kg_id
+        - id
     EdgeBinding:
       type: object
       properties:
-        kg_id:
+        id:
           type: string
           description: A knowledge-graph edge id, i.e. the `id` of a KEdge
       required:
-        - kg_id
+        - id
     KnowledgeGraph:
       type: object
       description: >-
