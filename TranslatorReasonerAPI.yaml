@@ -131,11 +131,18 @@ components:
       required:
         - message
     Message:
+      description: >-
+        The message object holds the main content of a Query or a Response.
+        This includes the query configuration in the query_graph property,
+        any answers in the results property, and a mapping of response nodes
+        and edges to their QueryGraph counterparts. The content of these
+        properties is context-dependent to encompassing object and the
+        TRAPI operation requested.
       type: object
       properties:
         results:
           description: >-
-            List of all returned potential answers for the query posed
+            List of all returned Result objects for the query posed
           type: array
           items:
             $ref: '#/components/schemas/Result'
