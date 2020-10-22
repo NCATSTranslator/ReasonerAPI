@@ -113,6 +113,13 @@ components:
         - message
     Response:
       type: object
+      description: >-
+        The Response object contains the main payload when a TRAPI query 
+        endpoint interprets and responds to the submitted query successfully 
+        (i.e., HTTP Status Code 200). The message property contains the 
+        knowledge of the response (query graph, knowledge graph, and results).
+        The status, description, and logs properties provide additional details 
+        about the response. 
       properties:
         message:
           $ref: '#/components/schemas/Message'
@@ -121,10 +128,14 @@ components:
             One of a standardized set of short codes,
             e.g. Success, QueryNotTraversable, KPsNotAvailable
           type: string
+          example: Success
         description:
           description: A brief human-readable description of the outcome
           type: string
+          example: Success. 42 results found. 
         logs:
+          description: >-
+            Log entries containing errors, warnings, debugging information, etc
           type: array
           items:
             $ref: '#/components/schemas/LogEntry'
