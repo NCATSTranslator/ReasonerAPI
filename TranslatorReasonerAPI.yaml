@@ -122,6 +122,9 @@ components:
         about the response.
       properties:
         message:
+          description: >-
+            Contains the knowledge of the response (query graph, knowledge
+            graph, and results).
           $ref: '#/components/schemas/Message'
         status:
           description: >-
