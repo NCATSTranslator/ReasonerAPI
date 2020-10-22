@@ -421,4 +421,4 @@ components:
       type: string
       description: A Compact URI
       externalDocs:
-        url: 'https://www.w3.org/TR/2010/NOTE-curie-20101216/'
+        url: https://www.w3.org/TR/2010/NOTE-curie-20101216/
