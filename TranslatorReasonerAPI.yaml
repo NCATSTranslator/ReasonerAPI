@@ -190,11 +190,16 @@ components:
               $ref: '#/components/schemas/NodeBinding'
         edge_bindings:
           type: object
-          description: List of QEdge-KEdge bindings.
+          description: >-
+            Dictionary of Input Query Graph to Result Knowledge Graph edge bindings where the
+            dictionary keys are the key identifiers of the Query Graph edges and the associated values of
+            those keys are instances of EdgeBinding schema type (see below).
           additionalProperties:
-            type: array
-            items:
-              $ref: '#/components/schemas/EdgeBinding'
+            # TODO: review (and possibly remove) this
+            # (possibly superfluous) array type specification here?
+            # type: array
+            # items:
+            $ref: '#/components/schemas/EdgeBinding'
       required:
         - node_bindings
         - edge_bindings
@@ -208,10 +213,14 @@ components:
         - id
     EdgeBinding:
       type: object
+      description: >-
+        A instance of EdgeBinding is a single KnowledgeGraph Edge mapping, identified by the corresponding 'id' object
+        key identifier of the Edge within the Knowledge Graph. Future iterations of the EdgeBinding record may include
+        other annotation, such as a score to qualify the computed confidence of the mapping.
       properties:
         id:
           type: string
-          description: A knowledge-graph edge id, i.e. the `id` of a KEdge
+          description: The key identifier of a specific instance of KnowledgeGraph Edge.
       required:
         - id
     KnowledgeGraph:
