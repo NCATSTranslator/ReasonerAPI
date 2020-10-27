@@ -201,19 +201,19 @@ components:
     NodeBinding:
       type: object
       properties:
-        kg_id:
-          type: string
+        id:
+          $ref: '#/components/schemas/CURIE'
           description: A knowledge-graph node id, i.e. the `id` of a KNode
       required:
-        - kg_id
+        - id
     EdgeBinding:
       type: object
       properties:
-        kg_id:
+        id:
           type: string
           description: A knowledge-graph edge id, i.e. the `id` of a KEdge
       required:
-        - kg_id
+        - id
     KnowledgeGraph:
       type: object
       description: >-
@@ -259,12 +259,12 @@ components:
       type: object
       description: A node in the QueryGraph
       properties:
-        curie:
+        id:
           oneOf:
-            - type: string
+            - $ref: '#/components/schemas/CURIE'
             - type: array
               items:
-                type: string
+                $ref: '#/components/schemas/CURIE'
           example: OMIM:603903
           description: CURIE identifier for this node
         category:
@@ -381,12 +381,12 @@ components:
           example: upregulates
           description: Lower-level relationship type of this edge
         subject:
-          type: string
+          $ref: '#/components/schemas/CURIE'
           example: OMIM:603903
           description: >-
             Corresponds to the map key CURIE of the subject node of this edge
         object:
-          type: string
+          $ref: '#/components/schemas/CURIE'
           example: UniProtKB:P00738
           description: >-
             Corresponds to the map key CURIE of the object node of this edge
@@ -417,3 +417,8 @@ components:
         description: Biolink model relations
         url: https://biolink.github.io/biolink-model/docs/related_to.html
       example: biolink:interacts_with
+    CURIE:
+      type: string
+      description: A Compact URI
+      externalDocs:
+        url: https://www.w3.org/TR/2010/NOTE-curie-20101216/
