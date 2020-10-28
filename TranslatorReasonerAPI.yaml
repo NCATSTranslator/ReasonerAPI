@@ -192,9 +192,12 @@ components:
           type: object
           description: >-
             Dictionary of Input Query Graph to Result Knowledge Graph edge
-            bindings where the dictionary keys are the key identifiers of the
+            bindings where the dictionary keys are the key identifiers of the 
             Query Graph edges and the associated values of those keys are
-            instances of EdgeBinding schema type (see below).
+            instances of EdgeBinding schema type (see below). This value is
+            an array of EdgeBinding's since a given query node may resolve to
+            multiple knowledge graph nodes with the same predicate/category
+            semantics.
           additionalProperties:
             type: array
             items:
