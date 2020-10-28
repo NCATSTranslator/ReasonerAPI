@@ -198,7 +198,7 @@ components:
           additionalProperties:
             type: array
             items:
-            $ref: '#/components/schemas/EdgeBinding'
+              $ref: '#/components/schemas/EdgeBinding'
       required:
         - node_bindings
         - edge_bindings
