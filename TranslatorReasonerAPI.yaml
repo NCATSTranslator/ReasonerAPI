@@ -29,6 +29,7 @@ tags:
 paths:
   /predicates:
     get:
+      deprecated: true
       tags:
         - predicates
       summary: Get supported relationships by source and target
@@ -53,6 +54,19 @@ paths:
                     'biolink:Gene':
                       - biolink:directly_interacts_with
                       - biolink:decreases_activity_of
+  /knowledge_map:
+    get:
+      tags:
+        - knowledge_map
+      summary: Knowledge-map representation of this knowledge source.
+      responses:
+        '200':
+          description: >-
+            Returns knowledge-map representation of this knowledge source.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KnowledgeMap'
   /query:
     post:
       tags:
@@ -422,3 +436,128 @@ components:
       description: A Compact URI
       externalDocs:
         url: https://www.w3.org/TR/2010/NOTE-curie-20101216/
+    KnowledgeMap:
+      type: object
+      properties:
+        nodes:
+          type: object
+          description: >-
+            List of semantic types provided by this knowledge source.
+          additionalProperties:
+            $ref: '#/components/schemas/KMNode'
+        predicates:
+          type: array
+          description: >-
+            List of predicates provided by this knowledge source.
+          items:
+            $ref: '#/components/schemas/KMPredicate'
+      description: >-
+        Knowledge-map representation of this knowledge source.
+    KMNode:
+      type: object
+      description: >-
+        Description of semantic types provided by this knowledge source.
+      properties:
+        id_prefixes:
+          type: array
+          description: >-
+            List of CURIE prefixes that this knowledge source understands and
+            accepts on the input.
+          items: 
+            type: string
+          example: ['ChEMBL:','inchikey:']
+        count:
+          type: integer
+          description: >-
+            Total number of node instances known to this knowledge source,
+            -1 if the number is not known
+        count_by_source:
+          type: object
+          description: >-
+            Number of node instances by their source
+          additionalProperties:
+            type: integer
+          example:
+            ChEMBL: 1234
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/KMAttribute'
+          description: >-
+            Attributes associated with this node.
+      required:
+        - id_prefixes
+      additionalProperties: false
+    KMPredicate:
+      type: object
+      description: >-
+        Predicate describing relationship between a subject and an object.
+      properties:
+        subject:
+          type: string
+          example: ChemicalSubstance
+        predicate:
+          type: string
+          example: affects
+        object:
+          type: string
+          example: Protein
+        relations: 
+          type: array
+          description: >-
+            Low-level relations from the underlying source.
+          items:
+            type: string
+          example: [inhibits, activates]
+        count:
+          type: integer
+          description: >-
+            Total number of edge instances known to this knowledge source,
+            -1 if the number is not known.
+        count_by_source:
+          type: object
+          description: >-
+            Number of edge instances by their source
+          additionalProperties:
+            type: integer
+          example:
+            ChEMBL: 1234
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/KMAttribute'
+          description: >-
+            Attributes associated with this predicate.
+      required:
+      - subject
+      - predicate
+      - object
+      additionalProperties: false
+    KMAttribute:
+      type: object
+      description: >-
+        Description of attribute types provided by this knowledge source.
+      properties:
+        type:
+          type: string
+          description: >-
+            CURIE of the semantic type of the attribute, from the EDAM ontology
+            if possible. If a suitable identifier does not exist, enter a
+            descriptive phrase here and submit the new type for consideration
+            by the appropriate authority.
+          example: EDAM:data_1187
+        source:
+          type: string
+          description: Source of the attribute, as a CURIE prefix.
+          example: UniProtKB
+        names:
+          type: array
+          description: >-
+            Human-readable names or labels for the attribute for attributes of 
+            given type.
+          items:
+            type: string
+          example: [PubMed Identifier]
+      required:
+        - type
+      additionalProperties: false
