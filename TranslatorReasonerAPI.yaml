@@ -67,6 +67,19 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/KnowledgeMap'
+  /info:
+    get:
+      tags:
+        - metadata
+      summary: Information about this knowledge source.
+      responses:
+        '200':
+          description: >-
+            Returns information about this knowledge source.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Info'
   /query:
     post:
       tags:
@@ -561,3 +574,74 @@ components:
       required:
         - type
       additionalProperties: false
+    Info:
+      type: object
+      properties:
+        title:
+          type: string
+          description: >-
+            Title od this knowledge source
+          example: best ARA ever
+        description:
+          type: string
+          description: >-
+            Description od this knowledge source
+          example: This is the best ARA ever.
+        version:
+          type: string
+          description: >-
+            Version od this knowledge source
+          example: 1.0.1
+        TRAPI:
+          type: object
+          properties:
+            version:
+              type: string
+              description: >-
+                Version od the Translator Reasoner API implemented by this 
+                knowledge source
+              example: 1.0.0
+            synchronous_support:
+              type: boolean
+              description: >-
+                Indication whether synchronous access is supported/implemented 
+                by this knowledge source
+              example: true
+            asynchronous_support:
+              type: boolean
+              description: >-
+                Indication whether is asynchronous support supported/implemented
+                by this knowledge source
+              example: false
+            callback_support:
+              type: boolean
+              description: >-
+                Indication whether callback is supported/implemented by this 
+                knowledge source
+              example: false
+            batch_support:
+              type: boolean
+              description: >-
+                Indication whether batch queries are supported/implemented by 
+                this knowledge source
+              example: false
+            extended:
+              type: boolean
+              description: >-
+                Indication whether extended API is supported/implemented by this 
+                knowledge source
+              example: true
+            supported_operations:
+              type: array
+              items:
+                type: string
+              description: >-
+                List of operations supported/implemented by this 
+                knowledge source
+              example: [query]
+            kgx_export_url:
+              type: string
+              description: >-
+                A link to data from this knowledge source exported in 
+                kowledge-graph-export format
+              example: https://translator.ncats.io/kgx/bestARAever
