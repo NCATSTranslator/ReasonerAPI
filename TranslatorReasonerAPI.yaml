@@ -103,11 +103,25 @@ paths:
 components:
   schemas:
     Query:
+      description: >-
+        The Query class is used to package a user request for information. A
+        Query object consists of a required Message object with optional
+        additional properties. Additional properties are intended to convey
+        implementation-specific or query-independent parameters. For example,
+        an additional property specifying a log level could allow a user to
+        override the default log level in order to receive more fine-grained
+        log information when debugging an issue.
       x-body-name: request_body
       type: object
       properties:
         message:
           $ref: '#/components/schemas/Message'
+          description: >-
+            The query Message is a serialization of the user request. Content
+            of the Message object depends on the intended TRAPI operation. For
+            example, the fill operation requires a non-empty query_graph field
+            as part of the Message, whereas other operations, e.g. overlay,
+            require non-empty results and knowledge_graph fields.
       additionalProperties: true
       required:
         - message
