@@ -363,8 +363,8 @@ components:
         url:
           type: string
           description: >-
-            Human-consumable URL to link out and provide additional information about
-            the attribute (not the node or the edge).
+            Human-consumable URL to link out and provide additional information
+            about the attribute (not the node or the edge).
           example: https://pubmed.ncbi.nlm.nih.gov/32529952
         source:
           type: string
