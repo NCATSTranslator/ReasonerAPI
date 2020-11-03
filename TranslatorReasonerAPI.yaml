@@ -156,8 +156,7 @@ components:
           type: object
           description: >-
             KnowledgeGraph object that contains all the nodes and edges
-            referenced in any of the possible answers to the query OR
-            connection information for a remote knowledge graph
+            referenced in any of the possible answers to the query.
           $ref: '#/components/schemas/KnowledgeGraph'
       additionalProperties: false
     LogEntry:
