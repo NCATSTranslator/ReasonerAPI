@@ -337,15 +337,16 @@ components:
     Attribute:
       type: object
       description: >-
-        Generic attribute for a node or an edge that expands key-value pair concept by
-        including a type of this attribute from a suitable ontology, a source of this
-        attribute, and (optionally) a url with additional information about this attribute.
+        Generic attribute for a node or an edge that expands key-value pair
+        concept by including a type of this attribute from a suitable ontology,
+        a source of this attribute, and (optionally) a url with additional
+        information about this attribute.
       properties:
         name:
           type: string
           description: >-
-            Human-readable name or label for the attribute. If appropriate, should be the name
-            of the semantic type term.
+            Human-readable name or label for the attribute. If appropriate,
+            should be the name of the semantic type term.
           example: PubMed Identifier
         value:
           example: 32529952
@@ -362,12 +363,12 @@ components:
         url:
           type: string
           description: >-
-            Human-consumable URL to link out and provide additional information about the attribute 
-            (not the node or the edge).
+            Human-consumable URL to link out and provide additional information about
+            the attribute (not the node or the edge).
           example: https://pubmed.ncbi.nlm.nih.gov/32529952
         source:
           type: string
-          description: Source of the attribute, referably as a CURIE prefix.
+          description: Source of the attribute, preferably as a CURIE prefix.
           example: UniProtKB
       required:
         - type
