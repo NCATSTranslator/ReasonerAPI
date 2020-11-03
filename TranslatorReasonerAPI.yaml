@@ -353,7 +353,7 @@ components:
           description: >-
             Value of the attribute. May be any data type, including a list.
         type:
-          type: CURIE
+          $ref: '#/components/schemas/CURIE'
           description: >-
             CURIE of the semantic type of the attribute, from the EDAM ontology
             if possible. If a suitable identifier does not exist, enter a
