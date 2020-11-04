@@ -1,0 +1,459 @@
+openapi: 3.0.1
+info:
+  description: OpenAPI for NCATS Biomedical Translator Reasoners
+  version: 1.0.0-beta
+  title: OpenAPI for NCATS Biomedical Translator Reasoners
+  contact:
+    email: edeutsch@systemsbiology.org
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: INSERT-URL-HERE
+externalDocs:
+  description: >-
+    Documentation for the NCATS Biomedical Translator Reasoners web services
+  url: https://github.com/NCATS-Tangerine/NCATS-ReasonerStdAPI
+tags:
+  - name: predicates
+    description: Get supported relationships by source and target
+    externalDocs:
+      description: Documentation for the reasoner predicates function
+      url: http://reasonerhost.ncats.io/overview.html#predicates
+  - name: query
+    description: Query reasoner using a predefined question type
+    externalDocs:
+      description: Documentation for the reasoner query function
+      url: http://reasonerhost.ncats.io/overview.html#query
+  - name: translator
+  - name: reasoner
+paths:
+  /predicates:
+    get:
+      tags:
+        - predicates
+      summary: Get supported relationships by source and target
+      responses:
+        '200':
+          description: Predicates by source and target
+          content:
+            application/json:
+              schema:
+                description: Source map
+                type: object
+                additionalProperties:
+                  description: Target map
+                  type: object
+                  additionalProperties:
+                    description: Array of predicates
+                    type: array
+                    items:
+                      type: string
+                example:
+                  'biolink:ChemicalSubstance':
+                    'biolink:Gene':
+                      - biolink:directly_interacts_with
+                      - biolink:decreases_activity_of
+  /query:
+    post:
+      tags:
+        - query
+      summary: Query reasoner via one of several inputs
+      description: ''
+      operationId: query
+      requestBody:
+        description: Query information to be submitted
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Query'
+      responses:
+        '200':
+          description: >-
+            OK. There may or may not be results. Note that some of the provided
+            identifiers may not have been recognized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+        '400':
+          description: >-
+            Bad request. The request is invalid according to this OpenAPI
+            schema OR a specific identifier is believed to be invalid somehow
+            (not just unrecognized).
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: >-
+            Internal server error.
+          content:
+            application/json:
+              schema:
+                type: string
+        '501':
+          description: >-
+            Not implemented.
+          content:
+            application/json:
+              schema:
+                type: string
+      x-swagger-router-controller: swagger_server.controllers.query_controller
+components:
+  schemas:
+    Query:
+      description: >-
+        The Query class is used to package a user request for information. A
+        Query object consists of a required Message object with optional
+        additional properties. Additional properties are intended to convey
+        implementation-specific or query-independent parameters. For example,
+        an additional property specifying a log level could allow a user to
+        override the default log level in order to receive more fine-grained
+        log information when debugging an issue.
+      x-body-name: request_body
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/Message'
+          description: >-
+            The query Message is a serialization of the user request. Content
+            of the Message object depends on the intended TRAPI operation. For
+            example, the fill operation requires a non-empty query_graph field
+            as part of the Message, whereas other operations, e.g. overlay,
+            require non-empty results and knowledge_graph fields.
+      additionalProperties: true
+      required:
+        - message
+    Response:
+      type: object
+      description: >-
+        The Response object contains the main payload when a TRAPI query
+        endpoint interprets and responds to the submitted query successfully
+        (i.e., HTTP Status Code 200). The message property contains the
+        knowledge of the response (query graph, knowledge graph, and results).
+        The status, description, and logs properties provide additional details
+        about the response.
+      properties:
+        message:
+          description: >-
+            Contains the knowledge of the response (query graph, knowledge
+            graph, and results).
+          $ref: '#/components/schemas/Message'
+        status:
+          description: >-
+            One of a standardized set of short codes,
+            e.g. Success, QueryNotTraversable, KPsNotAvailable
+          type: string
+          example: Success
+        description:
+          description: A brief human-readable description of the outcome
+          type: string
+          example: Success. 42 results found.
+        logs:
+          description: >-
+            Log entries containing errors, warnings, debugging information, etc
+          type: array
+          items:
+            $ref: '#/components/schemas/LogEntry'
+      required:
+        - message
+    Message:
+      type: object
+      properties:
+        results:
+          description: >-
+            List of all returned potential answers for the query posed
+          type: array
+          items:
+            $ref: '#/components/schemas/Result'
+        query_graph:
+          type: object
+          description: >-
+            QueryGraph object that contains a serialization of a query in the
+            form of a graph
+          $ref: '#/components/schemas/QueryGraph'
+        knowledge_graph:
+          type: object
+          description: >-
+            KnowledgeGraph object that contains all the nodes and edges
+            referenced in any of the possible answers to the query OR
+            connection information for a remote knowledge graph
+          $ref: '#/components/schemas/KnowledgeGraph'
+      additionalProperties: false
+    LogEntry:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+          description: Timestamp in ISO 8601 format
+          example: '2020-09-03T18:13:49+00:00'
+        level:
+          type: string
+          description: Logging level
+          enum:
+            - ERROR
+            - WARNING
+            - INFO
+            - DEBUG
+        code:
+          type: string
+          description: >-
+            One of a standardized set of short codes
+            e.g. QueryNotTraversable, KPNotAvailable, KPResponseMalformed
+        message:
+          type: string
+          description: A human-readable log message
+    Result:
+      type: object
+      description: >-
+        A Result object specifies the nodes and edges in the knowledge graph
+        that satisfy the structure or conditions of a user-submitted query
+        graph. It must contain a NodeBindings object (list of query graph node
+        to knowledge graph node mappings) and an EdgeBindings object (list of
+        query graph edge to knowledge graph edge mappings).
+      properties:
+        node_bindings:
+          type: object
+          description: List of QNode-KNode bindings.
+          additionalProperties:
+            type: array
+            items:
+              $ref: '#/components/schemas/NodeBinding'
+        edge_bindings:
+          type: object
+          description: List of QEdge-KEdge bindings.
+          additionalProperties:
+            type: array
+            items:
+              $ref: '#/components/schemas/EdgeBinding'
+      required:
+        - node_bindings
+        - edge_bindings
+    NodeBinding:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/CURIE'
+          description: A knowledge-graph node id, i.e. the `id` of a KNode
+      required:
+        - id
+    EdgeBinding:
+      type: object
+      properties:
+        id:
+          type: string
+          description: A knowledge-graph edge id, i.e. the `id` of a KEdge
+      required:
+        - id
+    KnowledgeGraph:
+      type: object
+      description: >-
+        A thought graph associated with this result. This will commonly be a
+        linear path subgraph from one concept to another, but related items
+        aside of the path may be included.
+      properties:
+        nodes:
+          type: object
+          description: List of nodes in the KnowledgeGraph
+          additionalProperties:
+            $ref: '#/components/schemas/Node'
+        edges:
+          type: object
+          description: List of edges in the KnowledgeGraph
+          additionalProperties:
+            $ref: '#/components/schemas/Edge'
+      additionalProperties: true
+      required:
+        - nodes
+        - edges
+    QueryGraph:
+      type: object
+      description: >-
+        A graph intended to be the thought path to be followed by a reasoner to
+        answer the question. This graph is a representation of a question.
+      properties:
+        nodes:
+          type: object
+          description: List of nodes in the QueryGraph
+          additionalProperties:
+            $ref: '#/components/schemas/QNode'
+        edges:
+          type: object
+          description: List of edges in the QueryGraph
+          additionalProperties:
+            $ref: '#/components/schemas/QEdge'
+      additionalProperties: true
+      required:
+        - nodes
+        - edges
+    QNode:
+      type: object
+      description: A node in the QueryGraph
+      properties:
+        id:
+          oneOf:
+            - $ref: '#/components/schemas/CURIE'
+            - type: array
+              items:
+                $ref: '#/components/schemas/CURIE'
+          example: OMIM:603903
+          description: CURIE identifier for this node
+        category:
+          oneOf:
+            - $ref: '#/components/schemas/BiolinkEntity'
+            - type: array
+              items:
+                $ref: '#/components/schemas/BiolinkEntity'
+        is_set:
+          type: boolean
+          description: >-
+            Boolean that if set to true, indicates that this QNode MAY have
+            multiple KnowledgeGraph Nodes bound to it within each Result.
+            The nodes in a set should be considered as a set of independent
+            nodes, rather than a set of dependent nodes, i.e., the answer
+            would still be valid if the nodes in the set were instead returned
+            individually. Multiple QNodes may have is_set=True. If a QNode
+            (n1) with is_set=True is connected to a QNode (n2) with
+            is_set=False, each n1 must be connected to n2. If a QNode (n1)
+            with is_set=True is connected to a QNode (n2) with is_set=True,
+            each n1 must be connected to at least one n2.
+          default: false
+      additionalProperties: true
+    QEdge:
+      type: object
+      description: An edge in the QueryGraph
+      properties:
+        predicate:
+          oneOf:
+            - $ref: '#/components/schemas/BiolinkRelation'
+            - type: array
+              items:
+                $ref: '#/components/schemas/BiolinkRelation'
+        relation:
+          type: string
+          example: upregulates
+          description: Lower-level relationship type of this edge
+        subject:
+          type: string
+          example: https://omim.org/entry/603903
+          description: Corresponds to the id of subject node of this edge
+        object:
+          type: string
+          example: https://www.uniprot.org/uniprot/P00738
+          description: Corresponds to the id of object node of this edge
+      additionalProperties: true
+      required:
+        - subject
+        - object
+    Node:
+      type: object
+      description: A node in the knowledge graph
+      properties:
+        name:
+          type: string
+          example: Haptoglobin
+          description: Formal name of the entity
+        category:
+          oneOf:
+            - $ref: '#/components/schemas/BiolinkEntity'
+            - type: array
+              items:
+                $ref: '#/components/schemas/BiolinkEntity'
+        attributes:
+          type: array
+          description: A list of attributes describing the node
+          items:
+            $ref: '#/components/schemas/Attribute'
+      additionalProperties: false
+    Attribute:
+      type: object
+      description: Generic attribute for a node
+      properties:
+        name:
+          type: string
+          description: >-
+            Human-readable name or label for the attribute. Should be the name
+            of the semantic type term.
+          example: PubMed Identifier
+        value:
+          example: 32529952
+          description: >-
+            Value of the attribute. May be any data type, including a list.
+        type:
+          type: string
+          description: >-
+            CURIE of the semantic type of the attribute, from the EDAM ontology
+            if possible. If a suitable identifier does not exist, enter a
+            descriptive phrase here and submit the new type for consideration
+            by the appropriate authority.
+          example: EDAM:data_1187
+        url:
+          type: string
+          description: >-
+            Human-consumable URL to link out and read about the attribute (not
+            the node).
+          example: https://pubmed.ncbi.nlm.nih.gov/32529952
+        source:
+          type: string
+          description: Source of the attribute, as a CURIE prefix.
+          example: UniProtKB
+      required:
+        - type
+        - value
+      additionalProperties: false
+    Edge:
+      type: object
+      description: An edge in the knowledge graph linking two nodes
+      properties:
+        predicate:
+          $ref: '#/components/schemas/BiolinkRelation'
+        relation:
+          type: string
+          example: upregulates
+          description: Lower-level relationship type of this edge
+        subject:
+          $ref: '#/components/schemas/CURIE'
+          example: OMIM:603903
+          description: >-
+            Corresponds to the map key CURIE of the subject node of this edge
+        object:
+          $ref: '#/components/schemas/CURIE'
+          example: UniProtKB:P00738
+          description: >-
+            Corresponds to the map key CURIE of the object node of this edge
+        attributes:
+          type: array
+          description: A list of additional attributes for this edge
+          items:
+            $ref: '#/components/schemas/Attribute'
+      additionalProperties: false
+      required:
+        - subject
+        - object
+    BiolinkEntity:
+      description: >-
+        Compact URI (CURIE) for a Biolink class, biolink:NamedThing
+        or a child thereof. The CURIE must use the prefix 'biolink:'
+        followed by the PascalCase class name.
+      type: string
+      pattern: ^biolink:[A-Z][a-zA-Z]*$
+      externalDocs:
+        description: Biolink model entities
+        url: https://biolink.github.io/biolink-model/docs/NamedThing.html
+      example: biolink:PhenotypicFeature
+    BiolinkRelation:
+      description: >-
+        CURIE for a Biolink slot, related_to or a child thereof (snake_case)
+      type: string
+      pattern: ^biolink:[a-z][a-z_]*$
+      externalDocs:
+        description: Biolink model relations
+        url: https://biolink.github.io/biolink-model/docs/related_to.html
+      example: biolink:interacts_with
+    CURIE:
+      type: string
+      description: A Compact URI
+      externalDocs:
+        url: https://www.w3.org/TR/2010/NOTE-curie-20101216/
