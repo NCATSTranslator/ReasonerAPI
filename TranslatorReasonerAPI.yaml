@@ -476,9 +476,9 @@ components:
           description: >-
             List of CURIE prefixes that this knowledge source understands and
             accepts on the input.
-          items: 
+          items:
             type: string
-          example: ['ChEMBL:','inchikey:']
+          example: ['ChEMBL:', 'inchikey:']
         count:
           type: integer
           description: >-
@@ -515,7 +515,7 @@ components:
         object:
           type: string
           example: Protein
-        relations: 
+        relations:
           type: array
           description: >-
             Low-level relations from the underlying source.
@@ -542,9 +542,9 @@ components:
           description: >-
             Attributes associated with this predicate.
       required:
-      - subject
-      - predicate
-      - object
+        - subject
+        - predicate
+        - object
       additionalProperties: false
     KMAttribute:
       type: object
@@ -566,7 +566,7 @@ components:
         names:
           type: array
           description: >-
-            Human-readable names or labels for the attribute for attributes of 
+            Human-readable names or labels for the attribute for attributes of
             given type.
           items:
             type: string
@@ -580,7 +580,7 @@ components:
         title:
           type: string
           description: >-
-            Title od this knowledge source
+            Title of this knowledge source
           example: best ARA ever
         description:
           type: string
@@ -590,7 +590,7 @@ components:
         version:
           type: string
           description: >-
-            Version od this knowledge source
+            Version of this knowledge source
           example: 1.0.1
         TRAPI:
           type: object
@@ -598,50 +598,50 @@ components:
             version:
               type: string
               description: >-
-                Version od the Translator Reasoner API implemented by this 
+                Version od the Translator Reasoner API implemented by this
                 knowledge source
               example: 1.0.0
             synchronous_support:
               type: boolean
               description: >-
-                Indication whether synchronous access is supported/implemented 
+                Indication whether synchronous access is supported/implemented
                 by this knowledge source
               example: true
             asynchronous_support:
               type: boolean
               description: >-
-                Indication whether is asynchronous support supported/implemented
-                by this knowledge source
+                Indication whether is asynchronous support
+                supported/implemented by this knowledge source
               example: false
             callback_support:
               type: boolean
               description: >-
-                Indication whether callback is supported/implemented by this 
+                Indication whether callback is supported/implemented by this
                 knowledge source
               example: false
             batch_support:
               type: boolean
               description: >-
-                Indication whether batch queries are supported/implemented by 
+                Indication whether batch queries are supported/implemented by
                 this knowledge source
               example: false
             extended:
               type: boolean
               description: >-
-                Indication whether extended API is supported/implemented by this 
-                knowledge source
+                Indication whether extended API is supported/implemented by
+                this  knowledge source
               example: true
             supported_operations:
               type: array
               items:
                 type: string
               description: >-
-                List of operations supported/implemented by this 
+                List of operations supported/implemented by this
                 knowledge source
               example: [query]
             kgx_export_url:
               type: string
               description: >-
-                A link to data from this knowledge source exported in 
+                A link to data from this knowledge source exported in
                 kowledge-graph-export format
               example: https://translator.ncats.io/kgx/bestARAever
