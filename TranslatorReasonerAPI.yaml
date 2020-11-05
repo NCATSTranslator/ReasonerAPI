@@ -139,7 +139,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
+                $ref: '#/components/schemas/Response'
         '404':
           description: Message_id not found
       x-swagger-router-controller: swagger_server.controllers.message_controller
