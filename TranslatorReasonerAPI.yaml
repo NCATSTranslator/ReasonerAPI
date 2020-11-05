@@ -194,10 +194,10 @@ components:
             Dictionary of Input Query Graph to Result Knowledge Graph edge
             bindings where the dictionary keys are the key identifiers of the
             Query Graph edges and the associated values of those keys are
-            instances of EdgeBinding schema type (see below). This value is
-            an array of EdgeBinding's since a given query node may resolve to
-            multiple knowledge graph nodes with the same predicate/category
-            semantics.
+            instances of EdgeBinding schema type (see below). This value is an
+            array of EdgeBindings since a given query node may have multiple
+            knowledge graph edges with identical predicates, each pointing to
+            a node with the same category.
           additionalProperties:
             type: array
             items:
@@ -218,15 +218,16 @@ components:
       description: >-
         A instance of EdgeBinding is a single KnowledgeGraph Edge mapping,
         identified by the corresponding 'id' object key identifier of the
-        Edge within the Knowledge Graph. Future iterations of the EdgeBinding
-        record may include other annotation, such as a score to qualify the
-        computed confidence of the mapping.
+        Edge within the Knowledge Graph. Instances of EdgeBinding may include
+        other annotation, such as a score to qualify the computed confidence
+        of the EdgeBinding (such extra annotation is not yet standardized).
       properties:
         id:
           type: string
           description: The key identifier of a specific KnowledgeGraph Edge.
       required:
         - id
+      additionalProperties: true
     KnowledgeGraph:
       type: object
       description: >-
