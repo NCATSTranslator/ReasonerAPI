@@ -1,0 +1,90 @@
+{
+    "query_graph": {
+        "nodes": {
+            "n0": {
+                "category": "biolink:Disease"
+            },
+            "n1": {
+                "category": "biolink:Gene"
+            }
+        },
+        "edges": {
+            "e01": {
+                "subject": "n0",
+                "object": "n1"
+            }
+        }
+    },
+    "knowledge_graph": {
+        "nodes": {
+            "MONDO:0005737": {
+                "category": "biolink:Disease",
+                "name": "Ebola hemorrhagic fever"
+            },
+            "HGNC:17770": {
+                "category": "biolink:Gene",
+                "name": "RALGAPA1"
+            },
+            "HGNC:13236": {
+                "category": "biolink:Gene",
+                "name": "URI1"
+            }
+        },
+        "edges": {
+            "x17770": {
+                "predicate": "biolink:related_to",
+                "subject": "MONDO:0005737",
+                "object": "HGNC:17770"
+            },
+            "x13236": {
+                "predicate": "biolink:related_to",
+                "subject": "MONDO:0005737",
+                "object": "HGNC:13236"
+            }
+        }
+    },
+    "results": [
+        {
+            "node_bindings": {
+                "n0": [
+                    {
+                        "id": "MONDO:0005737"
+                    }
+                ],
+                "n1": [
+                    {
+                        "id": "HGNC:17770"
+                    }
+                ]
+            },
+            "edge_bindings": {
+                "e01": [
+                    {
+                        "id": "x17770"
+                    }
+                ]
+            }
+        },
+        {
+            "node_bindings": {
+                "n0": [
+                    {
+                        "id": "MONDO:0005737"
+                    }
+                ],
+                "n1": [
+                    {
+                        "id": "HGNC:13236"
+                    }
+                ]
+            },
+            "edge_bindings": {
+                "e01": [
+                    {
+                        "id": "x13236"
+                    }
+                ]
+            }
+        }
+    ]
+}
