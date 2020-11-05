@@ -26,11 +26,6 @@ tags:
       url: http://reasonerhost.ncats.io/overview.html#query
   - name: translator
   - name: reasoner
-  - name: feedback
-    description: Get or submit feedback regarding a query result
-    externalDocs:
-      description: Documentation for the reasoner feedback function
-      url: 'http://reasonerhost.ncats.io/overview.html#feedback'
   - name: message
     description: Request stored messages and feedback for messages
     externalDocs:
