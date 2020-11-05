@@ -410,8 +410,8 @@ components:
         predicate:
           $ref: '#/components/schemas/BiolinkRelation'
         relation:
-          type: string
-          example: upregulates
+          $ref: '#/components/schemas/CURIE'
+          example: RO:0002447
           description: Lower-level relationship type of this edge
         subject:
           $ref: '#/components/schemas/CURIE'
