@@ -428,6 +428,10 @@ components:
           description: A list of additional attributes for this edge
           items:
             $ref: '#/components/schemas/Attribute'
+        provenance:
+          type: object
+          description: >-
+            A free-form object for holding provenance information.
       additionalProperties: false
       required:
         - subject
