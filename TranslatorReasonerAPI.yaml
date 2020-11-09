@@ -132,12 +132,14 @@ components:
         - message
     Message:
       description: >-
-        The message object holds the main content of a Query or a Response.
-        This includes the query configuration in the query_graph property,
-        any answers in the results property, and a mapping of response nodes
-        and edges to their QueryGraph counterparts in the knowledge_graph
-        property. The content of these properties is context-dependent
-        to encompassing object and the TRAPI operation requested.
+        The message object holds the main content of a Query or a Response in
+        three properties: query_graph, results, and knowledge_graph.
+        The query_graph property contains the query configuration, the results
+        property contains any answers that are returned by the service,
+        and knowledge_graph property contains lists of edges and nodes in the
+        thought graph corresponding to this message. The content of these
+        properties is context-dependent to the encompassing object and
+        the TRAPI operation requested.
       type: object
       properties:
         results:
@@ -155,8 +157,8 @@ components:
         knowledge_graph:
           type: object
           description: >-
-            KnowledgeGraph object that contains all the nodes and edges
-            referenced in any of the possible answers to the query.
+            KnowledgeGraph object that contains lists of nodes and edges
+            and edges in the thought graph corresponding to the message
           $ref: '#/components/schemas/KnowledgeGraph'
       additionalProperties: false
     LogEntry:
