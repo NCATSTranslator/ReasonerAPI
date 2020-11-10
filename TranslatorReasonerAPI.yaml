@@ -216,7 +216,13 @@ components:
       properties:
         node_bindings:
           type: object
-          description: List of QNode-KNode bindings.
+          description: >-
+            The dictionary of Input Query Graph to Result Knowledge Graph node
+            bindings where the dictionary keys are the key identifiers of the
+            Query Graph nodes and the associated values of those keys are
+            instances of NodeBinding schema type (see below). This value is an
+            array of NodeBindings since a given query edge may have multiple
+            knowledge graph Node bindings in the result.
           additionalProperties:
             type: array
             items:
@@ -236,7 +242,11 @@ components:
       properties:
         id:
           $ref: '#/components/schemas/CURIE'
-          description: A knowledge-graph node id, i.e. the `id` of a KNode
+          description: >-
+            An instance of NodeBinding is a single KnowledgeGraph Node mapping,
+            identified by the corresponding 'id' object key identifier of the
+            Node within the Knowledge Graph. Instances of NodeBinding may include
+            extra annotation (such annotation is not yet fully standardized).
       required:
         - id
     EdgeBinding:
@@ -349,7 +359,9 @@ components:
         - object
     Node:
       type: object
-      description: A node in the knowledge graph
+      description: >-
+        A node in the knowledge graph which represents some biomedical
+        concept.
       properties:
         name:
           type: string
