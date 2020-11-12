@@ -158,7 +158,7 @@ components:
           type: object
           description: >-
             KnowledgeGraph object that contains lists of nodes and edges
-            and edges in the thought graph corresponding to the message
+            in the thought graph corresponding to the message
           $ref: '#/components/schemas/KnowledgeGraph'
       additionalProperties: false
     LogEntry:
