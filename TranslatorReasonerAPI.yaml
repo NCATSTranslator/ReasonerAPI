@@ -245,8 +245,8 @@ components:
           description: >-
             An instance of NodeBinding is a single KnowledgeGraph Node mapping,
             identified by the corresponding 'id' object key identifier of the
-            Node within the Knowledge Graph. Instances of NodeBinding may 
-            include extra annotation (such annotation is not yet fully 
+            Node within the Knowledge Graph. Instances of NodeBinding may
+            include extra annotation (such annotation is not yet fully
             standardized).
       required:
         - id
