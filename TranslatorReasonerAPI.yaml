@@ -639,9 +639,3 @@ components:
                 List of operations supported/implemented by this
                 knowledge source
               example: [query]
-            kgx_export_url:
-              type: string
-              description: >-
-                A link to data from this knowledge source exported in
-                kowledge-graph-export format
-              example: https://translator.ncats.io/kgx/bestARAever
