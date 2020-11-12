@@ -30,12 +30,12 @@ tags:
     description: Request stored messages and feedback for messages
     externalDocs:
       description: Documentation for the reasoner message function
-      url: 'https://reasonerhost.ncats.io/overview.html#message'
+      url: https://reasonerhost.ncats.io/overview.html#message
   - name: result
     description: Request stored results and feedback for results
     externalDocs:
       description: Documentation for the reasoner result function
-      url: 'http://reasonerhost.ncats.io/overview.html#result'
+      url: http://reasonerhost.ncats.io/overview.html#result
 paths:
   /predicates:
     get:
@@ -201,17 +201,17 @@ components:
             $ref: '#/components/schemas/LogEntry'
         message_id:
           type: string
-          example: 'https://arax.ncats.io/api/rtx/v1/message/123'
+          example: https://arax.ncats.io/api/rtx/v1/message/123
           description: URI for this message
         reasoner_id:
           type: string
           example: reasoner
           description: >-
-            Identifier string of the reasoner that provided this message (one of
-            RTX, Robokop, Indigo, Integrator, etc.)
+            Identifier string of the reasoner that provided this message
+            (one of ARAX, Robokop, etc.)
         tool_version:
           type: string
-          example: RTX 0.5.0
+          example: ARAX 0.6.1
           description: Version label of the tool that generated this message
         schema_version:
           type: string
@@ -220,13 +220,15 @@ components:
         datetime:
           type: string
           example: '2018-01-09 12:34:45'
-          description: Datetime string for the time that this message was generated
+          description:  >-
+            Datetime string for the time that this message was generated
         table_column_names:
           type: array
           example:
             - chemical_substance.name
             - chemical_substance.id
-          description: List of column names that corresponds to the row_data for each result
+          description: >-
+            List of column names that corresponds to the row_data for each result
           items:
             type: string
         original_question:
@@ -238,16 +240,15 @@ components:
           example: Which proteins are affected by sickle cell anemia?
           description: >-
             A precise restatement of the question, as understood by the
-            Translator, for which the answer applies. The user should verify that
-            the restated question matches the intent of their original question
-            (it might not).
+            Translator, for which the answer applies. The user should verify
+            that the restated question matches the intent of their original
+            question (it might not).
         query_type_id:
           type: string
           example: Q2
           description: >-
             The query type id if one is known for the query/message (as defined in
-            https://docs.google.com/spreadsheets/d/18zW81wteUfOn3rFRVG0z8mW-ecNhdsfD_6s73ETJnUw/edit#gid=1742835901
-            )
+            a shared manner)
         terms:
           type: object
           description: Dict of terms needed by the specific query type
@@ -270,7 +271,7 @@ components:
           additionalProperties: true
         query_options:
           type: object
-          example: 
+          example:
             coalesce: true
             threshold: 0.9
           description: >-
@@ -351,15 +352,16 @@ components:
               $ref: '#/components/schemas/EdgeBinding'
         id:
           type: string
-          example: 'https://rtx.ncats.io/api/rtx/v1/result/234'
+          example: https://arax.ncats.io/api/rtx/v1/result/234
           description: URI for this message
         description:
           type: string
           example: >-
-            The genetic condition sickle cell anemia may provide protection from
-            cerebral malaria via genetic alterations of proteins HBB (P68871) and
-            HMOX1 (P09601).
-          description: A free text description of this result answer from the reasoner
+            The genetic condition sickle cell anemia may provide protection
+            from cerebral malaria via genetic alterations of proteins HBB
+            (P68871) and HMOX1 (P09601).
+          description: >-
+            A free text description of this result answer from the reasoner
         essence:
           type: string
           example: ibuprofen
@@ -374,7 +376,7 @@ components:
           type: array
           example:
             - ibuprofen
-            - 'CHEMBL:CHEMBL521'
+            - CHEMBL:CHEMBL521
           description: >-
             An arbitrary list of values that captures the essence of the result
             that can be turned into a tabular result across all answers (each
@@ -401,8 +403,8 @@ components:
           format: float
           example: 0.9234
           description: >-
-            Confidence metric for this result, a value between (inclusive) 0.0 (no
-            confidence) and 1.0 (highest confidence)
+            Confidence metric for this result, a value between (inclusive)
+             0.0 (no confidence) and 1.0 (highest confidence)
         result_type:
           type: string
           example: individual query answer
@@ -421,8 +423,8 @@ components:
           format: float
           example: 0.95
           description: >-
-            A score that denotes the similarity of this result to other members of
-            the result_group
+            A score that denotes the similarity of this result to other members
+            of the result_group
         reasoner_id:
           type: string
           example: RTX
