@@ -142,7 +142,8 @@ paths:
                 $ref: '#/components/schemas/Response'
         '404':
           description: Message_id not found
-      x-swagger-router-controller: swagger_server.controllers.message_controller
+      x-swagger-router-controller: \
+        swagger_server.controllers.message_controller
 components:
   schemas:
     Query:
@@ -220,7 +221,7 @@ components:
         datetime:
           type: string
           example: '2018-01-09 12:34:45'
-          description:  >-
+          description: >-
             Datetime string for the time that this message was generated
         table_column_names:
           type: array
@@ -228,7 +229,8 @@ components:
             - chemical_substance.name
             - chemical_substance.id
           description: >-
-            List of column names that corresponds to the row_data for each result
+            List of column names that corresponds to the row_data for
+            each result
           items:
             type: string
         original_question:
@@ -247,8 +249,8 @@ components:
           type: string
           example: Q2
           description: >-
-            The query type id if one is known for the query/message (as defined in
-            a shared manner)
+            The query type id if one is known for the query/message
+            (as defined in a shared manner)
         terms:
           type: object
           description: Dict of terms needed by the specific query type
