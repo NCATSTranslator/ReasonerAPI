@@ -358,7 +358,7 @@ components:
             CURIE of the semantic type of the attribute. For properties
             defined by the Biolink model this should be a biolik CURIE,
             otherwise, if possible, from the EDAM ontology. If a suitable
-            identifier does not exist, enter avdescriptive phrase here and
+            identifier does not exist, enter a descriptive phrase here and
             submit the new type for consideration by the appropriate
             authority.
           example: EDAM:data_1187
