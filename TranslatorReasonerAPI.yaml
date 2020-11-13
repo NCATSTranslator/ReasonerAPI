@@ -564,12 +564,12 @@ components:
             values and indicates whether higher or lower values are more
             significant.
           properties:
-            from: 
+            from:
               type: string
               description: >-
                 Lower bound for allowed numeric values. Must be a valid float
                 number or +/-infinity.
-            to: 
+            to:
               type: string
               description: >-
                 Upper bound for allowed numeric values. Must be a valid float
@@ -589,7 +589,7 @@ components:
                     - smaller
                 more_specific:
                   description: >-
-                    Indicates whether larger or smaller values are more 
+                    Indicates whether larger or smaller values are more
                     specific.
                   type: string
                   enum:
