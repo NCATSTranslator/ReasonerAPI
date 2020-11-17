@@ -245,6 +245,12 @@ components:
         id:
           type: string
           description: A knowledge-graph edge id, i.e. the `id` of a KEdge
+        score:
+          type: number
+          format: float
+          description: >-
+            Optional measure of what degree of confidence with which the
+            specified KnowledgeGraph Edge was bound to the associated QEdge.
       required:
         - id
     KnowledgeGraph:
