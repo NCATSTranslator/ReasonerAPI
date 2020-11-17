@@ -195,8 +195,8 @@ components:
             bindings where the dictionary keys are the key identifiers of the
             Query Graph edges and the associated values of those keys are
             instances of EdgeBinding schema type (see below). This value is an
-            array of EdgeBindings since a given query edge may have multiple
-            knowledge graph edge bindings in the result.
+            array of EdgeBindings since a given query edge may resolve to
+            multiple knowledge graph edges in the result.
           additionalProperties:
             type: array
             items:
@@ -223,12 +223,6 @@ components:
         id:
           type: string
           description: The key identifier of a specific KnowledgeGraph Edge.
-        score:
-          type: number
-          format: float
-          description: >-
-            Optional measure of what degree of confidence with which the
-            specified KnowledgeGraph Edge was bound to the associated QEdge.
       required:
         - id
       additionalProperties: true
@@ -336,14 +330,14 @@ components:
           type: string
           example: https://omim.org/entry/603903
           description: >-
-            Corresponds to the map key CURIE of the
+            Corresponds to the map key identifier of the
             subject concept node anchoring the query filter
             pattern for the query relationship edge.
         object:
           type: string
           example: https://www.uniprot.org/uniprot/P00738
           description: >-
-            Corresponds to the map key CURIE of the
+            Corresponds to the map key identifier of the
             object concept node anchoring the query filter
             pattern for the query relationship edge.
       additionalProperties: true
