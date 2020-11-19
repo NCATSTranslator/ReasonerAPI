@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   description: OpenAPI for NCATS Biomedical Translator Reasoners
-  version: 0.9.3-dev
+  version: 1.0.0-beta
   title: OpenAPI for NCATS Biomedical Translator Reasoners
   contact:
     email: edeutsch@systemsbiology.org
@@ -103,31 +103,60 @@ paths:
 components:
   schemas:
     Query:
+      description: >-
+        The Query class is used to package a user request for information. A
+        Query object consists of a required Message object with optional
+        additional properties. Additional properties are intended to convey
+        implementation-specific or query-independent parameters. For example,
+        an additional property specifying a log level could allow a user to
+        override the default log level in order to receive more fine-grained
+        log information when debugging an issue.
       x-body-name: request_body
       type: object
       properties:
         message:
           $ref: '#/components/schemas/Message'
+          description: >-
+            The query Message is a serialization of the user request. Content
+            of the Message object depends on the intended TRAPI operation. For
+            example, the fill operation requires a non-empty query_graph field
+            as part of the Message, whereas other operations, e.g. overlay,
+            require non-empty results and knowledge_graph fields.
       additionalProperties: true
       required:
         - message
     Response:
       type: object
+      description: >-
+        The Response object contains the main payload when a TRAPI query
+        endpoint interprets and responds to the submitted query successfully
+        (i.e., HTTP Status Code 200). The message property contains the
+        knowledge of the response (query graph, knowledge graph, and results).
+        The status, description, and logs properties provide additional details
+        about the response.
       properties:
         message:
+          description: >-
+            Contains the knowledge of the response (query graph, knowledge
+            graph, and results).
           $ref: '#/components/schemas/Message'
         status:
           description: >-
             One of a standardized set of short codes,
             e.g. Success, QueryNotTraversable, KPsNotAvailable
           type: string
+          example: Success
         description:
           description: A brief human-readable description of the outcome
           type: string
+          example: Success. 42 results found.
         logs:
+          description: >-
+            Log entries containing errors, warnings, debugging information, etc
           type: array
           items:
             $ref: '#/components/schemas/LogEntry'
+      additionalProperties: true
       required:
         - message
     Message:
@@ -177,9 +206,15 @@ components:
         message:
           type: string
           description: A human-readable log message
+      additionalProperties: true
     Result:
       type: object
-      description: One of potentially several results or answers for a query
+      description: >-
+        A Result object specifies the nodes and edges in the knowledge graph
+        that satisfy the structure or conditions of a user-submitted query
+        graph. It must contain a NodeBindings object (list of query graph node
+        to knowledge graph node mappings) and an EdgeBindings object (list of
+        query graph edge to knowledge graph edge mappings).
       properties:
         node_bindings:
           type: object
@@ -201,6 +236,7 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/EdgeBinding'
+      additionalProperties: true
       required:
         - node_bindings
         - edge_bindings
@@ -210,6 +246,7 @@ components:
         id:
           $ref: '#/components/schemas/CURIE'
           description: A knowledge-graph node id, i.e. the `id` of a KNode
+      additionalProperties: true
       required:
         - id
     EdgeBinding:
@@ -223,6 +260,7 @@ components:
         id:
           type: string
           description: The key identifier of a specific KnowledgeGraph Edge.
+      additionalProperties: true
       required:
         - id
       additionalProperties: true
@@ -439,7 +477,9 @@ components:
         - object
     BiolinkEntity:
       description: >-
-        CURIE for a Biolink class, NamedThing or a child thereof (PascalCase)
+        Compact URI (CURIE) for a Biolink class, biolink:NamedThing
+        or a child thereof. The CURIE must use the prefix 'biolink:'
+        followed by the PascalCase class name.
       type: string
       pattern: ^biolink:[A-Z][a-zA-Z]*$
       externalDocs:
