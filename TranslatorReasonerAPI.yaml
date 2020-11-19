@@ -291,7 +291,7 @@ components:
     QNode:
       type: object
       description: A node in the QueryGraph used represent an entity in a
-        query. If a CURIE is not specified, any nodes matching the type 
+        query. If a CURIE is not specified, any nodes matching the type
         of the QNode will be returned is the Results.
       properties:
         id:
