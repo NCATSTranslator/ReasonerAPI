@@ -156,6 +156,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/LogEntry'
+      additionalProperties: true
       required:
         - message
     Message:
@@ -205,6 +206,7 @@ components:
         message:
           type: string
           description: A human-readable log message
+      additionalProperties: true
     Result:
       type: object
       description: >-
@@ -228,6 +230,7 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/EdgeBinding'
+      additionalProperties: true
       required:
         - node_bindings
         - edge_bindings
@@ -237,6 +240,7 @@ components:
         id:
           $ref: '#/components/schemas/CURIE'
           description: A knowledge-graph node id, i.e. the `id` of a KNode
+      additionalProperties: true
       required:
         - id
     EdgeBinding:
@@ -245,6 +249,7 @@ components:
         id:
           type: string
           description: A knowledge-graph edge id, i.e. the `id` of a KEdge
+      additionalProperties: true
       required:
         - id
     KnowledgeGraph:
