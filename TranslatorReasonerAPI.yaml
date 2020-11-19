@@ -221,7 +221,7 @@ components:
             bindings where the dictionary keys are the key identifiers of the
             Query Graph nodes and the associated values of those keys are
             instances of NodeBinding schema type (see below). This value is an
-            array of NodeBindings since a given query edge may have multiple
+            array of NodeBindings since a given query node may have multiple
             knowledge graph Node bindings in the result.
           additionalProperties:
             type: array
@@ -362,7 +362,8 @@ components:
       type: object
       description: >-
         A node in the knowledge graph which represents some biomedical
-        concept.
+        concept. Nodes are identified by the keys in the KnowldgeGraph 
+        Node mapping.
       properties:
         name:
           type: string
