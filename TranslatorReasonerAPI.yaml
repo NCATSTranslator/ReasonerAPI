@@ -574,6 +574,11 @@ components:
               description: >-
                 Upper bound for allowed numeric values. Must be a valid float
                 number or +/-infinity.
+            units:
+              type: string
+              description: >-
+                Units of this numerical values.
+              example: nM
             direction:
               type: object
               description: >-
