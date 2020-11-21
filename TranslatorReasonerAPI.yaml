@@ -382,35 +382,41 @@ components:
       additionalProperties: false
     Attribute:
       type: object
-      description: Generic attribute for a node
+      description: >-
+        Generic attribute for a node or an edge that expands key-value pair
+        concept by including a type of this attribute from a suitable ontology,
+        a source of this attribute, and (optionally) a url with additional
+        information about this attribute.
       properties:
         name:
           type: string
           description: >-
-            Human-readable name or label for the attribute. Should be the name
-            of the semantic type term.
+            Human-readable name or label for the attribute. If appropriate,
+            should be the name of the semantic type term.
           example: PubMed Identifier
         value:
           example: 32529952
           description: >-
             Value of the attribute. May be any data type, including a list.
         type:
-          type: string
+          $ref: '#/components/schemas/CURIE'
           description: >-
-            CURIE of the semantic type of the attribute, from the EDAM ontology
-            if possible. If a suitable identifier does not exist, enter a
-            descriptive phrase here and submit the new type for consideration
-            by the appropriate authority.
+            CURIE of the semantic type of the attribute. For properties
+            defined by the Biolink model this should be a biolink CURIE,
+            otherwise, if possible, from the EDAM ontology. If a suitable
+            identifier does not exist, enter a descriptive phrase here and
+            submit the new type for consideration by the appropriate
+            authority.
           example: EDAM:data_1187
         url:
           type: string
           description: >-
-            Human-consumable URL to link out and read about the attribute (not
-            the node).
+            Human-consumable URL to link out and provide additional information
+            about the attribute (not the node or the edge).
           example: https://pubmed.ncbi.nlm.nih.gov/32529952
         source:
           type: string
-          description: Source of the attribute, as a CURIE prefix.
+          description: Source of the attribute, preferably as a CURIE prefix.
           example: UniProtKB
       required:
         - type
