@@ -284,17 +284,25 @@ components:
     QueryGraph:
       type: object
       description: >-
-        A graph intended to be the thought path to be followed by a reasoner to
-        answer the question. This graph is a representation of a question.
+        A graph representing a biomedical question. It serves as a template for
+        each result (answer), where each bound knowledge graph node/edge is
+        expected to obey the constraints of the associated query graph element.
       properties:
         nodes:
           type: object
-          description: List of nodes in the QueryGraph
+          description: >-
+            The node specifications. The keys of this map are unique node
+            identifiers and the corresponding values include the constraints
+            on bound nodes.
           additionalProperties:
             $ref: '#/components/schemas/QNode'
         edges:
           type: object
-          description: List of edges in the QueryGraph
+          description: >-
+            The edge specifications. The keys of this map are unique edge
+            identifiers and the corresponding values include the constraints
+            on bound edges, in addition to specifying the subject and object
+            QNodes.
           additionalProperties:
             $ref: '#/components/schemas/QEdge'
       additionalProperties: true
