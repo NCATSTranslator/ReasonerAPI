@@ -263,7 +263,6 @@ components:
       additionalProperties: true
       required:
         - id
-      additionalProperties: true
     KnowledgeGraph:
       type: object
       description: >-
