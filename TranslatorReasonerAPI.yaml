@@ -361,8 +361,8 @@ components:
     Node:
       type: object
       description: >-
-        A node in the knowledge graph which represents some biomedical
-        concept. Nodes are identified by the keys in the KnowldgeGraph 
+        A node in the KnowledgeGraph which represents some biomedical
+        concept. Nodes are identified by the keys in the KnowledgeGraph
         Node mapping.
       properties:
         name:
