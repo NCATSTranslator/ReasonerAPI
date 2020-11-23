@@ -146,16 +146,19 @@ components:
             e.g. Success, QueryNotTraversable, KPsNotAvailable
           type: string
           example: Success
+          nullable: true
         description:
           description: A brief human-readable description of the outcome
           type: string
           example: Success. 42 results found.
+          nullable: true
         logs:
           description: >-
             Log entries containing errors, warnings, debugging information, etc
           type: array
           items:
             $ref: '#/components/schemas/LogEntry'
+          nullable: true
       additionalProperties: true
       required:
         - message
@@ -177,18 +180,21 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Result'
+          nullable: true
         query_graph:
           type: object
           description: >-
             QueryGraph object that contains a serialization of a query in the
             form of a graph
           $ref: '#/components/schemas/QueryGraph'
+          nullable: true
         knowledge_graph:
           type: object
           description: >-
             KnowledgeGraph object that contains lists of nodes and edges
             in the thought graph corresponding to the message
           $ref: '#/components/schemas/KnowledgeGraph'
+          nullable: true
       additionalProperties: false
     LogEntry:
       type: object
@@ -198,6 +204,7 @@ components:
           format: date-time
           description: Timestamp in ISO 8601 format
           example: '2020-09-03T18:13:49+00:00'
+          nullable: true
         level:
           type: string
           description: Logging level
@@ -206,14 +213,17 @@ components:
             - WARNING
             - INFO
             - DEBUG
+          nullable: true
         code:
           type: string
           description: >-
             One of a standardized set of short codes
             e.g. QueryNotTraversable, KPNotAvailable, KPResponseMalformed
+          nullable: true
         message:
           type: string
           description: A human-readable log message
+          nullable: true
       additionalProperties: true
     Result:
       type: object
@@ -321,12 +331,14 @@ components:
                 $ref: '#/components/schemas/CURIE'
           example: OMIM:603903
           description: CURIE identifier for this node
+          nullable: true
         category:
           oneOf:
             - $ref: '#/components/schemas/BiolinkEntity'
             - type: array
               items:
                 $ref: '#/components/schemas/BiolinkEntity'
+          nullable: true
         is_set:
           type: boolean
           description: >-
@@ -352,10 +364,12 @@ components:
             - type: array
               items:
                 $ref: '#/components/schemas/BiolinkRelation'
+          nullable: true
         relation:
           type: string
           example: upregulates
           description: Lower-level relationship type of this edge
+          nullable: true
         subject:
           type: string
           example: https://omim.org/entry/603903
@@ -376,17 +390,20 @@ components:
           type: string
           example: Haptoglobin
           description: Formal name of the entity
+          nullable: true
         category:
           oneOf:
             - $ref: '#/components/schemas/BiolinkEntity'
             - type: array
               items:
                 $ref: '#/components/schemas/BiolinkEntity'
+          nullable: true
         attributes:
           type: array
           description: A list of attributes describing the node
           items:
             $ref: '#/components/schemas/Attribute'
+          nullable: true
       additionalProperties: false
     Attribute:
       type: object
@@ -402,6 +419,7 @@ components:
             Human-readable name or label for the attribute. If appropriate,
             should be the name of the semantic type term.
           example: PubMed Identifier
+          nullable: true
         value:
           example: 32529952
           description: >-
@@ -422,10 +440,12 @@ components:
             Human-consumable URL to link out and provide additional information
             about the attribute (not the node or the edge).
           example: https://pubmed.ncbi.nlm.nih.gov/32529952
+          nullable: true
         source:
           type: string
           description: Source of the attribute, preferably as a CURIE prefix.
           example: UniProtKB
+          nullable: true
       required:
         - type
         - value
@@ -435,11 +455,14 @@ components:
       description: An edge in the knowledge graph linking two nodes
       properties:
         predicate:
-          $ref: '#/components/schemas/BiolinkRelation'
+          allOf:
+            - $ref: '#/components/schemas/BiolinkRelation'
+          nullable: true
         relation:
           type: string
           example: upregulates
           description: Lower-level relationship type of this edge
+          nullable: true
         subject:
           $ref: '#/components/schemas/CURIE'
           example: OMIM:603903
@@ -455,6 +478,7 @@ components:
           description: A list of additional attributes for this edge
           items:
             $ref: '#/components/schemas/Attribute'
+          nullable: true
       additionalProperties: false
       required:
         - subject
