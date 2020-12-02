@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   description: OpenAPI for NCATS Biomedical Translator Reasoners
-  version: 1.0.0-beta
+  version: 1.1.0-beta
   title: OpenAPI for NCATS Biomedical Translator Reasoners
   contact:
     email: edeutsch@systemsbiology.org
@@ -392,43 +392,64 @@ components:
       type: object
       description: >-
         Generic attribute for a node or an edge that expands key-value pair
-        concept by including a type of this attribute from a suitable ontology,
-        a source of this attribute, and (optionally) a url with additional
-        information about this attribute.
+        concept by including attribute and value types of this attribute from
+        suitable ontology, a source of this attribute, and (optionally) a url
+        with additional information about the attribute value (e.g. a full
+        internet page defining a complex data value, e.g. a Pubmed entry).
+        Here we distinguish between the characteristics of the value of an
+        attribute (value_type and value_type_name) versus the context of
+        usage, interpretation or role of a given value in the system
+        (i.e. using an identifier of a person as a source for evidence,
+        as a data curator,as a publication author, etc.)
       properties:
-        name:
+        attribute_type:
+          $ref: '#/components/schemas/CURIE'
+          description: >-
+            CURIE of the ontology term defining the attribute. For properties
+            defined by the Biolink model this should be a biolink CURIE.
+            For evidence provenance confidence properties defined by the
+            SEPIO model, this should be a SEPIO CURIE.
+          example: SEPIO:0000130
+        attribute_name:
           type: string
           description: >-
             Human-readable name or label for the attribute. If appropriate,
-            should be the name of the semantic type term.
-          example: PubMed Identifier
+            should be the name of the ontology term of the attribute type but
+            could be any string which expresses the intent of the attribute.
+          example: Assertion Authored By
         value:
           example: 32529952
           description: >-
             Value of the attribute. May be any data type, including a list.
-        type:
+        value_type:
           $ref: '#/components/schemas/CURIE'
           description: >-
-            CURIE of the semantic type of the attribute. For properties
-            defined by the Biolink model this should be a biolink CURIE,
+            CURIE of the semantic type of the attribute value. ,
             otherwise, if possible, from the EDAM ontology. If a suitable
             identifier does not exist, enter a descriptive phrase here and
             submit the new type for consideration by the appropriate
             authority.
           example: EDAM:data_1187
+        value_type_name:
+          type: string
+          description: >-
+            Human-readable name or label for the value type, usually the name
+            of the value type semantic type term.
+          example: PubMed Identifier
         url:
           type: string
           description: >-
             Human-consumable URL to link out and provide additional information
-            about the attribute (not the node or the edge).
+            about the attribute value (not the node or the edge).
           example: https://pubmed.ncbi.nlm.nih.gov/32529952
         source:
           type: string
           description: Source of the attribute, preferably as a CURIE prefix.
           example: UniProtKB
       required:
-        - type
+        - attribute_type
         - value
+        - value_type
       additionalProperties: false
     Edge:
       type: object
