@@ -366,10 +366,10 @@ components:
       properties:
         predicate:
           oneOf:
-            - $ref: '#/components/schemas/BiolinkRelation'
+            - $ref: '#/components/schemas/BiolinkPredicate'
             - type: array
               items:
-                $ref: '#/components/schemas/BiolinkRelation'
+                $ref: '#/components/schemas/BiolinkPredicate'
         relation:
           type: string
           example: RO:0002447
@@ -467,7 +467,7 @@ components:
         resulting from a query upon the underlying knowledge source.
       properties:
         predicate:
-          $ref: '#/components/schemas/BiolinkRelation'
+          $ref: '#/components/schemas/BiolinkPredicate'
         relation:
           type: string
           example: RO:0002447
@@ -507,13 +507,16 @@ components:
         description: Biolink model entities
         url: https://biolink.github.io/biolink-model/docs/NamedThing.html
       example: biolink:PhenotypicFeature
-    BiolinkRelation:
+    BiolinkPredicate:
       description: >-
-        CURIE for a Biolink slot, related_to or a child thereof (snake_case)
+        CURIE for a Biolink 'predicate' slot, taken from the Biolink slot
+        ('is_a') hierarchy rooted in biolink:related_to (snake_case). This
+        predicate defines the Biolink relationship between the subject and
+        object nodes of a biolink:Association defining a knowledge graph edge.
       type: string
       pattern: ^biolink:[a-z][a-z_]*$
       externalDocs:
-        description: Biolink model relations
+        description: Biolink model predicates
         url: https://biolink.github.io/biolink-model/docs/related_to.html
       example: biolink:interacts_with
     CURIE:
