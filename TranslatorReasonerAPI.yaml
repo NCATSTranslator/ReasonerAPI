@@ -274,18 +274,26 @@ components:
     KnowledgeGraph:
       type: object
       description: >-
-        A thought graph associated with this result. This will commonly be a
-        linear path subgraph from one concept to another, but related items
-        aside of the path may be included.
+        A thought graph associated with this result. This will commonly be
+        a linear path subgraph from one concept to another, but related items
+        aside of the path may be included. The instances of Node and Edge
+        defining this graph represent instances of biolink:NamedThing (concept
+        nodes) and biolink:Association (relationship edges) representing
+        (Attribute) annotated knowledge returned from the knowledge sources
+        and inference agents wrapped by the given TRAPI implementation.
       properties:
         nodes:
           type: object
-          description: List of nodes in the KnowledgeGraph
+          description: >-
+            Dictionary of Node instances used in the KnowledgeGraph,
+            referenced elsewhere in the TRAPI output by the dictionary key.
           additionalProperties:
             $ref: '#/components/schemas/Node'
         edges:
           type: object
-          description: List of edges in the KnowledgeGraph
+          description: >-
+            Dictionary of Edge instances used in the KnowledgeGraph,
+            referenced elsewhere in the TRAPI output by the dictionary key.
           additionalProperties:
             $ref: '#/components/schemas/Edge'
       additionalProperties: true
