@@ -290,9 +290,9 @@ components:
         - edges
     QNode:
       type: object
-      description: A node in the QueryGraph used represent an entity in a
+      description: A node in the QueryGraph used to represent an entity in a
         query. If a CURIE is not specified, any nodes matching the type
-        of the QNode will be returned is the Results.
+        of the QNode will be returned in the Results.
       properties:
         id:
           oneOf:
