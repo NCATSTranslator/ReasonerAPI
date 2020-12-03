@@ -233,7 +233,13 @@ components:
               $ref: '#/components/schemas/NodeBinding'
         edge_bindings:
           type: object
-          description: List of QEdge-KEdge bindings.
+          description: >-
+            The dictionary of Input Query Graph to Result Knowledge Graph edge
+            bindings where the dictionary keys are the key identifiers of the
+            Query Graph edges and the associated values of those keys are
+            instances of EdgeBinding schema type (see below). This value is an
+            array of EdgeBindings since a given query edge may resolve to
+            multiple knowledge graph edges in the result.
           additionalProperties:
             type: array
             items:
@@ -253,10 +259,15 @@ components:
         - id
     EdgeBinding:
       type: object
+      description: >-
+        A instance of EdgeBinding is a single KnowledgeGraph Edge mapping,
+        identified by the corresponding 'id' object key identifier of the
+        Edge within the Knowledge Graph. Instances of EdgeBinding may include
+        extra annotation (such annotation is not yet fully standardized).
       properties:
         id:
           type: string
-          description: A knowledge-graph edge id, i.e. the `id` of a KEdge
+          description: The key identifier of a specific KnowledgeGraph Edge.
       additionalProperties: true
       required:
         - id
@@ -344,7 +355,14 @@ components:
       additionalProperties: true
     QEdge:
       type: object
-      description: An edge in the QueryGraph
+      description: >-
+        An edge in the QueryGraph used as an filter pattern specification in a
+        query. If optional predicate or relation properties are not specified,
+        they are assumed to be wildcard matches to the target knowledge space.
+        If specified, the ontological inheritance hierarchy associated with
+        the terms provided is assumed, such that edge bindings returned may be
+        an exact match to the given QEdge predicate or relation term ('class'),
+        or to a term which is a subclass of the QEdge specified term.
       properties:
         predicate:
           oneOf:
@@ -354,16 +372,27 @@ components:
                 $ref: '#/components/schemas/BiolinkRelation'
         relation:
           type: string
-          example: upregulates
-          description: Lower-level relationship type of this edge
+          example: RO:0002447
+          description: >-
+            Query constraint against the relationship type term of this edge,
+            as originally specified by, or curated by inference from, the
+            original external source of knowledge. Note that this should
+            often be specified as predicate ontology term CURIE, although
+            this may not be strictly enforced.
         subject:
           type: string
           example: https://omim.org/entry/603903
-          description: Corresponds to the id of subject node of this edge
+          description: >-
+            Corresponds to the map key identifier of the
+            subject concept node anchoring the query filter
+            pattern for the query relationship edge.
         object:
           type: string
           example: https://www.uniprot.org/uniprot/P00738
-          description: Corresponds to the id of object node of this edge
+          description: >-
+            Corresponds to the map key identifier of the
+            object concept node anchoring the query filter
+            pattern for the query relationship edge.
       additionalProperties: true
       required:
         - subject
@@ -432,24 +461,32 @@ components:
       additionalProperties: false
     Edge:
       type: object
-      description: An edge in the knowledge graph linking two nodes
+      description: >-
+        A specification of the semantic relationship linking two concepts
+        that are expressed as nodes in the knowledge "thought" graph
+        resulting from a query upon the underlying knowledge source.
       properties:
         predicate:
           $ref: '#/components/schemas/BiolinkRelation'
         relation:
           type: string
-          example: upregulates
-          description: Lower-level relationship type of this edge
+          example: RO:0002447
+          description: >-
+            The relationship type term of this edge, originally specified by,
+            or curated by inference from, the original source of knowledge.
+            This should generally be specified as predicate ontology CURIE.
         subject:
           $ref: '#/components/schemas/CURIE'
           example: OMIM:603903
           description: >-
-            Corresponds to the map key CURIE of the subject node of this edge
+            Corresponds to the map key CURIE of the
+            subject concept node of this relationship edge.
         object:
           $ref: '#/components/schemas/CURIE'
           example: UniProtKB:P00738
           description: >-
-            Corresponds to the map key CURIE of the object node of this edge
+            Corresponds to the map key CURIE of the
+            object concept node of this relationship edge.
         attributes:
           type: array
           description: A list of additional attributes for this edge
