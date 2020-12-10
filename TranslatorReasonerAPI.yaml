@@ -197,6 +197,19 @@ components:
           nullable: true
       additionalProperties: false
     LogEntry:
+      description: >-
+        The LogEntry object contains information useful for tracing and debugging across
+        Translator components.  Although an individual component (for example, an ARA or KP)
+        may have its own logging and debugging infrastructure, this internal information is
+        not, in general, available to other components.  The intent of the LogEntry class is
+        to provide a minimum level of compatibility for logging information that can be
+        communicated between componenents using TRAPI, in order to help humans track down
+        cross-component problems, and perhaps (at some point) to help software with automatic
+        diagnosis of problems across Translator components.  Since it is not yet clear which
+        logging information will be most useful, we have decide to keep the LogEntry format
+        simple and flexible.  In addition to a timestamp and logging level, LogEntry includes
+        a string intended to be read by a human, along with one of a standardized set of codes
+        describing the condition of the component sending the message.
       type: object
       properties:
         timestamp:
