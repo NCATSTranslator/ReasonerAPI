@@ -445,12 +445,12 @@ components:
             List of semantic types provided by this knowledge source.
           additionalProperties:
             $ref: '#/components/schemas/KMNode'
-        predicates:
+        edges:
           type: array
           description: >-
-            List of predicates provided by this knowledge source.
+            List of edges provided by this knowledge source.
           items:
-            $ref: '#/components/schemas/KMPredicate'
+            $ref: '#/components/schemas/KMEdge'
       description: >-
         Knowledge-map representation of this knowledge source.
     KMNode:
@@ -482,10 +482,11 @@ components:
       required:
         - id_prefixes
       additionalProperties: false
-    KMPredicate:
+    KMEdge:
       type: object
       description: >-
-        Predicate describing relationship between a subject and an object.
+        Edge in a knowledge map describing relationship between a subject
+        and an object.
       properties:
         subject:
           type: string
