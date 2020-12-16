@@ -479,12 +479,6 @@ components:
             type: integer
           example:
             ChEMBL: 1234
-        attributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/KMAttribute'
-          description: >-
-            Attributes associated with this node.
       required:
         - id_prefixes
       additionalProperties: false
@@ -522,85 +516,8 @@ components:
             type: integer
           example:
             ChEMBL: 1234
-        attributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/KMAttribute'
-          description: >-
-            Attributes associated with this predicate.
       required:
         - subject
         - predicate
         - object
-      additionalProperties: false
-    KMAttribute:
-      type: object
-      description: >-
-        Description of attribute types provided by this knowledge source.
-      properties:
-        type:
-          type: string
-          description: >-
-            CURIE of the semantic type of the attribute, from the EDAM ontology
-            if possible. If a suitable identifier does not exist, enter a
-            descriptive phrase here and submit the new type for consideration
-            by the appropriate authority.
-          example: biolink:reference
-        source:
-          type: string
-          description: Source of the attribute, as a CURIE prefix.
-          example: UniProtKB
-        names:
-          type: array
-          description: >-
-            Human-readable names or labels for attributes of a given type.
-          items:
-            type: string
-          example: [PubMed Identifier]
-        numeric_range:
-          type: object
-          description: >-
-            Applicable to numeric attributes, determines the range of numeric
-            values and indicates whether higher or lower values are more
-            significant.
-          properties:
-            from:
-              type: string
-              description: >-
-                Lower bound for allowed numeric values. Must be a valid float
-                number or +/-infinity.
-            to:
-              type: string
-              description: >-
-                Upper bound for allowed numeric values. Must be a valid float
-                number or +/-infinity.
-            units:
-              type: string
-              description: >-
-                Units of this numerical values.
-              example: nM
-            direction:
-              type: object
-              description: >-
-                Indicates whether larger or smaller values are more important.
-              properties:
-                more_confident:
-                  description: >-
-                    Indicates whether there is higher confidence in larger or
-                    smaller values.
-                  type: string
-                  enum:
-                    - larger
-                    - smaller
-                more_specific:
-                  description: >-
-                    Indicates whether larger or smaller values are more
-                    specific.
-                  type: string
-                  enum:
-                    - larger
-                    - smaller
-
-      required:
-        - type
       additionalProperties: false
