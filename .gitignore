@@ -1,2 +1,4 @@
 .tox
 __pycache__
+# PyCharms IDE metadata
+.idea/
