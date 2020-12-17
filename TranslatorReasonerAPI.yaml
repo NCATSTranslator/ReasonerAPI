@@ -146,40 +146,55 @@ components:
             e.g. Success, QueryNotTraversable, KPsNotAvailable
           type: string
           example: Success
+          nullable: true
         description:
           description: A brief human-readable description of the outcome
           type: string
           example: Success. 42 results found.
+          nullable: true
         logs:
           description: >-
             Log entries containing errors, warnings, debugging information, etc
           type: array
           items:
             $ref: '#/components/schemas/LogEntry'
+          nullable: true
+      additionalProperties: true
       required:
         - message
     Message:
+      description: >-
+        The message object holds the main content of a Query or a Response in
+        three properties: query_graph, results, and knowledge_graph.
+        The query_graph property contains the query configuration, the results
+        property contains any answers that are returned by the service,
+        and knowledge_graph property contains lists of edges and nodes in the
+        thought graph corresponding to this message. The content of these
+        properties is context-dependent to the encompassing object and
+        the TRAPI operation requested.
       type: object
       properties:
         results:
           description: >-
-            List of all returned potential answers for the query posed
+            List of all returned Result objects for the query posed
           type: array
           items:
             $ref: '#/components/schemas/Result'
+          nullable: true
         query_graph:
           type: object
           description: >-
             QueryGraph object that contains a serialization of a query in the
             form of a graph
           $ref: '#/components/schemas/QueryGraph'
+          nullable: true
         knowledge_graph:
           type: object
           description: >-
-            KnowledgeGraph object that contains all the nodes and edges
-            referenced in any of the possible answers to the query OR
-            connection information for a remote knowledge graph
+            KnowledgeGraph object that contains lists of nodes and edges
+            in the thought graph corresponding to the message
           $ref: '#/components/schemas/KnowledgeGraph'
+          nullable: true
       additionalProperties: false
     LogEntry:
       type: object
@@ -189,6 +204,7 @@ components:
           format: date-time
           description: Timestamp in ISO 8601 format
           example: '2020-09-03T18:13:49+00:00'
+          nullable: true
         level:
           type: string
           description: Logging level
@@ -197,14 +213,18 @@ components:
             - WARNING
             - INFO
             - DEBUG
+          nullable: true
         code:
           type: string
           description: >-
             One of a standardized set of short codes
             e.g. QueryNotTraversable, KPNotAvailable, KPResponseMalformed
+          nullable: true
         message:
           type: string
           description: A human-readable log message
+          nullable: true
+      additionalProperties: true
     Result:
       type: object
       description: >-
@@ -216,18 +236,31 @@ components:
       properties:
         node_bindings:
           type: object
-          description: List of QNode-KNode bindings.
+          description: >-
+            The dictionary of Input Query Graph to Result Knowledge Graph node
+            bindings where the dictionary keys are the key identifiers of the
+            Query Graph nodes and the associated values of those keys are
+            instances of NodeBinding schema type (see below). This value is an
+            array of NodeBindings since a given query node may have multiple
+            knowledge graph Node bindings in the result.
           additionalProperties:
             type: array
             items:
               $ref: '#/components/schemas/NodeBinding'
         edge_bindings:
           type: object
-          description: List of QEdge-KEdge bindings.
+          description: >-
+            The dictionary of Input Query Graph to Result Knowledge Graph edge
+            bindings where the dictionary keys are the key identifiers of the
+            Query Graph edges and the associated values of those keys are
+            instances of EdgeBinding schema type (see below). This value is an
+            array of EdgeBindings since a given query edge may resolve to
+            multiple knowledge graph edges in the result.
           additionalProperties:
             type: array
             items:
               $ref: '#/components/schemas/EdgeBinding'
+      additionalProperties: true
       required:
         - node_bindings
         - edge_bindings
@@ -236,15 +269,27 @@ components:
       properties:
         id:
           $ref: '#/components/schemas/CURIE'
-          description: A knowledge-graph node id, i.e. the `id` of a KNode
+          description: >-
+            An instance of NodeBinding is a single KnowledgeGraph Node mapping,
+            identified by the corresponding 'id' object key identifier of the
+            Node within the Knowledge Graph. Instances of NodeBinding may
+            include extra annotation (such annotation is not yet fully
+            standardized).
+      additionalProperties: true
       required:
         - id
     EdgeBinding:
       type: object
+      description: >-
+        A instance of EdgeBinding is a single KnowledgeGraph Edge mapping,
+        identified by the corresponding 'id' object key identifier of the
+        Edge within the Knowledge Graph. Instances of EdgeBinding may include
+        extra annotation (such annotation is not yet fully standardized).
       properties:
         id:
           type: string
-          description: A knowledge-graph edge id, i.e. the `id` of a KEdge
+          description: The key identifier of a specific KnowledgeGraph Edge.
+      additionalProperties: true
       required:
         - id
     KnowledgeGraph:
@@ -271,17 +316,25 @@ components:
     QueryGraph:
       type: object
       description: >-
-        A graph intended to be the thought path to be followed by a reasoner to
-        answer the question. This graph is a representation of a question.
+        A graph representing a biomedical question. It serves as a template for
+        each result (answer), where each bound knowledge graph node/edge is
+        expected to obey the constraints of the associated query graph element.
       properties:
         nodes:
           type: object
-          description: List of nodes in the QueryGraph
+          description: >-
+            The node specifications. The keys of this map are unique node
+            identifiers and the corresponding values include the constraints
+            on bound nodes.
           additionalProperties:
             $ref: '#/components/schemas/QNode'
         edges:
           type: object
-          description: List of edges in the QueryGraph
+          description: >-
+            The edge specifications. The keys of this map are unique edge
+            identifiers and the corresponding values include the constraints
+            on bound edges, in addition to specifying the subject and object
+            QNodes.
           additionalProperties:
             $ref: '#/components/schemas/QEdge'
       additionalProperties: true
@@ -300,12 +353,14 @@ components:
                 $ref: '#/components/schemas/CURIE'
           example: OMIM:603903
           description: CURIE identifier for this node
+          nullable: true
         category:
           oneOf:
             - $ref: '#/components/schemas/BiolinkEntity'
             - type: array
               items:
                 $ref: '#/components/schemas/BiolinkEntity'
+          nullable: true
         is_set:
           type: boolean
           description: >-
@@ -323,7 +378,14 @@ components:
       additionalProperties: true
     QEdge:
       type: object
-      description: An edge in the QueryGraph
+      description: >-
+        An edge in the QueryGraph used as an filter pattern specification in a
+        query. If optional predicate or relation properties are not specified,
+        they are assumed to be wildcard matches to the target knowledge space.
+        If specified, the ontological inheritance hierarchy associated with
+        the terms provided is assumed, such that edge bindings returned may be
+        an exact match to the given QEdge predicate or relation term ('class'),
+        or to a term which is a subclass of the QEdge specified term.
       properties:
         predicate:
           oneOf:
@@ -331,103 +393,143 @@ components:
             - type: array
               items:
                 $ref: '#/components/schemas/BiolinkRelation'
+          nullable: true
         relation:
           type: string
-          example: upregulates
-          description: Lower-level relationship type of this edge
+          example: RO:0002447
+          description: >-
+            Query constraint against the relationship type term of this edge,
+            as originally specified by, or curated by inference from, the
+            original external source of knowledge. Note that this should
+            often be specified as predicate ontology term CURIE, although
+            this may not be strictly enforced.
+          nullable: true
         subject:
           type: string
           example: https://omim.org/entry/603903
-          description: Corresponds to the id of subject node of this edge
+          description: >-
+            Corresponds to the map key identifier of the
+            subject concept node anchoring the query filter
+            pattern for the query relationship edge.
         object:
           type: string
           example: https://www.uniprot.org/uniprot/P00738
-          description: Corresponds to the id of object node of this edge
+          description: >-
+            Corresponds to the map key identifier of the
+            object concept node anchoring the query filter
+            pattern for the query relationship edge.
       additionalProperties: true
       required:
         - subject
         - object
     Node:
       type: object
-      description: A node in the knowledge graph
+      description: >-
+        A node in the KnowledgeGraph which represents some biomedical
+        concept. Nodes are identified by the keys in the KnowledgeGraph
+        Node mapping.
       properties:
         name:
           type: string
           example: Haptoglobin
           description: Formal name of the entity
+          nullable: true
         category:
           oneOf:
             - $ref: '#/components/schemas/BiolinkEntity'
             - type: array
               items:
                 $ref: '#/components/schemas/BiolinkEntity'
+          nullable: true
         attributes:
           type: array
           description: A list of attributes describing the node
           items:
             $ref: '#/components/schemas/Attribute'
+          nullable: true
       additionalProperties: false
     Attribute:
       type: object
-      description: Generic attribute for a node
+      description: >-
+        Generic attribute for a node or an edge that expands key-value pair
+        concept by including a type of this attribute from a suitable ontology,
+        a source of this attribute, and (optionally) a url with additional
+        information about this attribute.
       properties:
         name:
           type: string
           description: >-
-            Human-readable name or label for the attribute. Should be the name
-            of the semantic type term.
+            Human-readable name or label for the attribute. If appropriate,
+            should be the name of the semantic type term.
           example: PubMed Identifier
+          nullable: true
         value:
           example: 32529952
           description: >-
             Value of the attribute. May be any data type, including a list.
         type:
-          type: string
+          $ref: '#/components/schemas/CURIE'
           description: >-
-            CURIE of the semantic type of the attribute, from the EDAM ontology
-            if possible. If a suitable identifier does not exist, enter a
-            descriptive phrase here and submit the new type for consideration
-            by the appropriate authority.
+            CURIE of the semantic type of the attribute. For properties
+            defined by the Biolink model this should be a biolink CURIE,
+            otherwise, if possible, from the EDAM ontology. If a suitable
+            identifier does not exist, enter a descriptive phrase here and
+            submit the new type for consideration by the appropriate
+            authority.
           example: EDAM:data_1187
         url:
           type: string
           description: >-
-            Human-consumable URL to link out and read about the attribute (not
-            the node).
+            Human-consumable URL to link out and provide additional information
+            about the attribute (not the node or the edge).
           example: https://pubmed.ncbi.nlm.nih.gov/32529952
+          nullable: true
         source:
           type: string
-          description: Source of the attribute, as a CURIE prefix.
+          description: Source of the attribute, preferably as a CURIE prefix.
           example: UniProtKB
+          nullable: true
       required:
         - type
         - value
       additionalProperties: false
     Edge:
       type: object
-      description: An edge in the knowledge graph linking two nodes
+      description: >-
+        A specification of the semantic relationship linking two concepts
+        that are expressed as nodes in the knowledge "thought" graph
+        resulting from a query upon the underlying knowledge source.
       properties:
         predicate:
-          $ref: '#/components/schemas/BiolinkRelation'
+          allOf:
+            - $ref: '#/components/schemas/BiolinkRelation'
+          nullable: true
         relation:
           type: string
-          example: upregulates
-          description: Lower-level relationship type of this edge
+          example: RO:0002447
+          description: >-
+            The relationship type term of this edge, originally specified by,
+            or curated by inference from, the original source of knowledge.
+            This should generally be specified as predicate ontology CURIE.
+          nullable: true
         subject:
           $ref: '#/components/schemas/CURIE'
           example: OMIM:603903
           description: >-
-            Corresponds to the map key CURIE of the subject node of this edge
+            Corresponds to the map key CURIE of the
+            subject concept node of this relationship edge.
         object:
           $ref: '#/components/schemas/CURIE'
           example: UniProtKB:P00738
           description: >-
-            Corresponds to the map key CURIE of the object node of this edge
+            Corresponds to the map key CURIE of the
+            object concept node of this relationship edge.
         attributes:
           type: array
           description: A list of additional attributes for this edge
           items:
             $ref: '#/components/schemas/Attribute'
+          nullable: true
       additionalProperties: false
       required:
         - subject
