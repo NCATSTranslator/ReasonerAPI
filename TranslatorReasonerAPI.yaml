@@ -578,6 +578,11 @@ components:
       example: biolink:interacts_with
     CURIE:
       type: string
-      description: A Compact URI
+      description: >-
+        A Compact URI, consisting of a prefix and a reference separated
+        by a colon, such as UniProtKB:P00738. Via an external context
+        definition, the CURIE prefix and colon may be replaced by a URI
+        prefix, such as http://identifiers.org/uniprot/, to form a full
+        URI.
       externalDocs:
         url: https://www.w3.org/TR/2010/NOTE-curie-20101216/
