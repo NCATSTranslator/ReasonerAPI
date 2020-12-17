@@ -305,13 +305,12 @@ components:
     KnowledgeGraph:
       type: object
       description: >-
-        A thought graph associated with this result. This will commonly be
-        a linear path subgraph from one concept to another, but related items
-        aside of the path may be included. The instances of Node and Edge
-        defining this graph represent instances of biolink:NamedThing (concept
-        nodes) and biolink:Association (relationship edges) representing
-        (Attribute) annotated knowledge returned from the knowledge sources
-        and inference agents wrapped by the given TRAPI implementation.
+        The knowledge graph associated with a set of results. The instances
+        of Node and Edge defining this graph represent instances of
+        biolink:NamedThing (concept nodes) and biolink:Association
+        (relationship edges) representing (Attribute) annotated knowledge
+        returned from the knowledge sources and inference agents wrapped by
+        the given TRAPI implementation.
       properties:
         nodes:
           type: object
