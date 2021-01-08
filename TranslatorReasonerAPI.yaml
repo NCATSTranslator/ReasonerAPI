@@ -182,18 +182,18 @@ components:
             $ref: '#/components/schemas/Result'
           nullable: true
         query_graph:
-          type: object
           description: >-
             QueryGraph object that contains a serialization of a query in the
             form of a graph
-          $ref: '#/components/schemas/QueryGraph'
+          allOf:
+            - $ref: '#/components/schemas/QueryGraph'
           nullable: true
         knowledge_graph:
-          type: object
           description: >-
             KnowledgeGraph object that contains lists of nodes and edges
             in the thought graph corresponding to the message
-          $ref: '#/components/schemas/KnowledgeGraph'
+          allOf:
+            - $ref: '#/components/schemas/KnowledgeGraph'
           nullable: true
       additionalProperties: false
     LogEntry:
