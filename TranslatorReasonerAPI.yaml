@@ -18,12 +18,12 @@ tags:
     description: Get supported relationships by source and target
     externalDocs:
       description: Documentation for the reasoner predicates function
-      url: http://reasonerhost.ncats.io/overview.html#predicates
+      url: INSERT-URL-HERE-OR-REMOVE-EXTERNALDOCS-IF-NA
   - name: query
     description: Query reasoner using a predefined question type
     externalDocs:
       description: Documentation for the reasoner query function
-      url: http://reasonerhost.ncats.io/overview.html#query
+      url: INSERT-URL-HERE-OR-REMOVE-EXTERNALDOCS-IF-NA
   - name: translator
   - name: reasoner
 paths:
