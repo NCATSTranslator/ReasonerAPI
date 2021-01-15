@@ -474,27 +474,27 @@ components:
         (i.e. using an identifier of a person as a source for evidence,
         as a data curator,as a publication author, etc.)
       properties:
-        attribute_type:
+        attribute_type_id:
           $ref: '#/components/schemas/CURIE'
           description: >-
             CURIE of the ontology term defining the attribute. For properties
-            defined by the Biolink model this should be a biolink CURIE.
+            defined by the Biolink model this should be a Biolink CURIE.
             For evidence provenance confidence properties defined by the
-            SEPIO model, this should be a SEPIO CURIE.
+            SEPIO model, this should generally be a SEPIO CURIE.
           example: SEPIO:0000130
-        attribute_name:
+        attribute_from_source:
           type: string
           description: >-
-            Human-readable name or label for the attribute. If appropriate,
-            should be the name of the ontology term of the attribute type but
-            could be any string which expresses the intent of the attribute.
+            Attribute term as defined by the source defining the attribute.
+            The data type is 'string' but the contents of the field could
+            also be a CURIE of a third party ontology term.
           example: Assertion Authored By
           nullable: true
         value:
           example: 32529952
           description: >-
             Value of the attribute. May be any data type, including a list.
-        value_type:
+        value_type_id:
           $ref: '#/components/schemas/CURIE'
           description: >-
             CURIE of the semantic type of the attribute value. ,
@@ -503,26 +503,35 @@ components:
             submit the new type for consideration by the appropriate
             authority.
           example: EDAM:data_1187
-        value_type_name:
+        value_type_from_source:
+          $ref: '#/components/schemas/CURIE'
+          description: >-
+            Semantic type of the attribute value as defined by the source
+            defining the attribute. The data type is 'string' but the contents
+            of the field could also be a CURIE of a third party ontology term.
+          example: p value
+          nullable: true
+        value_source:
           type: string
           description: >-
-            Human-readable name or label for the value type, usually the name
-            of the value type semantic type term.
-          example: PubMed Identifier
-        url:
+            Source of the attribute value, preferably as a CURIE namespace.
+          example: UniProtKB
+          nullable: true
+        value_url:
           type: string
           description: >-
             Human-consumable URL to link out and provide additional information
             about the attribute value (not the node or the edge).
           example: https://pubmed.ncbi.nlm.nih.gov/32529952
           nullable: true
-        source:
+        description:
           type: string
-          description: Source of the attribute, preferably as a CURIE prefix.
-          example: UniProtKB
+          description: >-
+            Human-readable description for the attribute and its value.
+          example: Assertion Authored By Dr. Trans L. Ator
           nullable: true
       required:
-        - attribute_type
+        - attribute_type_id
         - value
         - value_type
       additionalProperties: false
