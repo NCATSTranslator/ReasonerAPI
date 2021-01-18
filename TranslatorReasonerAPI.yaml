@@ -32,6 +32,7 @@ paths:
       tags:
         - predicates
       summary: Get supported relationships by source and target
+      operationId: predicates
       responses:
         '200':
           description: Predicates by source and target
