@@ -99,7 +99,6 @@ paths:
             application/json:
               schema:
                 type: string
-      x-swagger-router-controller: swagger_server.controllers.query_controller
 components:
   schemas:
     Query:
