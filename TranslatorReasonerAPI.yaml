@@ -9,6 +9,12 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: INSERT-URL-HERE
+  x-translator:
+    component: INSERT-EITHER-ARA-OR-KP-HERE
+    team: INSERT-TRANSLATOR-TEAM-NAME-HERE
+servers:
+  - url: INSERT-URL-HERE
+    description: INSERT-SERVER-DESCRIPTION-HERE
 externalDocs:
   description: >-
     Documentation for the NCATS Biomedical Translator Reasoners web services
