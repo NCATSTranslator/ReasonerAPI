@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   description: OpenAPI for NCATS Biomedical Translator Reasoners
-  version: 1.0.0-beta
+  version: 1.0.0
   title: OpenAPI for NCATS Biomedical Translator Reasoners
   contact:
     email: edeutsch@systemsbiology.org
@@ -12,18 +12,18 @@ info:
 externalDocs:
   description: >-
     Documentation for the NCATS Biomedical Translator Reasoners web services
-  url: https://github.com/NCATS-Tangerine/NCATS-ReasonerStdAPI
+  url: https://github.com/NCATSTranslator/ReasonerAPI
 tags:
   - name: predicates
     description: Get supported relationships by source and target
     externalDocs:
       description: Documentation for the reasoner predicates function
-      url: http://reasonerhost.ncats.io/overview.html#predicates
+      url: INSERT-URL-HERE-OR-REMOVE-EXTERNALDOCS-IF-NA
   - name: query
     description: Query reasoner using a predefined question type
     externalDocs:
       description: Documentation for the reasoner query function
-      url: http://reasonerhost.ncats.io/overview.html#query
+      url: INSERT-URL-HERE-OR-REMOVE-EXTERNALDOCS-IF-NA
   - name: translator
   - name: reasoner
 paths:
@@ -182,18 +182,18 @@ components:
             $ref: '#/components/schemas/Result'
           nullable: true
         query_graph:
-          type: object
           description: >-
             QueryGraph object that contains a serialization of a query in the
             form of a graph
-          $ref: '#/components/schemas/QueryGraph'
+          allOf:
+            - $ref: '#/components/schemas/QueryGraph'
           nullable: true
         knowledge_graph:
-          type: object
           description: >-
             KnowledgeGraph object that contains lists of nodes and edges
             in the thought graph corresponding to the message
-          $ref: '#/components/schemas/KnowledgeGraph'
+          allOf:
+            - $ref: '#/components/schemas/KnowledgeGraph'
           nullable: true
       additionalProperties: false
     LogEntry:
