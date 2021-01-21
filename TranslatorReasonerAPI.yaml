@@ -32,7 +32,6 @@ paths:
       tags:
         - predicates
       summary: Get supported relationships by source and target
-      operationId: predicates
       responses:
         '200':
           description: Predicates by source and target
@@ -60,7 +59,6 @@ paths:
         - query
       summary: Query reasoner via one of several inputs
       description: ''
-      operationId: query
       requestBody:
         description: Query information to be submitted
         required: true
