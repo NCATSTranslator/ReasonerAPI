@@ -125,8 +125,8 @@ components:
         operations:
           description: >-
             Container for one or more Message objects or identifiers for one or
-            more Messages along with a processing plan and options for how those
-            messages should be processed and returned
+            more Messages along with a processing plan and options for how
+            those messages should be processed and returned
           allOf:
             - $ref: '#/components/schemas/Operations'
       additionalProperties: true
@@ -169,8 +169,8 @@ components:
         operations:
           description: >-
             Container for one or more Message objects or identifiers for one or
-            more Messages along with the processing plan and options for how those
-            messages were processed and returned
+            more Messages along with the processing plan and options for how
+            those messages were processed and returned
           allOf:
             - $ref: '#/components/schemas/Operations'
       additionalProperties: true
@@ -610,7 +610,7 @@ components:
         message_uris:
           type: array
           example:
-            - 'https://arax.ncats.io/api/arax/v1.0/response/38'
+            - https://arax.ncats.io/api/arax/v1.0/response/38
           description: >-
             List of URIs for Message or Response objects to fetch and process
           items:
@@ -636,7 +636,7 @@ components:
         options:
           type: object
           example:
-            halt_on_warning: False
+            halt_on_warning: false
           description: >-
             Map of order independent options that apply during processing
           additionalProperties: true
