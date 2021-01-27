@@ -375,20 +375,16 @@ components:
         of the QNode will be returned in the Results.
       properties:
         id:
-          oneOf:
-            - $ref: '#/components/schemas/CURIE'
-            - type: array
-              items:
-                $ref: '#/components/schemas/CURIE'
-          example: OMIM:603903
+          type: array
+          items:
+            $ref: '#/components/schemas/CURIE'
+            example: OMIM:603903
           description: CURIE identifier for this node
           nullable: true
         category:
-          oneOf:
-            - $ref: '#/components/schemas/BiolinkEntity'
-            - type: array
-              items:
-                $ref: '#/components/schemas/BiolinkEntity'
+          type: array
+          items:
+            $ref: '#/components/schemas/BiolinkEntity'
           nullable: true
         is_set:
           type: boolean
@@ -417,11 +413,9 @@ components:
         or to a term which is a subclass of the QEdge specified term.
       properties:
         predicate:
-          oneOf:
-            - $ref: '#/components/schemas/BiolinkPredicate'
-            - type: array
-              items:
-                $ref: '#/components/schemas/BiolinkPredicate'
+          type: array
+          items:
+            $ref: '#/components/schemas/BiolinkPredicate'
           nullable: true
         relation:
           type: string
@@ -464,11 +458,9 @@ components:
           description: Formal name of the entity
           nullable: true
         category:
-          oneOf:
-            - $ref: '#/components/schemas/BiolinkEntity'
-            - type: array
-              items:
-                $ref: '#/components/schemas/BiolinkEntity'
+          type: array
+          items:
+            $ref: '#/components/schemas/BiolinkEntity'
           nullable: true
         attributes:
           type: array
