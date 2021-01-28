@@ -16,8 +16,8 @@ info:
       description: >-
         The values for component and team are restricted according to this
         external JSON schema
-      url: 'https://github.com/NCATSTranslator/translator_extensions/blob/\
-        main/x-translator/smartapi_x-translator_schema.json'
+      url: https://github.com/NCATSTranslator/translator_extensions/blob/\
+        main/x-translator/smartapi_x-translator_schema.json
 servers:
   - url: INSERT-URL-HERE
     description: INSERT-SERVER-DESCRIPTION-HERE
