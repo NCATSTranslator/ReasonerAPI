@@ -71,7 +71,6 @@ paths:
         - query
       summary: Query reasoner via one of several inputs
       description: ''
-      operationId: query
       requestBody:
         description: Query information to be submitted
         required: true
