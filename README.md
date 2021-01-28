@@ -4,7 +4,7 @@
 
 The Translator Reasoner API (TRAPI) defines a standard HTTP API for communicating biomedical questions and answers. It leverages the [Biolink model](https://github.com/biolink/biolink-model/) to precisely describe the semantics of biological entities and relationships. TRAPI's graph-based query-knowledge-binding structure enables expressive yet concise description of biomedical questions and answers.
 
-TRAPI is described primarily by an [OpenAPI](https://github.com/OAI/OpenAPI-Specification) document [here](../TranslatorReasonerAPI.yaml). The request/response structure is also documented in a more human-readable form [here](reference.md).
+TRAPI is described primarily by an [OpenAPI](https://github.com/OAI/OpenAPI-Specification) document [here](TranslatorReasonerAPI.yaml). The request/response structure is also documented in a more human-readable form [here](docs/reference.md).
 
 ## Example
 
@@ -123,4 +123,4 @@ These messages form the backbone of TRAPI. They are transmitted between clients 
 
 ## Contributing
 
-TRAPI is developed by The [Biomedical Data Translator](https://ncats.nih.gov/translator) Consortium. Consortium members and external contributors are encouraged to submit issues and pull requests. See the [development policies](../Policies.md) for guidelines on branches and versioning.
+TRAPI is developed by The [Biomedical Data Translator](https://ncats.nih.gov/translator) Consortium. Consortium members and external contributors are encouraged to submit issues and pull requests. See the [development policies](Policies.md) for guidelines on branches and versioning.
