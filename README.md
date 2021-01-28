@@ -120,3 +120,7 @@ These messages form the backbone of TRAPI. They are transmitted between clients 
     "other information": ...
 }
 ```
+
+## Contributing
+
+TRAPI is developed by The [Biomedical Data Translator](https://ncats.nih.gov/translator) Consortium. Consortium members and external contributors are encouraged to submit issues and pull requests. See the [development policies](../Policies.md) for guidelines on branches and versioning.
