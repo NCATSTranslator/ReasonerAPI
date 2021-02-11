@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   description: OpenAPI for NCATS Biomedical Translator Reasoners
-  version: 1.0.3
+  version: 1.1.0
   title: OpenAPI for NCATS Biomedical Translator Reasoners
   contact:
     email: edeutsch@systemsbiology.org
@@ -374,14 +374,14 @@ components:
         query. If a CURIE is not specified, any nodes matching the category
         of the QNode will be returned in the Results.
       properties:
-        id:
+        ids:
           type: array
           items:
             $ref: '#/components/schemas/CURIE'
           example: [OMIM:603903]
           description: CURIE identifier for this node
           nullable: true
-        category:
+        categories:
           type: array
           items:
             $ref: '#/components/schemas/BiolinkEntity'
@@ -412,7 +412,7 @@ components:
         an exact match to the given QEdge predicate or relation term ('class'),
         or to a term which is a subclass of the QEdge specified term.
       properties:
-        predicate:
+        predicates:
           type: array
           items:
             $ref: '#/components/schemas/BiolinkPredicate'
@@ -457,7 +457,7 @@ components:
           example: Haptoglobin
           description: Formal name of the entity
           nullable: true
-        category:
+        categories:
           type: array
           items:
             $ref: '#/components/schemas/BiolinkEntity'
