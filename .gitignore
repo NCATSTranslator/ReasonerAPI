@@ -2,3 +2,5 @@
 __pycache__
 # PyCharms IDE metadata
 .idea/
+venv/
+.DS_Store
