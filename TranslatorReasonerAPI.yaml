@@ -217,13 +217,8 @@ components:
           example: '2020-09-03T18:13:49+00:00'
           nullable: true
         level:
-          type: string
-          description: Logging level
-          enum:
-            - ERROR
-            - WARNING
-            - INFO
-            - DEBUG
+          allOf:
+            - $ref: '#/components/schemas/LogLevel'
           nullable: true
         code:
           type: string
@@ -236,6 +231,14 @@ components:
           description: A human-readable log message
           nullable: true
       additionalProperties: true
+    LogLevel:
+      type: string
+      description: Logging level
+      enum:
+        - ERROR
+        - WARNING
+        - INFO
+        - DEBUG
     Result:
       type: object
       description: >-
