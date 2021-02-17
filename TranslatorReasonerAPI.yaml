@@ -123,6 +123,11 @@ components:
             example, the fill operation requires a non-empty query_graph field
             as part of the Message, whereas other operations, e.g. overlay,
             require non-empty results and knowledge_graph fields.
+        log_level:
+          description: The least critical level of logs to return
+          allOf:
+            - $ref: '#/components/schemas/LogLevel'
+          nullable: true
       additionalProperties: true
       required:
         - message
