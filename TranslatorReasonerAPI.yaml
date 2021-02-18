@@ -58,11 +58,11 @@ paths:
     get:
       tags:
         - knowledge_map
-      summary: Knowledge-map representation of this knowledge source.
+      summary: Knowledge-map representation of this TRAPI web service.
       responses:
         '200':
           description: >-
-            Returns knowledge-map representation of this knowledge source.
+            Returns knowledge-map representation of this TRAPI web service.
           content:
             application/json:
               schema:
@@ -438,39 +438,40 @@ components:
         url: https://www.w3.org/TR/2010/NOTE-curie-20101216/
     KnowledgeMap:
       type: object
+      description: >-
+        Knowledge-map representation of this TRAPI web service.
       properties:
         nodes:
           type: object
           description: >-
-            List of semantic types provided by this knowledge source.
+            Collection of node categories provided by this TRAPI web service,
+            indexed by Biolink class CURIEs.
           additionalProperties:
             $ref: '#/components/schemas/KMNode'
         edges:
           type: array
           description: >-
-            List of edges provided by this knowledge source.
+            List of edges/predicates provided by this TRAPI web service.
           items:
             $ref: '#/components/schemas/KMEdge'
-      description: >-
-        Knowledge-map representation of this knowledge source.
     KMNode:
       type: object
       description: >-
-        Description of semantic types provided by this knowledge source.
+        Description of a node category provided by this TRAPI web service.
       properties:
         id_prefixes:
           type: array
           description: >-
-            List of CURIE prefixes that this knowledge source understands and
-            accepts on the input.
+            List of CURIE prefixes for the node category that this TRAPI web
+            service understands and accepts on the input.
           items:
             type: string
           example: ['ChEMBL:', 'inchikey:']
         count:
           type: integer
           description: >-
-            Total number of node instances known to this knowledge source,
-            -1 if the number is not known
+            Total number of node instances of this node category known to this
+            TRAPI web service, or -1 if the number is not known.
         count_by_source:
           type: object
           description: >-
@@ -486,17 +487,23 @@ components:
       type: object
       description: >-
         Edge in a knowledge map describing relationship between a subject
-        and an object.
+        Biolink class and an object Biolink class.
       properties:
         subject:
-          type: string
-          example: ChemicalSubstance
+          type: BiolinkEntity
+          description: >-
+            Subject node category of this relationship edge.
+          example: biolink:ChemicalSubstance
         predicate:
-          type: string
-          example: affects
+          type: BiolinkRelation
+          description: >-
+            Biolink relationship between the subject and object categories.
+          example: biolink:affects
         object:
-          type: string
-          example: Protein
+          type: BiolinkEntity
+          description: >-
+            Object node category of this relationship edge.
+          example: biolink:Protein
         relations:
           type: array
           description: >-
@@ -507,12 +514,13 @@ components:
         count:
           type: integer
           description: >-
-            Total number of edge instances known to this knowledge source,
-            -1 if the number is not known.
+            Total number of edge instances of this (subject, predicate,
+            object) triple known to this TRAPI web service, or -1 if the 
+            number is not known.
         count_by_source:
           type: object
           description: >-
-            Number of edge instances by their source
+            Number of edge instances by their source.
           additionalProperties:
             type: integer
           example:
