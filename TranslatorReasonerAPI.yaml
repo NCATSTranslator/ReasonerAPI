@@ -402,7 +402,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CURIE'
-          example: ['OMIM:603903']
+          example: [OMIM:603903]
           description: CURIE identifier for this node
           nullable: true
         categories:
