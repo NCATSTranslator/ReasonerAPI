@@ -123,6 +123,9 @@ components:
             example, the fill operation requires a non-empty query_graph field
             as part of the Message, whereas other operations, e.g. overlay,
             require non-empty results and knowledge_graph fields.
+        workflow:
+          description: A specification of the workflow to be applied.
+          $ref: 'http://standards.ncats.io/workflow.json'
       additionalProperties: true
       required:
         - message
@@ -160,6 +163,9 @@ components:
           items:
             $ref: '#/components/schemas/LogEntry'
           nullable: true
+        workflow:
+          description: A specification of the applied workflow.
+          $ref: 'http://standards.ncats.io/workflow.json'
       additionalProperties: true
       required:
         - message
