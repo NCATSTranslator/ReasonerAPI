@@ -122,13 +122,9 @@ components:
             example, the fill operation requires a non-empty query_graph field
             as part of the Message, whereas other operations, e.g. overlay,
             require non-empty results and knowledge_graph fields.
-        operations:
-          description: >-
-            Container for one or more Message objects or identifiers for one or
-            more Messages along with a processing plan and options for how
-            those messages should be processed and returned
-          allOf:
-            - $ref: '#/components/schemas/Operations'
+        workflow:
+          description: A specification of the workflow to be applied.
+          $ref: 'http://standards.ncats.io/workflow.json'
       additionalProperties: true
       required:
         - message
@@ -166,13 +162,9 @@ components:
           items:
             $ref: '#/components/schemas/LogEntry'
           nullable: true
-        operations:
-          description: >-
-            Container for one or more Message objects or identifiers for one or
-            more Messages along with the processing plan and options for how
-            those messages were processed and returned
-          allOf:
-            - $ref: '#/components/schemas/Operations'
+        workflow:
+          description: A specification of the applied workflow.
+          $ref: 'http://standards.ncats.io/workflow.json'
       additionalProperties: true
       required:
         - message
@@ -600,44 +592,3 @@ components:
         URI.
       externalDocs:
         url: https://www.w3.org/TR/2010/NOTE-curie-20101216/
-    Operations:
-      type: object
-      description: >-
-        Container for one or more Message objects or identifiers for one or
-        more Messages along with a processing plan and options for how those
-        messages should be processed and returned
-      properties:
-        message_uris:
-          type: array
-          example:
-            - https://arax.ncats.io/api/arax/v1.0/response/38
-          description: >-
-            List of URIs for Message or Response objects to fetch and process
-          items:
-            type: string
-        messages:
-          type: array
-          description: List of Message objects to process
-          items:
-            $ref: '#/components/schemas/Message'
-        actions:
-          type: array
-          example:
-            - add_qnode(name=acetaminophen, key=n00)
-            - add_qnode(category=biolink:Protein, key=n01)
-            - add_qedge(subject=n01, object=n00, key=e00)
-            - expand(edge_key=e00)
-            - resultify()
-            - filter_results(action=limit_number_of_results, max_results=10)
-          description: >-
-            List of order-dependent operations to execute
-          items:
-            type: string
-        options:
-          type: object
-          example:
-            halt_on_warning: false
-          description: >-
-            Map of order independent options that apply during processing
-          additionalProperties: true
-      additionalProperties: true
