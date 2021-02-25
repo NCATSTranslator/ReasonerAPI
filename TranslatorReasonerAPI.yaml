@@ -642,7 +642,7 @@ components:
             service understands and accepts on the input.
           items:
             type: string
-          example: ['CHEMBL.COMPOUND', 'INCHIKEY']
+          example: [CHEMBL.COMPOUND, INCHIKEY]
         count:
           type: integer
           description: >-
