@@ -623,7 +623,7 @@ components:
             service understands and accepts on the input.
           items:
             type: string
-          example: ['ChEMBL:', 'inchikey:']
+          example: ['CHEMBL.COMPOUND', 'INCHIKEY']
         count:
           type: integer
           description: >-
