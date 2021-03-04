@@ -685,19 +685,6 @@ components:
           items:
             type: string
           example: [CHEMBL.COMPOUND, INCHIKEY]
-        count:
-          type: integer
-          description: >-
-            Total number of node instances of this node category known to this
-            TRAPI web service, or -1 if the number is not known.
-        count_by_source:
-          type: object
-          description: >-
-            Number of node instances by their source
-          additionalProperties:
-            type: integer
-          example:
-            ChEMBL: 1234
       required:
         - id_prefixes
       additionalProperties: false
@@ -729,20 +716,6 @@ components:
           items:
             type: string
           example: [inhibits, activates]
-        count:
-          type: integer
-          description: >-
-            Total number of edge instances of this (subject, predicate,
-            object) triple known to this TRAPI web service, or -1 if the
-            number is not known.
-        count_by_source:
-          type: object
-          description: >-
-            Number of edge instances by their source.
-          additionalProperties:
-            type: integer
-          example:
-            ChEMBL: 1234
       required:
         - subject
         - predicate
