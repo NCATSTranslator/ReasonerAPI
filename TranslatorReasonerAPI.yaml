@@ -612,6 +612,7 @@ components:
             List of edges/predicates provided by this TRAPI web service.
           items:
             $ref: '#/components/schemas/KMEdge'
+          minItems: 1
     KMNode:
       type: object
       description: >-
@@ -624,6 +625,7 @@ components:
             service understands and accepts on the input.
           items:
             type: string
+          minItems: 1
           example: [CHEMBL.COMPOUND, INCHIKEY]
       required:
         - id_prefixes
