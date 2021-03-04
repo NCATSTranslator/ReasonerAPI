@@ -74,7 +74,8 @@ paths:
       responses:
         '200':
           description: >-
-            Returns meta knowledge graph representation of this TRAPI web service.
+            Returns meta knowledge graph representation of this TRAPI web 
+            service.
           content:
             application/json:
               schema:
