@@ -66,19 +66,19 @@ paths:
                     'biolink:Gene':
                       - biolink:directly_interacts_with
                       - biolink:decreases_activity_of
-  /knowledge_map:
+  /meta_knowledge_graph:
     get:
       tags:
-        - knowledge_map
-      summary: Knowledge-map representation of this TRAPI web service.
+        - meta_knowledge_graph
+      summary: Meta knowledge graph representation of this TRAPI web service.
       responses:
         '200':
           description: >-
-            Returns knowledge-map representation of this TRAPI web service.
+            Returns meta knowledge graph representation of this TRAPI web service.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/KnowledgeMap'
+                $ref: '#/components/schemas/MetaKnowledgeGraph'
   /query:
     post:
       tags:
@@ -806,7 +806,7 @@ components:
         URI.
       externalDocs:
         url: https://www.w3.org/TR/2010/NOTE-curie-20101216/
-    KnowledgeMap:
+    MetaKnowledgeGraph:
       type: object
       description: >-
         Knowledge-map representation of this TRAPI web service.
@@ -856,7 +856,7 @@ components:
     KMEdge:
       type: object
       description: >-
-        Edge in a knowledge map describing relationship between a subject
+        Edge in a meta knowledge map describing relationship between a subject
         Biolink class and an object Biolink class.
       properties:
         subject:
