@@ -665,15 +665,15 @@ components:
             Collection of node categories provided by this TRAPI web service,
             indexed by Biolink class CURIEs.
           additionalProperties:
-            $ref: '#/components/schemas/KMNode'
+            $ref: '#/components/schemas/MetaNode'
         edges:
           type: array
           description: >-
             List of edges/predicates provided by this TRAPI web service.
           items:
-            $ref: '#/components/schemas/KMEdge'
+            $ref: '#/components/schemas/MetaEdge'
           minItems: 1
-    KMNode:
+    MetaNode:
       type: object
       description: >-
         Description of a node category provided by this TRAPI web service.
@@ -690,7 +690,7 @@ components:
       required:
         - id_prefixes
       additionalProperties: false
-    KMEdge:
+    MetaEdge:
       type: object
       description: >-
         Edge in a meta knowledge map describing relationship between a subject
