@@ -7,7 +7,7 @@ After initial formation - roster should be maintained at the consortium level Tr
 |Casey Ta|Connections Hypothesis Provider|Voting Member|ct2865@columbia.edu
 |Bill Baumgartner|Text Mining Provider|Voting Member|william.baumgartner@cuanshutz.edu
 |Will Byrd|Unsecret Agent|Voting Member|webyrd@uab.edu
-|Richard Bruskiewich|SRI|Proxy|richard.bruskiewich@delphinai.com
+|Richard Bruskiewich|SRI|Voting Member|richard.bruskiewich@delphinai.com
 |Patrick Wang|Ranking Agent|Voting Member|patrick@covar.com
 |Ryan Roper|Multiomics Provider|Voting Member|ryan.roper@isbscience.org
 |Marc Duby|Genetics Provider|Voting Member|mduby@broadinstitute.org
@@ -16,7 +16,7 @@ After initial formation - roster should be maintained at the consortium level Tr
 |Steve Cox|SRI|Voting Member|scox@renci.org
 |Chase Yakaboski|Connection Hypothesis Provider|Voting Member|chase.a.yakaboski.th@dartmouth.edu
 |Andrew Su|Exploring Agent|Voting Member|asu@scripps.edu
-|Brett Smith|(im)Prove Agent|Committee Chair|brett.smith@isbscience.org
+|Brett Smith|(im)Prove Agent|Voting Member|brett.smith@isbscience.org
 |Tom Zisk|(Im)Explanatory Agent|Voting Member|tz@iomics.us
 |Kent Shefchek|SRI|Voting Member|shefchek@oregonstate.edu
 |Shawn O’Neil|SRI|Voting Member|oneils@oregonstate.edu
