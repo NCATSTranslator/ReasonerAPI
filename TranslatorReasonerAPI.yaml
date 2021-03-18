@@ -210,6 +210,85 @@ components:
           items:
             $ref: '#/components/schemas/LogEntry'
           nullable: true
+        message_id:
+          type: string
+          example: https://arax.ncats.io/api/rtx/v1/message/123
+          description: URI for this message
+        reasoner_id:
+          type: string
+          example: reasoner
+          description: >-
+            Identifier string of the reasoner that provided this message
+            (one of ARAX, Robokop, etc.)
+        tool_version:
+          type: string
+          example: ARAX 0.6.1
+          description: Version label of the tool that generated this message
+        schema_version:
+          type: string
+          example: 0.9.0
+          description: Version label of this JSON-LD schema
+        datetime:
+          type: string
+          example: '2018-01-09 12:34:45'
+          description: >-
+            Datetime string for the time that this message was generated
+        table_column_names:
+          type: array
+          example:
+            - chemical_substance.name
+            - chemical_substance.id
+          description: >-
+            List of column names that corresponds to the row_data for
+            each result
+          items:
+            type: string
+        original_question:
+          type: string
+          example: what proteins are affected by sickle cell anemia
+          description: The original question text typed in by the user
+        restated_question:
+          type: string
+          example: Which proteins are affected by sickle cell anemia?
+          description: >-
+            A precise restatement of the question, as understood by the
+            Translator, for which the answer applies. The user should verify
+            that the restated question matches the intent of their original
+            question (it might not).
+        query_type_id:
+          type: string
+          example: Q2
+          description: >-
+            The query type id if one is known for the query/message
+            (as defined in a shared manner)
+        terms:
+          type: object
+          description: Dict of terms needed by the specific query type
+          properties:
+            disease:
+              type: string
+              example: malaria
+            protein:
+              type: string
+              example: P12345
+            anatomical_entity:
+              type: string
+              example: liver
+            chemical_substance:
+              type: string
+              example: ibuprofen
+            metabolite:
+              type: string
+              example: ibuprofen
+          additionalProperties: true
+        query_options:
+          type: object
+          example:
+            coalesce: true
+            threshold: 0.9
+          description: >-
+            Dict of options that can be sent with the query. Options are tool
+            specific and not stipulated here
       additionalProperties: true
       required:
         - message
