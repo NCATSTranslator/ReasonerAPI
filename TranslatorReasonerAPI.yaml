@@ -403,6 +403,87 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/EdgeBinding'
+        id:
+          type: string
+          example: https://arax.ncats.io/api/rtx/v1/result/234
+          description: URI for this message
+        description:
+          type: string
+          example: >-
+            The genetic condition sickle cell anemia may provide protection
+            from cerebral malaria via genetic alterations of proteins HBB
+            (P68871) and HMOX1 (P09601).
+          description: >-
+            A free text description of this result answer from the reasoner
+        essence:
+          type: string
+          example: ibuprofen
+          description: >-
+            A single string that is the terse essence of the result (useful for
+            simple answers)
+        essence_type:
+          type: string
+          example: drug
+          description: A Translator bioentity type of the essence
+        row_data:
+          type: array
+          example:
+            - ibuprofen
+            - CHEMBL:CHEMBL521
+          description: >-
+            An arbitrary list of values that captures the essence of the result
+            that can be turned into a tabular result across all answers (each
+            result is a row) for a user that wants tabular output
+          items:
+            type: string
+        score:
+          type: number
+          format: float
+          example: 163.233
+          description: Any type of score associated with this result
+        score_name:
+          type: string
+          example: Jaccard distance
+          description: Name for the score
+        score_direction:
+          type: string
+          example: lower_is_better
+          description: >-
+            Sorting indicator for the score: one of higher_is_better or
+            lower_is_better
+        confidence:
+          type: number
+          format: float
+          example: 0.9234
+          description: >-
+            Confidence metric for this result, a value between (inclusive)
+             0.0 (no confidence) and 1.0 (highest confidence)
+        result_type:
+          type: string
+          example: individual query answer
+          description: >-
+            One of several possible result types: 'individual query answer',
+            'neighborhood graph', 'type summary graph'
+        result_group:
+          type: integer
+          example: 1
+          description: >-
+            An integer group number for results for use in cases where several
+            results should be grouped together. Also useful to control sorting
+            ascending.
+        result_group_similarity_score:
+          type: number
+          format: float
+          example: 0.95
+          description: >-
+            A score that denotes the similarity of this result to other members
+            of the result_group
+        reasoner_id:
+          type: string
+          example: RTX
+          description: >-
+            Identifier string of the reasoner that provided this result (e.g.,
+            RTX, Robokop, Indigo, Integrator)
       additionalProperties: true
       required:
         - node_bindings
