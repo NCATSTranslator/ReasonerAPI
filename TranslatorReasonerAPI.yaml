@@ -427,20 +427,20 @@ components:
           default: false
         additionalProperties:
           oneOf:
-          - $ref: '#/components/schemas/PropertyConstraint'
-          - type: array
-            items:
-              $ref: '#/components/schemas/PropertyConstraint'
+            - $ref: '#/components/schemas/PropertyConstraint'
+            - type: array
+              items:
+                $ref: '#/components/schemas/PropertyConstraint'
     PropertyConstraint:
       description: Additional property constraint
       oneOf:
         - description: >-
             Simple property constraint using an implicit equal_to operator
           oneOf:
-          - type: boolean
-          - type: integer
-          - type: number
-          - type: string
+            - type: boolean
+            - type: integer
+            - type: number
+            - type: string
         - description: (In)equality property constraint
           type: object
           properties:
