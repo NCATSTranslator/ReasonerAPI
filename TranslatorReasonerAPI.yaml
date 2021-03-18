@@ -28,6 +28,16 @@ tags:
       url: INSERT-URL-HERE-OR-REMOVE-EXTERNALDOCS-IF-NA
   - name: translator
   - name: reasoner
+  - name: message
+    description: Request stored messages and feedback for messages
+    externalDocs:
+      description: Documentation for the reasoner message function
+      url: https://reasonerhost.ncats.io/overview.html#message
+  - name: result
+    description: Request stored results and feedback for results
+    externalDocs:
+      description: Documentation for the reasoner result function
+      url: http://reasonerhost.ncats.io/overview.html#result
 paths:
   /predicates:
     get:
