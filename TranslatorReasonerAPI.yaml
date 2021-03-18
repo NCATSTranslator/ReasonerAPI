@@ -440,13 +440,13 @@ components:
             operator:
               type: string
               enum:
-                - '='
+                - ==
                 - <>
                 - '>'
                 - <
                 - '>='
                 - <=
-              default: '='
+              default: ==
             value:
               type: number
           required:
