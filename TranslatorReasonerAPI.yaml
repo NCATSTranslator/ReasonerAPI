@@ -426,7 +426,11 @@ components:
             each n1 must be connected to at least one n2.
           default: false
         additionalProperties:
-          $ref: '#/components/schemas/PropertyConstraint'
+          oneOf:
+          - $ref: '#/components/schemas/PropertyConstraint'
+          - type: array
+            items:
+              $ref: '#/components/schemas/PropertyConstraint'
     PropertyConstraint:
       description: Additional property constraint
       oneOf:
