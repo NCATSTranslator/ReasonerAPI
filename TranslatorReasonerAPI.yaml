@@ -441,7 +441,7 @@ components:
           - type: integer
           - type: number
           - type: string
-        - description: Numerical property constraint
+        - description: (In)equality property constraint
           type: object
           properties:
             operator:
@@ -458,7 +458,7 @@ components:
               type: number
           required:
             - value
-        - description: One-of property constraint
+        - description: In-range property constraint
           type: object
           properties:
             operator:
@@ -468,8 +468,9 @@ components:
             values:
               type: array
               items:
-                not:
-                  type: object
+                type: number
+              minItems: 2
+              maxItems: 2
           required:
             - operator
             - values
