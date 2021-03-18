@@ -436,8 +436,11 @@ components:
       oneOf:
         - description: >-
             Simple property constraint using an implicit equal_to operator
-          not:
-            type: object
+          oneOf:
+          - type: boolean
+          - type: integer
+          - type: number
+          - type: string
         - description: Numerical property constraint
           type: object
           properties:
