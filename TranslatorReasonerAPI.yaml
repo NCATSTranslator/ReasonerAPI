@@ -508,65 +508,58 @@ components:
     Attribute:
       type: object
       description: >-
-        Generic attribute for a node or an edge that expands key-value pair
-        concept by including attribute and value types of this attribute from
-        suitable ontology, a source of this attribute, and (optionally) a url
-        with additional information about the attribute value (e.g. a full
-        internet page defining a complex data value, e.g. a Pubmed entry).
-        Here we distinguish between the characteristics of the value of an
-        attribute (value_type and value_type_name) versus the context of
-        usage, interpretation or role of a given value in the system
-        (i.e. using an identifier of a person as a source for evidence,
-        as a data curator,as a publication author, etc.)
+        Generic attribute for a node or an edge that expands the key-value pair
+        concept by including fields for additional metadata. These fields can be 
+        used to describe the source of the statement made in key-value pair of the 
+        attribute object, or describe the attribute's value itself - including its 
+        semantic type, or a url providing additional information about it. 
       properties:
         attribute_type_id:
           $ref: '#/components/schemas/CURIE'
           description: >-
-            CURIE of the ontology term defining the attribute. For properties
-            defined by the Biolink model this should be a Biolink CURIE.
-            For evidence provenance confidence properties defined by the
-            SEPIO model, this should generally be a SEPIO CURIE.
-          example: SEPIO:0000130
-        attribute_from_source:
+            The 'key' of the attribute object, holding a CURIE of an ontology property 
+            defining the attribute (preferrably the CURIE of a Biolink association slot). 
+            This property captures the relationship asserted to hold between the value 
+            of the attribute, and the node or edge from  which it hangs. For example, 
+            that a value of '0.000153' represents a p-value supporting an edge, or that
+            a value of 'ChEMBL' represents the original source of the knowlege expressed 
+            in the edge.
+          example: Biolink:has_p-value_evidence, Biolink:has_original_source
+        original_attribute_name:
           type: string
           description: >-
-            Attribute term as defined by the source defining the attribute.
-            The data type is 'string' but the contents of the field could
-            also be a CURIE of a third party ontology term.
-          example: Assertion Authored By
+            The term used by the original source of an attribute to describe the meaning or
+            significance of the value it captures. This may be a column name in a source tsv
+            file, or a key in a source json document for the field in the data that held the 
+            attribute's value. Capturing this information  where possible lets us preserve what 
+            the original source said. Note that the data type is string' but the contents of
+            the field could also be a CURIE of a third party ontology term.
+          example: p-value
           nullable: true
         value:
-          example: 32529952
           description: >-
             Value of the attribute. May be any data type, including a list.
+          example: 0.000153
         value_type_id:
           $ref: '#/components/schemas/CURIE'
           description: >-
-            CURIE of the semantic type of the attribute value. ,
-            otherwise, if possible, from the EDAM ontology. If a suitable
-            identifier does not exist, enter a descriptive phrase here and
-            submit the new type for consideration by the appropriate
+            CURIE describing the semantic type of an  attribute's value. Use a Biolink class if possible, 
+            otherwise a term from an external ontology. If a suitable CURIE/identifier does not exist, 
+            enter a descriptive phrase here and submit the new type for consideration by the appropriate
             authority.
           example: EDAM:data_1187
-        value_type_from_source:
-          $ref: '#/components/schemas/CURIE'
-          description: >-
-            Semantic type of the attribute value as defined by the source
-            defining the attribute. The data type is 'string' but the contents
-            of the field could also be a CURIE of a third party ontology term.
-          example: p value
-          nullable: true
-        value_source:
+        attribute_source:
           type: string
           description: >-
-            Source of the attribute value, preferably as a CURIE namespace.
+            The source of the core assertion madeby the key-value pair of an attribute object. Use a CURIE 
+            or namespace designator for this resource where possible.
           example: UniProtKB
           nullable: true
         value_url:
           type: string
           description: >-
-            Human-consumable URL to link out and provide additional information
-            about the attribute value (not the node or the edge).
+            Human-consumable URL linking to a web document that provides additional information
+            about an  attribute's value (not the node or the edge fom which it hangs).
           example: https://pubmed.ncbi.nlm.nih.gov/32529952
           nullable: true
         description:
@@ -578,7 +571,6 @@ components:
       required:
         - attribute_type_id
         - value
-        - value_type
       additionalProperties: false
     Edge:
       type: object
