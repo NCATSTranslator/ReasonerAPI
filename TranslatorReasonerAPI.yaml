@@ -4,7 +4,7 @@ info:
   version: INSERT-VERSION-OF-YOUR-SERVICE-HERE
     title: INSERT-TITLE-OF-YOUR-SERVICE-HERE
   contact:
-    email: INSERT-EMAIL-ADDRESS-OF-IMPLEMENTER-HERE
+    email: INSERT@EMAIL-ADDRESS-OF-IMPLEMENTER-HERE.ORG
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
