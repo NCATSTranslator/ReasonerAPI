@@ -1,10 +1,10 @@
 openapi: 3.0.1
 info:
-  description: OpenAPI for NCATS Biomedical Translator Reasoners
+  description: INSERT-DESCRIPTION-OF-YOUR-SERVICE-HERE
   version: INSERT-VERSION-OF-YOUR-SERVICE-HERE
-  title: OpenAPI for NCATS Biomedical Translator Reasoners
+    title: INSERT-TITLE-OF-YOUR-SERVICE-HERE
   contact:
-    email: edeutsch@systemsbiology.org
+    email: INSERT-EMAIL-ADDRESS-OF-IMPLEMENTER-HERE
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
