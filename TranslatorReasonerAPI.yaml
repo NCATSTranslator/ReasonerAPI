@@ -403,7 +403,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CURIE'
-          example: [OMIM:603903]
+          example: [ 'OMIM:603903' ]
           description: CURIE identifier for this node
           nullable: true
         categories:
@@ -713,7 +713,8 @@ components:
           example: molecular mass
           nullable: false
         id:
-          $ref: '#/components/schemas/CURIE'
+          allOf:
+            - $ref: '#/components/schemas/CURIE'
           description: >-
             CURIE of the concept being constrained. For properties
             defined by the Biolink model this should be a biolink CURIE,
@@ -746,4 +747,4 @@ components:
         - id
         - operator
         - value
-    additionalProperties: false
+      additionalProperties: false
