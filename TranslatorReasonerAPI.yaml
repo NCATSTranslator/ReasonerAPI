@@ -20,7 +20,7 @@ info:
         The values for component and team are restricted according to this
         external JSON schema
       url: https://github.com/NCATSTranslator/translator_extensions/blob/\
-        main/x-translator/smartapi_x-translator_schema.jsonexternalDocs:
+        main/x-translator/smartapi_x-translator_schema.json
 externalDocs:
   description: >-
     Documentation for the NCATS Biomedical Translator Reasoners web services
