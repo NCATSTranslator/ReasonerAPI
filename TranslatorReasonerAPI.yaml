@@ -19,7 +19,7 @@ info:
         The values for component and team are restricted according to this
         external JSON schema. See schema and examples at url
       url: https://github.com/NCATSTranslator/translator_extensions/blob/\
-        production/x-translator/
+        main/x-translator/smartapi_x-translator_schema.json
   x-trapi:
     version: INSERT-TRAPI-VERSION-HERE
     externalDocs:
