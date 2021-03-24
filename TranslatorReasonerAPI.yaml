@@ -425,12 +425,12 @@ components:
             with is_set=True is connected to a QNode (n2) with is_set=True,
             each n1 must be connected to at least one n2.
           default: false
-        additionalProperties:
-          oneOf:
-            - $ref: '#/components/schemas/PropertyConstraint'
-            - type: array
-              items:
-                $ref: '#/components/schemas/PropertyConstraint'
+      additionalProperties:
+        oneOf:
+          - $ref: '#/components/schemas/PropertyConstraint'
+          - type: array
+            items:
+              $ref: '#/components/schemas/PropertyConstraint'
     PropertyConstraint:
       description: Additional property constraint
       oneOf:
