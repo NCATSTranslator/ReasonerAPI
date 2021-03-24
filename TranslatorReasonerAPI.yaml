@@ -425,6 +425,15 @@ components:
             with is_set=True is connected to a QNode (n2) with is_set=True,
             each n1 must be connected to at least one n2.
           default: false
+        constraints:
+          type: array
+          description: >-
+            A list of contraints applied to a query node.
+            If there are multiple items, they must all be true (equivalent
+            to AND)
+          items:
+            $ref: '#/components/schemas/QueryConstraint'
+          nullable: true
       additionalProperties: true
     QEdge:
       type: object
@@ -466,6 +475,15 @@ components:
             Corresponds to the map key identifier of the
             object concept node anchoring the query filter
             pattern for the query relationship edge.
+        constraints:
+          type: array
+          description: >-
+            A list of contraints applied to a query edge.
+            If there are multiple items, they must all be true (equivalent
+            to AND)
+          items:
+            $ref: '#/components/schemas/QueryConstraint'
+          nullable: true
       additionalProperties: true
       required:
         - subject
@@ -682,3 +700,50 @@ components:
         - predicate
         - object
       additionalProperties: false
+    QueryConstraint:
+      type: object
+      description: >-
+        Generic query constraint for a query node or query edge
+      properties:
+        name:
+          type: string
+          description: >-
+            Human-readable name or label for the constraint. If appropriate,
+            it should be the name of the semantic type term.
+          example: molecular mass
+          nullable: false
+        id:
+          $ref: '#/components/schemas/CURIE'
+          description: >-
+            CURIE of the concept being constrained. For properties
+            defined by the Biolink model this should be a biolink CURIE,
+            otherwise, if possible, from the EDAM ontology. If a suitable
+            identifier does not exist, enter a descriptive phrase here and
+            submit the new type for consideration by the appropriate
+            authority.
+          example: EDAM:data_0844
+          nullable: false
+        not:
+          type: boolean
+          default: false
+        operator:
+          type: string
+          enum:
+            - ==
+            - '>'
+            - <
+            - 'in'
+            - 'matches'
+          default: ==
+        value:
+          example: 57.0
+          description: >-
+            Value of the attribute. May be any data type, including a list.
+            If the value is a list and there are multiple items, at least one
+            must all be true (equivalent to OR)
+      required:
+        - name
+        - id
+        - operator
+        - value
+    additionalProperties: false
