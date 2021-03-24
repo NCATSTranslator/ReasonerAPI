@@ -732,8 +732,8 @@ components:
             - ==
             - '>'
             - <
-            - 'in'
-            - 'matches'
+            - in
+            - matches
           default: ==
         value:
           example: 57.0
