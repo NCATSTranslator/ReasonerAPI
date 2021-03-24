@@ -9,12 +9,11 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: INSERT-URL-HERE
-  x-trapi:
-    version: 1.1.0
   x-translator:
     component: INSERT-EITHER-ARA-OR-KP-OR-ARS-OR-Utility-HERE
     team:
       - INSERT-ONE-TRANSLATOR-TEAM-NAME-PER-ELEMENT-HERE
+    biolink_model_version: INSERT-BIOLINK-MODEL-VERSION-HERE
     externalDocs:
       description: >-
         The values for component and team are restricted according to this
