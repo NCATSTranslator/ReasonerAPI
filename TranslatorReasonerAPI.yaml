@@ -11,6 +11,16 @@ info:
   termsOfService: INSERT-URL-HERE
   x-trapi:
     version: 1.1.0
+  x-translator:
+    component: INSERT-EITHER-ARA-OR-KP-HERE
+    team: INSERT-TRANSLATOR-TEAM-NAME-HERE
+    biolink_model_version: INSERT-BIOLINK-MODEL-VERSION-HERE
+    externalDocs:
+      description: >-
+        The values for component and team are restricted according to this
+        external JSON schema
+      url: https://github.com/NCATSTranslator/translator_extensions/blob/\
+        main/x-translator/smartapi_x-translator_schema.jsonexternalDocs:
 externalDocs:
   description: >-
     Documentation for the NCATS Biomedical Translator Reasoners web services
