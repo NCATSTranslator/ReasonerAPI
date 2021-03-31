@@ -12,14 +12,23 @@ info:
   x-trapi:
     version: 1.1.0
   x-translator:
-    component: INSERT-EITHER-ARA-OR-KP-HERE
-    team: INSERT-TRANSLATOR-TEAM-NAME-HERE
+    component: INSERT-EITHER-ARA-OR-KP-OR-ARS-OR-Utility-HERE
+    team:
+      - INSERT-ONE-TRANSLATOR-TEAM-NAME-PER-ELEMENT-HERE
     externalDocs:
       description: >-
         The values for component and team are restricted according to this
-        external JSON schema
+        external JSON schema. See schema and examples at url
       url: https://github.com/NCATSTranslator/translator_extensions/blob/\
-        main/x-translator/smartapi_x-translator_schema.json
+        production/x-translator/
+  x-trapi:
+    version: INSERT-TRAPI-VERSION-HERE
+    externalDocs:
+      description: >-
+        The values for version are restricted according to the regex in
+        this external JSON schema. See schema and examples at url
+      url: https://github.com/NCATSTranslator/translator_extensions/blob/\
+        production/x-trapi/
 servers:
   - url: INSERT-URL-HERE
     description: INSERT-SERVER-DESCRIPTION-HERE
@@ -39,7 +48,9 @@ tags:
       description: Documentation for the reasoner query function
       url: INSERT-URL-HERE-OR-REMOVE-EXTERNALDOCS-IF-NA
   - name: translator
-  - name: reasoner
+    description: Required for SmartAPI validation of x-translator
+  - name: trapi
+    description: Required for SmartAPI validation of x-trapi
 paths:
   /predicates:
     get:
