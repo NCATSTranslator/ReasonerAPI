@@ -2,16 +2,14 @@
 
 This document described development and release policies for the Translator Reasoner API.
 
-## Repository branches
-- The repository has two primary branches, `master` and `extended`
-- The `master` branch contains the current core API schema, both in-development changes and tagged releases
-- The `extended` branch contains the current extended API schema, a definition of additional properties that are used and promoted by at least one team
+## Stable branches
+- The repository has two "stable" branches, `master` and `extended`
+- The `master` branch contains the latest stable version of the core API schema
+- The `extended` branch contains the latest stable extended API schema, a definition of additional properties that are used and promoted by at least one team
 
-## Version Numbering
-- After a tagged release, the very next commit to the `master` branch will receive an increment to the next minor version number with '-dev' appended
-  (e.g. 0.9.3-dev)
-- In the process of tagging a release, the version number shall be incremented again to the next minor version number or major version numbers as appropriate,
-  with no suffix (e.g. 0.9.4 or 1.0.0)
-- The `extended` branch shall maintain the same version number as the core
+## In-development branches
+- The repository may contain a number of branches for pre-release versions, e.g. `v1.1.x`
 
-
+## Version numbering
+- Each merge into master must include a version bump
+- The `extended` branch shall maintain the same version number as `master`
