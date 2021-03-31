@@ -578,7 +578,7 @@ components:
         attribute_source:
           type: string
           description: >-
-            The source of the core assertion madeby the key-value pair of an
+            The source of the core assertion made by the key-value pair of an
             attribute object. Use a CURIE or namespace designator for this
             resource where possible.
           example: UniProtKB
