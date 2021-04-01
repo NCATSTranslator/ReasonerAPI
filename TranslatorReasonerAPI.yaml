@@ -781,7 +781,7 @@ components:
             is exactly equal to, is greater than, and is less than,
             respectively. The 'matches' operator indicates that the value
             is a regular expression to be evaluated. If value is a list type,
-            then at least one evaluation must all be true (equivalent to OR).
+            then at least one evaluation must be true (equivalent to OR).
             This means that the == operator with a list acts like a SQL 'IN'
             clause. The 'not' property negates the operator such that not
             and == means 'not equal to' (or 'not in' for a list), and not >
@@ -798,8 +798,10 @@ components:
           description: >-
             Value of the attribute. May be any data type, including a list.
             If the value is a list and there are multiple items, at least one
-            must all be true (equivalent to OR). If value is a data type of
-            object, the keys of the object MAY be treated as a list.
+            comparison must be true (equivalent to OR). If 'value' is a data type
+            object, the keys of the object MAY be treated as a list. A 'list' data
+            type paired with the '>' or '<' operators will encode extraneous
+            comparisons, but this is permitted as it is in SQL and other languages.
         unit_id:
           example: UO:0000222
           description: >-
