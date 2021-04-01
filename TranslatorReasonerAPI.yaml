@@ -749,24 +749,26 @@ components:
       description: >-
         Generic query constraint for a query node or query edge
       properties:
-        name:
-          type: string
-          description: >-
-            Human-readable name or label for the constraint. If appropriate,
-            it should be the name of the CURIE in of the id.
-          example: molecular mass
-          nullable: false
         id:
           allOf:
             - $ref: '#/components/schemas/CURIE'
           description: >-
             CURIE of the concept being constrained. For properties
-            defined by the Biolink model this should be a biolink CURIE,
+            defined by the Biolink model this SHOULD be a biolink CURIE.
             otherwise, if possible, from the EDAM ontology. If a suitable
-            identifier does not exist, enter a descriptive phrase here and
+            CURIE does not exist, enter a descriptive phrase here and
             submit the new type for consideration by the appropriate
             authority.
           example: EDAM:data_0844
+          nullable: false
+        name:
+          type: string
+          description: >-
+            Human-readable name or label for the constraint concept.
+            If appropriate, it SHOULD be the term name of the CURIE used
+            as the 'id'. This is redundant but required for human
+            readability.
+          example: molecular mass
           nullable: false
         not:
           type: boolean
@@ -798,6 +800,21 @@ components:
             If the value is a list and there are multiple items, at least one
             must all be true (equivalent to OR). If value is a data type of
             object, the keys of the object MAY be treated as a list.
+        unit_id:
+          example: UO:0000222
+          description: >-
+            CURIE of the units of the value or list of values in the 'value'
+            property. The Units of Measurement Ontology (UO) should be used
+            if possible. The unit_id MUST be provided for (lists of)
+            numerical values that correspond to a quantity that has units.
+        unit_name:
+          example: kilodalton
+          description: >-
+            Term name that is associated with the CURIE of the units
+            of the value or list of values in the 'value'
+            property. The Units of Measurement Ontology (UO) SHOULD be used
+            if possible. This property SHOULD be provided if a unit_id is
+            provided. This is redundant but recommended for human readability.
       required:
         - name
         - id
