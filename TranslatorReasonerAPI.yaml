@@ -753,7 +753,7 @@ components:
           type: string
           description: >-
             Human-readable name or label for the constraint. If appropriate,
-            it should be the name of the semantic type term.
+            it should be the name of the CURIE in of the id.
           example: molecular mass
           nullable: false
         id:
@@ -773,11 +773,22 @@ components:
           default: false
         operator:
           type: string
+          description: >-
+            Relationship between the database value and the constraint value
+            for the specified id. The operators ==, >, and < mean
+            is exactly equal to, is greater than, and is less than,
+            respectively. The 'matches' operator indicates that the value
+            is a regular expression to be evaluated. If value is a list type,
+            then at least one evaluation must all be true (equivalent to OR).
+            This means that the == operator with a list acts like a SQL 'IN'
+            clause. The 'not' property negates the operator such that not
+            and == means 'not equal to' (or 'not in' for a list), and not >
+            means <=, and not < means >=, and not matches means does not
+            match.
           enum:
             - ==
             - '>'
             - <
-            - in
             - matches
           default: ==
         value:
@@ -785,7 +796,8 @@ components:
           description: >-
             Value of the attribute. May be any data type, including a list.
             If the value is a list and there are multiple items, at least one
-            must all be true (equivalent to OR)
+            must all be true (equivalent to OR). If value is a data type of
+            object, the keys of the object MAY be treated as a list.
       required:
         - name
         - id
