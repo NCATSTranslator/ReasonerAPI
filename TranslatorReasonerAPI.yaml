@@ -786,7 +786,8 @@ components:
             clause. The 'not' property negates the operator such that not
             and == means 'not equal to' (or 'not in' for a list), and not >
             means <=, and not < means >=, and not matches means does not
-            match.
+            match. The '==' operator SHOULD NOT be used in a manner that
+            describes an "is a" subclass relationship for the parent QNode.
           enum:
             - ==
             - '>'
