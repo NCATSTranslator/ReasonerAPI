@@ -1,0 +1,14 @@
+# Change Log TRAPI 1.0 -> 1.1
+- Many changes to "info" template at top. Please refresh to the latest template
+- info.version is now your API version not TRAPI version
+- x-trapi now contains the official TRAPI version
+- x-translator now contains mandatory metadata
+- Remove tag "reasoner". Add tag "trapi"
+- /predicates endpoint is marked deprecated
+- New /meta_knowledge_graph endpoint replaces /predicates endpoint. Note that counts are optional as defined in extended schema
+- log_level property in Query specifies desired logging level in Response
+- QNode.id pluralized to ids and changed from CURIE or array of CURIEs to just array of CURIEs with array length > 0
+- QNode.category pluralized to categories and changed from BiolinkEntity or array of BiolinkEntitys to just array of BiolinkEntitys with array length > 0
+- QNode.predicate pluralized to predicates and changed from BiolinkPredicate or array of BiolinkPredicates to just array of BiolinkPredicates with array length > 0
+- Attribute class extended and properties renamed
+- QNode.constraints and QEdge.constraints as array of Constraint added
