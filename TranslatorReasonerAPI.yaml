@@ -754,10 +754,11 @@ components:
           description: >-
             Value of the attribute. May be any data type, including a list.
             If the value is a list and there are multiple items, at least one
-            comparison must be true (equivalent to OR). If 'value' is a data type
-            object, the keys of the object MAY be treated as a list. A 'list' data
-            type paired with the '>' or '<' operators will encode extraneous
-            comparisons, but this is permitted as it is in SQL and other languages.
+            comparison must be true (equivalent to OR). If 'value' is of data
+            type 'object', the keys of the object MAY be treated as a list.
+            A 'list' data type paired with the '>' or '<' operators will
+            encode extraneous comparisons, but this is permitted as it is in
+            SQL and other languages.
         unit_id:
           example: UO:0000222
           description: >-
