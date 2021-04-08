@@ -23,7 +23,7 @@
 ## Components
 
 {% for name, schema in schemas.items() -%}{%- if schema is mapping -%}
-#### {{ name }} [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/master/TranslatorReasonerAPI.yaml#L{{ schema._start }}:L{{ schema._end }})
+#### {{ name }} [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/{{ sha }}/TranslatorReasonerAPI.yaml#L{{ schema._start }}:L{{ schema._end }})
 
 {% if 'description' in schema -%}
 {{ schema.description }}
