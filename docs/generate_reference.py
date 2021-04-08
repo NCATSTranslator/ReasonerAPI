@@ -47,8 +47,12 @@ def main():
         data = yaml.load(stream, Loader=SafeLineLoader)
     components = data['components']
     schemas = components['schemas']
+
+    sha = "master"
+
     markdown = j2_env.get_template('reference_template.md').render(
-        schemas=schemas
+        schemas=schemas,
+        sha=sha,
     )
 
     with open('reference.md', 'w') as stream:
