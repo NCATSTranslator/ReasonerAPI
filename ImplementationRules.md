@@ -10,12 +10,9 @@ The terms MUST, SHOULD, MAY are used as defined in RFC 2119  https://tools.ietf.
 - MUST NOT be an empty array (#199)
 - If more than one element is present, the elements MUST be treated in the sense of an "or" list.
   This effectively creates a simple batch query mechanism.
-- If the list contains exact duplicate CURIEs, the duplicates MUST be collapsed into one by the server
 - The list SHOULD NOT be used by the client to provide equivalent CURIEs to the server
 - If the server considers a subset of items in the list as equivalent CURIEs,
-  the server SHOULD the subset into a single KnowledgeGraph Node
-- A list MUST NOT be used to express an AND relationship between the elements. Separate QNodes
-  MUST be used to express this.
+  the server SHOULD merge the subset into a single KnowledgeGraph Node
 
 ## QNode.categories
 - MAY be null, or MAY be missing. The meaning is the same: matching Nodes may be any category
@@ -23,11 +20,11 @@ The terms MUST, SHOULD, MAY are used as defined in RFC 2119  https://tools.ietf.
   (any descendent biolink category NamedThing)
 - MUST NOT be an empty array (#199)
 - If more than one element is present, the elements MUST be treated in the sense of an "or" list.
-  Matching Nodes may be any of the QNode.categories
+  Matching Nodes may be any of the listed QNode.categories
 - Biolink category descendents do not need to be specified separately. Queries MUST automatically
   match descendents. (e.g. QNode.categories is [ 'biolink:BiologicalEntity' ], then the KP MUST return
   Nodes with category biolink:Protein and biolink:Disease if present)
-- #224: If a QNode has non-null QNode.ids (CURIEs), the client SHOULD NOT provide QNode.categories and
+- #224: This is still an open issue. This is not the final word: If a QNode has non-null QNode.ids (CURIEs), the client SHOULD NOT provide QNode.categories and
   the server MUST return the same answer irrespective of the value of QNode.categories
   (i.e. it MUST be ignored)
 
@@ -35,16 +32,23 @@ The terms MUST, SHOULD, MAY are used as defined in RFC 2119  https://tools.ietf.
 - MAY be null, or MAY be missing. The meaning is the same.
 - MUST NOT be an empty array (#199)
 - If more than one element is present, the elements MUST be treated in the sense of an "or" list.
-  Matching Edges may be any of the QEdge.predicates. 
+  Matching Edges may be any of the listed QEdge.predicates. 
   This effectively creates a simple batch query mechanism where the response may contain multiple
   edges, where each one matches at least one of the specified QEdge.predicates.
 - Biolink predicate descendents do not need to be specified separately. Queries MUST automatically
   match descendents. (e.g. QEdge.predicates is [ 'biolink:regulates' ], then the KP MUST return
   Edges with biolink:positively_regulates and biolink:negatively_regulates if present)
 
-## QNode
+## QNode.xxxxx
 - #209: If the server encounters a QNode property key that it does not recognize, it MUST immediately respond
   with an error code "UnknownQNodeProperty"
+Some dissent over this statement
+Options:
+1. Server MUST error out
+2. Server MUST generate a WARNING or ERROR but MAY continue
+3. We change TRAPI 1.1-beta schema to disallow this
+4. Server can do whatever it wants. The client risks getting answers that are different than it intended
+ENDED HERE on 2021-04-08
 
 ## QEdge
 - #209: If the server encounters a QEdge property key that it does not recognize, it MUST immediately respond
