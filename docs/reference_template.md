@@ -1,7 +1,7 @@
 {%- macro schema_summary(schema) -%}
     {%- if '$ref' in schema -%}
         {%- set ref_name=schema['$ref'].split('/')[3] -%}
-        [{{ ref_name }}](#{{ ref_name|lower }})
+        [{{ ref_name }}](#{{ ref_name|lower }}-)
     {%- elif schema['type'] == 'array' -%}
         [{{ schema_summary(schema['items']) }}]
     {%- elif 'oneOf' in schema -%}
