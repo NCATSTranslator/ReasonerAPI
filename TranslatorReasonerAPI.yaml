@@ -820,6 +820,5 @@ components:
       required:
         - name
         - id
-        - operator
         - value
       additionalProperties: false
