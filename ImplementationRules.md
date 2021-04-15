@@ -40,19 +40,10 @@ The terms MUST, SHOULD, MAY are used as defined in RFC 2119  https://tools.ietf.
   Edges with biolink:positively_regulates and biolink:negatively_regulates if present)
 
 ## QNode.xxxxx
-- #209: If the server encounters a QNode property key that it does not recognize, it MUST immediately respond
-  with an error code "UnknownQNodeProperty"
-Some dissent over this statement
-Options:
-1. Server MUST error out
-2. Server MUST generate a WARNING or ERROR but MAY continue
-3. We change TRAPI 1.1-beta schema to disallow this
-4. Server can do whatever it wants. The client risks getting answers that are different than it intended
-ENDED HERE on 2021-04-08
+- Server SHOULD generate a warning and MAY continue
 
-## QEdge
-- #209: If the server encounters a QEdge property key that it does not recognize, it MUST immediately respond
-  with an error with code "UnknownQEdgeProperty"
+## QEdge.xxxxx
+- Server SHOULD generate a warning and MAY continue
 
 ## QNode.constraints
 - If a KP server receives any QNode.constraints, if it does not support all of them,
