@@ -446,7 +446,7 @@ components:
           items:
             $ref: '#/components/schemas/QueryConstraint'
           nullable: true
-      additionalProperties: true
+      additionalProperties: false
     QEdge:
       type: object
       description: >-
@@ -497,7 +497,7 @@ components:
           items:
             $ref: '#/components/schemas/QueryConstraint'
           nullable: true
-      additionalProperties: true
+      additionalProperties: false
       required:
         - subject
         - object
