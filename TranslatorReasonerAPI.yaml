@@ -474,16 +474,6 @@ components:
             $ref: '#/components/schemas/BiolinkPredicate'
           minItems: 1
           nullable: true
-        relation:
-          type: string
-          example: RO:0002447
-          description: >-
-            Query constraint against the relationship type term of this edge,
-            as originally specified by, or curated by inference from, the
-            original external source of knowledge. Note that this should
-            often be specified as predicate ontology term CURIE, although
-            this may not be strictly enforced.
-          nullable: true
         subject:
           type: string
           example: https://omim.org/entry/603903
