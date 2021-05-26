@@ -218,7 +218,9 @@ components:
       properties:
         results:
           description: >-
-            List of all returned Result objects for the query posed
+            List of all returned Result objects for the query posed.
+            The list MUST be ordered/ranked with the most relevant/confident
+            appearing at the beginning of the list.
           type: array
           items:
             $ref: '#/components/schemas/Result'
