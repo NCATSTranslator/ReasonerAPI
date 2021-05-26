@@ -319,24 +319,10 @@ components:
           type: number
           format: float
           example: 163.233
-          description: Any numerical score associated with this result
-        score_name:
-          type: string
-          example: Jaccard distance
-          description: Name for the score
-        score_direction:
-          type: string
-          example: lower_is_better
           description: >-
-            Sorting indicator for the score: one of higher_is_better or
-            lower_is_better
-        confidence:
-          type: number
-          format: float
-          example: 0.9234
-          description: >-
-            Confidence metric for this result, a value between (inclusive)
-             0.0 (no confidence) and 1.0 (highest confidence)
+            A numerical score associated with this result indicating the
+            relevance or confidence of this result relative to others in the
+            returned set. No range is prescribed. Higher MUST be better.
       additionalProperties: true
       required:
         - node_bindings
