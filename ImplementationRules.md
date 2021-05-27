@@ -24,9 +24,9 @@ The terms MUST, SHOULD, MAY are used as defined in RFC 2119  https://tools.ietf.
 - Biolink category descendents do not need to be specified separately. Queries MUST automatically
   match descendents. (e.g. QNode.categories is [ 'biolink:BiologicalEntity' ], then the KP MUST return
   Nodes with category biolink:Protein and biolink:Disease if present)
-- #224: This is still an open issue. This is not the final word: If a QNode has non-null QNode.ids (CURIEs), the client SHOULD NOT provide QNode.categories and
-  the server MUST return the same answer irrespective of the value of QNode.categories
-  (i.e. it MUST be ignored)
+- IF a QNode has non-null QNode.ids (CURIEs), the client SHOULD NOT provide QNode.categories, and
+  the server SHOULD NOT require that categories are provided to function, and the server MAY provide
+  different answers for different provided categories.
 
 ## QEdge.predicates
 - MAY be null, or MAY be missing. The meaning is the same.
