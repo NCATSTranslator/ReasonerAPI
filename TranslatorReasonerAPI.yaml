@@ -219,8 +219,8 @@ components:
         results:
           description: >-
             List of all returned Result objects for the query posed.
-            The list SHOULD NOT be assumed to be ordered. The client SHOULD
-            reorder the results based on the 'score' property if it is present.
+            The list SHOULD NOT be assumed to be ordered. The 'score' property,
+             if present, MAY be used to infer result rankings.
           type: array
           items:
             $ref: '#/components/schemas/Result'
