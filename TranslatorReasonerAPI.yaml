@@ -685,9 +685,9 @@ components:
         nodes:
           type: object
           description: >-
-            Collection of the most specific node categories provided by 
-            this TRAPI web service, indexed by Biolink class CURIEs.   
-            A node category is only exposed here if there is 
+            Collection of the most specific node categories provided by
+            this TRAPI web service, indexed by Biolink class CURIEs.
+            A node category is only exposed here if there is
             node for which that is the most specific category available.
           additionalProperties:
             $ref: '#/components/schemas/MetaNode'
