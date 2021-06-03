@@ -21,7 +21,7 @@ info:
       url: https://github.com/NCATSTranslator/translator_extensions/blob/\
         production/x-translator/
   x-trapi:
-    version: 1.1.0-beta
+    version: 1.2
     externalDocs:
       description: >-
         The values for version are restricted according to the regex in
@@ -599,14 +599,6 @@ components:
         predicate:
           allOf:
             - $ref: '#/components/schemas/BiolinkPredicate'
-          nullable: true
-        relation:
-          type: string
-          example: RO:0002447
-          description: >-
-            The relationship type term of this edge, originally specified by,
-            or curated by inference from, the original source of knowledge.
-            This should generally be specified as predicate ontology CURIE.
           nullable: true
         subject:
           $ref: '#/components/schemas/CURIE'
