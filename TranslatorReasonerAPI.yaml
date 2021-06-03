@@ -612,14 +612,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/BiolinkPredicate'
           nullable: true
-        relation:
-          type: string
-          example: RO:0002447
-          description: >-
-            The relationship type term of this edge, originally specified by,
-            or curated by inference from, the original source of knowledge.
-            This should generally be specified as predicate ontology CURIE.
-          nullable: true
         subject:
           $ref: '#/components/schemas/CURIE'
           example: OMIM:603903
