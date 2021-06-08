@@ -218,7 +218,9 @@ components:
       properties:
         results:
           description: >-
-            List of all returned Result objects for the query posed
+            List of all returned Result objects for the query posed.
+            The list SHOULD NOT be assumed to be ordered. The 'score' property,
+             if present, MAY be used to infer result rankings.
           type: array
           items:
             $ref: '#/components/schemas/Result'
