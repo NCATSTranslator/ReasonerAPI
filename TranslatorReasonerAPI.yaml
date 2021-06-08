@@ -218,7 +218,9 @@ components:
       properties:
         results:
           description: >-
-            List of all returned Result objects for the query posed
+            List of all returned Result objects for the query posed.
+            The list SHOULD NOT be assumed to be ordered. The 'score' property,
+             if present, MAY be used to infer result rankings.
           type: array
           items:
             $ref: '#/components/schemas/Result'
@@ -315,6 +317,14 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/EdgeBinding'
+        score:
+          type: number
+          format: float
+          example: 163.233
+          description: >-
+            A numerical score associated with this result indicating the
+            relevance or confidence of this result relative to others in the
+            returned set. Higher MUST be better.
       additionalProperties: true
       required:
         - node_bindings
@@ -678,19 +688,25 @@ components:
     MetaKnowledgeGraph:
       type: object
       description: >-
-        Knowledge-map representation of this TRAPI web service.
+        Knowledge-map representation of this TRAPI web service. The meta
+        knowledge graph is composed of the union of most specific categories
+        and predicates for each node and edge.
       properties:
         nodes:
           type: object
           description: >-
-            Collection of node categories provided by this TRAPI web service,
-            indexed by Biolink class CURIEs.
+            Collection of the most specific node categories provided by
+            this TRAPI web service, indexed by Biolink class CURIEs.
+            A node category is only exposed here if there is
+            node for which that is the most specific category available.
           additionalProperties:
             $ref: '#/components/schemas/MetaNode'
         edges:
           type: array
           description: >-
-            List of edges/predicates provided by this TRAPI web service.
+            List of the most specific edges/predicates provided by this TRAPI
+            web service. A predicate is only exposed here if there is an edge
+            for which the predicate is the most specific available.
           items:
             $ref: '#/components/schemas/MetaEdge'
           minItems: 1
