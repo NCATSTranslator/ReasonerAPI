@@ -151,8 +151,11 @@ components:
       x-body-name: request_body
       type: object
       properties:
-        message:
-          $ref: '#/components/schemas/Message'
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/Message'
+          minItems: 1
           description: >-
             The query Message is a serialization of the user request. Content
             of the Message object depends on the intended TRAPI operation. For
@@ -166,7 +169,7 @@ components:
           nullable: true
       additionalProperties: true
       required:
-        - message
+        - messages
     Response:
       type: object
       description: >-
@@ -177,11 +180,14 @@ components:
         The status, description, and logs properties provide additional details
         about the response.
       properties:
-        message:
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/Message'
+          minItems: 1
           description: >-
             Contains the knowledge of the response (query graph, knowledge
             graph, and results).
-          $ref: '#/components/schemas/Message'
         status:
           description: >-
             One of a standardized set of short codes,
