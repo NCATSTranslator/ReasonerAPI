@@ -209,7 +209,7 @@ components:
           nullable: true
       additionalProperties: true
       required:
-        - message
+        - messages
     Message:
       description: >-
         The message object holds the main content of a Query or a Response in
