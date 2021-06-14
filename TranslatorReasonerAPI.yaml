@@ -229,7 +229,9 @@ components:
           format: uri
           pattern: ^https?://
           description: >-
-            Upon completion, the Response will be POSTed to this URL.
+            Upon completion, this server will send a POST request to the callback
+            URL with `Content-Type: application/json` header and request body
+            containing a JSON-encoded `Response` object.
         message:
           $ref: '#/components/schemas/Message'
           description: >-
