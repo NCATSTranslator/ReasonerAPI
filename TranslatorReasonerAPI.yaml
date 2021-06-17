@@ -706,6 +706,12 @@ components:
             type: string
           minItems: 1
           example: [CHEMBL.COMPOUND, INCHIKEY]
+        attributes:
+          type: array
+          description: >-
+            Node attributes provided by this TRAPI web service.
+          items:
+            $ref: '#/components/schemas/MetaAttribute'
       required:
         - id_prefixes
       additionalProperties: false
@@ -737,11 +743,51 @@ components:
           items:
             type: string
           example: [inhibits, activates]
+        attributes:
+          type: array
+          description: >-
+            Edge attributes provided by this TRAPI web service.
+          items:
+            $ref: '#/components/schemas/MetaAttribute'
       required:
         - subject
         - predicate
         - object
       additionalProperties: false
+    MetaAttribute:
+      type: object
+      properties:
+        attribute_type_id:
+          $ref: '#/components/schemas/CURIE'
+          description: >-
+            Type of an attribute provided by this TRAPI web service
+            (preferably the CURIE of a Biolink association slot)
+          example: biolink:p_value
+        attribute_source:
+          type: string
+          description: >-
+            Source of an attribute provided by this TRAPI web service.
+          example: infores:chembl
+        original_attribute_names:
+          type: array
+          items:
+            type: string
+          description: >-
+            Names of an the attribute as provided by the source.
+        costraint_use:
+          type: boolean
+          description: >-
+            Indicates whether this attribute can be used as a query
+            constraint.
+          example: true
+        constraint_name:
+          type: string
+          description: >-
+            Human-readable name or label for the constraint concept.
+            Required whenever constraint_use is true.
+          example: p-value
+      required:
+        - attribute_type_id
     QueryConstraint:
       type: object
       description: >-
