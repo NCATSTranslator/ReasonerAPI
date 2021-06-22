@@ -22,6 +22,7 @@ info:
         production/x-translator/
   x-trapi:
     version: 1.2.0
+    asyncquery: REPLACE-WITH-true-IF-/asyncquery-IS-IMPLEMENTED-ELSE-false
     externalDocs:
       description: >-
         The values for version are restricted according to the regex in
@@ -42,9 +43,14 @@ tags:
       description: Documentation for the reasoner predicates function
       url: INSERT-URL-HERE-OR-REMOVE-EXTERNALDOCS-IF-NA
   - name: query
-    description: Query reasoner using a predefined question type
+    description: Initiate a query and wait to receive the response
     externalDocs:
       description: Documentation for the reasoner query function
+      url: INSERT-URL-HERE-OR-REMOVE-EXTERNALDOCS-IF-NA
+  - name: asyncquery
+    description: Initiate a query with a callback to receive the response
+    externalDocs:
+      description: Documentation for the reasoner asynchquery function
       url: INSERT-URL-HERE-OR-REMOVE-EXTERNALDOCS-IF-NA
   - name: translator
     description: Required for SmartAPI validation of x-translator
@@ -96,7 +102,7 @@ paths:
     post:
       tags:
         - query
-      summary: Query reasoner via one of several inputs
+      summary: Initiate a query and wait to receive a Response
       description: ''
       requestBody:
         description: Query information to be submitted
@@ -114,6 +120,51 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Response'
+        '400':
+          description: >-
+            Bad request. The request is invalid according to this OpenAPI
+            schema OR a specific identifier is believed to be invalid somehow
+            (not just unrecognized).
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: >-
+            Internal server error.
+          content:
+            application/json:
+              schema:
+                type: string
+        '501':
+          description: >-
+            Not implemented.
+          content:
+            application/json:
+              schema:
+                type: string
+  /asyncquery:
+    post:
+      tags:
+        - asyncquery
+      summary: Initiate a query with a callback to receive the response
+      description: ''
+      requestBody:
+        description: Query information to be submitted
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AsyncQuery'
+      responses:
+        '200':
+          description: >-
+            The query is accepted for processing and the Response will be
+            sent to the callback url when complete.
+          content:
+            application/json:
+              schema:
+                type: string
         '400':
           description: >-
             Bad request. The request is invalid according to this OpenAPI
@@ -166,6 +217,38 @@ components:
           nullable: true
       additionalProperties: true
       required:
+        - message
+    AsyncQuery:
+      description: >-
+        The AsyncQuery class is effectively the same as the Query class but
+        it requires a callback property.
+      x-body-name: request_body
+      type: object
+      properties:
+        callback:
+          type: string
+          format: uri
+          pattern: ^https?://
+          description: >-
+            Upon completion, this server will send a POST request to the
+            callback URL with `Content-Type: application/json` header and
+            request body containing a JSON-encoded `Response` object.
+        message:
+          $ref: '#/components/schemas/Message'
+          description: >-
+            The query Message is a serialization of the user request. Content
+            of the Message object depends on the intended TRAPI operation. For
+            example, the fill operation requires a non-empty query_graph field
+            as part of the Message, whereas other operations, e.g. overlay,
+            require non-empty results and knowledge_graph fields.
+        log_level:
+          description: The least critical level of logs to return
+          allOf:
+            - $ref: '#/components/schemas/LogLevel'
+          nullable: true
+      additionalProperties: true
+      required:
+        - callback
         - message
     Response:
       type: object
