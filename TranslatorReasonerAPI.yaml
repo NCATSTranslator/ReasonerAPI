@@ -774,7 +774,7 @@ components:
             type: string
           description: >-
             Names of an the attribute as provided by the source.
-        costraint_use:
+        constraint_use:
           type: boolean
           description: >-
             Indicates whether this attribute can be used as a query
