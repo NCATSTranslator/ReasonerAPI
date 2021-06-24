@@ -37,11 +37,6 @@ externalDocs:
     Documentation for the NCATS Biomedical Translator Reasoners web services
   url: https://github.com/NCATSTranslator/ReasonerAPI
 tags:
-  - name: predicates
-    description: Get supported relationships by source and target
-    externalDocs:
-      description: Documentation for the reasoner predicates function
-      url: INSERT-URL-HERE-OR-REMOVE-EXTERNALDOCS-IF-NA
   - name: query
     description: Initiate a query and wait to receive the response
     externalDocs:
@@ -57,33 +52,6 @@ tags:
   - name: trapi
     description: Required for SmartAPI validation of x-trapi
 paths:
-  /predicates:
-    get:
-      deprecated: true
-      tags:
-        - predicates
-      summary: Get supported relationships by source and target
-      responses:
-        '200':
-          description: Predicates by source and target
-          content:
-            application/json:
-              schema:
-                description: Source map
-                type: object
-                additionalProperties:
-                  description: Target map
-                  type: object
-                  additionalProperties:
-                    description: Array of predicates
-                    type: array
-                    items:
-                      type: string
-                example:
-                  'biolink:ChemicalSubstance':
-                    'biolink:Gene':
-                      - biolink:directly_interacts_with
-                      - biolink:decreases_activity_of
   /meta_knowledge_graph:
     get:
       tags:
