@@ -219,7 +219,7 @@ components:
           nullable: true
         workflow:
           description: List of workflow steps to be executed.
-          $ref: 'http://standards.ncats.io/workflow.json'
+          $ref: http://standards.ncats.io/workflow.json
       additionalProperties: true
       required:
         - message
@@ -253,7 +253,7 @@ components:
           nullable: true
         workflow:
           description: List of workflow steps to be executed.
-          $ref: 'http://standards.ncats.io/workflow.json'
+          $ref: http://standards.ncats.io/workflow.json
       additionalProperties: true
       required:
         - callback
@@ -294,7 +294,7 @@ components:
           nullable: true
         workflow:
           description: List of workflow steps that were executed.
-          $ref: 'http://standards.ncats.io/workflow.json'
+          $ref: http://standards.ncats.io/workflow.json
       additionalProperties: true
       required:
         - message
