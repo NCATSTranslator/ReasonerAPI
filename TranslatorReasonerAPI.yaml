@@ -201,6 +201,11 @@ components:
             Upon completion, this server will send a POST request to the
             callback URL with `Content-Type: application/json` header and
             request body containing a JSON-encoded `Response` object.
+            The server MAY POST `Response` objects before work is fully
+            complete to provide interim results with a Response.status
+            value of 'Running'. If a POST operation to the callback URL
+            does not succeed, the server SHOULD retry the POST at least
+            once.
         message:
           $ref: '#/components/schemas/Message'
           description: >-
