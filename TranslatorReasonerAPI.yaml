@@ -37,6 +37,14 @@ externalDocs:
     Documentation for the NCATS Biomedical Translator Reasoners web services
   url: https://github.com/NCATSTranslator/ReasonerAPI
 tags:
+  - name: meta_knowledge_graph
+    description: >-
+      Retreive the meta knowledge graph representation of this
+      TRAPI web service.
+    externalDocs:
+      description: >-
+        Documentation for the reasoner meta_knowledge_graph function
+      url: INSERT-URL-HERE-OR-REMOVE-EXTERNALDOCS-IF-NA
   - name: query
     description: Initiate a query and wait to receive the response
     externalDocs:
