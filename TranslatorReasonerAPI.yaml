@@ -792,13 +792,6 @@ components:
           description: >-
             Object node category of this relationship edge.
           example: biolink:Protein
-        relations:
-          type: array
-          description: >-
-            Low-level relations from the underlying source.
-          items:
-            type: string
-          example: [inhibits, activates]
         attributes:
           type: array
           description: >-
