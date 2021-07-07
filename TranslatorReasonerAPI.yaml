@@ -23,6 +23,8 @@ info:
   x-trapi:
     version: 1.2.0
     asyncquery: REPLACE-WITH-true-IF-/asyncquery-IS-IMPLEMENTED-ELSE-false
+    operations:
+      - LIST-ALL-SUPPORTED-OPERATION-IDS-HERE-OR-REMOVE-THIS-SECTION
     externalDocs:
       description: >-
         The values for version are restricted according to the regex in
@@ -191,6 +193,9 @@ components:
           allOf:
             - $ref: '#/components/schemas/LogLevel'
           nullable: true
+        workflow:
+          description: List of workflow steps to be executed.
+          $ref: http://standards.ncats.io/workflow.json
       additionalProperties: true
       required:
         - message
@@ -227,6 +232,9 @@ components:
           allOf:
             - $ref: '#/components/schemas/LogLevel'
           nullable: true
+        workflow:
+          description: List of workflow steps to be executed.
+          $ref: http://standards.ncats.io/workflow.json
       additionalProperties: true
       required:
         - callback
@@ -265,6 +273,9 @@ components:
           items:
             $ref: '#/components/schemas/LogEntry'
           nullable: true
+        workflow:
+          description: List of workflow steps that were executed.
+          $ref: http://standards.ncats.io/workflow.json
       additionalProperties: true
       required:
         - message
