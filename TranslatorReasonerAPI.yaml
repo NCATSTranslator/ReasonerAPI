@@ -672,6 +672,15 @@ components:
             Human-readable description for the attribute and its value.
           example: Assertion Authored By Dr. Trans L. Ator
           nullable: true
+        attributes:
+          type: array
+          description: >-
+            A list of attributes providing further information about the
+            parent attribute (for example to provide provenance
+            information about the parent attribute).
+          items:
+            $ref: '#/components/schemas/Attribute'
+          nullable: true
       required:
         - attribute_type_id
         - value
