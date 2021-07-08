@@ -779,7 +779,7 @@ components:
           description: >-
             Indicates whether this attribute can be used as a query
             constraint.
-          example: true
+          default: false
         constraint_name:
           type: string
           description: >-
