@@ -429,6 +429,16 @@ components:
         id:
           type: string
           description: The key identifier of a specific KnowledgeGraph Edge.
+        attributes:
+          type: array
+          description: >-
+            A list of attributes providing further information about the
+            edge binding. This is not intended for capturing edge attributes
+            and should only be used for properties that vary from result to
+            result.
+          items:
+            $ref: '#/components/schemas/Attribute'
+          nullable: true
       additionalProperties: true
       required:
         - id
