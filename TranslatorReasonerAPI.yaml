@@ -22,6 +22,9 @@ info:
         production/x-translator/
   x-trapi:
     version: 1.2.0
+    asyncquery: REPLACE-WITH-true-IF-/asyncquery-IS-IMPLEMENTED-ELSE-false
+    operations:
+      - LIST-ALL-SUPPORTED-OPERATION-IDS-HERE-OR-REMOVE-THIS-SECTION
     externalDocs:
       description: >-
         The values for version are restricted according to the regex in
@@ -36,48 +39,29 @@ externalDocs:
     Documentation for the NCATS Biomedical Translator Reasoners web services
   url: https://github.com/NCATSTranslator/ReasonerAPI
 tags:
-  - name: predicates
-    description: Get supported relationships by source and target
+  - name: meta_knowledge_graph
+    description: >-
+      Retreive the meta knowledge graph representation of this
+      TRAPI web service.
     externalDocs:
-      description: Documentation for the reasoner predicates function
+      description: >-
+        Documentation for the reasoner meta_knowledge_graph function
       url: INSERT-URL-HERE-OR-REMOVE-EXTERNALDOCS-IF-NA
   - name: query
-    description: Query reasoner using a predefined question type
+    description: Initiate a query and wait to receive the response
     externalDocs:
       description: Documentation for the reasoner query function
+      url: INSERT-URL-HERE-OR-REMOVE-EXTERNALDOCS-IF-NA
+  - name: asyncquery
+    description: Initiate a query with a callback to receive the response
+    externalDocs:
+      description: Documentation for the reasoner asynchquery function
       url: INSERT-URL-HERE-OR-REMOVE-EXTERNALDOCS-IF-NA
   - name: translator
     description: Required for SmartAPI validation of x-translator
   - name: trapi
     description: Required for SmartAPI validation of x-trapi
 paths:
-  /predicates:
-    get:
-      deprecated: true
-      tags:
-        - predicates
-      summary: Get supported relationships by source and target
-      responses:
-        '200':
-          description: Predicates by source and target
-          content:
-            application/json:
-              schema:
-                description: Source map
-                type: object
-                additionalProperties:
-                  description: Target map
-                  type: object
-                  additionalProperties:
-                    description: Array of predicates
-                    type: array
-                    items:
-                      type: string
-                example:
-                  'biolink:ChemicalSubstance':
-                    'biolink:Gene':
-                      - biolink:directly_interacts_with
-                      - biolink:decreases_activity_of
   /meta_knowledge_graph:
     get:
       tags:
@@ -96,7 +80,7 @@ paths:
     post:
       tags:
         - query
-      summary: Query reasoner via one of several inputs
+      summary: Initiate a query and wait to receive a Response
       description: ''
       requestBody:
         description: Query information to be submitted
@@ -114,6 +98,51 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Response'
+        '400':
+          description: >-
+            Bad request. The request is invalid according to this OpenAPI
+            schema OR a specific identifier is believed to be invalid somehow
+            (not just unrecognized).
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: >-
+            Internal server error.
+          content:
+            application/json:
+              schema:
+                type: string
+        '501':
+          description: >-
+            Not implemented.
+          content:
+            application/json:
+              schema:
+                type: string
+  /asyncquery:
+    post:
+      tags:
+        - asyncquery
+      summary: Initiate a query with a callback to receive the response
+      description: ''
+      requestBody:
+        description: Query information to be submitted
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AsyncQuery'
+      responses:
+        '200':
+          description: >-
+            The query is accepted for processing and the Response will be
+            sent to the callback url when complete.
+          content:
+            application/json:
+              schema:
+                type: string
         '400':
           description: >-
             Bad request. The request is invalid according to this OpenAPI
@@ -164,8 +193,51 @@ components:
           allOf:
             - $ref: '#/components/schemas/LogLevel'
           nullable: true
+        workflow:
+          description: List of workflow steps to be executed.
+          $ref: http://standards.ncats.io/workflow.json
       additionalProperties: true
       required:
+        - message
+    AsyncQuery:
+      description: >-
+        The AsyncQuery class is effectively the same as the Query class but
+        it requires a callback property.
+      x-body-name: request_body
+      type: object
+      properties:
+        callback:
+          type: string
+          format: uri
+          pattern: ^https?://
+          description: >-
+            Upon completion, this server will send a POST request to the
+            callback URL with `Content-Type: application/json` header and
+            request body containing a JSON-encoded `Response` object.
+            The server MAY POST `Response` objects before work is fully
+            complete to provide interim results with a Response.status
+            value of 'Running'. If a POST operation to the callback URL
+            does not succeed, the server SHOULD retry the POST at least
+            once.
+        message:
+          $ref: '#/components/schemas/Message'
+          description: >-
+            The query Message is a serialization of the user request. Content
+            of the Message object depends on the intended TRAPI operation. For
+            example, the fill operation requires a non-empty query_graph field
+            as part of the Message, whereas other operations, e.g. overlay,
+            require non-empty results and knowledge_graph fields.
+        log_level:
+          description: The least critical level of logs to return
+          allOf:
+            - $ref: '#/components/schemas/LogLevel'
+          nullable: true
+        workflow:
+          description: List of workflow steps to be executed.
+          $ref: http://standards.ncats.io/workflow.json
+      additionalProperties: true
+      required:
+        - callback
         - message
     Response:
       type: object
@@ -201,6 +273,9 @@ components:
           items:
             $ref: '#/components/schemas/LogEntry'
           nullable: true
+        workflow:
+          description: List of workflow steps that were executed.
+          $ref: http://standards.ncats.io/workflow.json
       additionalProperties: true
       required:
         - message
@@ -736,13 +811,6 @@ components:
           description: >-
             Object node category of this relationship edge.
           example: biolink:Protein
-        relations:
-          type: array
-          description: >-
-            Low-level relations from the underlying source.
-          items:
-            type: string
-          example: [inhibits, activates]
         attributes:
           type: array
           description: >-
