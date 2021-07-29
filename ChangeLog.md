@@ -19,6 +19,12 @@
 
 - /meta_knowledge_graph should only include specific relationships, not ancestor-inferred relationships (policy clarification)
 
+- Add one level of subattributes to Attribute
+  https://github.com/NCATSTranslator/ReasonerAPI/pull/268/files
+
+- ? Add attributes[] to EdgeBinding to complement Edge and Node
+  https://github.com/NCATSTranslator/ReasonerAPI/pull/269/files
+
 
 # Change Log TRAPI 1.0 -> 1.1
 - Many changes to "info" template at top. Please refresh to the latest template
