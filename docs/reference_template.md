@@ -33,6 +33,12 @@
 {%- if schema.type == 'string' and 'pattern' in schema %} (pattern: `{{ schema.pattern }}`)
 {%- endif %}
 {% endif -%}
+{% if 'enum' in schema %}
+one of:
+{% for option in schema.enum -%}
+* {{ option }}
+{% endfor %}
+{% endif -%}
 {%- if schema.type == 'object' %}
 ##### Fixed Fields
 
