@@ -72,6 +72,13 @@ message | `string` | A human-readable log message
 Logging level
 
 `string`
+
+one of:
+* ERROR
+* WARNING
+* INFO
+* DEBUG
+
 #### Result [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/master/TranslatorReasonerAPI.yaml#L360:L406)
 
 A Result object specifies the nodes and edges in the knowledge graph that satisfy the structure or conditions of a user-submitted query graph. It must contain a NodeBindings object (list of query graph node to knowledge graph node mappings) and an EdgeBindings object (list of query graph edge to knowledge graph edge mappings).
