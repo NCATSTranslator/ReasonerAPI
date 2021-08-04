@@ -7,7 +7,7 @@
 - /meta_knowledge_graph allows optional attributes[] property (encouraged but not required)
   https://github.com/NCATSTranslator/ReasonerAPI/pull/259/files
 
-- Add support for workflow and operations (encouraged but not yet required)
+- Add support for workflow and operations v1.0.0 (encouraged but not yet required)
   https://github.com/NCATSTranslator/ReasonerAPI/pull/262/files
 
 - /asyncquery endpoint added (recommended but not required)
@@ -22,7 +22,7 @@
 - Add one level of subattributes to Attribute
   https://github.com/NCATSTranslator/ReasonerAPI/pull/268/files
 
-- ? Add attributes[] to EdgeBinding to complement Edge and Node
+- Add attributes[] to EdgeBinding to complement Edge and Node
   https://github.com/NCATSTranslator/ReasonerAPI/pull/269/files
 
 
