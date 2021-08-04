@@ -33,13 +33,19 @@
 {%- if schema.type == 'string' and 'pattern' in schema %} (pattern: `{{ schema.pattern }}`)
 {%- endif %}
 {% endif -%}
+{% if 'enum' in schema %}
+one of:
+{% for option in schema.enum -%}
+* {{ option }}
+{% endfor %}
+{% endif -%}
 {%- if schema.type == 'object' %}
 ##### Fixed Fields
 
 Field Name | Type | Description
 ---|:---:|---
 {% for prop_name, prop_schema in schema['properties'].items() -%}{%- if prop_schema is mapping -%}
-    {{ prop_name }} | {{ schema_summary(prop_schema) }} | {% if prop_name in schema.required %}**REQUIRED**. {% endif -%}
+    {{ prop_name }} | {{ schema_summary(prop_schema) }} | {% if 'required' in schema and prop_name in schema.required %}**REQUIRED**. {% endif -%}
     {{ prop_schema.description }}
 {% endif %}{%- endfor %}
 {% endif -%}
