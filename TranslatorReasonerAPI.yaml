@@ -546,12 +546,12 @@ components:
       type: object
       description: >-
         An edge in the QueryGraph used as an filter pattern specification in a
-        query. If optional predicate or relation properties are not specified,
-        they are assumed to be wildcard matches to the target knowledge space.
+        query. If the optional predicate property is not specified,
+        it is assumed to be a wildcard match to the target knowledge space.
         If specified, the ontological inheritance hierarchy associated with
         the terms provided is assumed, such that edge bindings returned may be
-        an exact match to the given QEdge predicate or relation term ('class'),
-        or to a term which is a subclass of the QEdge specified term.
+        an exact match to the given QEdge predicate term ('class'),
+        or to a term that is a subclass of the QEdge specified term.
       properties:
         predicates:
           type: array
