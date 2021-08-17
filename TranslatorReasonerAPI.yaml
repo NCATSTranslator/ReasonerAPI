@@ -195,7 +195,9 @@ components:
           nullable: true
         workflow:
           description: List of workflow steps to be executed.
-          $ref: http://standards.ncats.io/workflow/1.0.0/schema
+          allOf:
+            - $ref: http://standards.ncats.io/workflow/1.0.0/schema
+          nullable: true
       additionalProperties: true
       required:
         - message
@@ -234,7 +236,9 @@ components:
           nullable: true
         workflow:
           description: List of workflow steps to be executed.
-          $ref: http://standards.ncats.io/workflow/1.0.0/schema
+          allOf:
+            - $ref: http://standards.ncats.io/workflow/1.0.0/schema
+          nullable: true
       additionalProperties: true
       required:
         - callback
@@ -275,7 +279,9 @@ components:
           nullable: true
         workflow:
           description: List of workflow steps that were executed.
-          $ref: http://standards.ncats.io/workflow/1.0.0/schema
+          allOf:
+            - $ref: http://standards.ncats.io/workflow/1.0.0/schema
+          nullable: true
       additionalProperties: true
       required:
         - message
@@ -400,6 +406,7 @@ components:
             A numerical score associated with this result indicating the
             relevance or confidence of this result relative to others in the
             returned set. Higher MUST be better.
+          nullable: true
       additionalProperties: true
       required:
         - node_bindings
@@ -879,6 +886,7 @@ components:
             Node attributes provided by this TRAPI web service.
           items:
             $ref: '#/components/schemas/MetaAttribute'
+          nullable: true
       required:
         - id_prefixes
       additionalProperties: false
@@ -909,6 +917,7 @@ components:
             Edge attributes provided by this TRAPI web service.
           items:
             $ref: '#/components/schemas/MetaAttribute'
+          nullable: true
       required:
         - subject
         - predicate
@@ -928,12 +937,14 @@ components:
           description: >-
             Source of an attribute provided by this TRAPI web service.
           example: infores:chembl
+          nullable: true
         original_attribute_names:
           type: array
           items:
             type: string
           description: >-
             Names of an the attribute as provided by the source.
+          nullable: true
         constraint_use:
           type: boolean
           description: >-
@@ -946,6 +957,7 @@ components:
             Human-readable name or label for the constraint concept.
             Required whenever constraint_use is true.
           example: p-value
+          nullable: true
       required:
         - attribute_type_id
     QueryConstraint:
@@ -997,6 +1009,7 @@ components:
             - '>'
             - <
             - matches
+          nullable: false
         value:
           example: 57.0
           description: >-
@@ -1007,6 +1020,7 @@ components:
             A 'list' data type paired with the '>' or '<' operators will
             encode extraneous comparisons, but this is permitted as it is in
             SQL and other languages.
+          nullable: false
         unit_id:
           example: UO:0000222
           description: >-
@@ -1014,6 +1028,7 @@ components:
             property. The Units of Measurement Ontology (UO) should be used
             if possible. The unit_id MUST be provided for (lists of)
             numerical values that correspond to a quantity that has units.
+          nullable: true
         unit_name:
           example: kilodalton
           description: >-
@@ -1022,6 +1037,7 @@ components:
             property. The Units of Measurement Ontology (UO) SHOULD be used
             if possible. This property SHOULD be provided if a unit_id is
             provided. This is redundant but recommended for human readability.
+          nullable: true
       required:
         - name
         - id
