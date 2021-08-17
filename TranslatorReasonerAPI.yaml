@@ -859,6 +859,9 @@ components:
           items:
             $ref: '#/components/schemas/MetaEdge'
           minItems: 1
+      required:
+        - nodes
+        - edges
     MetaNode:
       type: object
       description: >-
