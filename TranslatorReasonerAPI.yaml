@@ -540,7 +540,7 @@ components:
             to AND)
           items:
             $ref: '#/components/schemas/QueryConstraint'
-          nullable: true
+          default: []
       additionalProperties: true
     QEdge:
       type: object
@@ -581,7 +581,7 @@ components:
             to AND)
           items:
             $ref: '#/components/schemas/QueryConstraint'
-          nullable: true
+          default: []
       additionalProperties: true
       required:
         - subject
