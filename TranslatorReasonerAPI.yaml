@@ -858,7 +858,6 @@ components:
             for which the predicate is the most specific available.
           items:
             $ref: '#/components/schemas/MetaEdge'
-          minItems: 1
       required:
         - nodes
         - edges
