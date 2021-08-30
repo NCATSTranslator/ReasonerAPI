@@ -549,9 +549,9 @@ components:
         query. If the optional predicate property is not specified,
         it is assumed to be a wildcard match to the target knowledge space.
         If specified, the ontological inheritance hierarchy associated with
-        the terms provided is assumed, such that edge bindings returned may be
-        an exact match to the given QEdge predicate term ('class'),
-        or to a term that is a subclass of the QEdge specified term.
+        the term provided is assumed, such that edge bindings returned may be
+        an exact match to the given QEdge predicate term,
+        or to a term that is a descendant of the QEdge predicate term.
       properties:
         predicates:
           type: array
