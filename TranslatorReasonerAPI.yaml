@@ -945,6 +945,7 @@ components:
           description: >-
             Names of an the attribute as provided by the source.
           nullable: true
+          minItems: 1
         constraint_use:
           type: boolean
           description: >-
@@ -976,7 +977,6 @@ components:
             submit the new type for consideration by the appropriate
             authority.
           example: EDAM:data_0844
-          nullable: false
         name:
           type: string
           description: >-
@@ -985,7 +985,6 @@ components:
             as the 'id'. This is redundant but required for human
             readability.
           example: molecular mass
-          nullable: false
         not:
           type: boolean
           default: false
@@ -1009,7 +1008,6 @@ components:
             - '>'
             - <
             - matches
-          nullable: false
         value:
           example: 57.0
           description: >-
@@ -1020,7 +1018,6 @@ components:
             A 'list' data type paired with the '>' or '<' operators will
             encode extraneous comparisons, but this is permitted as it is in
             SQL and other languages.
-          nullable: false
         unit_id:
           example: UO:0000222
           description: >-
