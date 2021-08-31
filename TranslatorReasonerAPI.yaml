@@ -198,6 +198,13 @@ components:
           allOf:
             - $ref: http://standards.ncats.io/workflow/1.0.0/schema
           nullable: true
+        submitter:
+          type: string
+          description: >-
+            Any string for self-identifying the submitter of a query. The
+            purpose of this optional field is to aid in the tracking of
+            the source of queries for development and issue resolution.
+          nullable: true
       additionalProperties: true
       required:
         - message
@@ -238,6 +245,13 @@ components:
           description: List of workflow steps to be executed.
           allOf:
             - $ref: http://standards.ncats.io/workflow/1.0.0/schema
+          nullable: true
+        submitter:
+          type: string
+          description: >-
+            Any string for self-identifying the submitter of a query. The
+            purpose of this optional field is to aid in the tracking of
+            the source of queries for development and issue resolution.
           nullable: true
       additionalProperties: true
       required:
