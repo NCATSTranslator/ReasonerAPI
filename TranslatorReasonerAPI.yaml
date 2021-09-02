@@ -26,7 +26,7 @@ info:
     operations:
       - LIST-ALL-SUPPORTED-OPERATION-IDS-HERE-OR-REMOVE-THIS-SECTION
     batchSizeLimit: ADD-BATCH-SIZE-LIMIT-OR-REMOVE-IF-NO-LIMIT
-    throughputLimit: ADD-THROUGHPUT-LIMIT-OR-REMOVE-IF-NO-LIMIT
+    rateLimit: ADD-PER-REQUEST-RATE-LIMIT-OR-REMOVE-IF-NO-LIMIT
     externalDocs:
       description: >-
         The values for version are restricted according to the regex in
