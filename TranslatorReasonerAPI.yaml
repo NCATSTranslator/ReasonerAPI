@@ -21,7 +21,7 @@ info:
       url: https://github.com/NCATSTranslator/translator_extensions/blob/\
         production/x-translator/
   x-trapi:
-    version: 1.2.0
+    version: 1.2.1
     asyncquery: REPLACE-WITH-true-IF-/asyncquery-IS-IMPLEMENTED-ELSE-false
     operations:
       - LIST-ALL-SUPPORTED-OPERATION-IDS-HERE-OR-REMOVE-THIS-SECTION
