@@ -25,6 +25,9 @@
 - Add attributes[] to EdgeBinding to complement Edge and Node
   https://github.com/NCATSTranslator/ReasonerAPI/pull/269/files
 
+- QNode.constraints and QEdge.constraints no longer nullable. Now use empty list as default instead of null
+  https://github.com/NCATSTranslator/ReasonerAPI/pull/286/files
+
 
 # Change Log TRAPI 1.0 -> 1.1
 - Many changes to "info" template at top. Please refresh to the latest template
