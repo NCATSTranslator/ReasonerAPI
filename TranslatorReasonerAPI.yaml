@@ -25,8 +25,8 @@ info:
     asyncquery: REPLACE-WITH-true-IF-/asyncquery-IS-IMPLEMENTED-ELSE-false
     operations:
       - LIST-ALL-SUPPORTED-OPERATION-IDS-HERE-OR-REMOVE-THIS-SECTION
-    batchSizeLimit: ADD-BATCH-SIZE-LIMIT-OR-REMOVE-IF-NO-LIMIT
-    rateLimit: ADD-PER-REQUEST-RATE-LIMIT-OR-REMOVE-IF-NO-LIMIT
+    batch_size_limit: ADD-BATCH-SIZE-LIMIT-OR-REMOVE-IF-NO-LIMIT
+    rate_simit: ADD-REQUEST-RATE-LIMIT-OR-REMOVE-IF-NO-LIMIT
     externalDocs:
       description: >-
         The values for version are restricted according to the regex in
