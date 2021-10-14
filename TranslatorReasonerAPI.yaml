@@ -25,6 +25,8 @@ info:
     asyncquery: REPLACE-WITH-true-IF-/asyncquery-IS-IMPLEMENTED-ELSE-false
     operations:
       - LIST-ALL-SUPPORTED-OPERATION-IDS-HERE-OR-REMOVE-THIS-SECTION
+    batch_size_limit: ADD-BATCH-SIZE-LIMIT-OR-REMOVE-IF-NO-LIMIT
+    rate_limit: ADD-REQUEST-RATE-LIMIT-OR-REMOVE-IF-NO-LIMIT
     externalDocs:
       description: >-
         The values for version are restricted according to the regex in
@@ -107,6 +109,22 @@ paths:
             application/json:
               schema:
                 type: string
+        '413':
+          description: >-
+            Payload too large. Indicates that batch size was over the limit
+            specified in x-trapi.
+          content:
+            application/json:
+              schema:
+                type: string
+        '429':
+          description: >-
+            Too many requests. Indicates that the client issued requests that
+            exceed the rate limit specified in x-trapi.
+          content:
+            application/json:
+              schema:
+                type: string
         '500':
           description: >-
             Internal server error.
@@ -148,6 +166,22 @@ paths:
             Bad request. The request is invalid according to this OpenAPI
             schema OR a specific identifier is believed to be invalid somehow
             (not just unrecognized).
+          content:
+            application/json:
+              schema:
+                type: string
+        '413':
+          description: >-
+            Payload too large. Indicates that batch size was over the limit
+            specified in x-trapi.
+          content:
+            application/json:
+              schema:
+                type: string
+        '429':
+          description: >-
+            Too many requests. Indicates that the client issued requests that
+            exceed the rate limit specified in x-trapi.
           content:
             application/json:
               schema:
