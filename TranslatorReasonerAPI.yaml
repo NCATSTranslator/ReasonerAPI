@@ -673,7 +673,7 @@ components:
             '0.000153' represents a p-value supporting an edge, or that
             a value of 'ChEMBL' represents the original source of the knowledge
             expressed in the edge.
-          example: Biolink:has_p-value_evidence, Biolink:has_original_source
+          example: biolink:synonym
         original_attribute_name:
           type: string
           description: >-
@@ -754,7 +754,7 @@ components:
             '0.000153' represents a p-value supporting an edge, or that
             a value of 'ChEMBL' represents the original source of the knowledge
             expressed in the edge.
-          example: Biolink:has_p-value_evidence, Biolink:has_original_source
+          example: biolink:synonym
         original_attribute_name:
           type: string
           description: >-
