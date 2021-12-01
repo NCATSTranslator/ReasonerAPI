@@ -587,7 +587,7 @@ components:
       type: object
       description: >-
         An edge in the QueryGraph used as an filter pattern specification in a
-        query. If the optional predicate property is not specified,
+        query. If the optional predicates property is not specified,
         it is assumed to be a wildcard match to the target knowledge space.
         If specified, the ontological inheritance hierarchy associated with
         the term provided is assumed, such that edge bindings returned may be
@@ -600,6 +600,12 @@ components:
             $ref: '#/components/schemas/BiolinkPredicate'
           minItems: 1
           nullable: true
+        negated:
+          type: boolean
+          description: >-
+            If set to true, then the query seeks assertions that are
+            explictly negated. i.e. evidence of absence is required, rather
+            than absence of evidence.
         subject:
           type: string
           example: https://omim.org/entry/603903
@@ -820,6 +826,11 @@ components:
           allOf:
             - $ref: '#/components/schemas/BiolinkPredicate'
           nullable: true
+        negated:
+          type: boolean
+          description: >-
+            If set to true, then the assertion is explictly negated with
+            evidence of absence, rather than absence of evidence.
         subject:
           $ref: '#/components/schemas/CURIE'
           example: OMIM:603903
