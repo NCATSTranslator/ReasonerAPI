@@ -623,6 +623,11 @@ components:
           items:
             $ref: '#/components/schemas/QueryConstraint'
           default: []
+        exclude:
+          type: boolean
+          description: >-
+            If set to true, then all subgraphs that could contain
+            this edge are excluded from the final results.
       additionalProperties: true
       required:
         - subject
