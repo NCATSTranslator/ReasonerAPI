@@ -65,4 +65,10 @@ The terms MUST, SHOULD, MAY are used as defined in RFC 2119  https://tools.ietf.
   it MUST immediately respond with an error Code "UnsupportedConstraint" and list all constraint
   names that it does not support.
 
+## info.x-trapi.batch_size_limit
+- This batch size limit refers to the maximum length of any single QNode.ids list. The limit
+  applies to the length of the list as supplied by the client, with the understanding that the server
+  may further expand the list via descendant inference. If the descendant expansion becomes too
+  large (e.g., if the client specified `MONDO:0000001: disease or disorder`), the server SHOULD
+  return a runtime error gracefully.
 
