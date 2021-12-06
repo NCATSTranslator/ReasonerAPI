@@ -1029,27 +1029,39 @@ components:
           description: >-
             Relationship between the database value and the constraint value
             for the specified id. The operators ==, >, and < mean
-            is exactly equal to, is greater than, and is less than,
+            is equal to, is greater than, and is less than,
             respectively. The 'matches' operator indicates that the value
             is a regular expression to be evaluated. If value is a list type,
             then at least one evaluation must be true (equivalent to OR).
             This means that the == operator with a list acts like a SQL 'IN'
-            clause. The 'not' property negates the operator such that not
+            clause. If the value of the compared attribute is a list, then
+            comparisons are performed between each of the constraint values
+            and each of the attribute values, and any one true evaluation
+            counts as an overall true (e.g., [1,2,3] == [6,7,2] is true).
+            The == operator is therefore a broad interpretation of inclusion.
+            The 'exact_==' operator requires that the constraint value and
+            the attribute value be the same data type, the same length, and
+            the same content (e.g. only [1,2,3] exact_== [1,2,3]).
+            The 'not' property negates the operator such that not
             and == means 'not equal to' (or 'not in' for a list), and not >
-            means <=, and not < means >=, and not matches means does not
-            match. The '==' operator SHOULD NOT be used in a manner that
+            means <=, and not < means >=, not matches means does not
+            match, and not exact_== means the match between the constraint
+            and attribute values are not exact.
+            The '==' operator SHOULD NOT be used in a manner that
             describes an "is a" subclass relationship for the parent QNode.
           enum:
             - ==
             - '>'
             - <
             - matches
+            - exact_==
         value:
           example: 57.0
           description: >-
             Value of the attribute. May be any data type, including a list.
             If the value is a list and there are multiple items, at least one
-            comparison must be true (equivalent to OR). If 'value' is of data
+            comparison must be true (equivalent to OR) unless the 'exact_=='
+            operator is used. If 'value' is of data
             type 'object', the keys of the object MAY be treated as a list.
             A 'list' data type paired with the '>' or '<' operators will
             encode extraneous comparisons, but this is permitted as it is in
