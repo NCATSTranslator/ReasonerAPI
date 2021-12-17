@@ -622,9 +622,9 @@ components:
           nullable: true
           description: >-
             An array of predicates that should be excluded from any results.
-            For example, a client may want to explore all possible relationships
-            between a drug and a disease but is not interested in
-            contraindications. In this case, the client would specify the
+            For example, a client may want to explore all possible
+            relationships between a drug and a disease but is not interested
+            in contraindications. In this case, the client would specify the
             predicates field with ['biolink:related_to'] (or leave the
             predicates field unspecified) and would specify the
             excluded_predicates field with ['biolink:contraindicated_for'].
