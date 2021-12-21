@@ -1040,8 +1040,8 @@ components:
             counts as an overall true (e.g., [1,2,3] == [6,7,2] is true).
             The == operator is therefore a broad interpretation of inclusion.
             The 'exact_==' operator requires that the constraint value and
-            the attribute value be the same data type, the same length, and
-            the same content (e.g. only [1,2,3] exact_== [1,2,3]).
+            the attribute value be the same data type, length,
+            content, and order (e.g. only [1,2,3] exact_== [1,2,3]).
             The 'not' property negates the operator such that not
             and == means 'not equal to' (or 'not in' for a list), and not >
             means <=, and not < means >=, not matches means does not
