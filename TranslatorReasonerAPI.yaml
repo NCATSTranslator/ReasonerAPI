@@ -1060,7 +1060,7 @@ components:
           description: >-
             Value of the attribute. May be any data type, including a list.
             If the value is a list and there are multiple items, at least one
-            comparison must be true (equivalent to OR) unless the 'exact_=='
+            comparison must be true (equivalent to OR) unless the '==='
             operator is used. If 'value' is of data
             type 'object', the keys of the object MAY be treated as a list.
             A 'list' data type paired with the '>' or '<' operators will
