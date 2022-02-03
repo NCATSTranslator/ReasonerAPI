@@ -436,6 +436,16 @@ components:
             Node within the Knowledge Graph. Instances of NodeBinding may
             include extra annotation (such annotation is not yet fully
             standardized).
+        attributes:
+          type: array
+          description: >-
+            A list of attributes providing further information about the
+            nodee binding. This is not intended for capturing node attributes
+            and should only be used for properties that vary from result to
+            result.
+          items:
+            $ref: '#/components/schemas/Attribute'
+          nullable: true
       additionalProperties: true
       required:
         - id
