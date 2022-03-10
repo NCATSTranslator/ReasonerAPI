@@ -440,7 +440,7 @@ components:
           type: array
           description: >-
             A list of attributes providing further information about the
-            nodee binding. This is not intended for capturing node attributes
+            node binding. This is not intended for capturing node attributes
             and should only be used for properties that vary from result to
             result.
           items:
