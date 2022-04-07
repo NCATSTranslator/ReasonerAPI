@@ -781,7 +781,7 @@ components:
         qualifiers:
           type: array
           description: >-
-            A list of qualifiers for this edge to express the full 
+            A list of qualifiers for this edge to express the full
             semantics of a complex statement.
           items:
             $ref: '#/components/schemas/Attribute'
