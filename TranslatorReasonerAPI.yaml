@@ -778,6 +778,14 @@ components:
           description: >-
             Corresponds to the map key CURIE of the
             object concept node of this relationship edge.
+        qualifiers:
+          type: array
+          description: >-
+            A list of qualifiers for this edge to express the full 
+            semantics of a complex statement.
+          items:
+            $ref: '#/components/schemas/Attribute'
+          nullable: false
         attributes:
           type: array
           description: A list of additional attributes for this edge
@@ -1004,7 +1012,8 @@ components:
         value:
           example: 57.0
           description: >-
-            Value of the attribute. May be any data type, including a list.
+            Value of the qualifier or attribute. May be any data type,
+            including a list.
             If the value is a list and there are multiple items, at least one
             comparison must be true (equivalent to OR) unless the '==='
             operator is used. If 'value' is of data
