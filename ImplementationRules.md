@@ -48,10 +48,12 @@ The terms MUST, SHOULD, MAY are used as defined in RFC 2119  https://tools.ietf.
   Edges with biolink:positively_regulates and biolink:negatively_regulates if present)
 
 ## QNode.xxxxx
-- Server SHOULD generate a warning and MAY continue
+- If a server receives a property on a QNode that it does not recognize, it SHOULD generate
+  a warning and MAY continue processing.
 
 ## QEdge.xxxxx
-- Server SHOULD generate a warning and MAY continue
+- If a server receives a property on a QEdge that it does not recognize, it SHOULD generate
+  a warning and MAY continue processing.
 
 ## QNode.constraints
 - If a KP server receives any QNode.constraints, if it does not support all of them,
