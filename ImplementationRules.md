@@ -72,3 +72,85 @@ The terms MUST, SHOULD, MAY are used as defined in RFC 2119  https://tools.ietf.
   large (e.g., if the client specified `MONDO:0000001: disease or disorder`), the server SHOULD
   return a runtime error gracefully.
 
+## Specifying permitted and excluded KPs to an ARA
+- The proper syntax for specifying or excluding specific KPs to consult to an ARA MUST be done
+  via a `constraint` on a QEdge. The following is a complete Query example that disallows the
+  use of SemMedDB:
+
+```
+{
+  "message": {
+    "query_graph": {
+      "edges": {
+        "e01": {
+          "object": "n0",
+          "subject": "n1",
+          "predicates": [
+            "biolink:entity_negatively_regulates_entity"
+          ],
+          "constraints": [
+            {
+              "id": "biolink:knowledge_source",
+              "name": "knowledge source",
+              "value": "infores:semmeddb",
+              "not": true,
+              "operator": "=="
+            }
+          ]
+        }
+      },
+      "nodes": {
+        "n0": {
+          "ids": [
+            "NCBIGene:23221"
+          ],
+          "categories": [
+            "biolink:Gene"
+          ]
+        },
+        "n1": {
+          "categories": [
+            "biolink:Gene"
+          ]
+        }
+      }
+    }
+  }
+}
+```
+
+A general "allowlist" SHOULD look like this:
+```
+      "constraints": [
+        {
+          "id": "biolink:knowledge_source",
+          "name": "knowledge source",
+          "value": [
+            "infores:rtx-kg2",
+            "infores:biothings-explorer",
+          ],
+          "operator": "=="
+        }
+      ],
+```
+
+(when the value is a list, the "==" operator works like a SQL "IN" clause, as clearly documented in the TRAPI yaml)
+
+Here is what a general "denylist" should look like:
+```
+      "constraints": [
+        {
+          "id": "biolink:knowledge_source",
+          "name": "knowledge source",
+          "value": [
+            "infores:rtx-kg2",
+            "infores:biothings-explorer",
+          ],
+          "not": true,
+          "operator": "=="
+        }
+      ],
+```
+
+(when the value is a list, the "==" operator combined with ' "not": true ' works like a SQL "NOT IN" clause, as clearly documented in the TRAPI yaml)
+
