@@ -802,7 +802,7 @@ components:
         An additional nuance attached to an assertion
       type: object
       properties:
-        type:
+        qualifier_type_id:
           type: string
           description: >-
             The category of the qualifier, drawn from a hierarchy of qualifier
