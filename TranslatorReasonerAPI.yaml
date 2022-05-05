@@ -805,7 +805,7 @@ components:
         type:
           type: string
           description: >-
-            The category of the qualifier, drawn from a hierarchy qualifier
+            The category of the qualifier, drawn from a hierarchy of qualifier
             slots in the Biolink model (e.g. subject_aspect, subject_direction,
             object_aspect, object_direction, etc).
           example: subject_aspect
@@ -814,8 +814,8 @@ components:
           type: string
           description: >-
             The value associated with the type of the qualifier, drawn from
-            a set of controlled values specified by the type, as specified in
-            in the Biolink model (e.g. 'decreased' or 'increased' for the type
+            a set of controlled values by the type as specified in
+            the Biolink model (e.g. 'decreased' or 'increased' for the type
             subject_direction, etc).
           example: decreased
           nullable: false
