@@ -784,10 +784,44 @@ components:
           items:
             $ref: '#/components/schemas/Attribute'
           nullable: true
+        qualifiers:
+          type: array
+          description: >-
+            A list of qualifiers that provide additional detailed nuance
+            to the assertion beyond what the subject-predicate-object can
+            provide.
+          items:
+            $ref: '#/components/schemas/Qualifier'
+          nullable: true
       additionalProperties: false
       required:
         - subject
         - object
+    Qualifier:
+      description: >-
+        An additional nuance attached to an assertion
+      type: object
+      properties:
+        type:
+          type: string
+          description: >-
+            The category of the qualifier, drawn from a hierarchy qualifier
+            slots in the Biolink model (e.g. subject_aspect, subject_direction,
+            object_aspect, object_direction, etc).
+          example: subject_aspect
+          nullable: false
+        value:
+          type: string
+          description: >-
+            The value associated with the type of the qualifier, drawn from
+            a set of controlled values specified by the type, as specified in
+            in the Biolink model (e.g. 'decreased' or 'increased' for the type
+            subject_direction, etc).
+          example: decreased
+          nullable: false
+      required:
+        - type
+        - value
     BiolinkEntity:
       description: >-
         Compact URI (CURIE) for a Biolink class, biolink:NamedThing
