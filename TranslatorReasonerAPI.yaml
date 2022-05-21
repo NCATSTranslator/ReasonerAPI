@@ -810,6 +810,7 @@ components:
         - subject
         - object
     Qualifier:
+      additionalProperties: false
       description: >-
         An additional nuance attached to an assertion
       type: object
@@ -835,6 +836,7 @@ components:
         - type
         - value
     QualifierSet:
+      additionalProperties: false
       description: >-
         A set of Qualifiers that act together to add nuance to an assertion.
       properties:
