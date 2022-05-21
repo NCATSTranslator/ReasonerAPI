@@ -632,14 +632,26 @@ components:
             Corresponds to the map key identifier of the
             object concept node anchoring the query filter
             pattern for the query relationship edge.
-        constraints:
+        attribute_constraints:
           type: array
           description: >-
-            A list of contraints applied to a query edge.
+            A list of attribute contraints applied to a query edge.
             If there are multiple items, they must all be true (equivalent
             to AND)
           items:
             $ref: '#/components/schemas/QueryConstraint'
+          default: []
+        qualifier_constraints:
+          type: array
+          description: >-
+            A list of QualifierSets that provide nuance to the QEdge.
+            If multiple QualifierSets are provided, there is an OR
+            relationship between them. If the QEdge has multiple
+            predicates, then each QualifierSet SHOULD define the
+            predicate it is qualifying via the
+            QualiferSet.qualified_predicate property.
+          items:
+            $ref: '#/components/schemas/QualifierSet'
           default: []
       additionalProperties: true
       required:
@@ -784,10 +796,67 @@ components:
           items:
             $ref: '#/components/schemas/Attribute'
           nullable: true
+        qualifiers:
+          type: array
+          description: >-
+            A list of qualifiers that together provide additional detailed
+            nuance to the assertion beyond what the subject-predicate-object
+            can provide.
+          items:
+            $ref: '#/components/schemas/Qualifier'
+          nullable: true
       additionalProperties: false
       required:
         - subject
         - object
+    Qualifier:
+      description: >-
+        An additional nuance attached to an assertion
+      type: object
+      properties:
+        qualifier_type_id:
+          type: string
+          description: >-
+            The category of the qualifier, drawn from a hierarchy of qualifier
+            slots in the Biolink model (e.g. subject_aspect, subject_direction,
+            object_aspect, object_direction, etc).
+          example: subject_aspect
+          nullable: false
+        value:
+          type: string
+          description: >-
+            The value associated with the type of the qualifier, drawn from
+            a set of controlled values by the type as specified in
+            the Biolink model (e.g. 'decreased' or 'increased' for the type
+            subject_direction, etc).
+          example: decreased
+          nullable: false
+      required:
+        - type
+        - value
+    QualifierSet:
+      description: >-
+        A set of Qualifiers that act together to add nuance to an assertion.
+      properties:
+        qualifiers:
+          type: array
+          description: >-
+            A list of qualifiers that together provide additional detailed
+            nuance to the assertion beyond what the subject-predicate-object
+            can provide.
+          items:
+            $ref: '#/components/schemas/Qualifier'
+          nullable: false
+        qualified_predicate:
+          $ref: '#/components/schemas/BiolinkPredicate'
+          description: >-
+            The predicate that is to be qualified in cases where there
+            are multiple predicates in a query and there thus might be
+            ambiguity.
+          nullable: true
+      required:
+        - qualifiers
+      type: object
     BiolinkEntity:
       description: >-
         Compact URI (CURIE) for a Biolink class, biolink:NamedThing
