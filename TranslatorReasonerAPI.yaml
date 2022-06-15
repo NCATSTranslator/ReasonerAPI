@@ -598,7 +598,7 @@ components:
             If there are multiple items, they must all be true (equivalent
             to AND)
           items:
-            $ref: '#/components/schemas/QueryConstraint'
+            $ref: '#/components/schemas/AttributeConstraint'
           default: []
       additionalProperties: true
     QEdge:
@@ -639,7 +639,7 @@ components:
             If there are multiple items, they must all be true (equivalent
             to AND)
           items:
-            $ref: '#/components/schemas/QueryConstraint'
+            $ref: '#/components/schemas/AttributeConstraint'
           default: []
         qualifier_constraints:
           type: array
@@ -1014,7 +1014,7 @@ components:
           nullable: true
       required:
         - attribute_type_id
-    QueryConstraint:
+    AttributeConstraint:
       type: object
       description: >-
         Generic query constraint for a query node or query edge
