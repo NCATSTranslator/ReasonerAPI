@@ -823,18 +823,18 @@ components:
             object_aspect, object_direction, etc).
           example: subject_aspect
           nullable: false
-        value:
+        qualifier_value:
           type: string
           description: >-
             The value associated with the type of the qualifier, drawn from
             a set of controlled values by the type as specified in
-            the Biolink model (e.g. 'decreased' or 'increased' for the type
-            subject_direction, etc).
-          example: decreased
+            the Biolink model (e.g. 'expression' or 'abundance' for the
+            qualifier type 'subject_aspect', etc).
+          example: expression
           nullable: false
       required:
-        - type
-        - value
+        - qualifier_type_id
+        - qualifier_value
     QualifierSet:
       additionalProperties: false
       description: >-
