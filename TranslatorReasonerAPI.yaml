@@ -838,7 +838,13 @@ components:
     QualifierConstraint:
       additionalProperties: false
       description: >-
-        A set of Qualifiers that act together to add nuance to an assertion.
+        Defines a query constraint based on the
+        qualifier_types and qualifier_values of a set of
+        Qualifiers attached to an edge. For example, it can constrain a
+        "ChemicalX - affects - ?Gene" query to return only edges where
+        ChemicalX specifically affects the 'expression' of the Gene,
+        by constraining on the qualifier_type "object_aspect" with
+        a qualifier_value of "expression".
       properties:
         qualifier_set:
           type: array
