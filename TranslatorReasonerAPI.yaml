@@ -644,14 +644,14 @@ components:
         qualifier_constraints:
           type: array
           description: >-
-            A list of QualifierSets that provide nuance to the QEdge.
-            If multiple QualifierSets are provided, there is an OR
+            A list of QualifierConstraints that provide nuance to the QEdge.
+            If multiple QualifierConstraints are provided, there is an OR
             relationship between them. If the QEdge has multiple
-            predicates, then each QualifierSet SHOULD define the
+            predicates, then each QualifierConstraint SHOULD define the
             predicate it is qualifying via the
-            QualiferSet.qualified_predicate property.
+            QualifierConstraint.qualified_predicate property.
           items:
-            $ref: '#/components/schemas/QualifierSet'
+            $ref: '#/components/schemas/QualifierConstraint'
           default: []
       additionalProperties: true
       required:
@@ -835,7 +835,7 @@ components:
       required:
         - qualifier_type_id
         - qualifier_value
-    QualifierSet:
+    QualifierConstraint:
       additionalProperties: false
       description: >-
         A set of Qualifiers that act together to add nuance to an assertion.
@@ -843,7 +843,7 @@ components:
         qualifiers:
           type: array
           description: >-
-            A list of qualifiers that together provide additional detailed
+            A list of Qualifiers that together provide additional detailed
             nuance to the assertion beyond what the subject-predicate-object
             can provide.
           items:
