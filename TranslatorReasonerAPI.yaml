@@ -649,7 +649,7 @@ components:
             relationship between them. If the QEdge has multiple
             predicates, then each QualifierConstraint SHOULD define the
             predicate it is qualifying via the
-            QualifierConstraint.qualified_predicate property.
+            QualifierConstraint.constrained_predicate property.
           items:
             $ref: '#/components/schemas/QualifierConstraint'
           default: []
@@ -849,7 +849,7 @@ components:
           items:
             $ref: '#/components/schemas/Qualifier'
           nullable: false
-        qualified_predicate:
+        constrained_predicate:
           $ref: '#/components/schemas/BiolinkPredicate'
           description: >-
             The predicate that is to be qualified in cases where there
