@@ -796,10 +796,10 @@ components:
           items:
             $ref: '#/components/schemas/Attribute'
           nullable: true
-        qualifiers:
+        qualifier_set:
           type: array
           description: >-
-            A list of qualifiers that together provide additional detailed
+            A set of qualifiers that together provide additional detailed
             nuance to the assertion beyond what the subject-predicate-object
             can provide.
           items:
@@ -840,10 +840,10 @@ components:
       description: >-
         A set of Qualifiers that act together to add nuance to an assertion.
       properties:
-        qualifiers:
+        qualifier_set:
           type: array
           description: >-
-            A list of Qualifiers that together provide additional detailed
+            A set of Qualifiers that together provide additional detailed
             nuance to the assertion beyond what the subject-predicate-object
             can provide.
           items:
