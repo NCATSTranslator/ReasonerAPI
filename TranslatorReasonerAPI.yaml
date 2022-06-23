@@ -893,6 +893,16 @@ components:
           description: >-
             Object node category of this relationship edge.
           example: biolink:Protein
+        knowledge_types:
+          description: >-
+            A list of knowledge_types that are supported by the service.
+            If the knowledge_types is null, this means that only 'lookup'
+            is supported. Currently allowed values are 'lookup' or 'inferred'.
+          items:
+            string
+          minItems: 1
+          nullable: true
+          type: array
         attributes:
           type: array
           description: >-
