@@ -799,9 +799,8 @@ components:
         qualifier_set:
           type: array
           description: >-
-            A set of qualifiers that together provide additional detailed
-            nuance to the assertion beyond what the subject-predicate-object
-            can provide.
+            A set of Qualifiers that act together to add nuance
+            or detail to the statement expressed in an Edge.
           items:
             $ref: '#/components/schemas/Qualifier'
           nullable: true
@@ -849,9 +848,9 @@ components:
         qualifier_set:
           type: array
           description: >-
-            A set of Qualifiers that together provide additional detailed
-            nuance to the assertion beyond what the subject-predicate-object
-            can provide.
+            A set of Qualifiers that serves to add nuance to a query,
+            by constraining allowed values held by Qualifiers
+            on queried Edges.
           items:
             $ref: '#/components/schemas/Qualifier'
           nullable: false
