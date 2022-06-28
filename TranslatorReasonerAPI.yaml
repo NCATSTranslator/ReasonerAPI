@@ -899,7 +899,7 @@ components:
             If the knowledge_types is null, this means that only 'lookup'
             is supported. Currently allowed values are 'lookup' or 'inferred'.
           items:
-            string
+            type: string
           minItems: 1
           nullable: true
           type: array
