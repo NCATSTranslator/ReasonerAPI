@@ -27,6 +27,7 @@ info:
       - LIST-ALL-SUPPORTED-OPERATION-IDS-HERE-OR-REMOVE-THIS-SECTION
     batch_size_limit: ADD-BATCH-SIZE-LIMIT-OR-REMOVE-IF-NO-LIMIT
     rate_limit: ADD-REQUEST-RATE-LIMIT-OR-REMOVE-IF-NO-LIMIT
+    test_data_location: ADD-URL-THAT-RESOLVES-TO-SRI-TESTING-HARNESS-DATA
     externalDocs:
       description: >-
         The values for version are restricted according to the regex in
