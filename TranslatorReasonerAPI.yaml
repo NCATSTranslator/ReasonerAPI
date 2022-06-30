@@ -797,7 +797,7 @@ components:
           items:
             $ref: '#/components/schemas/Attribute'
           nullable: true
-        qualifier_set:
+        qualifiers:
           type: array
           description: >-
             A set of Qualifiers that act together to add nuance
