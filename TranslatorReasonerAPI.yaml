@@ -647,9 +647,10 @@ components:
             A list of QualifierConstraints that provide nuance to the QEdge.
             If multiple QualifierConstraints are provided, there is an OR
             relationship between them. If the QEdge has multiple
-            predicates, then each QualifierConstraint SHOULD define the
-            predicate it is qualifying via the
-            QualifierConstraint.constrained_predicate property.
+            predicates or if the QNodes that correspond to the subject or
+            object of this QEdge have multiple categories or multiple
+            curies, then qualifier_constraints MUST NOT be specified
+            because these complex use cases are not supported at this time.
           items:
             $ref: '#/components/schemas/QualifierConstraint'
           default: []
@@ -854,13 +855,6 @@ components:
           items:
             $ref: '#/components/schemas/Qualifier'
           nullable: false
-        constrained_predicate:
-          $ref: '#/components/schemas/BiolinkPredicate'
-          description: >-
-            The predicate that is to be qualified in cases where there
-            are multiple predicates in a query and there thus might be
-            ambiguity.
-          nullable: true
       required:
         - qualifiers
       type: object
