@@ -2,6 +2,18 @@
 
 https://github.com/NCATSTranslator/ReasonerAPI/compare/v1.2.0...1.3
   
+- Add test_data_location in x-trapi
+  https://github.com/NCATSTranslator/ReasonerAPI/pull/339/files
+
+- Add flag for knowledge_type flag for Creative Mode
+  https://github.com/NCATSTranslator/ReasonerAPI/pull/331/files
+
+- Add support for Qualifiers in KGs and queries
+  https://github.com/NCATSTranslator/ReasonerAPI/pull/330/files
+
+- Add knowledge_types support to /meta_knowledge_graph
+  https://github.com/NCATSTranslator/ReasonerAPI/pull/333/files
+
 - Add === operator to Constraint
   https://github.com/NCATSTranslator/ReasonerAPI/commit/875112b7a349c9f8e89bb5660725af5c895c9a24
 
