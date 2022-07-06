@@ -45,7 +45,7 @@ externalDocs:
 tags:
   - name: meta_knowledge_graph
     description: >-
-      Retreive the meta knowledge graph representation of this
+      Retrieve the meta knowledge graph representation of this
       TRAPI web service. KPs MUST provide all subject category - predicate -
       object category triplets that are supported by the service,
       including all implied ancestor relationships. ARAs SHOULD provide
@@ -238,6 +238,13 @@ components:
           allOf:
             - $ref: http://standards.ncats.io/workflow/1.0.0/schema
           nullable: true
+        submitter:
+          type: string
+          description: >-
+            Any string for self-identifying the submitter of a query. The
+            purpose of this optional field is to aid in the tracking of
+            the source of queries for development and issue resolution.
+          nullable: true
       additionalProperties: true
       required:
         - message
@@ -278,6 +285,13 @@ components:
           description: List of workflow steps to be executed.
           allOf:
             - $ref: http://standards.ncats.io/workflow/1.0.0/schema
+          nullable: true
+        submitter:
+          type: string
+          description: >-
+            Any string for self-identifying the submitter of a query. The
+            purpose of this optional field is to aid in the tracking of
+            the source of queries for development and issue resolution.
           nullable: true
       additionalProperties: true
       required:
@@ -476,6 +490,16 @@ components:
             the NodeBinding.id being a descendant of a QNode.id), then
             this query_id MUST be provided. In other cases, there is no
             ambiguity, and this query_id SHOULD NOT be provided.
+        attributes:
+          type: array
+          description: >-
+            A list of attributes providing further information about the
+            node binding. This is not intended for capturing node attributes
+            and should only be used for properties that vary from result to
+            result.
+          items:
+            $ref: '#/components/schemas/Attribute'
+          nullable: true
       additionalProperties: true
       required:
         - id
