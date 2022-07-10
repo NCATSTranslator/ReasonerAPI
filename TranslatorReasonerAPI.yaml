@@ -992,7 +992,7 @@ components:
           $ref: '#/components/schemas/BiolinkEntity'
           description: >-
             Subject node category of this relationship edge.
-          example: biolink:ChemicalSubstance
+          example: biolink:ChemicalEntity
         predicate:
           $ref: '#/components/schemas/BiolinkPredicate'
           description: >-
