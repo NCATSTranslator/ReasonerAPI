@@ -56,7 +56,7 @@ def main():
     )
 
     with open('reference.md', 'w') as stream:
-        stream.write(markdown)
+        stream.write(markdown.encode('cp850', 'replace').decode('utf-8', 'replace'))
 
 
 if __name__ == "__main__":
