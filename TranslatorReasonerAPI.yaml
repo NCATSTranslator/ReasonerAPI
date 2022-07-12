@@ -48,7 +48,7 @@ tags:
       Retrieve the meta knowledge graph representation of this
       TRAPI web service. KPs MUST provide all subject category - predicate -
       object category triplets that are supported by the service,
-      including all implied ancestor relationships. ARAs SHOULD provide
+      NOT including all implied ancestor relationships. ARAs SHOULD provide
       the union of all meta knowledge graphs of all the KPs that they can
       consult.
     externalDocs:
