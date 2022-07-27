@@ -37,13 +37,13 @@
   },
   "knowledge_graph": {
     "nodes": {
-      "n0": {
+      "PUBCHEM.COMPOUND:6623": {
         "categories": [
           "biolink:ChemicalEntity"
         ],
         "name": "Bisphenol A"
       },
-      "n1": {
+      "HGNC:3467": {
         "categories": [
           "biolink:Gene"
         ],
