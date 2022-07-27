@@ -2,11 +2,11 @@
     "query_graph": {
         "nodes": {
             "n0": {
-                "category": "biolink:Disease",
-                "id": "MONDO:0005737"
+                "categories": ["biolink:Disease"],
+                "ids": ["MONDO:0005737"]
             },
             "n1": {
-                "category": "biolink:Gene"
+                "categories": ["biolink:Gene"]
             }
         },
         "edges": {
@@ -19,15 +19,15 @@
     "knowledge_graph": {
         "nodes": {
             "MONDO:0005737": {
-                "category": "biolink:Disease",
+                "categories": ["biolink:Disease"],
                 "name": "Ebola hemorrhagic fever"
             },
             "HGNC:17770": {
-                "category": "biolink:Gene",
+                "categories": ["biolink:Gene"],
                 "name": "RALGAPA1"
             },
             "HGNC:13236": {
-                "category": "biolink:Gene",
+                "categories": ["biolink:Gene"],
                 "name": "URI1"
             }
         },
