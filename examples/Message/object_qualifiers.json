@@ -2,10 +2,14 @@
   "query_graph": {
     "nodes": {
       "n0": {
-        "categories": ["biolink:ChemicalEntity"]
+        "categories": [
+          "biolink:ChemicalEntity"
+        ]
       },
       "n1": {
-        "categories": ["biolink:GeneOrGeneProduct"],
+        "categories": [
+          "biolink:GeneOrGeneProduct"
+        ],
         "ids": [
           "HGNC:3467"
         ]
@@ -29,10 +33,10 @@
                 "qualifier_type_id": "biolink:object_direction_qualifier",
                 "qualifier_value": "decreased"
               },
- 	      {
+              {
                 "qualifier_type_id": "biolink:qualified_predicate",
                 "qualifier_value": "causes"
-              },
+              }
             ]
           }
         ]
@@ -49,7 +53,7 @@
       },
       "HGNC:3467": {
         "categories": [
-          "biolink:Gene"
+          "biolink:GeneOrGeneProduct"
         ],
         "name": "ESR1"
       }

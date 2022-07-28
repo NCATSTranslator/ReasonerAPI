@@ -1,0 +1,5 @@
+tox
+pyyaml
+requests
+jsonschema
+pytest

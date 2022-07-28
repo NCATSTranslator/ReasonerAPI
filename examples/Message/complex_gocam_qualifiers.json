@@ -1,0 +1,133 @@
+{
+  "query_graph": {
+    "nodes": {
+      "n0": {
+        "categories": [
+          "biolink:GeneOrGeneProduct"
+        ],
+        "ids": [
+          "FB:FBgn0003205"
+        ]
+      },
+      "n1": {
+        "categories": [
+          "biolink:GeneOrGeneProduct"
+        ],
+        "ids": [
+          "FB:FBgn0003079"
+        ]
+      }
+    },
+    "edges": {
+      "e01": {
+        "subject": "n0",
+        "object": "n1",
+        "predicates": [
+          "biolink:regulates"
+        ],
+        "qualifier_constraints": [
+          {
+            "qualifier_set": [
+              {
+                "qualifier_type_id": "biolink:subject_aspect_qualifier",
+                "qualifier_value": "GO:0043539"
+              },
+              {
+                "qualifier_type_id": "biolink:subject_specialization",
+                "qualifier_value": "GO:0005886"
+              },
+              {
+                "qualifier_type_id": "biolink:object_aspect_qualifier",
+                "qualifier_value": "GO:0004708"
+              },
+              {
+                "qualifier_type_id": "biolink:subject_specialization_qualifier",
+                "qualifier_value": "GO:0005737"
+              },
+              {
+                "qualifier_type_id": "biolink:object_direction_qualifier",
+                "qualifier_value": "increased"
+              },
+              {
+                "qualifier_type_id": "biolink:pathway_context_qualifier",
+                "qualifier_value": "EGFR pathway"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "knowledge_graph": {
+    "nodes": {
+      "FB:FBgn0003205": {
+        "categories": [
+          "biolink:GeneOrGeneProduct"
+        ],
+        "name": "Ras85D"
+      },
+      "FB:FBgn0003079": {
+        "categories": [
+          "biolink:GeneOrGeneProduct"
+        ],
+        "name": "Raf"
+      }
+    },
+    "edges": {
+      "x17770": {
+        "predicate": "biolink:regulates",
+        "subject": "FB:FBgn0003205",
+        "object": "FB:FBgn0003079",
+        "qualifiers": [
+          {
+            "qualifier_type_id": "biolink:subject_aspect_qualifier",
+            "qualifier_value": "GO:0043539"
+          },
+          {
+            "qualifier_type_id": "biolink:subject_specialization",
+            "qualifier_value": "GO:0005886"
+          },
+          {
+            "qualifier_type_id": "biolink:object_aspect_qualifier",
+            "qualifier_value": "GO:0004708"
+          },
+          {
+            "qualifier_type_id": "biolink:subject_specialization_qualifier",
+            "qualifier_value": "GO:0005737"
+          },
+          {
+            "qualifier_type_id": "biolink:object_direction_qualifier",
+            "qualifier_value": "increased"
+          },
+          {
+            "qualifier_type_id": "biolink:pathway_context_qualifier",
+            "qualifier_value": "EGFR pathway"
+          }
+        ]
+      }
+    }
+  },
+  "results": [
+    {
+      "node_bindings": {
+        "n0": [
+          {
+            "id": "FB:FBgn0003205"
+          }
+        ],
+        "n1": [
+          {
+            "id": "FB:FBgn0003079"
+          }
+        ]
+      },
+      "edge_bindings": {
+        "e01": [
+          {
+            "id": "x17770"
+          }
+        ]
+      }
+    }
+  ]
+}
