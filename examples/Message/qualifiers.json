@@ -28,7 +28,11 @@
               {
                 "qualifier_type_id": "biolink:object_direction_qualifier",
                 "qualifier_value": "decreased"
-              }
+              },
+ 	      {
+                "qualifier_type_id": "biolink:qualified_predicate",
+                "qualifier_value": "causes"
+              },
             ]
           }
         ]
@@ -63,6 +67,10 @@
           {
             "qualifier_type_id": "biolink:object_direction_qualifier",
             "qualifier_value": "decreased"
+          },
+          {
+            "qualifier_type_id": "biolink:qualified_predicate",
+            "qualifier_value": "causes"
           }
         ]
       }
