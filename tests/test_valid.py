@@ -1,4 +1,4 @@
-"""OpenAPI 3.0 validation."""
+"""OpenAPI 3.0 validation and examples validation."""
 import json
 import os
 import pathlib
