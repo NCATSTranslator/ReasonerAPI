@@ -21,3 +21,14 @@ activity of Raf in the cytoplasm within the EGFR signaling pathway"
 ![gocam](../images/gocam.png)
 
 * [complex_gocam_qualifiers.json](complex_gocam_qualifiers.json)
+
+### Rules
+
+* There may only be one of each type of qualifier in any edges.qualifier_constraints.qualifier_set
+* qualifier_value is defined by either: an enumerated value in biolink, or an ontology term. 
+* qualifier_value enumerations are hierarchical.  If a query asks for "biolink:object_aspect_qualifier" = "abundance", 
+then, aspects matching any child of abundance should also be returned. 
+* qualified_predicate is required in any edges.qualifier_constraints.qualifier_set.  If the statement does not
+make use of a more or less specific value for the qualified_predicate, the value of qualified_predicate should
+be the predicate. 
+* 

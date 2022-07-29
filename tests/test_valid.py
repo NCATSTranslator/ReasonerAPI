@@ -21,13 +21,11 @@ def test_valid():
 
 def test_examples():
     dir_path = os.path.dirname(os.path.realpath(__file__))
-    print(dir_path)
     with open(os.path.join(dir_path, '..', 'TranslatorReasonerAPI.yaml')) as f:
         spec = yaml.load(f, Loader=yaml.SafeLoader)
-    dir_path = os.path.join(dir_path, '../examples/Message')
-    print(dir_path)
-    for filename in os.listdir(dir_path):
-        full_path = os.path.join(dir_path, filename)
+    dir_path_json = os.path.join(dir_path, '../examples/Message')
+    for filename in os.listdir(dir_path_json):
+        full_path = os.path.join(dir_path_json, filename)
         # checking if it is a file
         file_extension = pathlib.Path(full_path).suffix
         if file_extension == '.json':
