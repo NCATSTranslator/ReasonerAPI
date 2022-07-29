@@ -36,10 +36,13 @@ These rules can not be enforced in the schema for TRAPI, but should be implement
       statement MAY also be returned.
 2. __qualifier_value__  
    1. is constrained by either: an enumeration in biolink, or an ontology term.  
-      1. When an ontology term is used, the assumption is that annotations that use this term or any of its children should be returned.
-   2. qualifier_value enumerations are hierarchical.  
-      1. If a query asks for "biolink:object_aspect_qualifier" = "abundance", 
-      then, aspects matching any child of abundance should also be returned. 
+      1. When an ontology term is used, the assumption is that annotations that use this term or any of its children 
+      should be returned.
+      2. When an enumerated value is used, the assumption is that annotations that use this enumerated value or any 
+      of its children should be returned. 
+         1. For example, if a query asks for "biolink:object_aspect_qualifier" = "abundance", 
+         then, aspects matching any child of "abundance" should also be returned (if the other qualifiers used in this
+         query are also satisfied). 
 3. __qualified_predicate__ is required in any edges.qualifier_constraints.qualifier_set.  
    1. If the statement does not
    make use of a more or less specific value for the qualified_predicate, the value of qualified_predicate should
