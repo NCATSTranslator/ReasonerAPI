@@ -43,6 +43,4 @@ These rules can not be enforced in the schema for TRAPI, but should be implement
          1. For example, if a query asks for "biolink:object_aspect_qualifier" = "abundance", 
          then, aspects matching any child of "abundance" should also be returned (if the other qualifiers used in this
          query are also satisfied). 
-3. __qualified_predicate__ is required in any edges.qualifier_constraints.qualifier_set.  
-   1. If the statement does not make use of a more or less specific value for the qualified_predicate, the value of 
-   qualified_predicate should be the predicate.
+3. __qualified_predicate__ 
