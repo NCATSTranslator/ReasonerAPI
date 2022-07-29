@@ -26,13 +26,15 @@ activity of Raf in the cytoplasm within the EGFR signaling pathway"_
 
 These rules can not be enforced in the schema for TRAPI, but should be implemented in a validation layer.
 
-1. There may only be one of each type of qualifier in any edges.qualifier_constraints.qualifier_set
-2. qualifier_value is constrained by either: an enumeration in biolink, or an ontology term.  
-   1. When an ontology term is used, the assumption is that annotations that use this term or any of its children should be returned.
-3. qualifier_value enumerations are hierarchical.  
-   1. If a query asks for "biolink:object_aspect_qualifier" = "abundance", 
-   then, aspects matching any child of abundance should also be returned. 
-4. qualified_predicate is required in any edges.qualifier_constraints.qualifier_set.  
+1. __general rules__
+   1. There may only be one of each type of qualifier in any edges.qualifier_constraints.qualifier_set
+2. __qualifier_value__  
+   1. is constrained by either: an enumeration in biolink, or an ontology term.  
+      1. When an ontology term is used, the assumption is that annotations that use this term or any of its children should be returned.
+   2. qualifier_value enumerations are hierarchical.  
+      1. If a query asks for "biolink:object_aspect_qualifier" = "abundance", 
+      then, aspects matching any child of abundance should also be returned. 
+3. __qualified_predicate__ is required in any edges.qualifier_constraints.qualifier_set.  
    1. If the statement does not
    make use of a more or less specific value for the qualified_predicate, the value of qualified_predicate should
    be the predicate.
