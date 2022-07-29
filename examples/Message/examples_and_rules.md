@@ -28,6 +28,12 @@ These rules can not be enforced in the schema for TRAPI, but should be implement
 
 1. __general rules__
    1. There may only be one of each type of qualifier in any edges.qualifier_constraints.qualifier_set
+   2. If a KP receives non-empty QEdge.qualifier_constraints, it MUST only return edges that satisfy the entire set of 
+   qualifier_constraints. If a KP does not yet support QEdge.qualifier_constraints, it MUST return an empty response 
+   because no matches are found.
+      1. If a knowledge statement contains more qualifiers or differently typed qualifiers than those specified in
+      edges.qualifier_constraints.qualifier_set in addition to the entire set of qualifier_constraints, the knowledge 
+      statement should also be returned.
 2. __qualifier_value__  
    1. is constrained by either: an enumeration in biolink, or an ontology term.  
       1. When an ontology term is used, the assumption is that annotations that use this term or any of its children should be returned.
