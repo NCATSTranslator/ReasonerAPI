@@ -1,4 +1,4 @@
-# Class for autogenerating content for the README.md file based on the YAML file
+# Class for autogenerating content for the examples_and_rules.md file based on the YAML file
 import os
 import sys
 import re
