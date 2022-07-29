@@ -1,7 +1,7 @@
 """OpenAPI 3.0 validation."""
 import json
 import os
-from pprint import pprint
+import pathlib
 import jsonschema
 import requests
 import yaml
@@ -24,10 +24,13 @@ def test_examples():
     print(dir_path)
     with open(os.path.join(dir_path, '..', 'TranslatorReasonerAPI.yaml')) as f:
         spec = yaml.load(f, Loader=yaml.SafeLoader)
+    dir_path = os.path.join(dir_path, '../examples/Message')
+    print(dir_path)
     for filename in os.listdir(dir_path):
-        f = os.path.join(dir_path, '../examples/Message', filename)
+        full_path = os.path.join(dir_path, filename)
         # checking if it is a file
-        if os.path.isfile(f):
-            with open(f) as f:
+        file_extension = pathlib.Path(full_path).suffix
+        if file_extension == '.json':
+            with open(full_path) as f:
                 example = yaml.load(f, Loader=yaml.SafeLoader)
                 jsonschema.validate(example, spec)
