@@ -620,7 +620,7 @@ components:
         constraints:
           type: array
           description: >-
-            A list of contraints applied to a query node.
+            A list of constraints applied to a query node.
             If there are multiple items, they must all be true (equivalent
             to AND)
           items:
@@ -675,7 +675,7 @@ components:
         attribute_constraints:
           type: array
           description: >-
-            A list of attribute contraints applied to a query edge.
+            A list of attribute constraints applied to a query edge.
             If there are multiple items, they must all be true (equivalent
             to AND)
           items:
