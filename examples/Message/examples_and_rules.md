@@ -1,4 +1,4 @@
-## Biolink 3.0 Qualifiers Examples
+## Biolink Qualifiers Examples
 
 ### Object qualifiers
 _“Bisphenol A results in decreased degradation of ESR1 protein”_
@@ -8,8 +8,8 @@ subject: Bisphenol A
 predicate: affects 
 qualified_predicate: causes
 object: ESR1
-object_aspect: degradation
-object_direction: decreased
+object_aspect_qualifier: degradation
+object_direction_qualifier: decreased
 ```
 * [object_qualifiers.json](object_qualifiers.json)
 
@@ -22,8 +22,8 @@ _"Bisphenol A is associated with decreased degradation of ESR1 protein"_
 subject: Bisphenol A
 predicate: associated_with
 object: ESR1
-object_aspect: degradation
-object_direction: decreased
+object_aspect_qualifier: degradation
+object_direction_qualifier: decreased
 ```
 
 
@@ -32,16 +32,28 @@ _“Methionine deficiency results in increased expression of ADRB2”_
 
 ```
 subject: Methionine
-subject_aspect: abundance
-subject_direction: decreased
+subject_aspect_qualifier: abundance
+subject_direction_qualifier: decreased
 predicate: affects 
 qualified_predicate: causes
 object: ADRB2 
-object_aspect: expression
-object_direction: increased
+object_aspect_qualifier: expression
+object_direction_qualifier: increased
 ```
 
 * [subject_and_object_qualifiers.json](subject_and_object_qualifiers.json)
+
+_"Fenofibrate is an agonist of PPARA protein"_
+
+```
+subject: Fenofibrate
+predicate: affects             
+qualified_predicate: causes
+object: PPARA protein
+object_aspect_qualifier: activity
+object_direction_qualifier: increased
+mechanism_qualifier: agonism
+```
 
 ### Complex GO-CAM statement
 _"The protein ser/thr kinase activator activity of Ras85D in the plasma membrane directly positively regulates MAPKKK 
@@ -49,14 +61,14 @@ activity of Raf in the cytoplasm within the EGFR signaling pathway"_
 
 ```
 subject: Dmel Ras85D
-subject_aspect: protein ser/thr kinase activator activity
-subject_specialization: plasma membrane
+subject_aspect_qualifier: protein ser/thr kinase activator activity
+subject_context_qualifier: plasma membrane
 predicate: regulates   
 qualified_predicate: causes
 object: Dmel Raf
-object_aspect: MAPKKK activity
-object_specialization: cytoplasm
-object_direction: increased
+object_aspect_qualifier: MAPKKK activity
+object_context_qualifier: cytoplasm
+object_direction_qualifier: increased
 pathway_context_qualifier: EGFR pathway
 ```
 

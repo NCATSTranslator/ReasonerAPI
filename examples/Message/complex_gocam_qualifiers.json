@@ -33,7 +33,7 @@
                 "qualifier_value": "GO:0043539"
               },
               {
-                "qualifier_type_id": "biolink:subject_specialization",
+                "qualifier_type_id": "biolink:subject_context_qualifier",
                 "qualifier_value": "GO:0005886"
               },
               {
@@ -41,7 +41,7 @@
                 "qualifier_value": "GO:0004708"
               },
               {
-                "qualifier_type_id": "biolink:subject_specialization_qualifier",
+                "qualifier_type_id": "biolink:object_context_qualifier",
                 "qualifier_value": "GO:0005737"
               },
               {
@@ -84,7 +84,7 @@
             "qualifier_value": "GO:0043539"
           },
           {
-            "qualifier_type_id": "biolink:subject_specialization",
+            "qualifier_type_id": "biolink:subject_context_qualifier",
             "qualifier_value": "GO:0005886"
           },
           {
@@ -92,7 +92,7 @@
             "qualifier_value": "GO:0004708"
           },
           {
-            "qualifier_type_id": "biolink:subject_specialization_qualifier",
+            "qualifier_type_id": "biolink:object_context_qualifier",
             "qualifier_value": "GO:0005737"
           },
           {
