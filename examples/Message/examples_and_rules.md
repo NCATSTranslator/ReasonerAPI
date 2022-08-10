@@ -55,7 +55,9 @@ object_direction_qualifier: increased
 mechanism_qualifier: agonism
 ```
 
-### Complex GO-CAM statement
+### Complex statement
+
+#### GO-CAM
 _"The protein ser/thr kinase activator activity of Ras85D in the plasma membrane directly positively regulates MAPKKK 
 activity of Raf in the cytoplasm within the EGFR signaling pathway"_
 
