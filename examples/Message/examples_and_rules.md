@@ -3,14 +3,43 @@
 ### Object qualifiers
 _“Bisphenol A results in decreased degradation of ESR1 protein”_
 
-![bisphenol](../images/bisphenolA.png)
-
+```
+subject: Bisphenol A
+predicate: affects 
+qualified_predicate: causes
+object: ESR1
+object_aspect: degradation
+object_direction: decreased
+```
 * [object_qualifiers.json](object_qualifiers.json)
+
+Note: the predicate chosen should reflect the relationship between the subject and the object, and is not required
+to be "affects".
+
+_"Bisphenol A is associated with decreased degradation of ESR1 protein"_
+
+```
+subject: Bisphenol A
+predicate: associated_with
+object: ESR1
+object_aspect: degradation
+object_direction: decreased
+```
+
 
 ### Subject and object qualifiers
 _“Methionine deficiency results in increased expression of ADRB2”_
 
-![methionine](../images/methionine.png)
+```
+subject: Methionine
+subject_aspect: abundance
+subject_direction: decreased
+predicate: affects 
+qualified_predicate: causes
+object: ADRB2 
+object_aspect: expression
+object_direction: increased
+```
 
 * [subject_and_object_qualifiers.json](subject_and_object_qualifiers.json)
 
@@ -18,7 +47,18 @@ _“Methionine deficiency results in increased expression of ADRB2”_
 _"The protein ser/thr kinase activator activity of Ras85D in the plasma membrane directly positively regulates MAPKKK 
 activity of Raf in the cytoplasm within the EGFR signaling pathway"_
 
-![gocam](../images/gocam.png)
+```
+subject: Dmel Ras85D
+subject_aspect: protein ser/thr kinase activator activity
+subject_specialization: plasma membrane
+predicate: regulates   
+qualified_predicate: causes
+object: Dmel Raf
+object_aspect: MAPKKK activity
+object_specialization: cytoplasm
+object_direction: increased
+pathway_context_qualifier: EGFR pathway
+```
 
 * [complex_gocam_qualifiers.json](complex_gocam_qualifiers.json)
 
@@ -34,6 +74,7 @@ These rules can not be enforced in the schema for TRAPI, but should be implement
       1. If a knowledge statement contains more qualifiers or differently typed qualifiers than those specified in
       edges.qualifier_constraints.qualifier_set in addition to the entire set of qualifier_constraints, the knowledge 
       statement MAY also be returned.
+   3. Qualifier constraints should be treated as "or" constraints. 
 2. __qualifier_value__  
    1. is constrained by either: an enumeration in biolink, or an ontology term.  
       1. When an ontology term is used, the assumption is that annotations that use this term or any of its children 
@@ -42,5 +83,4 @@ These rules can not be enforced in the schema for TRAPI, but should be implement
       of its children should be returned. 
          1. For example, if a query asks for "biolink:object_aspect_qualifier" = "abundance", 
          then, aspects matching any child of "abundance" should also be returned (if the other qualifiers used in this
-         query are also satisfied). 
-3. __qualified_predicate__ 
+         query are also satisfied).
