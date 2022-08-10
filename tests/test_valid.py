@@ -5,7 +5,9 @@ import pathlib
 import jsonschema
 import requests
 import yaml
+from jsonschema.exceptions import ValidationError
 from pprint import pprint
+from reasoner_validator import validate
 
 
 def test_valid():
@@ -33,15 +35,12 @@ def test_examples():
             with open(full_path) as f:
                 print(full_path)
                 example = json.load(f)
-                jsonschema.validate(example, spec)
+                try:
+                    validate(
+                        instance=example,
+                        component="Message",
+                        trapi_version="1.3.0"
+                    )
+                except ValidationError:
+                    raise ValueError('Bad TRAPI component!')
 
-
-def test_simple_file():
-    dir_path = os.path.dirname(os.path.realpath(__file__))
-    with open(os.path.join(dir_path, '..', 'TranslatorReasonerAPI.yaml')) as f:
-        spec = yaml.load(f, Loader=yaml.SafeLoader)
-    full_path = os.path.join(dir_path, '../examples/Message/simple.json')
-    with open(full_path) as f:
-        example = json.load(f)
-        pprint(example)
-        jsonschema.validate(example, spec)
