@@ -6,7 +6,6 @@ import jsonschema
 import requests
 import yaml
 from jsonschema.exceptions import ValidationError
-from pprint import pprint
 from reasoner_validator import validate
 
 
