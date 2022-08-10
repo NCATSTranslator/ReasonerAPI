@@ -24,12 +24,9 @@ def test_valid():
 
 def test_examples():
     dir_path = os.path.dirname(os.path.realpath(__file__))
-    with open(os.path.join(dir_path, '..', 'TranslatorReasonerAPI.yaml')) as f:
-        spec = yaml.load(f, Loader=yaml.SafeLoader)
     dir_path_json = os.path.join(dir_path, '../examples/Message')
     for filename in os.listdir(dir_path_json):
         full_path = os.path.join(dir_path_json, filename)
-        # checking if it is a file
         file_extension = pathlib.Path(full_path).suffix
         if file_extension == '.json':
             with open(full_path) as f:
@@ -42,5 +39,5 @@ def test_examples():
                         trapi_version="1.3.0"
                     )
                 except ValidationError:
-                    raise ValueError('Bad TRAPI component!')
+                    raise ValueError('TRAPI example is not valid against the trapi_version specified!')
 
