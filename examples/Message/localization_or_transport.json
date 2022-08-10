@@ -28,10 +28,6 @@
               {
                 "qualifier_type_id": "biolink:object_aspect_qualifier",
                 "qualifier_value": "localization"
-              },
-              {
-                "qualifier_type_id": "biolink:qualified_predicate",
-                "qualifier_value": "biolink:causes"
               }
             ]
           },
@@ -40,10 +36,6 @@
               {
                 "qualifier_type_id": "biolink:object_aspect_qualifier",
                 "qualifier_value": "transport"
-              },
-              {
-                "qualifier_type_id": "biolink:qualified_predicate",
-                "qualifier_value": "biolink:causes"
               }
             ]
           }
