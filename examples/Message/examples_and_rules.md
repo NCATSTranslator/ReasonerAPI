@@ -88,7 +88,7 @@ _"What chemicals affect either the localization or the transport of ADRB2"_
 
 _"What chemicals cause increased activity of PPARA protein"_
 
-
+* [causes_predicate_vs_qualifier.json](causes_predicate_vs_qualifier.json)
 
 
 ### Qualifier Rules
