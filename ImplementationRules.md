@@ -70,6 +70,8 @@ The terms MUST, SHOULD, MAY are used as defined in RFC 2119  https://tools.ietf.
 ## QEdge.qualifier_constraints
 - If a KP server receives any QEdge.qualifier_constraints, it MUST only return qualified
   edges that are compatible with the constraints. It MUST NOT return any unqualified edges.
+  If a KP does not yet support QEdge.qualifier_constraints, it MUST return an empty response
+  because no matches are possible.
 - If an ARA server receives any QEdge.qualifier_constraints, it MUST relay all
   QEdge.qualifier_constraints to its KP(s) to satisfy.
 
