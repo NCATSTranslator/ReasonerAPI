@@ -14,7 +14,8 @@ object_direction_qualifier: decreased
 * [object_qualifiers.json](object_qualifiers.json)
 
 Note: the predicate chosen should reflect the relationship between the subject and the object, and is not required
-to be "affects".
+to be "affects".  For example, below we see a statement where the relationship between Bisphenol A and ESR1 is
+not causal. 
 
 _"Bisphenol A is associated with decreased degradation of ESR1 protein"_
 
@@ -57,7 +58,6 @@ mechanism_qualifier: agonism
 
 ### Complex statement
 
-#### GO-CAM
 _"The protein ser/thr kinase activator activity of Ras85D in the plasma membrane directly positively regulates MAPKKK 
 activity of Raf in the cytoplasm within the EGFR signaling pathway"_
 
@@ -76,13 +76,21 @@ pathway_context_qualifier: EGFR pathway
 
 * [complex_gocam_qualifiers.json](complex_gocam_qualifiers.json)
 
+
+### Localization or Transport Query
+
+_"What chemicals affect either the localization or the transport of ADRB2"_
+
+* [localization_or_transport.json](localization_or_transport.json)
+
+
 ### Qualifier Rules
 
 These rules can not be enforced in the schema for TRAPI, but should be implemented in a validation layer.
 
 1. __general rules__
    1. There MUST be only one of each type of qualifier in any edges.qualifier_constraints.qualifier_set
-      1. There MUST be only one qualified_predicate for each set of qualifier constraints. 
+      1. There MUST be only one qualified_predicate for each set of qualifiers in a QualifierConstraint. 
    2. If a KP receives non-empty QEdge.qualifier_constraints, it MUST only return edges that satisfy the entire set of 
    qualifier_constraints. If a KP does not yet support QEdge.qualifier_constraints, it MUST return an empty response 
    because no matches are found.
