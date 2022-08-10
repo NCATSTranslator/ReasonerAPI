@@ -98,8 +98,9 @@ These rules can not be enforced in the schema for TRAPI, but should be implement
 1. __general rules__
    1. There MUST be only one of each type of qualifier in any edges.qualifier_constraints.qualifier_set
       1. There MUST be only one qualified_predicate for each set of qualifiers in a QualifierConstraint. 
-      2. qualified_predicate is an optional qualifier. 
-         1. Both the qualified_predicate and the predicate should be queried when a predicate is provided. 
+      2. qualified_predicate is an optional qualifier. (see [localization_or_transport.json](localization_or_transport.json))
+         1. Both the qualified_predicate and the predicate edge properties SHOULD be queried when a predicate is provided. 
+         see [causes_predicate_vs_qualifier.json](causes_predicate_vs_qualifier.json)
    2. If a KP receives non-empty QEdge.qualifier_constraints, it MUST only return edges that satisfy the entire set of 
    qualifier_constraints. If a KP does not yet support QEdge.qualifier_constraints, it MUST return an empty response 
    because no matches are found.
