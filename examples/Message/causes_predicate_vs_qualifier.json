@@ -1,0 +1,106 @@
+{
+  "query_graph": {
+    "nodes": {
+      "n0": {
+        "categories": [
+          "biolink:ChemicalEntity"
+        ]
+      },
+      "n1": {
+        "categories": [
+          "biolink:GeneOrGeneProduct"
+        ],
+        "ids": [
+          "HGNC:3467"
+        ]
+      }
+    },
+    "edges": {
+      "e01": {
+        "subject": "n0",
+        "object": "n1",
+        "predicates": [
+          "biolink:causes"
+        ],
+        "qualifier_constraints": [
+          {
+            "qualifier_set": [
+              {
+                "qualifier_type_id": "biolink:object_aspect_qualifier",
+                "qualifier_value": "activity"
+              },
+              {
+                "qualifier_type_id": "biolink:object_modifier_qualifier",
+                "qualifier_value": "increased"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "knowledge_graph": {
+    "nodes": {
+      "PUBCHEM.COMPOUND:6623": {
+        "categories": [
+          "biolink:ChemicalEntity"
+        ],
+        "name": "Bisphenol A"
+      },
+      "HGNC:3467": {
+        "categories": [
+          "biolink:GeneOrGeneProduct"
+        ],
+        "name": "EGRB2"
+      }
+    },
+    "edges": {
+      "x17770": {
+        "predicate": "biolink:affects",
+        "subject": "PUBCHEM.COMPOUND:6623",
+        "object": "HGNC:3467",
+        "qualifiers": [
+          {
+            "qualifier_type_id": "biolink:object_aspect_qualifier",
+            "qualifier_value": "activity"
+          },
+          {
+            "qualifier_type_id": "biolink:object_modifier_qualifier",
+            "qualifier_value": "increased"
+          },
+          {
+            "qualifier_type_id": "biolink:qualified_predicate",
+            "qualifier_value": "causes"
+          },
+          {
+            "qualifier_type_id": "biolink:mechanism_qualifier",
+            "qualifier_value": "binding"
+          }
+        ]
+      }
+    },
+    "results": [
+      {
+        "node_bindings": {
+          "n0": [
+            {
+              "id": "PUBCHEM.COMPOUND:6623"
+            }
+          ],
+          "n1": [
+            {
+              "id": "HGNC:3467"
+            }
+          ]
+        },
+        "edge_bindings": {
+          "e01": [
+            {
+              "id": "x17770"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

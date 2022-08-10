@@ -77,11 +77,18 @@ pathway_context_qualifier: EGFR pathway
 * [complex_gocam_qualifiers.json](complex_gocam_qualifiers.json)
 
 
-### Localization or Transport Query
+### Querying for "_affects transport of_ *OR* _affects localization of_" with qualifiers instead of predicates.
 
 _"What chemicals affect either the localization or the transport of ADRB2"_
 
 * [localization_or_transport.json](localization_or_transport.json)
+
+
+### When to use predicate=causes vs. qualified_predicate=causes
+
+_"What chemicals cause increased activity of PPARA protein"_
+
+
 
 
 ### Qualifier Rules
@@ -91,6 +98,8 @@ These rules can not be enforced in the schema for TRAPI, but should be implement
 1. __general rules__
    1. There MUST be only one of each type of qualifier in any edges.qualifier_constraints.qualifier_set
       1. There MUST be only one qualified_predicate for each set of qualifiers in a QualifierConstraint. 
+      2. qualified_predicate is an optional qualifier. 
+         1. Both the qualified_predicate and the predicate should be queried when a predicate is provided. 
    2. If a KP receives non-empty QEdge.qualifier_constraints, it MUST only return edges that satisfy the entire set of 
    qualifier_constraints. If a KP does not yet support QEdge.qualifier_constraints, it MUST return an empty response 
    because no matches are found.
