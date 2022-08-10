@@ -5,6 +5,7 @@ import pathlib
 import jsonschema
 import requests
 import yaml
+from pprint import pprint
 
 
 def test_valid():
@@ -30,5 +31,17 @@ def test_examples():
         file_extension = pathlib.Path(full_path).suffix
         if file_extension == '.json':
             with open(full_path) as f:
-                example = yaml.load(f, Loader=yaml.SafeLoader)
+                print(full_path)
+                example = json.load(f)
                 jsonschema.validate(example, spec)
+
+
+def test_simple_file():
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    with open(os.path.join(dir_path, '..', 'TranslatorReasonerAPI.yaml')) as f:
+        spec = yaml.load(f, Loader=yaml.SafeLoader)
+    full_path = os.path.join(dir_path, '../examples/Message/simple.json')
+    with open(full_path) as f:
+        example = json.load(f)
+        pprint(example)
+        jsonschema.validate(example, spec)
