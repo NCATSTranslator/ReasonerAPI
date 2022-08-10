@@ -34,7 +34,6 @@ def test_examples():
                 print(full_path)
                 example = json.load(f)
                 trapi_version_locally = spec['info']['x-trapi']['version']
-
                 try:
                     validate(
                         instance=example,
