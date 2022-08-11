@@ -90,6 +90,8 @@ _"What chemicals cause increased activity of PPARA protein"_
 
 * [causes_predicate_vs_qualifier.json](causes_predicate_vs_qualifier.json)
 
+Note: in this example we need to convert the user's request for "causes" (predicate) to an "affects" predicate 
+with a "causes" qualified_predicate.
 
 ### Qualifier Rules
 

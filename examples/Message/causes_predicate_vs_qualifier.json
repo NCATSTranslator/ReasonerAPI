@@ -20,7 +20,7 @@
         "subject": "n0",
         "object": "n1",
         "predicates": [
-          "biolink:causes"
+          "biolink:affects"
         ],
         "qualifier_constraints": [
           {
@@ -32,6 +32,10 @@
               {
                 "qualifier_type_id": "biolink:object_modifier_qualifier",
                 "qualifier_value": "increased"
+              },
+              {
+                "qualifier_type_id": "biolink:qualified_predicate",
+                "qualifier_value": "causes"
               }
             ]
           }
