@@ -35,7 +35,7 @@
               },
               {
                 "qualifier_type_id": "biolink:qualified_predicate",
-                "qualifier_value": "causes"
+                "qualifier_value": "biolink:causes"
               }
             ]
           }
