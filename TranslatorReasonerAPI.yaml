@@ -479,7 +479,8 @@ components:
           description: >-
             The CURIE of a Node within the Knowledge Graph.
         query_id:
-          $ref: '#/components/schemas/CURIE'
+          allOf:
+            - $ref: '#/components/schemas/CURIE'
           description: >-
             An optional property to provide the CURIE in the QueryGraph to
             which this binding applies. If the bound QNode does not have an
@@ -490,6 +491,7 @@ components:
             the NodeBinding.id being a descendant of a QNode.id), then
             this query_id MUST be provided. In other cases, there is no
             ambiguity, and this query_id SHOULD NOT be provided.
+          nullable: true
         attributes:
           type: array
           description: >-
