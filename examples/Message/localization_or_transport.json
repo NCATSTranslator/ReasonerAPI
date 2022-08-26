@@ -1,0 +1,121 @@
+{
+  "query_graph": {
+    "nodes": {
+      "n0": {
+        "categories": [
+          "biolink:ChemicalEntity"
+        ]
+      },
+      "n1": {
+        "categories": [
+          "biolink:GeneOrGeneProduct"
+        ],
+        "ids": [
+          "HGNC:3467"
+        ]
+      }
+    },
+    "edges": {
+      "e01": {
+        "subject": "n0",
+        "object": "n1",
+        "predicates": [
+          "biolink:affects"
+        ],
+        "qualifier_constraints": [
+          {
+            "qualifier_set": [
+              {
+                "qualifier_type_id": "biolink:object_aspect_qualifier",
+                "qualifier_value": "localization"
+              }
+            ]
+          },
+          {
+            "qualifier_set": [
+              {
+                "qualifier_type_id": "biolink:object_aspect_qualifier",
+                "qualifier_value": "transport"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "knowledge_graph": {
+    "nodes": {
+      "PUBCHEM.COMPOUND:6623": {
+        "categories": [
+          "biolink:ChemicalEntity"
+        ],
+        "name": "Bisphenol A"
+      },
+      "HGNC:3467": {
+        "categories": [
+          "biolink:GeneOrGeneProduct"
+        ],
+        "name": "EGRB2"
+      },
+      "PUBCHEM.COMPOUND:6625": {
+        "categories": [
+          "biolink:ChemicalEntity"
+        ],
+        "name": "C03893"
+      }
+    },
+    "edges": {
+      "x17770": {
+        "predicate": "biolink:affects",
+        "subject": "PUBCHEM.COMPOUND:6623",
+        "object": "HGNC:3467",
+        "qualifiers": [
+          {
+            "qualifier_type_id": "biolink:object_aspect_qualifier",
+            "qualifier_value": "localization"
+          }
+        ]
+      },
+      "x17771": {
+        "predicate": "biolink:affects",
+        "subject": "PUBCHEM.COMPOUND:6625",
+        "object": "HGNC:3467",
+        "qualifiers": [
+          {
+            "qualifier_type_id": "biolink:object_aspect_qualifier",
+            "qualifier_value": "transport"
+          }
+        ]
+      }
+    }
+  },
+  "results": [
+    {
+      "node_bindings": {
+        "n0": [
+          {
+            "id": "PUBCHEM.COMPOUND:6623"
+          },
+          {
+            "id": "PUBCHEM.COMPOUND:6625"
+          }
+        ],
+        "n1": [
+          {
+            "id": "HGNC:3467"
+          }
+        ]
+      },
+      "edge_bindings": {
+        "e01": [
+          {
+            "id": "x17770"
+          },
+          {
+            "id": "x17771"
+          }
+        ]
+      }
+    }
+  ]
+}
