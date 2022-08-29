@@ -35,7 +35,7 @@
                 "qualifier_set": [
                 {
                     "qualifier_type_id": "biolink:object_direction_qualifier",
-                    "qualifier_value": "increased"
+                    "qualifier_value": "decreased"
                 },
                 {
                     "qualifier_type_id": "biolink:object_aspect_qualifier",
