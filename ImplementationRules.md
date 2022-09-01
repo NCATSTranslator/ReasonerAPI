@@ -55,16 +55,16 @@ The terms MUST, SHOULD, MAY are used as defined in RFC 2119  https://tools.ietf.
 - If a server receives a property on a QEdge that it does not recognize, it SHOULD generate
   a warning and MAY continue processing.
 
-## QNode.attribute_constraints
-- If a KP server receives any QNode.attribute_constraints, if it does not support all of them,
-  it MUST immediately respond with an error Code "UnsupportedAttributeConstraint" and list
-  all the specified attribute_constraint names that it does not support.
+## QNode.constraints
+- If a KP server receives any QNode.constraints, if it does not support all of them,
+  it MUST immediately respond with an error Code "UnsupportedConstraint" and list
+  all the specified constraint names that it does not support.
 - If an ARA server receives any QNode.constraints, it MUST perform one of the following:
-  - Relay all attribute_constraints to its KP(s) to satisfy
-  - Withhold one or more attribute_constraints from its KP queries and satisfy those attribute_constraints itself
-- An ARA server MUST ensure that all attribute_constraints are satisifed by either trusting its KPs to satisfy them
+  - Relay all constraints to its KP(s) to satisfy
+  - Withhold one or more constraints from its KP queries and satisfy those constraints itself
+- An ARA server MUST ensure that all constraints are satisifed by either trusting its KPs to satisfy them
   or by performing the constraining itself. If the ARA cannot ensure this,
-  it MUST immediately respond with an error Code "UnsupportedAttributeConstraint" and list all attribute_constraint
+  it MUST immediately respond with an error Code "UnsupportedConstraint" and list all constraint
   names that it does not support.
 
 ## QEdge.qualifier_constraints
