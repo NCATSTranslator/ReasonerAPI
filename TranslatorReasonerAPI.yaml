@@ -818,39 +818,48 @@ components:
         resulting from a query upon the underlying knowledge source.
       properties:
         predicate:
-          allOf:
+          description: >-
+            The type of relationship between the subject and object
+            for the statement expressed in an Edge.
+          example: biolink:gene_associated_with_condition
+          oneOf:
             - $ref: '#/components/schemas/BiolinkPredicate'
-          nullable: true
+          nullable: false
         subject:
-          $ref: '#/components/schemas/CURIE'
-          example: OMIM:603903
           description: >-
             Corresponds to the map key CURIE of the
             subject concept node of this relationship edge.
+          example: MONDO:0011382
+          oneOf:
+            - $ref: '#/components/schemas/CURIE'
+          nullable: false
         object:
-          $ref: '#/components/schemas/CURIE'
-          example: UniProtKB:P00738
           description: >-
             Corresponds to the map key CURIE of the
             object concept node of this relationship edge.
+          example: UniProtKB:P00738
+          oneOf:
+            - $ref: '#/components/schemas/CURIE'
+          nullable: false
         attributes:
-          type: array
           description: A list of additional attributes for this edge
           items:
             $ref: '#/components/schemas/Attribute'
           nullable: true
-        qualifiers:
           type: array
+        qualifiers:
           description: >-
             A set of Qualifiers that act together to add nuance
             or detail to the statement expressed in an Edge.
           items:
             $ref: '#/components/schemas/Qualifier'
           nullable: true
+          type: array
       additionalProperties: false
       required:
-        - subject
         - object
+        - predicate
+        - subject
     Qualifier:
       additionalProperties: false
       description: >-
