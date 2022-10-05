@@ -78,6 +78,7 @@
         "predicate": "biolink:regulates",
         "subject": "FB:FBgn0003205",
         "object": "FB:FBgn0003079",
+        "association": "biolink:ChemicalEntityOrGeneOrGeneProductRegulatesGeneAssociation",
         "qualifiers": [
           {
             "qualifier_type_id": "biolink:subject_aspect_qualifier",
