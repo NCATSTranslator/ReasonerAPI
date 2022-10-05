@@ -236,7 +236,7 @@ components:
         workflow:
           description: List of workflow steps to be executed.
           allOf:
-            - $ref: http://standards.ncats.io/workflow/1.0.0/schema
+            - $ref: http://standards.ncats.io/workflow/1.3.2/schema
           nullable: true
         submitter:
           type: string
@@ -284,7 +284,7 @@ components:
         workflow:
           description: List of workflow steps to be executed.
           allOf:
-            - $ref: http://standards.ncats.io/workflow/1.0.0/schema
+            - $ref: http://standards.ncats.io/workflow/1.3.2/schema
           nullable: true
         submitter:
           type: string
@@ -334,7 +334,7 @@ components:
         workflow:
           description: List of workflow steps that were executed.
           allOf:
-            - $ref: http://standards.ncats.io/workflow/1.0.0/schema
+            - $ref: http://standards.ncats.io/workflow/1.3.2/schema
           nullable: true
       additionalProperties: true
       required:
@@ -479,7 +479,8 @@ components:
           description: >-
             The CURIE of a Node within the Knowledge Graph.
         query_id:
-          $ref: '#/components/schemas/CURIE'
+          allOf:
+            - $ref: '#/components/schemas/CURIE'
           description: >-
             An optional property to provide the CURIE in the QueryGraph to
             which this binding applies. If the bound QNode does not have an
@@ -490,6 +491,7 @@ components:
             the NodeBinding.id being a descendant of a QNode.id), then
             this query_id MUST be provided. In other cases, there is no
             ambiguity, and this query_id SHOULD NOT be provided.
+          nullable: true
         attributes:
           type: array
           description: >-
@@ -620,7 +622,7 @@ components:
         constraints:
           type: array
           description: >-
-            A list of contraints applied to a query node.
+            A list of constraints applied to a query node.
             If there are multiple items, they must all be true (equivalent
             to AND)
           items:
@@ -675,7 +677,7 @@ components:
         attribute_constraints:
           type: array
           description: >-
-            A list of attribute contraints applied to a query edge.
+            A list of attribute constraints applied to a query edge.
             If there are multiple items, they must all be true (equivalent
             to AND)
           items:
@@ -816,39 +818,48 @@ components:
         resulting from a query upon the underlying knowledge source.
       properties:
         predicate:
-          allOf:
+          description: >-
+            The type of relationship between the subject and object
+            for the statement expressed in an Edge.
+          example: biolink:gene_associated_with_condition
+          oneOf:
             - $ref: '#/components/schemas/BiolinkPredicate'
-          nullable: true
+          nullable: false
         subject:
-          $ref: '#/components/schemas/CURIE'
-          example: OMIM:603903
           description: >-
             Corresponds to the map key CURIE of the
             subject concept node of this relationship edge.
+          example: MONDO:0011382
+          oneOf:
+            - $ref: '#/components/schemas/CURIE'
+          nullable: false
         object:
-          $ref: '#/components/schemas/CURIE'
-          example: UniProtKB:P00738
           description: >-
             Corresponds to the map key CURIE of the
             object concept node of this relationship edge.
+          example: UniProtKB:P00738
+          oneOf:
+            - $ref: '#/components/schemas/CURIE'
+          nullable: false
         attributes:
-          type: array
           description: A list of additional attributes for this edge
           items:
             $ref: '#/components/schemas/Attribute'
           nullable: true
-        qualifiers:
           type: array
+        qualifiers:
           description: >-
             A set of Qualifiers that act together to add nuance
             or detail to the statement expressed in an Edge.
           items:
             $ref: '#/components/schemas/Qualifier'
           nullable: true
+          type: array
       additionalProperties: false
       required:
-        - subject
         - object
+        - predicate
+        - subject
     Qualifier:
       additionalProperties: false
       description: >-
