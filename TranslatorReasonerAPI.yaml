@@ -855,11 +855,17 @@ components:
             $ref: '#/components/schemas/Qualifier'
           nullable: true
           type: array
+        association:
+          description: >-
+            Corresponds to the Biolink model association type represented by this edge.
       additionalProperties: false
       required:
         - object
         - predicate
         - subject
+      dependentRequired:
+        qualifiers:
+          - association
     Qualifier:
       additionalProperties: false
       description: >-
