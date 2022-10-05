@@ -1,0 +1,6 @@
+tox
+pyyaml
+requests
+jsonschema
+pytest
+reasoner-validator

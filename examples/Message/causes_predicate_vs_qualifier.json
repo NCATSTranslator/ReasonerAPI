@@ -2,10 +2,14 @@
   "query_graph": {
     "nodes": {
       "n0": {
-        "categories": ["biolink:ChemicalEntity"]
+        "categories": [
+          "biolink:ChemicalEntity"
+        ]
       },
       "n1": {
-        "categories": ["biolink:GeneOrGeneProduct"],
+        "categories": [
+          "biolink:GeneOrGeneProduct"
+        ],
         "ids": [
           "HGNC:3467"
         ]
@@ -23,16 +27,16 @@
             "qualifier_set": [
               {
                 "qualifier_type_id": "biolink:object_aspect_qualifier",
-                "qualifier_value": "degredation"
+                "qualifier_value": "activity"
               },
               {
-                "qualifier_type_id": "biolink:object_direction_qualifier",
-                "qualifier_value": "decreased"
+                "qualifier_type_id": "biolink:object_modifier_qualifier",
+                "qualifier_value": "increased"
               },
- 	      {
+              {
                 "qualifier_type_id": "biolink:qualified_predicate",
-                "qualifier_value": "causes"
-              },
+                "qualifier_value": "biolink:causes"
+              }
             ]
           }
         ]
@@ -49,9 +53,9 @@
       },
       "HGNC:3467": {
         "categories": [
-          "biolink:Gene"
+          "biolink:GeneOrGeneProduct"
         ],
-        "name": "ESR1"
+        "name": "EGRB2"
       }
     },
     "edges": {
@@ -59,45 +63,48 @@
         "predicate": "biolink:affects",
         "subject": "PUBCHEM.COMPOUND:6623",
         "object": "HGNC:3467",
-        "association": "biolink:ChemicalAffectsGeneAssociation",
         "qualifiers": [
           {
             "qualifier_type_id": "biolink:object_aspect_qualifier",
-            "qualifier_value": "degredation"
+            "qualifier_value": "activity"
           },
           {
-            "qualifier_type_id": "biolink:object_direction_qualifier",
-            "qualifier_value": "decreased"
+            "qualifier_type_id": "biolink:object_modifier_qualifier",
+            "qualifier_value": "increased"
           },
           {
             "qualifier_type_id": "biolink:qualified_predicate",
             "qualifier_value": "causes"
+          },
+          {
+            "qualifier_type_id": "biolink:mechanism_qualifier",
+            "qualifier_value": "binding"
           }
         ]
       }
-    }
-  },
-  "results": [
-    {
-      "node_bindings": {
-        "n0": [
-          {
-            "id": "PUBCHEM.COMPOUND:6623"
-          }
-        ],
-        "n1": [
-          {
-            "id": "HGNC:3467"
-          }
-        ]
-      },
-      "edge_bindings": {
-        "e01": [
-          {
-            "id": "x17770"
-          }
-        ]
+    },
+    "results": [
+      {
+        "node_bindings": {
+          "n0": [
+            {
+              "id": "PUBCHEM.COMPOUND:6623"
+            }
+          ],
+          "n1": [
+            {
+              "id": "HGNC:3467"
+            }
+          ]
+        },
+        "edge_bindings": {
+          "e01": [
+            {
+              "id": "x17770"
+            }
+          ]
+        }
       }
-    }
-  ]
+    ]
+  }
 }
