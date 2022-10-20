@@ -147,20 +147,20 @@ A node in the QueryGraph used to represent an entity in a query. If a CURIE is n
 Field Name | Type | Description
 ---|:---:|---
 ids | [[CURIE](#curie-)] | CURIE identifier for this node
-categories | [[BiolinkEntity](#biolinkentity-)] | 
+categories | [[BiolinkEntity](#biolinkentity-)] | **QNode** categories should be Biolink Model categories and are allowed to be of type `abstract` or `mixin` (only in QGraphs). Use of `deprecated` categories should be avoided.
 is_set | `boolean` | Boolean that if set to true, indicates that this QNode MAY have multiple KnowledgeGraph Nodes bound to it within each Result. The nodes in a set should be considered as a set of independent nodes, rather than a set of dependent nodes, i.e., the answer would still be valid if the nodes in the set were instead returned individually. Multiple QNodes may have is_set=True. If a QNode (n1) with is_set=True is connected to a QNode (n2) with is_set=False, each n1 must be connected to n2. If a QNode (n1) with is_set=True is connected to a QNode (n2) with is_set=True, each n1 must be connected to at least one n2.
 constraints | [[AttributeConstraint](#attributeconstraint-)] | A list of contraints applied to a query node. If there are multiple items, they must all be true (equivalent to AND)
 
 #### QEdge [?](https://github.com/NCATSTranslator/ReasonerAPI/blob/master/TranslatorReasonerAPI.yaml#L630:L700)
 
-An edge in the QueryGraph used as an filter pattern specification in a query. If the optional predicate property is not specified, it is assumed to be a wildcard match to the target knowledge space. If specified, the ontological inheritance hierarchy associated with the term provided is assumed, such that edge bindings returned may be an exact match to the given QEdge predicate term, or to a term that is a descendant of the QEdge predicate term.
+An edge in the QueryGraph used as a filter pattern specification in a query. If the optional predicate property is not specified, it is assumed to be a wildcard match to the target knowledge space. If specified, the ontological inheritance hierarchy associated with the term provided is assumed, such that edge bindings returned may be an exact match to the given QEdge predicate term, or to a term that is a descendant of the QEdge predicate term.
 
 ##### Fixed Fields
 
 Field Name | Type | Description
 ---|:---:|---
 knowledge_type | `string` | Indicates the type of knowledge that the client wants from the server between the subject and object. If the value is 'lookup', then the client wants direct lookup information from knowledge sources. If the value is 'inferred', then the client wants the server to get creative and connect the subject and object in more speculative and non-direct-lookup ways. If this property is absent or null, it MUST be assumed to mean 'lookup'. This feature is currently experimental and may be further extended in the future.
-predicates | [[BiolinkPredicate](#biolinkpredicate-)] | 
+predicates | [[BiolinkPredicate](#biolinkpredicate-)] | This should be a Biolink Model predicate and is allowed to be of type `abstract` or `mixin` (only in QGraphs). Use of `deprecated` predicates should be avoided.
 subject | `string` | **REQUIRED**. Corresponds to the map key identifier of the subject concept node anchoring the query filter pattern for the query relationship edge.
 object | `string` | **REQUIRED**. Corresponds to the map key identifier of the object concept node anchoring the query filter pattern for the query relationship edge.
 attribute_constraints | [[AttributeConstraint](#attributeconstraint-)] | A list of attribute contraints applied to a query edge. If there are multiple items, they must all be true (equivalent to AND)
@@ -175,7 +175,7 @@ A node in the KnowledgeGraph which represents some biomedical concept. Nodes are
 Field Name | Type | Description
 ---|:---:|---
 name | `string` | Formal name of the entity
-categories | [[BiolinkEntity](#biolinkentity-)] | 
+categories | [[BiolinkEntity](#biolinkentity-)] | These should be Biolink Model categories and are **_NOT_** allowed to be of type `abstract` or `mixin`. Returning `deprecated` categories should also be avoided.
 attributes | [[Attribute](#attribute-)] | A list of attributes describing the node
 
 #### Attribute [?](https://github.com/NCATSTranslator/ReasonerAPI/blob/master/TranslatorReasonerAPI.yaml#L725:L810)
@@ -203,7 +203,7 @@ A specification of the semantic relationship linking two concepts that are expre
 
 Field Name | Type | Description
 ---|:---:|---
-predicate | any | 
+predicate | any | These should be Biolink Model predicate terms and are **_NOT_** allowed to be of type `abstract` or `mixin`. Returning `deprecated` predicate terms should also be avoided.
 subject | [CURIE](#curie-) | **REQUIRED**. Corresponds to the map key CURIE of the subject concept node of this relationship edge.
 object | [CURIE](#curie-) | **REQUIRED**. Corresponds to the map key CURIE of the object concept node of this relationship edge.
 attributes | [[Attribute](#attribute-)] | A list of additional attributes for this edge
@@ -323,4 +323,3 @@ operator | `string` | **REQUIRED**. Relationship between the database value and 
 value | any | **REQUIRED**. Value of the attribute. May be any data type, including a list. If the value is a list and there are multiple items, at least one comparison must be true (equivalent to OR) unless the '===' operator is used. If 'value' is of data type 'object', the keys of the object MAY be treated as a list. A 'list' data type paired with the '>' or '<' operators will encode extraneous comparisons, but this is permitted as it is in SQL and other languages.
 unit_id | any | CURIE of the units of the value or list of values in the 'value' property. The Units of Measurement Ontology (UO) should be used if possible. The unit_id MUST be provided for (lists of) numerical values that correspond to a quantity that has units.
 unit_name | any | Term name that is associated with the CURIE of the units of the value or list of values in the 'value' property. The Units of Measurement Ontology (UO) SHOULD be used if possible. This property SHOULD be provided if a unit_id is provided. This is redundant but recommended for human readability.
-
