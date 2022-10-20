@@ -661,7 +661,7 @@ components:
         predicates:
           type: array
           description: >-
-            This should be a Biolink Model predicate and is allowed to be of
+            These should be Biolink Model predicates and are allowed to be of
             type 'abstract' or 'mixin' (only in QGraphs!). Use of 'deprecated'
             predicates should be avoided.
           items:
