@@ -62,16 +62,16 @@ _"The protein ser/thr kinase activator activity of Ras85D in the plasma membrane
 activity of Raf in the cytoplasm within the EGFR signaling pathway"_
 
 ```
-subject: Dmel Ras85D
-subject_aspect_qualifier: protein ser/thr kinase activator activity
-subject_context_qualifier: plasma membrane
+subject: FB:FBgn0003205 # Dmel Ras85D
+subject_aspect_qualifier: GO:0043539 # protein ser/thr kinase activator activity
+subject_context_qualifier: GO:0005886 # plasma membrane
 predicate: biolink:regulates   
 qualified_predicate: biolink:causes
-object: Dmel Raf
-object_aspect_qualifier: MAPKKK activity
-object_context_qualifier: cytoplasm
+object: FB:FBgn0003079 # Dmel Raf
+object_aspect_qualifier: GO:0004708 # MAPKKK activity
+object_context_qualifier: GO:0005737 #cytoplasm
 object_direction_qualifier: increased
-pathway_context_qualifier: EGFR pathway
+pathway_context_qualifier: GO:0038134 # ERBB2-EGFR signaling pathway
 ```
 
 * [complex_gocam_qualifiers.json](complex_gocam_qualifiers.json)
