@@ -4,10 +4,10 @@
 _“Bisphenol A results in decreased degradation of ESR1 protein”_
 
 ```
-subject: Bisphenol A
+subject: CHEBI:33216 # Bisphenol A
 predicate: biolink:affects 
 qualified_predicate: biolink:causes
-object: ESR1
+object: NCBIGene:2099  # ESR1
 object_aspect_qualifier: degradation
 object_direction_qualifier: decreased
 ```
