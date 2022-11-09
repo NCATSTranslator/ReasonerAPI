@@ -71,7 +71,6 @@
         "predicate": "biolink:affects",
         "subject": "PUBCHEM.COMPOUND:6137",
         "object": "HGNC:286",
-        "association": "biolink:ChemicalAffectsGeneAssociation",
         "qualifiers": [
               {
                 "qualifier_type_id": "biolink:subject_aspect_qualifier",

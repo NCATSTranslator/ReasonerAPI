@@ -69,7 +69,6 @@
         "predicate": "biolink:affects",
         "subject": "PUBCHEM.COMPOUND:6623",
         "object": "HGNC:3467",
-        "association": "biolink:ChemicalAffectsGeneAssociation",
         "qualifiers": [
           {
             "qualifier_type_id": "biolink:object_aspect_qualifier",
@@ -81,7 +80,6 @@
         "predicate": "biolink:affects",
         "subject": "PUBCHEM.COMPOUND:6625",
         "object": "HGNC:3467",
-        "association": "biolink:ChemicalAffectsGeneAssociation",
         "qualifiers": [
           {
             "qualifier_type_id": "biolink:object_aspect_qualifier",
