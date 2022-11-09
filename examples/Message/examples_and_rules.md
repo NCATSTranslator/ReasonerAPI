@@ -73,6 +73,8 @@ object_context_qualifier: GO:0005737 #cytoplasm
 object_direction_qualifier: increased
 pathway_context_qualifier: GO:0038134 # ERBB2-EGFR signaling pathway
 ```
+Please note, pathway_context_qualifier is still under discussion in the Biolink Model. If you are trying to 
+represent GO-CAMs, please contact the Biolink Model team for more information.
 
 * [complex_gocam_qualifiers.json](complex_gocam_qualifiers.json)
 
