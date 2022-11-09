@@ -5,8 +5,8 @@ _“Bisphenol A results in decreased degradation of ESR1 protein”_
 
 ```
 subject: Bisphenol A
-predicate: affects 
-qualified_predicate: causes
+predicate: biolink:affects 
+qualified_predicate: biolink:causes
 object: ESR1
 object_aspect_qualifier: degradation
 object_direction_qualifier: decreased
@@ -20,9 +20,9 @@ not causal.
 _"Bisphenol A is associated with decreased degradation of ESR1 protein"_
 
 ```
-subject: Bisphenol A
-predicate: associated_with
-object: ESR1
+subject: CHEBI:33216 # Bisphenol A
+predicate: biolink:associated_with
+object: NCBIGene:2099  # ESR1
 object_aspect_qualifier: degradation
 object_direction_qualifier: decreased
 ```
@@ -32,12 +32,12 @@ object_direction_qualifier: decreased
 _“Methionine deficiency results in increased expression of ADRB2”_
 
 ```
-subject: Methionine
+subject: "CHEBI:16811", # methionine
 subject_aspect_qualifier: abundance
 subject_direction_qualifier: decreased
-predicate: affects 
-qualified_predicate: causes
-object: ADRB2 
+predicate: biolink:affects 
+qualified_predicate: biolink:causes
+object: "NCBIGene:154", # ADRB2
 object_aspect_qualifier: expression
 object_direction_qualifier: increased
 ```
@@ -47,13 +47,13 @@ object_direction_qualifier: increased
 _"Fenofibrate is an agonist of PPARA protein"_
 
 ```
-subject: Fenofibrate
-predicate: affects             
-qualified_predicate: causes
-object: PPARA protein
+subject: "CHEBI:5001"  # Fenofibrate
+predicate: biolink:affects             
+qualified_predicate: biolink:causes
+object: "NCBIGene:5465"  # PPARA
 object_aspect_qualifier: activity
 object_direction_qualifier: increased
-mechanism_qualifier: agonism
+causal_mechanism_qualifier: agonism
 ```
 
 ### Complex statement
@@ -65,8 +65,8 @@ activity of Raf in the cytoplasm within the EGFR signaling pathway"_
 subject: Dmel Ras85D
 subject_aspect_qualifier: protein ser/thr kinase activator activity
 subject_context_qualifier: plasma membrane
-predicate: regulates   
-qualified_predicate: causes
+predicate: biolink:regulates   
+qualified_predicate: biolink:causes
 object: Dmel Raf
 object_aspect_qualifier: MAPKKK activity
 object_context_qualifier: cytoplasm
