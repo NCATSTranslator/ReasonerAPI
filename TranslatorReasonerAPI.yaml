@@ -818,54 +818,39 @@ components:
         resulting from a query upon the underlying knowledge source.
       properties:
         predicate:
-          description: >-
-            The type of relationship between the subject and object
-            for the statement expressed in an Edge.
-          example: biolink:gene_associated_with_condition
-          oneOf:
+          allOf:
             - $ref: '#/components/schemas/BiolinkPredicate'
-          nullable: false
+          nullable: true
         subject:
+          $ref: '#/components/schemas/CURIE'
+          example: OMIM:603903
           description: >-
             Corresponds to the map key CURIE of the
             subject concept node of this relationship edge.
-          example: MONDO:0011382
-          oneOf:
-            - $ref: '#/components/schemas/CURIE'
-          nullable: false
         object:
+          $ref: '#/components/schemas/CURIE'
+          example: UniProtKB:P00738
           description: >-
             Corresponds to the map key CURIE of the
             object concept node of this relationship edge.
-          example: UniProtKB:P00738
-          oneOf:
-            - $ref: '#/components/schemas/CURIE'
-          nullable: false
         attributes:
+          type: array
           description: A list of additional attributes for this edge
           items:
             $ref: '#/components/schemas/Attribute'
           nullable: true
-          type: array
         qualifiers:
+          type: array
           description: >-
             A set of Qualifiers that act together to add nuance
             or detail to the statement expressed in an Edge.
           items:
             $ref: '#/components/schemas/Qualifier'
           nullable: true
-          type: array
-        association:
-          description: >-
-            Corresponds to the Biolink model association type represented by this edge.
       additionalProperties: false
       required:
-        - object
-        - predicate
         - subject
-      dependentRequired:
-        qualifiers:
-          - association
+        - object
     Qualifier:
       additionalProperties: false
       description: >-
