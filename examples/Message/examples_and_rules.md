@@ -37,7 +37,7 @@ subject_aspect_qualifier: abundance
 subject_direction_qualifier: decreased
 predicate: biolink:affects 
 qualified_predicate: biolink:causes
-object: "NCBIGene:154", # ADRB2
+object: "NCBIGene:154" # ADRB2
 object_aspect_qualifier: expression
 object_direction_qualifier: increased
 ```
