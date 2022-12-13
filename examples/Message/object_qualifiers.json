@@ -27,7 +27,7 @@
             "qualifier_set": [
               {
                 "qualifier_type_id": "biolink:object_aspect_qualifier",
-                "qualifier_value": "degredation"
+                "qualifier_value": "degradation"
               },
               {
                 "qualifier_type_id": "biolink:object_direction_qualifier",
@@ -35,7 +35,7 @@
               },
               {
                 "qualifier_type_id": "biolink:qualified_predicate",
-                "qualifier_value": "causes"
+                "qualifier_value": "biolink:causes"
               }
             ]
           }
@@ -66,7 +66,7 @@
         "qualifiers": [
           {
             "qualifier_type_id": "biolink:object_aspect_qualifier",
-            "qualifier_value": "degredation"
+            "qualifier_value": "degradation"
           },
           {
             "qualifier_type_id": "biolink:object_direction_qualifier",
@@ -74,7 +74,7 @@
           },
           {
             "qualifier_type_id": "biolink:qualified_predicate",
-            "qualifier_value": "causes"
+            "qualifier_value": "biolink:causes"
           }
         ]
       }
