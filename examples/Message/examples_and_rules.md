@@ -4,10 +4,10 @@
 _“Bisphenol A results in decreased degradation of ESR1 protein”_
 
 ```
-subject: Bisphenol A
-predicate: affects 
-qualified_predicate: causes
-object: ESR1
+subject: CHEBI:33216 # Bisphenol A
+predicate: biolink:affects 
+qualified_predicate: biolink:causes
+object: NCBIGene:2099  # ESR1
 object_aspect_qualifier: degradation
 object_direction_qualifier: decreased
 ```
@@ -20,9 +20,9 @@ not causal.
 _"Bisphenol A is associated with decreased degradation of ESR1 protein"_
 
 ```
-subject: Bisphenol A
-predicate: associated_with
-object: ESR1
+subject: CHEBI:33216 # Bisphenol A
+predicate: biolink:associated_with
+object: NCBIGene:2099  # ESR1
 object_aspect_qualifier: degradation
 object_direction_qualifier: decreased
 ```
@@ -32,12 +32,12 @@ object_direction_qualifier: decreased
 _“Methionine deficiency results in increased expression of ADRB2”_
 
 ```
-subject: Methionine
+subject: "CHEBI:16811", # methionine
 subject_aspect_qualifier: abundance
 subject_direction_qualifier: decreased
-predicate: affects 
-qualified_predicate: causes
-object: ADRB2 
+predicate: biolink:affects 
+qualified_predicate: biolink:causes
+object: "NCBIGene:154" # ADRB2
 object_aspect_qualifier: expression
 object_direction_qualifier: increased
 ```
@@ -47,13 +47,13 @@ object_direction_qualifier: increased
 _"Fenofibrate is an agonist of PPARA protein"_
 
 ```
-subject: Fenofibrate
-predicate: affects             
-qualified_predicate: causes
-object: PPARA protein
+subject: "CHEBI:5001"  # Fenofibrate
+predicate: biolink:affects             
+qualified_predicate: biolink:causes
+object: "NCBIGene:5465"  # PPARA
 object_aspect_qualifier: activity
 object_direction_qualifier: increased
-mechanism_qualifier: agonism
+causal_mechanism_qualifier: agonism
 ```
 
 ### Complex statement
@@ -62,17 +62,19 @@ _"The protein ser/thr kinase activator activity of Ras85D in the plasma membrane
 activity of Raf in the cytoplasm within the EGFR signaling pathway"_
 
 ```
-subject: Dmel Ras85D
-subject_aspect_qualifier: protein ser/thr kinase activator activity
-subject_context_qualifier: plasma membrane
-predicate: regulates   
-qualified_predicate: causes
-object: Dmel Raf
-object_aspect_qualifier: MAPKKK activity
-object_context_qualifier: cytoplasm
+subject: FB:FBgn0003205 # Dmel Ras85D
+subject_aspect_qualifier: GO:0043539 # protein ser/thr kinase activator activity
+subject_context_qualifier: GO:0005886 # plasma membrane
+predicate: biolink:regulates   
+qualified_predicate: biolink:causes
+object: FB:FBgn0003079 # Dmel Raf
+object_aspect_qualifier: GO:0004708 # MAPKKK activity
+object_context_qualifier: GO:0005737 #cytoplasm
 object_direction_qualifier: increased
-pathway_context_qualifier: EGFR pathway
+pathway_context_qualifier: GO:0038134 # ERBB2-EGFR signaling pathway
 ```
+Please note, pathway_context_qualifier is still under discussion in the Biolink Model. If you are trying to 
+represent GO-CAMs, please contact the Biolink Model team for more information.
 
 * [complex_gocam_qualifiers.json](complex_gocam_qualifiers.json)
 

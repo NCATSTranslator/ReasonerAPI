@@ -50,7 +50,7 @@
               },
               {
                 "qualifier_type_id": "biolink:pathway_context_qualifier",
-                "qualifier_value": "EGFR pathway"
+                "qualifier_value": "GO:0038134"
               }
             ]
           }
@@ -101,7 +101,7 @@
           },
           {
             "qualifier_type_id": "biolink:pathway_context_qualifier",
-            "qualifier_value": "EGFR pathway"
+            "qualifier_value": "GO:0038134"
           }
         ]
       }
