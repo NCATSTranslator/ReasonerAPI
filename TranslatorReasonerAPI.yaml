@@ -832,7 +832,7 @@ components:
         predicate:
           description: >-
             The type of relationship between the subject and object
-            for the statement expressed in an Edge. These should be 
+            for the statement expressed in an Edge. These should be
             Biolink Model predicate terms and are NOT allowed
             to be of type 'abstract' or 'mixin'. Returning 'deprecated'
             predicate terms should also be avoided.
