@@ -885,8 +885,10 @@ components:
           type: string
           description: >-
             The category of the qualifier, drawn from a hierarchy of qualifier
-            slots in the Biolink model (e.g. biolink:subject_aspect_qualifier, biolink:subject_direction_qualifier,
-            biolink:object_aspect_qualifier, biolink:object_direction_qualifier, etc).
+            slots in the Biolink model (e.g. biolink:subject_aspect_qualifier,
+            biolink:subject_direction_qualifier,
+            biolink:object_aspect_qualifier,
+            biolink:object_direction_qualifier, etc).
           example: biolink:subject_aspect_qualifier
           nullable: false
         qualifier_value:
@@ -1050,16 +1052,18 @@ components:
           description: >-
             Qualifiers that are possible to be found on this edge type.
           items:
-            $ref: '#/components/schemas/Qualifier'
+            $ref: '#/components/schemas/MetaQualifier'
           nullable: true
           type: array
         association:
           type: object
           $ref: '#/components/schemas/BiolinkEntity'
           description: >-
-            The Biolink association type (entity) that this edge represents.  Associations are classes in Biolink
-            that represent a relationship between two entities.  For example, the association 'gene interacts with gene'
-            is represented by the Biolink class 'biolink:GeneToGeneAssociation'.
+            The Biolink association type (entity) that this edge represents.
+            Associations are classes in Biolink
+            that represent a relationship between two entities.
+            For example, the association 'gene interacts with gene'
+            is represented by the Biolink class, 'biolink:GeneToGeneAssociation'.
           example: biolink:ChemicalToGeneAssociation
           nullable: false
       required:
@@ -1068,6 +1072,25 @@ components:
         - object
         - association
       additionalProperties: false
+    MetaQualifier:
+      type: object
+      properties:
+        qualifier_type_id:
+          type: string
+          description: >-
+            The CURIE of the qualifier type.  Note: biolink:qualified_predicate is a valid
+            qualifier_type_id and should be included in the
+            list of qualifiers for any MetaEdge association that has
+            a biolink:qualified_predicate.
+          example: biolink:subject_aspect_qualifier
+        applicable_values:
+          type: array
+          description: >-
+                The list of values that are possible for this qualifier.
+          items:
+            type: string
+            example: [expression, activity, abundance, degradation]
+            nullable: true
     MetaAttribute:
       type: object
       properties:
