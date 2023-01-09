@@ -1044,16 +1044,29 @@ components:
           description: >-
             Edge attributes provided by this TRAPI web service.
           items:
-            $ref: '#/components/schemas/Qualifier'
+            $ref: '#/components/schemas/MetaAttribute'
           nullable: true
         qualifiers:
-          type: array
           description: >-
             Qualifiers that are possible to be found on this edge type.
+          items:
+            $ref: '#/components/schemas/Qualifier'
+          nullable: true
+          type: array
+        association:
+          type: object
+          $ref: '#/components/schemas/BiolinkEntity'
+          description: >-
+            The Biolink association type (entity) that this edge represents.  Associations are classes in Biolink
+            that represent a relationship between two entities.  For example, the association 'gene interacts with gene'
+            is represented by the Biolink class 'biolink:GeneToGeneAssociation'.
+          example: biolink:ChemicalToGeneAssociation
+          nullable: false
       required:
         - subject
         - predicate
         - object
+        - association
       additionalProperties: false
     MetaAttribute:
       type: object
