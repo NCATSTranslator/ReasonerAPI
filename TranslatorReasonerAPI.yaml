@@ -861,9 +861,9 @@ components:
           type: string
           description: >-
             The category of the qualifier, drawn from a hierarchy of qualifier
-            slots in the Biolink model (e.g. subject_aspect, subject_direction,
-            object_aspect, object_direction, etc).
-          example: subject_aspect
+            slots in the Biolink model (e.g. biolink:subject_aspect_qualifier, biolink:subject_direction_qualifier,
+            biolink:object_aspect_qualifier, biolink:object_direction_qualifier, etc).
+          example: biolink:subject_aspect_qualifier
           nullable: false
         qualifier_value:
           type: string
@@ -871,7 +871,7 @@ components:
             The value associated with the type of the qualifier, drawn from
             a set of controlled values by the type as specified in
             the Biolink model (e.g. 'expression' or 'abundance' for the
-            qualifier type 'subject_aspect', etc).
+            qualifier type 'biolink:subject_aspect_qualifier', etc).
           example: expression
           nullable: false
       required:
@@ -1020,8 +1020,12 @@ components:
           description: >-
             Edge attributes provided by this TRAPI web service.
           items:
-            $ref: '#/components/schemas/MetaAttribute'
+            $ref: '#/components/schemas/Qualifier'
           nullable: true
+        qualifiers:
+          type: array
+          description: >-
+            Qualifiers that are possible to be found on this edge type.
       required:
         - subject
         - predicate
