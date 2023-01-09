@@ -1,12 +1,13 @@
 """OpenAPI 3.0 validation and examples validation."""
 import json
+from sys import stderr
 import os
 import pathlib
 import jsonschema
 import requests
 import yaml
 from jsonschema.exceptions import ValidationError
-from reasoner_validator.trapi import TRAPISchemaValidator
+from reasoner_validator import TRAPISchemaValidator
 
 
 def test_valid():
@@ -34,13 +35,13 @@ def test_examples():
                 print(full_path)
                 example = json.load(f)
                 trapi_version_locally = spec['info']['x-trapi']['version']
-                print(trapi_version_locally)
-                tsv = TRAPISchemaValidator(trapi_version_locally)
+                validator = TRAPISchemaValidator(trapi_version=trapi_version_locally)
                 try:
-                    tsv.validate(
+                    validator.validate(
                         instance=example,
                         component="Message"
                     )
                 except ValidationError:
+                    print(validator.to_dict(), file=stderr)
                     raise ValueError('TRAPI example is not valid against the trapi_version specified!')
 
