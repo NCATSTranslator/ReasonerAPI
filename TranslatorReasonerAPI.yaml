@@ -1055,9 +1055,8 @@ components:
           type: string
           description: >-
             The CURIE of the qualifier type.  Note: biolink:qualified_predicate is a valid
-            qualifier_type_id and should be included in the
-            list of qualifiers for any MetaEdge association that has
-            a biolink:qualified_predicate.
+            qualifier_type_id and should be included in the list of qualifiers for any MetaEdge
+            association that has a biolink:qualified_predicate.
           example: biolink:subject_aspect_qualifier
         applicable_values:
           type: array
