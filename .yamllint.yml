@@ -5,7 +5,7 @@ rules:
   empty-values:
     forbid-in-block-mappings: true
   line-length:
-    max: 79
+    max: 100
   quoted-strings:
     quote-type: single
     required: only-when-needed
