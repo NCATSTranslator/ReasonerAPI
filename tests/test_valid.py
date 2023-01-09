@@ -48,25 +48,23 @@ def test_message_examples():
                     raise ValueError('TRAPI example is not valid against the trapi_version specified!')
 
 
-def test_metakg_examples():
-    test_directory('../examples/MetaKnowledgeGraph', 'MetaKnowledgeGraph')
-    test_directory('../examples/Message', 'Message')
+def metakg_examples():  # def test_metakg_examples():
+    mtest_directory('../examples/MetaKnowledgeGraph', 'MetaKnowledgeGraph')
+    mtest_directory('../examples/Message', 'Message')
 
 
-def test_directory(json_path, object_to_validate):
+def mtest_directory(json_path, object_to_validate):
     dir_path = os.path.dirname(os.path.realpath(__file__))
     with open(os.path.join(dir_path, '..', 'TranslatorReasonerAPI.yaml')) as f:
         spec = yaml.load(f, Loader=yaml.SafeLoader)
     dir_path_json = os.path.join(dir_path, json_path)
     for filename in os.listdir(dir_path_json):
-        print(filename)
         full_path = os.path.join(dir_path_json, filename)
         file_extension = pathlib.Path(full_path).suffix
         if file_extension == '.json':
             with open(full_path) as f:
                 example = json.load(f)
                 trapi_version_locally = spec['info']['x-trapi']['version']
-                print(trapi_version_locally)
                 validator = TRAPISchemaValidator(trapi_version=trapi_version_locally)
                 try:
                     validator.validate(
