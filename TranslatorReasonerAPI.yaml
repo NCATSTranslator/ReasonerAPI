@@ -1010,12 +1010,14 @@ components:
         qualifier_type_id:
           $ref: '#/components/schemas/CURIE'
           description: >-
-            The category of the qualifier, drawn from a hierarchy of qualifier
-            slots in the Biolink model (e.g. biolink:subject_aspect_qualifier,
-            biolink:subject_direction_qualifier,
-            biolink:object_aspect_qualifier,
-            biolink:object_direction_qualifier, etc).
-          example: biolink:subject_aspect_qualifier
+            CURIE for a Biolink 'qualifier' association slot, generally taken
+            from Biolink association slots designated for this purpose
+            (that is, association slots with names ending in 'qualifier')
+            e.g. biolink:subject_aspect, biolink:subject_direction, 
+            biolink:object_aspect, etc. Such qualifiers are used to elaborate
+            a second layer of meaning of a knowledge graph edge.
+          pattern: ^biolink:[a-z][a-z_]*$
+          example: biolink:subject_aspect
           nullable: false
         qualifier_value:
           type: string
