@@ -1040,14 +1040,15 @@ components:
             that represent a relationship between two entities.
             For example, the association 'gene interacts with gene'
             is represented by the Biolink class,
-            'biolink:GeneToGeneAssociation'.
+            'biolink:GeneToGeneAssociation'.  If association
+            is filled out, then the testing harness can
+            help validate that the qualifiers are being used
+            correctly.
           example: biolink:ChemicalToGeneAssociation
-          nullable: false
       required:
         - subject
         - predicate
         - object
-        - association
       additionalProperties: false
     MetaQualifier:
       type: object
