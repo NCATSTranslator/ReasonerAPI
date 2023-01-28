@@ -499,8 +499,11 @@ components:
           type: string
           format: date-time
           description: >-
-            Timestamp in ISO 8601 format, providing univeral
-            coordinated time (UTC), not local time.
+            Timestamp in ISO 8601 format, providing the LogEntry time
+            either in univeral coordinated time (UTC) using the 'Z' tag
+            (e.g 2020-09-03T18:13:49Z), or, if local time is provided,
+            the timezone offset must be provided
+            (e.g. 2020-09-03T18:13:49-04:00).
           example: '2020-09-03T18:13:49+00:00'
           nullable: false
         level:
