@@ -22,7 +22,7 @@ info:
       url: https://github.com/NCATSTranslator/translator_extensions/blob/\
         production/x-translator/
   x-trapi:
-    version: 1.3.0
+    version: 1.4.0-dev
     asyncquery: REPLACE-WITH-true-IF-/asyncquery-IS-IMPLEMENTED-ELSE-false
     operations:
       - LIST-ALL-SUPPORTED-OPERATION-IDS-HERE-OR-REMOVE-THIS-SECTION
@@ -601,6 +601,10 @@ components:
           nullable: true
         categories:
           type: array
+          description: >-
+            These should be Biolink Model categories and are allowed
+            to be of type 'abstract' or 'mixin' (only in QGraphs!).
+            Use of 'deprecated' categories should be avoided.
           items:
             $ref: '#/components/schemas/BiolinkEntity'
           minItems: 1
@@ -632,7 +636,7 @@ components:
     QEdge:
       type: object
       description: >-
-        An edge in the QueryGraph used as an filter pattern specification in a
+        An edge in the QueryGraph used as a filter pattern specification in a
         query. If the optional predicate property is not specified,
         it is assumed to be a wildcard match to the target knowledge space.
         If specified, the ontological inheritance hierarchy associated with
@@ -656,6 +660,10 @@ components:
           type: string
         predicates:
           type: array
+          description: >-
+            These should be Biolink Model predicates and are allowed to be of
+            type 'abstract' or 'mixin' (only in QGraphs!). Use of 'deprecated'
+            predicates should be avoided.
           items:
             $ref: '#/components/schemas/BiolinkPredicate'
           minItems: 1
@@ -714,6 +722,10 @@ components:
           nullable: true
         categories:
           type: array
+          description: >-
+            These should be Biolink Model categories and are NOT allowed
+            to be of type 'abstract' or 'mixin'. Returning 'deprecated'
+            categories should also be avoided.
           items:
             $ref: '#/components/schemas/BiolinkEntity'
           nullable: true
@@ -818,39 +830,63 @@ components:
         resulting from a query upon the underlying knowledge source.
       properties:
         predicate:
-          allOf:
+          description: >-
+            The type of relationship between the subject and object
+            for the statement expressed in an Edge. These should be
+            Biolink Model predicate terms and are NOT allowed
+            to be of type 'abstract' or 'mixin'. Returning 'deprecated'
+            predicate terms should also be avoided.
+          example: biolink:gene_associated_with_condition
+          oneOf:
             - $ref: '#/components/schemas/BiolinkPredicate'
-          nullable: true
+          nullable: false
         subject:
-          $ref: '#/components/schemas/CURIE'
-          example: OMIM:603903
           description: >-
             Corresponds to the map key CURIE of the
             subject concept node of this relationship edge.
+          example: MONDO:0011382
+          oneOf:
+            - $ref: '#/components/schemas/CURIE'
+          nullable: false
         object:
-          $ref: '#/components/schemas/CURIE'
-          example: UniProtKB:P00738
           description: >-
             Corresponds to the map key CURIE of the
             object concept node of this relationship edge.
+          example: UniProtKB:P00738
+          oneOf:
+            - $ref: '#/components/schemas/CURIE'
+          nullable: false
         attributes:
-          type: array
           description: A list of additional attributes for this edge
           items:
             $ref: '#/components/schemas/Attribute'
           nullable: true
-        qualifiers:
           type: array
+        qualifiers:
           description: >-
             A set of Qualifiers that act together to add nuance
             or detail to the statement expressed in an Edge.
           items:
             $ref: '#/components/schemas/Qualifier'
           nullable: true
+          type: array
+        sources:
+          type: array
+          description: >-
+            A list of RetrievalSource objects that provide information
+            about how a particular Information Resource served
+            as a source from which the knowledge expressed in an Edge,
+            or data used to generate this knowledge, was retrieved.
+          items:
+            $ref: '#/components/schemas/RetrievalSource'
+          minItems: 1
+          nullable: false
       additionalProperties: false
       required:
-        - subject
         - object
+        - predicate
+        - subject
+        - sources
     Qualifier:
       additionalProperties: false
       description: >-
@@ -1157,3 +1193,47 @@ components:
         - operator
         - value
       additionalProperties: false
+    RetrievalSource:
+      type: object
+      description: >-
+        Provides information about how a particular InformationResource
+        served as a source from which knowledge expressed in an Edge, or
+        data used to generate this knowledge, was retrieved.
+      properties:
+        resource:
+          $ref: '#/components/schemas/CURIE'
+          description: >-
+            The CURIE for an Information Resource that served as a source
+            of knowledge expressed in an Edge, or a source of data used to
+            generate this knowledge.
+          example: infores:drugbank
+          nullable: false
+        resource_role:
+          type: string
+          description: >-
+            The role played by the InformationResource in serving as a
+            source for an Edge. Note that a given Edge should have one
+            and only one 'primary' source, and may have any number of
+            'aggregator' or 'supporting data' sources.
+          enum:
+            - primary_knowledge_source
+            - aggregator_knowledge_source
+            - supporting_data_source
+        upstream_resources:
+          type: array
+          items:
+            $ref: '#/components/schemas/CURIE'
+          description: >-
+            An upstream InformationResource from which the resource
+            being described directly retrieved a record of the knowledge
+            expressed in the Edge, or data used to generate this knowledge.
+            This is an array because there are cases where a merged Edge
+            holds knowledge that was retrieved from multiple sources. e.g.
+            an Edge provided by the ARAGORN ARA can expressing knowledge it
+            retrieved from both the automat-mychem-info and molepro KPs,
+            which both provided it with records of this single fact.
+          example: [infores:automat-mychem-info, infores:molepro]
+      additional_properties: true
+      required:
+        - resource
+        - resource_role
