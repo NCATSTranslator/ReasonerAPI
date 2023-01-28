@@ -381,9 +381,10 @@ components:
           nullable: false
         logs:
           description: >-
-            Log entries containing errors, warnings, debugging information, etc.
-            Most important is to have the most recent log entry with a timestamp
-            that can be compared against the current time to see if there is
+            A list of LogEntry items, containing errors, warnings, debugging
+            information, etc. List items MUST be in chronological order with
+            earliest first. The most recent entry should be last. Its timestamp
+            will be compared against the current time to see if there is
             still activity.
           type: array
           items:
@@ -430,7 +431,9 @@ components:
           nullable: true
         logs:
           description: >-
-            Log entries containing errors, warnings, debugging information, etc
+            A list of LogEntry items, containing errors, warnings, debugging
+            information, etc. List items MUST be in chronological order with
+            earliest first.
           type: array
           items:
             $ref: '#/components/schemas/LogEntry'
@@ -495,9 +498,11 @@ components:
         timestamp:
           type: string
           format: date-time
-          description: Timestamp in ISO 8601 format
+          description: >-
+            Timestamp in ISO 8601 format, providing univeral
+            coordinated time (UTC), not local time.
           example: '2020-09-03T18:13:49+00:00'
-          nullable: true
+          nullable: false
         level:
           allOf:
             - $ref: '#/components/schemas/LogLevel'
@@ -511,8 +516,11 @@ components:
         message:
           type: string
           description: A human-readable log message
-          nullable: true
+          nullable: false
       additionalProperties: true
+      required:
+        - timestamp
+        - message
     LogLevel:
       type: string
       description: Logging level
