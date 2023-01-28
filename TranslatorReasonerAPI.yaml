@@ -210,13 +210,22 @@ paths:
             application/json:
               schema:
                 type: string
-  /async_query_status:
+  /async_query_status/{job_id}:
     get:
       tags:
         - async_query_status
       summary: >-
         Retrieve the current status of a previously submitted
         async_query given its job_id
+      operationId: async_query_status
+      parameters:
+        - in: path
+          name: job_id
+          description: Identifier of the job for status request
+          example: rXEOAosN3L
+          required: true
+          schema:
+            type: string
       responses:
         '200':
           description: >-
@@ -226,6 +235,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AsyncQueryStatusResponse'
+        '404':
+          description: job_id not found
 components:
   schemas:
     Query:
