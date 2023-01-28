@@ -1233,7 +1233,7 @@ components:
             retrieved from both the automat-mychem-info and molepro KPs,
             which both provided it with records of this single fact.
           example: [infores:automat-mychem-info, infores:molepro]
-      additional_properties: true
       required:
         - resource
         - resource_role
+      additionalProperties: true
