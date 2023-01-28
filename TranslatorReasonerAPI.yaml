@@ -1209,16 +1209,12 @@ components:
           example: infores:drugbank
           nullable: false
         resource_role:
-          type: string
+          $ref: '#/components/schemas/ResourceRoleEnum'
           description: >-
             The role played by the InformationResource in serving as a
             source for an Edge. Note that a given Edge should have one
             and only one 'primary' source, and may have any number of
             'aggregator' or 'supporting data' sources.
-          enum:
-            - primary_knowledge_source
-            - aggregator_knowledge_source
-            - supporting_data_source
         upstream_resources:
           type: array
           items:
@@ -1237,3 +1233,15 @@ components:
         - resource
         - resource_role
       additionalProperties: true
+      ResourceRoleEnum:
+        type: string
+        description: >-
+          The role played by the InformationResource in serving as a
+          source for an Edge. Note that a given Edge should have one
+          and only one 'primary' source, and may have any number of
+          'aggregator' or 'supporting data' sources.  This enumeration
+          is found in Biolink Model, but is repeated here for convenience.
+        enum:
+          - primary_knowledge_source
+          - aggregator_knowledge_source
+          - supporting_data_source
