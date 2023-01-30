@@ -733,7 +733,7 @@ components:
             reference to a single Knoweldge Graph edge
           items:
             type: string
-          min-occurs: 1
+          minOccurs: 1
           nullable: false
           attributes:
             type: array
