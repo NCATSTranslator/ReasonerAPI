@@ -608,7 +608,7 @@ components:
           items:
             type: string
           nullable: false
-          minitems: 1
+          minItems: 1
         attributes:
           type: array
           description: >-
