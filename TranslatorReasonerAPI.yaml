@@ -615,7 +615,7 @@ components:
               Attributes of the Auxiliaary Graph
             items:
               $ref: '#/components/schemas/Attribute'
-        additionalProperties: true
+      additionalProperties: true
       required:
         - edges
     KnowledgeGraph:
