@@ -616,8 +616,8 @@ components:
             items:
               $ref: '#/components/schemas/Attribute'
         additionalProperties: true
-        required:
-          - edges
+      required:
+        - edges
     KnowledgeGraph:
       type: object
       description: >-
