@@ -609,12 +609,12 @@ components:
             type: string
           minOccurs: 1
           nullable: false
-          attributes:
-            type: array
-            description: >-
-              Attributes of the Auxiliaary Graph
-            items:
-              $ref: '#/components/schemas/Attribute'
+        attributes:
+          type: array
+          description: >-
+            Attributes of the Auxiliaary Graph
+          items:
+            $ref: '#/components/schemas/Attribute'
       additionalProperties: true
       required:
         - edges
