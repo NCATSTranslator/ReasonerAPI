@@ -669,6 +669,8 @@ components:
             reasoning service. Each item in the list is the key of a
             single Auxiliary Graph.
           nullable: true
+          items:
+            type: string
         scoring_method:
           type: string
           description: >-
@@ -729,6 +731,10 @@ components:
           description: >-
             List of edges that form the Auxiliary Graph. Each item is a
             reference to a single Knoweldge Graph edge
+          items:
+            type: string
+          min-occurs: 1
+          nullable: false
           attributes:
             type: array
             description: >-
