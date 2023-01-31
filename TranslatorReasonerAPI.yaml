@@ -511,7 +511,7 @@ components:
         generation of the score).
       properties:
         reasoner_id:
-          type: string
+          $ref: '#/components/schemas/CURIE'
           description: The id of the service generating and using this Anlysis
         score:
           type: number
@@ -612,7 +612,7 @@ components:
         attributes:
           type: array
           description: >-
-            Attributes of the Auxiliaary Graph
+            Attributes of the Auxiliary Graph
           items:
             $ref: '#/components/schemas/Attribute'
       additionalProperties: true
