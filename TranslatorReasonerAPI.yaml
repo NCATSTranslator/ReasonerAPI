@@ -735,6 +735,12 @@ components:
           items:
             $ref: '#/components/schemas/Attribute'
           nullable: true
+        is_set:
+          type: boolean
+          description: >-
+            Indicates that the node represents a set of entities.
+          default: false
+          nullable: true        
       additionalProperties: false
     Attribute:
       type: object
