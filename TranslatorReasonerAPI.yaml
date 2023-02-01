@@ -612,6 +612,12 @@ components:
         is_set:
           type: boolean
           description: >-
+            Indicates that the query node represents a set of entities.
+          default: false
+          nullable: true        
+        collate:
+          type: boolean
+          description: >-
             Boolean that if set to true, indicates that this QNode MAY have
             multiple KnowledgeGraph Nodes bound to it within each Result.
             The nodes in a set should be considered as a set of independent
