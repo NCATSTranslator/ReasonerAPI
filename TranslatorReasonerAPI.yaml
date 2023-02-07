@@ -730,7 +730,7 @@ components:
           type: array
           description: >-
             List of edges that form the Auxiliary Graph. Each item is a
-            reference to a single Knoweldge Graph edge
+            reference to a single Knowledge Graph edge
           items:
             type: string
           nullable: false
@@ -741,6 +741,7 @@ components:
             Attributes of the Auxiliary Graph
           items:
             $ref: '#/components/schemas/Attribute'
+          nullable: true
       additionalProperties: true
       required:
         - edges
