@@ -1015,7 +1015,10 @@ components:
             (that is, association slots with names ending in 'qualifier')
             e.g. biolink:subject_aspect_qualifier, biolink:subject_direction,
             biolink:object_aspect, etc. Such qualifiers are used to elaborate
-            a second layer of meaning of a knowledge graph edge.
+            a second layer of meaning of a knowledge graph edge. Available
+            qualifiers are edge properties in the Biolink Model (see
+            https://biolink.github.io/biolink-model/docs/edge_properties.html)
+            which have slot names with the suffix string 'qualifier'.
           pattern: ^biolink:[a-z][a-z_]*$
           example: biolink:subject_aspect_qualifier
           nullable: false
@@ -1026,6 +1029,9 @@ components:
             a set of controlled values by the type as specified in
             the Biolink model (e.g. 'expression' or 'abundance' for the
             qualifier type 'biolink:subject_aspect_qualifier', etc).
+            The enumeration of qualifier values for a given qualifier
+            type is generally going to be constrained by the category
+            of edge (i.e. biolink:Association subtype) of the (Q)Edge.
           example: expression
           nullable: false
       required:
