@@ -1,3 +1,45 @@
+# Change Log TRAPI 1.3 (2022-09-01) -> 1.4 (2023-??)
+
+https://github.com/NCATSTranslator/ReasonerAPI/compare/v1.3.0...1.4
+  
+- Edge.predicate switched to nullable false and made required, Edge.subject and Edge.object switched to nullable false
+  https://github.com/NCATSTranslator/ReasonerAPI/pull/377/files
+
+- External workflow schema updated from version 1.0.0 to version 1.3.2 
+  https://github.com/NCATSTranslator/ReasonerAPI/pull/365/files
+  
+- Node.categories clarified that they SHOULD be Biolink Model categories and MUST NOT be of type 'abstract' or 'mixin'. 'deprecated' categories SHOULD also be avoided.
+  https://github.com/NCATSTranslator/ReasonerAPI/pull/383/files
+
+PLANNED BUT NOT YET MERGED:
+
+- In MetaKnowledgeGraph component, added MetaEdge.qualifiers as list of new MetaQualifier types
+  https://github.com/NCATSTranslator/ReasonerAPI/pull/387/files
+  Status: Ask Sierra: Should qualifier_type_id be required and not nullable? and also a second open question?
+
+- Add /async_query_status/{job_id} endpoint
+  https://github.com/NCATSTranslator/ReasonerAPI/pull/395/files
+  Status: only two approvals. Will anyone else read it and approve it?
+
+- Constrain Qualifier.qualifier_type_id to be a biolink CURIE
+  https://github.com/NCATSTranslator/ReasonerAPI/pull/391/files
+  Status: Awaiting Richard amending the PR for actual biolink curies
+
+- Enhance encoding of EPC retrieval sources by adding Edge.sources as list of RetrievalSource items (required, minItems: 1)
+  https://github.com/NCATSTranslator/ReasonerAPI/pull/393/files
+  Status: Check in with Sierra and Matt. Is this complete? There's a comment in the minutes about "adding properties"?
+
+- Encoding extra supporting graph information in TRAPI
+  This is a complex breaking change that moves Result.edge_bindings into Result.analyses which link to AuxiliaryGraph objects
+  https://github.com/NCATSTranslator/ReasonerAPI/pull/389/files
+  Status: everyone is tagged. Only 3 approvals
+
+To do with no PR yet:
+- Ensure that we can switch all cases of "allOf" to "oneOf" to be compatible with the TRAPI validator
+
+
+
+
 # Change Log TRAPI 1.2 -> 1.3
 
 https://github.com/NCATSTranslator/ReasonerAPI/compare/v1.2.0...1.3
