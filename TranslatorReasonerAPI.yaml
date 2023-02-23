@@ -1058,6 +1058,7 @@ components:
           description: >-
             The CURIE of the qualifier type.
           example: biolink:subject_aspect_qualifier
+          nullable: false
         applicable_values:
           type: array
           description: >-
@@ -1065,7 +1066,8 @@ components:
           items:
             type: string
             example: [expression, activity, abundance, degradation]
-            nullable: true
+      required:
+        - qualifier_type_id
     MetaAttribute:
       type: object
       properties:
