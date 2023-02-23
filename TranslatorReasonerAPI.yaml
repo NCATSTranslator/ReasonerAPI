@@ -887,10 +887,11 @@ components:
             CURIE for a Biolink 'qualifier' association slot, generally taken
             from Biolink association slots designated for this purpose
             (that is, association slots with names ending in 'qualifier')
-            e.g. biolink:subject_aspect_qualifier, biolink:subject_direction,
-            biolink:object_aspect, etc. Such qualifiers are used to elaborate
-            a second layer of meaning of a knowledge graph edge. Available
-            qualifiers are edge properties in the Biolink Model (see
+            e.g. biolink:subject_aspect_qualifier, 
+            biolink:subject_direction_qualifier,
+            biolink:object_aspect_qualifier, etc. Such qualifiers are used
+            to elaborate a second layer of meaning of a knowledge graph edge.
+            Available qualifiers are edge properties in the Biolink Model (see
             https://biolink.github.io/biolink-model/docs/edge_properties.html)
             which have slot names with the suffix string 'qualifier'.
           pattern: ^biolink:[a-z][a-z_]*$
@@ -918,9 +919,9 @@ components:
         qualifier_types and qualifier_values of a set of
         Qualifiers attached to an edge. For example, it can constrain a
         "ChemicalX - affects - ?Gene" query to return only edges where
-        ChemicalX specifically affects the 'expression' of the Gene,
-        by constraining on the qualifier_type "object_aspect" with
-        a qualifier_value of "expression".
+        ChemicalX specifically affects the 'expression' of the Gene, by
+        constraining on the qualifier_type "biolink:object_aspect_qualifier"
+        with a qualifier_value of "expression".
       properties:
         qualifier_set:
           type: array
