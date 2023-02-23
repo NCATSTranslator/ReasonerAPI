@@ -15,7 +15,7 @@ PLANNED BUT NOT YET MERGED:
 
 - In MetaKnowledgeGraph component, added MetaEdge.qualifiers as list of new MetaQualifier types
   https://github.com/NCATSTranslator/ReasonerAPI/pull/387/files
-  Status: Ask Sierra: Should qualifier_type_id be required and not nullable? and also a second open question?
+  Status: Five approvals. A few tweaks to address issues from last meeting. Awaiting approvals
 
 - Add /async_query_status/{job_id} endpoint
   https://github.com/NCATSTranslator/ReasonerAPI/pull/395/files
@@ -23,7 +23,7 @@ PLANNED BUT NOT YET MERGED:
 
 - Constrain Qualifier.qualifier_type_id to be a biolink CURIE
   https://github.com/NCATSTranslator/ReasonerAPI/pull/391/files
-  Status: Awaiting Richard amending the PR for actual biolink curies
+  Status: 3 approvals. A few tweaks to address issues from last meeting have been addressed. Awaiting approvals
 
 - Enhance encoding of EPC retrieval sources by adding Edge.sources as list of RetrievalSource items (required, minItems: 1)
   https://github.com/NCATSTranslator/ReasonerAPI/pull/393/files
