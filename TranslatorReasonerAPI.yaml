@@ -887,11 +887,11 @@ components:
             CURIE for a Biolink 'qualifier' association slot, generally taken
             from Biolink association slots designated for this purpose
             (that is, association slots with names ending in 'qualifier')
-            e.g. biolink:subject_aspect, biolink:subject_direction,
+            e.g. biolink:subject_aspect_qualifier, biolink:subject_direction,
             biolink:object_aspect, etc. Such qualifiers are used to elaborate
             a second layer of meaning of a knowledge graph edge.
           pattern: ^biolink:[a-z][a-z_]*$
-          example: biolink:subject_aspect
+          example: biolink:subject_aspect_qualifier
           nullable: false
         qualifier_value:
           type: string
@@ -899,7 +899,7 @@ components:
             The value associated with the type of the qualifier, drawn from
             a set of controlled values by the type as specified in
             the Biolink model (e.g. 'expression' or 'abundance' for the
-            qualifier type 'biolink:subject_aspect', etc).
+            qualifier type 'biolink:subject_aspect_qualifier', etc).
           example: expression
           nullable: false
       required:
