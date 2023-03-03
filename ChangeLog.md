@@ -11,8 +11,6 @@ https://github.com/NCATSTranslator/ReasonerAPI/compare/v1.3.0...1.4
 - Node.categories clarified that they SHOULD be Biolink Model categories and MUST NOT be of type 'abstract' or 'mixin'. 'deprecated' categories SHOULD also be avoided.
   https://github.com/NCATSTranslator/ReasonerAPI/pull/383/files
 
-PLANNED BUT NOT YET MERGED:
-
 - In MetaKnowledgeGraph component, added MetaEdge.qualifiers as list of new MetaQualifier types
   https://github.com/NCATSTranslator/ReasonerAPI/pull/387/files
   Status: Five approvals. A few tweaks to address issues from last meeting. Awaiting approvals
@@ -25,14 +23,16 @@ PLANNED BUT NOT YET MERGED:
   https://github.com/NCATSTranslator/ReasonerAPI/pull/391/files
   Status: 3 approvals. A few tweaks to address issues from last meeting have been addressed. Awaiting approvals
 
-- Enhance encoding of EPC retrieval sources by adding Edge.sources as list of RetrievalSource items (required, minItems: 1)
-  https://github.com/NCATSTranslator/ReasonerAPI/pull/393/files
-  Status: Check in with Sierra and Matt. Is this complete? There's a comment in the minutes about "adding properties"?
-
 - Encoding extra supporting graph information in TRAPI
   This is a complex breaking change that moves Result.edge_bindings into Result.analyses which link to AuxiliaryGraph objects
   https://github.com/NCATSTranslator/ReasonerAPI/pull/389/files
   Status: everyone is tagged. Only 3 approvals
+
+FINAL REVIEWS REQUIRED. NOT YET MERGED:
+
+- Enhance encoding of EPC retrieval sources by adding Edge.sources as list of RetrievalSource items (required, minItems: 1)
+  https://github.com/NCATSTranslator/ReasonerAPI/pull/393/files
+  Status: Check in with Sierra and Matt. Is this complete? There's a comment in the minutes about "adding properties"?
 
 To do with no PR yet:
 - Ensure that we can switch all cases of "allOf" to "oneOf" to be compatible with the TRAPI validator
