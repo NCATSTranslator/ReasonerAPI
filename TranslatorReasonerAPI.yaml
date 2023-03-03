@@ -65,6 +65,10 @@ tags:
     externalDocs:
       description: Documentation for the reasoner asynchquery function
       url: INSERT-URL-HERE-OR-REMOVE-EXTERNALDOCS-IF-NA
+  - name: asyncquery_status
+    description: >-
+      Retrieve the current status of a previously submitted
+      asyncquery given its job_id
   - name: translator
     description: Required for SmartAPI validation of x-translator
   - name: trapi
@@ -166,7 +170,7 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/AsyncQueryResponse'
         '400':
           description: >-
             Bad request. The request is invalid according to this OpenAPI
@@ -202,6 +206,44 @@ paths:
         '501':
           description: >-
             Not implemented.
+          content:
+            application/json:
+              schema:
+                type: string
+  /asyncquery_status/{job_id}:
+    get:
+      tags:
+        - asyncquery_status
+      summary: >-
+        Retrieve the current status of a previously submitted
+        asyncquery given its job_id
+      operationId: asyncquery_status
+      parameters:
+        - in: path
+          name: job_id
+          description: Identifier of the job for status request
+          example: rXEOAosN3L
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: >-
+            Returns the status and current logs of a previously
+            submitted asyncquery.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncQueryStatusResponse'
+        '404':
+          description: job_id not found
+        '501':
+          description: >-
+            Return code 501 indicates that this endpoint has not been
+            implemented at this site. Sites that implement /asyncquery
+            MUST implement /asyncquery_status/{job_id}, but those that
+            do not implement /asyncquery SHOULD NOT implement
+            /asyncquery_status.
           content:
             application/json:
               schema:
@@ -297,6 +339,80 @@ components:
       required:
         - callback
         - message
+    AsyncQueryResponse:
+      type: object
+      description: >-
+        The AsyncQueryResponse object contains a payload that must be
+        returned from a submitted async_query.
+      properties:
+        status:
+          description: >-
+            One of a standardized set of short codes:
+            e.g. Accepted, QueryNotTraversable, KPsNotAvailable
+          type: string
+          example: Accepted
+          nullable: true
+        description:
+          description: >-
+            A brief human-readable description of the result of the
+            async_query submission.
+          type: string
+          example: Async_query has been queued
+          nullable: true
+        job_id:
+          description: >-
+            An identifier for the submitted job that can be used with
+            /async_query_status to receive an update on the status of
+            the job.
+          type: string
+          example: rXEOAosN3L
+          nullable: false
+      additionalProperties: true
+      required:
+        - job_id
+    AsyncQueryStatusResponse:
+      type: object
+      description: >-
+        The AsyncQueryStatusResponse object contains a payload that describes
+        the current status of a previously submitted async_query.
+      properties:
+        status:
+          description: >-
+            One of a standardized set of short codes:
+            Queued, Running, Completed, Failed
+          type: string
+          example: Running
+          nullable: false
+        description:
+          description: >-
+            A brief human-readable description of the current state
+            or summary of the problem if the status is Failed.
+          type: string
+          example: Callback URL returned 500
+          nullable: false
+        logs:
+          description: >-
+            A list of LogEntry items, containing errors, warnings, debugging
+            information, etc. List items MUST be in chronological order with
+            earliest first. The most recent entry should be last. Its timestamp
+            will be compared against the current time to see if there is
+            still activity.
+          type: array
+          items:
+            $ref: '#/components/schemas/LogEntry'
+          nullable: false
+        response_url:
+          description: >-
+            Optional URL that can be queried to restrieve the full TRAPI
+            Response.
+          type: string
+          example: https://arax.ncats.io/api/arax/v1.3/response/116481
+          nullable: true
+      additionalProperties: true
+      required:
+        - status
+        - description
+        - logs
     Response:
       type: object
       description: >-
@@ -326,7 +442,9 @@ components:
           nullable: true
         logs:
           description: >-
-            Log entries containing errors, warnings, debugging information, etc
+            A list of LogEntry items, containing errors, warnings, debugging
+            information, etc. List items MUST be in chronological order with
+            earliest first.
           type: array
           items:
             $ref: '#/components/schemas/LogEntry'
@@ -391,9 +509,14 @@ components:
         timestamp:
           type: string
           format: date-time
-          description: Timestamp in ISO 8601 format
+          description: >-
+            Timestamp in ISO 8601 format, providing the LogEntry time
+            either in univeral coordinated time (UTC) using the 'Z' tag
+            (e.g 2020-09-03T18:13:49Z), or, if local time is provided,
+            the timezone offset must be provided
+            (e.g. 2020-09-03T18:13:49-04:00).
           example: '2020-09-03T18:13:49+00:00'
-          nullable: true
+          nullable: false
         level:
           allOf:
             - $ref: '#/components/schemas/LogLevel'
@@ -407,8 +530,11 @@ components:
         message:
           type: string
           description: A human-readable log message
-          nullable: true
+          nullable: false
       additionalProperties: true
+      required:
+        - timestamp
+        - message
     LogLevel:
       type: string
       description: Logging level
