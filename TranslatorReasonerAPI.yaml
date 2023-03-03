@@ -65,10 +65,10 @@ tags:
     externalDocs:
       description: Documentation for the reasoner asynchquery function
       url: INSERT-URL-HERE-OR-REMOVE-EXTERNALDOCS-IF-NA
-  - name: async_query_status
+  - name: asyncquery_status
     description: >-
       Retrieve the current status of a previously submitted
-      async_query given its job_id
+      asyncquery given its job_id
   - name: translator
     description: Required for SmartAPI validation of x-translator
   - name: trapi
@@ -210,14 +210,14 @@ paths:
             application/json:
               schema:
                 type: string
-  /async_query_status/{job_id}:
+  /asyncquery_status/{job_id}:
     get:
       tags:
-        - async_query_status
+        - asyncquery_status
       summary: >-
         Retrieve the current status of a previously submitted
-        async_query given its job_id
-      operationId: async_query_status
+        asyncquery given its job_id
+      operationId: asyncquery_status
       parameters:
         - in: path
           name: job_id
@@ -230,13 +230,24 @@ paths:
         '200':
           description: >-
             Returns the status and current logs of a previously
-            submitted async_query.
+            submitted asyncquery.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AsyncQueryStatusResponse'
         '404':
           description: job_id not found
+        '501':
+          description: >-
+            Return code 501 indicates that this endpoint has not been
+            implemented at this site. Sites that implement /asyncquery
+            MUST implement /asyncquery_status/{job_id}, but those that
+            do not implement /asyncquery SHOULD NOT implement
+            /asyncquery_status.
+          content:
+            application/json:
+              schema:
+                type: string
 components:
   schemas:
     Query:
