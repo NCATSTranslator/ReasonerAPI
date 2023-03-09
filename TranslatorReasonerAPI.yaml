@@ -1229,6 +1229,20 @@ components:
             retrieved from both the automat-mychem-info and molepro KPs,
             which both provided it with records of this single fact.
           example: [infores:automat-mychem-info, infores:molepro]
+        source_record_urls:
+          type: array
+          items: string
+          description: >-
+            A URL linking to a specific web page or document provided by the 
+            source, that contains a record of the knowledge expressed in the 
+            Edge. If the knowledge is contained in more than one web page on 
+            an Information Resource's site, urls MAY be provided for each. 
+            For example, Therapeutic Targets Database (TTD) has separate web 
+            pages for 'Imatinib' and its protein target KIT, both of which hold 
+            the claim that 'the KIT protein is a therapeutic target for Imatinib'.         
+          example: >-
+            [https://db.idrblab.net/ttd/data/drug/details/d0az3c, 
+            https://db.idrblab.net/ttd/data/target/details/t57700]
       required:
         - resource
         - resource_role
