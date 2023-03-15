@@ -13,20 +13,16 @@ https://github.com/NCATSTranslator/ReasonerAPI/compare/v1.3.0...1.4
 
 - In MetaKnowledgeGraph component, added MetaEdge.qualifiers as list of new MetaQualifier types
   https://github.com/NCATSTranslator/ReasonerAPI/pull/387/files
-  Status: Five approvals. A few tweaks to address issues from last meeting. Awaiting approvals
-
+ 
 - Add /async_query_status/{job_id} endpoint
   https://github.com/NCATSTranslator/ReasonerAPI/pull/395/files
-  Status: only two approvals. Will anyone else read it and approve it?
-
+  
 - Constrain Qualifier.qualifier_type_id to be a biolink CURIE
   https://github.com/NCATSTranslator/ReasonerAPI/pull/391/files
-  Status: 3 approvals. A few tweaks to address issues from last meeting have been addressed. Awaiting approvals
-
+ 
 - Encoding extra supporting graph information in TRAPI
   This is a complex breaking change that moves Result.edge_bindings into Result.analyses which link to AuxiliaryGraph objects
   https://github.com/NCATSTranslator/ReasonerAPI/pull/389/files
-  Status: everyone is tagged. Only 3 approvals
 
 FINAL REVIEWS REQUIRED. NOT YET MERGED:
 
