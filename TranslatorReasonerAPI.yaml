@@ -454,6 +454,14 @@ components:
           allOf:
             - $ref: http://standards.ncats.io/workflow/1.3.2/schema
           nullable: true
+        schema_version:
+          type: string
+          example: 1.4.0
+          description: Version label of the TRAPI schema used in this document
+        biolink_version:
+          type: string
+          example: 3.1.2
+          description: Version label of the Biolink model used in this document
       additionalProperties: true
       required:
         - message
