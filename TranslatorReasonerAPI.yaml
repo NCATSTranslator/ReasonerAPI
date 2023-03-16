@@ -1185,12 +1185,12 @@ components:
       externalDocs:
         url: https://www.w3.org/TR/2010/NOTE-curie-20101216/
       pattern: ^\S+:\S+$
-    URI:
+    URL:
       type: string
       description: >-
       externalDocs:
         url: https://www.ietf.org/rfc/rfc3987.txt
-      pattern: (http(s)?:\/\/.)?(www\.)?\S+$
+      pattern: ^(http(s)?:\/\/.)?(www\.)?\S+$
     MetaKnowledgeGraph:
       type: object
       description: >-
