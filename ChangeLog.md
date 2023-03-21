@@ -24,15 +24,22 @@ https://github.com/NCATSTranslator/ReasonerAPI/compare/v1.3.0...1.4
   This is a complex breaking change that moves Result.edge_bindings into Result.analyses which link to AuxiliaryGraph objects
   https://github.com/NCATSTranslator/ReasonerAPI/pull/389/files
 
-FINAL REVIEWS REQUIRED. NOT YET MERGED:
-
 - Enhance encoding of EPC retrieval sources by adding Edge.sources as list of RetrievalSource items (required, minItems: 1)
   https://github.com/NCATSTranslator/ReasonerAPI/pull/393/files
-  Status: Check in with Sierra and Matt. Is this complete? There's a comment in the minutes about "adding properties"?
 
 - Switch all cases of "allOf" to "oneOf" to be compatible with actual schema semantics and TRAPI (JSONSchema) validation
   https://github.com/NCATSTranslator/ReasonerAPI/pull/403/files
+
+
+FINAL REVIEWS REQUIRED. NOT YET MERGED:
+
+- New properties Response.schema_version and Response.biolink_version to aid in TRAPI (JSONSchema) validation
+  https://github.com/NCATSTranslator/ReasonerAPI/pull/405/files
   Status: Pending more approvals
+
+- Further constrain CURIE and URL with regexps 
+  https://github.com/NCATSTranslator/ReasonerAPI/pull/406
+  Status: No approvals, one concern, one disapprove
 
 
 # Change Log TRAPI 1.2 -> 1.3
