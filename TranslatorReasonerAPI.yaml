@@ -1277,6 +1277,16 @@ components:
           description: >-
             Object node category of this relationship edge.
           example: biolink:Protein
+        can_be_negated:
+          type: boolean
+          description: >-
+            Indicates that this edge can be negated in the data source
+            presenting the edge. The edge property is different here from the
+            negated property in the Edge object in order to reuse the same edge
+            in the meta knowledge graph to represent both positive and negated 
+            edges of this type.
+          example: false
+          default: false
         knowledge_types:
           description: >-
             A list of knowledge_types that are supported by the service.
