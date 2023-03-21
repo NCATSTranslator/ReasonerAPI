@@ -1072,6 +1072,15 @@ components:
           oneOf:
             - $ref: '#/components/schemas/CURIE'
           nullable: false
+        negated:
+          description: >-
+            Indicates whether the statement expressed in an Edge is
+            negated. If true, the statement is negated.  This also 
+            reflects the implementation in Biolink Model for 
+            negating an edge.
+          type: boolean
+          nullable: false
+          default: false
         attributes:
           description: A list of additional attributes for this edge
           items:
