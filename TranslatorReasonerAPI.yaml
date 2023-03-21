@@ -1086,11 +1086,23 @@ components:
             $ref: '#/components/schemas/Qualifier'
           nullable: true
           type: array
+        sources:
+          type: array
+          description: >-
+            A list of RetrievalSource objects that provide information
+            about how a particular Information Resource served
+            as a source from which the knowledge expressed in an Edge,
+            or data used to generate this knowledge, was retrieved.
+          items:
+            $ref: '#/components/schemas/RetrievalSource'
+          minItems: 1
+          nullable: false
       additionalProperties: false
       required:
         - object
         - predicate
         - subject
+        - sources
     Qualifier:
       additionalProperties: false
       description: >-
@@ -1447,3 +1459,70 @@ components:
         - operator
         - value
       additionalProperties: false
+    RetrievalSource:
+      type: object
+      description: >-
+        Provides information about how a particular InformationResource
+        served as a source from which knowledge expressed in an Edge, or
+        data used to generate this knowledge, was retrieved.
+      properties:
+        resource:
+          $ref: '#/components/schemas/CURIE'
+          description: >-
+            The CURIE for an Information Resource that served as a source
+            of knowledge expressed in an Edge, or a source of data used to
+            generate this knowledge.
+          example: infores:drugbank
+          nullable: false
+        resource_role:
+          $ref: '#/components/schemas/ResourceRoleEnum'
+          description: >-
+            The role played by the InformationResource in serving as a
+            source for an Edge. Note that a given Edge should have one
+            and only one 'primary' source, and may have any number of
+            'aggregator' or 'supporting data' sources.
+        upstream_resources:
+          type: array
+          items:
+            $ref: '#/components/schemas/CURIE'
+          description: >-
+            An upstream InformationResource from which the resource
+            being described directly retrieved a record of the knowledge
+            expressed in the Edge, or data used to generate this knowledge.
+            This is an array because there are cases where a merged Edge
+            holds knowledge that was retrieved from multiple sources. e.g.
+            an Edge provided by the ARAGORN ARA can expressing knowledge it
+            retrieved from both the automat-mychem-info and molepro KPs,
+            which both provided it with records of this single fact.
+          example: [infores:automat-mychem-info, infores:molepro]
+        source_record_urls:
+          type: array
+          items: 
+            type: string
+          description: >-
+            A URL linking to a specific web page or document provided by the 
+            source, that contains a record of the knowledge expressed in the 
+            Edge. If the knowledge is contained in more than one web page on 
+            an Information Resource's site, urls MAY be provided for each. 
+            For example, Therapeutic Targets Database (TTD) has separate web 
+            pages for 'Imatinib' and its protein target KIT, both of which hold 
+            the claim that 'the KIT protein is a therapeutic target for Imatinib'.         
+          example: >-
+            [https://db.idrblab.net/ttd/data/drug/details/d0az3c, 
+            https://db.idrblab.net/ttd/data/target/details/t57700]
+      required:
+        - resource
+        - resource_role
+      additionalProperties: true
+    ResourceRoleEnum:
+      type: string
+      description: >-
+        The role played by the InformationResource in serving as a
+        source for an Edge. Note that a given Edge should have one
+        and only one 'primary' source, and may have any number of
+        'aggregator' or 'supporting data' sources.  This enumeration
+        is found in Biolink Model, but is repeated here for convenience.
+      enum:
+        - primary_knowledge_source
+        - aggregator_knowledge_source
+        - supporting_data_source
