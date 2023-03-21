@@ -272,12 +272,12 @@ components:
             require non-empty results and knowledge_graph fields.
         log_level:
           description: The least critical level of logs to return
-          allOf:
+          oneOf:
             - $ref: '#/components/schemas/LogLevel'
           nullable: true
         workflow:
           description: List of workflow steps to be executed.
-          allOf:
+          oneOf:
             - $ref: http://standards.ncats.io/workflow/1.3.2/schema
           nullable: true
         submitter:
@@ -320,12 +320,12 @@ components:
             require non-empty results and knowledge_graph fields.
         log_level:
           description: The least critical level of logs to return
-          allOf:
+          oneOf:
             - $ref: '#/components/schemas/LogLevel'
           nullable: true
         workflow:
           description: List of workflow steps to be executed.
-          allOf:
+          oneOf:
             - $ref: http://standards.ncats.io/workflow/1.3.2/schema
           nullable: true
         submitter:
@@ -451,7 +451,7 @@ components:
           nullable: true
         workflow:
           description: List of workflow steps that were executed.
-          allOf:
+          oneOf:
             - $ref: http://standards.ncats.io/workflow/1.3.2/schema
           nullable: true
       additionalProperties: true
@@ -482,14 +482,14 @@ components:
           description: >-
             QueryGraph object that contains a serialization of a query in the
             form of a graph
-          allOf:
+          oneOf:
             - $ref: '#/components/schemas/QueryGraph'
           nullable: true
         knowledge_graph:
           description: >-
             KnowledgeGraph object that contains lists of nodes and edges
             in the thought graph corresponding to the message
-          allOf:
+          oneOf:
             - $ref: '#/components/schemas/KnowledgeGraph'
           nullable: true
         auxiliary_graphs:
@@ -526,7 +526,7 @@ components:
           example: '2020-09-03T18:13:49+00:00'
           nullable: false
         level:
-          allOf:
+          oneOf:
             - $ref: '#/components/schemas/LogLevel'
           nullable: true
         code:
@@ -599,7 +599,7 @@ components:
           description: >-
             The CURIE of a Node within the Knowledge Graph.
         query_id:
-          allOf:
+          oneOf:
             - $ref: '#/components/schemas/CURIE'
           description: >-
             An optional property to provide the CURIE in the QueryGraph to
@@ -993,7 +993,7 @@ components:
             Value of the attribute. May be any data type, including a list.
           example: 0.000153
         value_type_id:
-          allOf:
+          oneOf:
             - $ref: '#/components/schemas/CURIE'
           description: >-
             CURIE describing the semantic type of an  attribute's value. Use
@@ -1373,7 +1373,7 @@ components:
         Generic query constraint for a query node or query edge
       properties:
         id:
-          allOf:
+          oneOf:
             - $ref: '#/components/schemas/CURIE'
           description: >-
             CURIE of the concept being constrained. For properties
