@@ -1188,8 +1188,7 @@ components:
     URL:
       type: string
       description: >-
-      externalDocs:
-        url: https://www.ietf.org/rfc/rfc3987.txt
+        A Uniform Resource Locator, such as https://www.example.com.
       pattern: ^(http(s)?:\/\/.)?(www\.)?\S+$
     MetaKnowledgeGraph:
       type: object
