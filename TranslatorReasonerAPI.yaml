@@ -884,6 +884,12 @@ components:
             $ref: '#/components/schemas/BiolinkPredicate'
           minItems: 1
           nullable: true
+        negated:
+          type: boolean
+          description: >-
+            If set to true, then the query seeks assertions that are
+            explictly negated. i.e. evidence of absence is required, rather
+            than absence of evidence.
         subject:
           type: string
           example: https://omim.org/entry/603903
@@ -1056,6 +1062,13 @@ components:
           oneOf:
             - $ref: '#/components/schemas/BiolinkPredicate'
           nullable: false
+        negated:
+          type: boolean
+          description: >-
+            If set to true, then the assertion is explictly negated with
+            evidence of absence, rather than absence of evidence.
+          nullable: false
+          default: false
         subject:
           description: >-
             Corresponds to the map key CURIE of the
@@ -1072,15 +1085,6 @@ components:
           oneOf:
             - $ref: '#/components/schemas/CURIE'
           nullable: false
-        negated:
-          description: >-
-            Indicates whether the statement expressed in an Edge is
-            negated. If true, the statement is negated.  This also 
-            reflects the implementation in Biolink Model for 
-            negating an edge.
-          type: boolean
-          nullable: false
-          default: false
         attributes:
           description: A list of additional attributes for this edge
           items:
