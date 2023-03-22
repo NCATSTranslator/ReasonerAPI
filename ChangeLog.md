@@ -1,4 +1,4 @@
-# Change Log TRAPI 1.3 (2022-09-01) -> 1.4 (2023-??)
+# Change Log TRAPI 1.3 (2022-09-01) -> 1.4-beta (2023-03-23)
 
 https://github.com/NCATSTranslator/ReasonerAPI/compare/v1.3.0...1.4
   
