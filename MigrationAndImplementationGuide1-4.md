@@ -6,6 +6,7 @@ TRAPI 1.4 implements a few major breaking changes, and is therefore not backward
 
 First we will start with an example TRAPI 1.3 message. For ease of reading, this message won't be exactly what a real message would look like. For instance, proper CURIE's will not be used in many cases, instead being replaced by more easily readable words and names. The example presented is a representation of a message sent by an ARA to the ARS, however this can be fairly easily generalized.
 
+```
 "message": {
     "query_graph": {
         "nodes": {
@@ -159,6 +160,7 @@ First we will start with an example TRAPI 1.3 message. For ease of reading, this
         }
     ]
 }
+```
 
 This message is a creative mode query that asks which drug treats diabetes. Three results are returned in total. The first is a basic result that says metformin treats diabetes using a found edge. The second uses the same found edge, but also includes extra information in the form of literature co-occurrence edges and an estra node meant to help with scoring. The third uses a creative mode edge to determine that metformin treats diabetes.
 
@@ -170,6 +172,7 @@ Now we will go about transforming this message into a TRAPI 1.4 message, going s
 
 There is now a top level property of a message named "auxiliary_graphs". Auxiliary graphs are graphs that provide support or evidence for both results and knowledge graph edges. They are created by referencing edges from the knowledge graph. We will now create the auxiliary graphs neccessary for our TRAPI 1.4 message. These use the same edge identifiers used in the knowledge graph of our TRAPI 1.3 message.
 
+```
 "auxiliary_graphs": {
     "a0": {
         "edges": [
@@ -188,9 +191,11 @@ There is now a top level property of a message named "auxiliary_graphs". Auxilia
         ]
     }
 }
+```
 
 These auxiliary graphs each represent something different. "a0" represents the explanation for the creative edge found in our original message. "a1" is the graph of literature co-occurrence. "a2" is used for the extra node. Some of this is up to an ARA's discretion. For instance, if both "a1" and "a2" were produced by the same ARA, then that ARA may decide to create only a single auxiliary graph for both. Therefore, this is also a valid representation:
 
+```
 "auxiliary_graphs": {
     "a0": {
         "edges": [
@@ -205,6 +210,7 @@ These auxiliary graphs each represent something different. "a0" represents the e
         ]
     }
 }
+```
 
 We will be using the first "auxiliary_graphs" list going forward.
 
@@ -212,6 +218,7 @@ We will be using the first "auxiliary_graphs" list going forward.
 
 Most of the knowledge graph will remain the same in this example. Only one of the edge would be significantly changed. For readibility, we will only go over that edge.
 
+```
 "creative_edge" {
     "subject": "metformin",
     "object": "diabetes",
@@ -225,6 +232,7 @@ Most of the knowledge graph will remain the same in this example. Only one of th
         }
     ]
 }
+```
 
 The auxiliary graph that is being used as evidence for the creative edge is now attached to the attribute of the creative edge.
 
@@ -232,6 +240,7 @@ The auxiliary graph that is being used as evidence for the creative edge is now 
 
 Results experience the largest refactor in TRAPI 1.4. From the three results presented before, we now make a single result.
 
+```
 "results": [
     {
         "node_bindings": {
@@ -245,6 +254,7 @@ Results experience the largest refactor in TRAPI 1.4. From the three results pre
         "analyses":[analysis objects]
     }
 ]
+```
 
 Notice that a result now has only two top-level properties: node bindings and analyses. Edge bindings and scores will now be included in the analyses, which is a list of analysis objects. We will go through creating an analysis object from each of the previous results.
 
@@ -252,6 +262,7 @@ Also notice that the node bindings lack any extra nodes. Only nodes that are pre
 
 The first result has the most straighforward anaylsis block:
 
+```
 {
     "reasoner_id": "ara0"
     "edge_bindings": {
@@ -263,9 +274,11 @@ The first result has the most straighforward anaylsis block:
     },
     "score": .4
 }
+```
 
 From the second result, we construct this analysis:
 
+```
 {
     "reasoner_id": "ara0"
     "edge_bindings": {
@@ -281,11 +294,13 @@ From the second result, we construct this analysis:
     ],
     "score": .6
 }
+```
 
 The auxiliary graphs that we constructed earlier are now being used as support for this analysis block, so therefore go into the "support_graphs" field of the analysis block.
 
 Lastly, the third result generates this analysis:
 
+```
 {
     "reasoner_id": "ara0"
     "edge_bindings": {
@@ -297,6 +312,7 @@ Lastly, the third result generates this analysis:
     }
     "score": .3
 }
+```
 
 Notice that the other components of the creative edge, the edges used to support it, are not included in the edge bindings. Instead, they have been included as evidence for the edge itself.
 
@@ -304,6 +320,7 @@ Those are all of the generated analysis blocks. As you can see, like node bindin
 
 So the completed "analyses" list with these analysis blocks will look like this
 
+```
 "analyses": [
     {
         "reasoner_id": "ara0"
@@ -343,9 +360,11 @@ So the completed "analyses" list with these analysis blocks will look like this
         "score": .3
     }
 ]
+```
 
 However, an ARA also discretion in the construction of the analysis blocks as well. All three of thos analysis blocks can be combined into a single analysis instead. If that decision is made, then the results would look like this instead.
 
+```
 "results": [
     {
         "node_bindings": {
@@ -378,11 +397,13 @@ However, an ARA also discretion in the construction of the analysis blocks as we
         ]
     }
 ]
+```
 
 ## TRAPI 1.4 Example Message
 
 Finally, we can put all of it back together, to show the full message.
 
+```
 "message": {
     "query_graph": {
         "nodes": {
@@ -483,3 +504,4 @@ Finally, we can put all of it back together, to show the full message.
         }
     ]
 }
+```
