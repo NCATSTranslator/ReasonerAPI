@@ -219,7 +219,7 @@ We will be using the first "auxiliary_graphs" list going forward.
 Most of the knowledge graph will remain the same in this example. Only one of the edge would be significantly changed. For readibility, we will only go over that edge.
 
 ```
-"creative_edge" {
+"creative_edge": {
     "subject": "metformin",
     "object": "diabetes",
     "predicate": "treats",
@@ -446,7 +446,7 @@ Finally, we can put all of it back together, to show the full message.
                 "object": hypoglycemia,
                 "predicate": "contraindicated for"
             },
-            "creative_edge" {
+            "creative_edge": {
                 "subject": "metformin",
                 "object": "diabetes",
                 "predicate": "treats",
