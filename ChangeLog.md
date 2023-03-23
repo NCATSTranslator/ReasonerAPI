@@ -32,13 +32,6 @@ https://github.com/NCATSTranslator/ReasonerAPI/compare/v1.3.0...1.4
 
 - New properties Response.schema_version and Response.biolink_version to aid in TRAPI (JSONSchema) validation
   https://github.com/NCATSTranslator/ReasonerAPI/pull/405/files
-  Status: Pending more approvals
-
-FINAL REVIEWS REQUIRED. NOT YET MERGED:
-
-- Further constrain CURIE and URL with regexps 
-  https://github.com/NCATSTranslator/ReasonerAPI/pull/406
-  Status: No approvals, one concern, one disapprove
 
 
 # Change Log TRAPI 1.2 -> 1.3
