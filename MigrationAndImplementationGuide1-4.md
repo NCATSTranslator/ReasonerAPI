@@ -471,6 +471,20 @@ Finally, we can put all of it back together, to show the full message.
             }
         }
     },
+    "auxiliary_graphs": {
+        "a0": {
+            "edges": [
+                "e02",
+                "e12"
+            ]
+        },
+        "a1": {
+            "edges": [
+                "extra_edge0",
+                "extra_edge1"
+            ]
+        }
+    },
     "results": [
         {
             "node_bindings": {
