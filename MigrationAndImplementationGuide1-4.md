@@ -362,7 +362,7 @@ So the completed "analyses" list with these analysis blocks will look like this
 ]
 ```
 
-However, an ARA also discretion in the construction of the analysis blocks as well. All three of thos analysis blocks can be combined into a single analysis instead. If that decision is made, then the results would look like this instead.
+However, an ARA also has discretion in the construction of the analysis blocks as well. All three of those analysis blocks can be combined into a single analysis instead. If that decision is made, then the results would look like this instead.
 
 ```
 "results": [
