@@ -162,11 +162,11 @@ First we will start with an example TRAPI 1.3 message. For ease of reading, this
 }
 ```
 
-This message is a creative mode query that asks which drug treats diabetes. Three results are returned in total. The first is a basic result that says metformin treats diabetes using a found edge. The second uses the same found edge, but also includes extra information in the form of literature co-occurrence edges and an estra node meant to help with scoring. The third uses a creative mode edge to determine that metformin treats diabetes.
+This message is a creative mode query that asks which drug treats diabetes. Three results are returned in total. The first is a basic result that says metformin treats diabetes using a found edge. The second uses the same found edge, but also includes extra information in the form of literature co-occurrence edges and an extra node meant to help with scoring. The third uses a creative mode edge to determine that metformin treats diabetes.
 
 ## Migrating to TRAPI 1.4
 
-Now we will go about transforming this message into a TRAPI 1.4 message, going step-by-step. Both the knowledge graph and the results will be modified, but first we creats the auxiliary graphs.
+Now we will go about transforming this message into a TRAPI 1.4 message, going step-by-step. Both the knowledge graph and the results will be modified, but first we create the auxiliary graphs.
 
 ### Auxiliary Graphs
 
@@ -216,7 +216,7 @@ We will be using the first "auxiliary_graphs" list going forward.
 
 ### Knowledge Graph
 
-Most of the knowledge graph will remain the same in this example. Only one of the edge would be significantly changed. For readibility, we will only go over that edge.
+Most of the knowledge graph will remain the same in this example. Only one of the edges would be significantly changed. For readibility, we will only go over that edge.
 
 ```
 "creative_edge": {
@@ -480,7 +480,11 @@ Finally, we can put all of it back together, to show the full message.
         },
         "a1": {
             "edges": [
-                "extra_edge0",
+                "extra_edge0"
+            ]
+        },
+        "a2": {
+            "edges" [
                 "extra_edge1"
             ]
         }
