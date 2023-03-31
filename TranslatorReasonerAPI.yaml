@@ -1474,7 +1474,7 @@ components:
         served as a source from which knowledge expressed in an Edge, or
         data used to generate this knowledge, was retrieved.
       properties:
-        resource:
+        resource_id:
           $ref: '#/components/schemas/CURIE'
           description: >-
             The CURIE for an Information Resource that served as a source
@@ -1489,7 +1489,7 @@ components:
             source for an Edge. Note that a given Edge should have one
             and only one 'primary' source, and may have any number of
             'aggregator' or 'supporting data' sources.
-        upstream_resources:
+        upstream_resource_ids:
           type: array
           items:
             $ref: '#/components/schemas/CURIE'
