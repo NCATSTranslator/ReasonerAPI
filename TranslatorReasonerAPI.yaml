@@ -644,9 +644,9 @@ components:
         supporting the analysis (e.g. method or data that supported
         generation of the score).
       properties:
-        reasoner_id:
+        resource_id:
           $ref: '#/components/schemas/CURIE'
-          description: The id of the service generating and using this Anlysis
+          description: The id of the resource generating this Analysis
         score:
           type: number
           format: float
