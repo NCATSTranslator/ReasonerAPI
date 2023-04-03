@@ -33,6 +33,15 @@ https://github.com/NCATSTranslator/ReasonerAPI/compare/v1.3.0...1.4
 - New properties Response.schema_version and Response.biolink_version to aid in TRAPI (JSONSchema) validation
   https://github.com/NCATSTranslator/ReasonerAPI/pull/405/files
 
+Minor updates during the beta phase:
+
+- Everyone should be tagging at 1.4.0: https://github.com/NCATSTranslator/ReasonerAPI/pull/419/files
+
+- Change RetrievalSource.resource and upstream_resources to RetrievalSource.resource_id and upstream_resource_ids for consistency:
+  https://github.com/NCATSTranslator/ReasonerAPI/pull/418/files
+
+- Change Analysis.reasoner_id to Analysis.resource_id
+
 
 # Change Log TRAPI 1.2 -> 1.3
 
