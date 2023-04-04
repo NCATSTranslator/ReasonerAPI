@@ -723,9 +723,6 @@ We will use a much simpler example message for the KP guide.
                 "e0": [
                     {
                         "id": "e01"
-                    },
-                    {
-                        "id": "creative_edge"
                     }
                 ]
             }
