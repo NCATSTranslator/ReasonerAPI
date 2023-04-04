@@ -1,10 +1,12 @@
-# TRAPI 1.4 Migration and Implementation Guide
+This guide is split into two major sections. The first section focusses on ARA's. The second section focusses on KP's.
+
+# TRAPI 1.4 Migration and Implementation Guide - ARA
 
 TRAPI 1.4 implements a few major breaking changes, and is therefore not backwards compatible with previous versions of TRAPI. This guide aims to provide instructions for how to transform a TRAPI 1.3 message into a TRAPI 1.4 message.
 
 ## TRAPI 1.3 Example Message
 
-First we will start with an example TRAPI 1.3 message. For ease of reading, this message won't be exactly what a real message would look like. For instance, proper CURIE's will not be used in many cases, instead being replaced by more easily readable words and names. The example presented is a representation of a message sent by an ARA to the ARS, however this can be fairly easily generalized.
+First we will start with an example TRAPI 1.3 message. For ease of reading, this message won't be exactly what a real message would look like. For instance, proper CURIE's will not be used in the example in many cases (like edge predicates) where they normally would be, instead being replaced by more easily readable words and names. CURIE's will be used in some instances where using the CURIE is pertinent to the change. The example presented is a representation of a message sent by an ARA to the ARS, however this can be fairly easily generalized.
 
 ```
 "message": {
@@ -19,7 +21,7 @@ First we will start with an example TRAPI 1.3 message. For ease of reading, this
         },
         "edges": {
             "e0": {
-                "predicates":["treats],
+                "predicates":["treats"],
                 "subject": "n1",
                 "object": "n0",
                 "knowledge_type": "inferred"
@@ -164,6 +166,113 @@ First we will start with an example TRAPI 1.3 message. For ease of reading, this
 
 This message is a creative mode query that asks which drug treats diabetes. Three results are returned in total. The first is a basic result that says metformin treats diabetes using a found edge. The second uses the same found edge, but also includes extra information in the form of literature co-occurrence edges and an extra node meant to help with scoring. The third uses a creative mode edge to determine that metformin treats diabetes.
 
+The results are shown broken up for illustrative purposes to make this guide clearer, however that is not the true expected behavior. Instead, under the current universal binding scheme, the message would more likely look like this.
+
+```
+"message": {
+    "query_graph": {
+        "nodes": {
+            "n0": {
+                "id": "diabetes"
+            },
+            "n1": {
+                "categories": ["drug"]
+            }
+        },
+        "edges": {
+            "e0": {
+                "predicates":["treats],
+                "subject": "n1",
+                "object": "n0",
+                "knowledge_type": "inferred"
+            }
+        }
+    },
+    "knowledge_graph": {
+        "nodes": {
+            "diabetes": {node_info},
+            "metformin": {node_info},
+            "hypoglycemia": {node_info}
+            "extra_node": {node_info}
+        },
+        "edges": {
+            "e01": {
+                "subject": "metformin",
+                "object": "diabetes",
+                "predicate": "treats",
+            },
+            "e02": {
+                "subject": "diabetes",
+                "object": "hypoglycemia",
+                "predicate": "similar_to"
+            },
+            "e12": {
+                "subject": "metformin",
+                "object": hypoglycemia,
+                "predicate": "contraindicated for"
+            },
+            "creative_edge" {
+                "subject": "metformin",
+                "object": "diabetes",
+                "predicate": "treats",
+            },
+            "extra_edge0": {
+                "subject": "metformin",
+                "object": "diabetes",
+                "predicate": "co-occurs in literature with"
+            },
+            "extra_edge1": {
+                "subject": "metformin",
+                "object": "extra_node",
+                "predicate": "related to"
+            }
+        }
+    },
+    "results": [
+        {
+            "node_bindings": {
+                "n0": [
+                    {
+                        "id": "diabetes"
+                    }
+                ],
+                "n1": [
+                    {
+                        "id": "metformin"
+                    }
+                ],
+                "dummy_node": [
+                    {
+                        "id": "extra_node"
+                    }
+                ]
+            },
+            "edge_bindings": {
+                "e0": [
+                    {
+                        "id": "e01"
+                    },
+                    {
+                        "id": "creative_edge"
+                    }
+                ],
+                "dummy_edge0": [
+                    {
+                        "id": "extra_edge0"
+                    }
+                ],
+                "dummy_edge1": [
+                    {
+                        "id": "extra_edge1"
+                    }
+                ]
+            },
+            "score": .7
+        }
+    ]
+}
+```
+
 ## Migrating to TRAPI 1.4
 
 Now we will go about transforming this message into a TRAPI 1.4 message, going step-by-step. Both the knowledge graph and the results will be modified, but first we create the auxiliary graphs.
@@ -225,7 +334,7 @@ Most of the knowledge graph will remain the same in this example. Only one of th
     "predicate": "treats",
     "attributes": [
         {
-            "attribute_type_id": "support graph",
+            "attribute_type_id": "infores:support_graphs",
             "values": [
                 "a0"
             ]
@@ -245,10 +354,14 @@ Results experience the largest refactor in TRAPI 1.4. From the three results pre
     {
         "node_bindings": {
             "n0": [
-                "id": "diabetes"
+                {
+                    "id": "diabetes"
+                }
             ],
             "n1": [
-                "id": "metformin"
+                {
+                    "id": "metformin"
+                }
             ]
         },
         "analyses":[analysis objects]
@@ -264,7 +377,7 @@ The first result has the most straighforward anaylsis block:
 
 ```
 {
-    "reasoner_id": "ara0"
+    "resource_id": "infores:ara0"
     "edge_bindings": {
         "e0": [
             {
@@ -280,7 +393,7 @@ From the second result, we construct this analysis:
 
 ```
 {
-    "reasoner_id": "ara0"
+    "resource_id": "infores:ara0"
     "edge_bindings": {
         "e0": [
             {
@@ -302,7 +415,7 @@ Lastly, the third result generates this analysis:
 
 ```
 {
-    "reasoner_id": "ara0"
+    "resource_id": "infores:ara0"
     "edge_bindings": {
         "e0": [
             {
@@ -323,7 +436,7 @@ So the completed "analyses" list with these analysis blocks will look like this
 ```
 "analyses": [
     {
-        "reasoner_id": "ara0"
+        "resource_id": "infores:ara0"
         "edge_bindings": {
             "e0": [
                 {
@@ -334,7 +447,7 @@ So the completed "analyses" list with these analysis blocks will look like this
         "score": .4
     },
     {
-        "reasoner_id": "ara0"
+        "resource_id": "infores:ara0"
         "edge_bindings": {
             "e0": [
                 {
@@ -349,7 +462,7 @@ So the completed "analyses" list with these analysis blocks will look like this
         "score": .6
     },
     {
-        "reasoner_id": "ara0"
+        "resource_id": "infores:ara0"
         "edge_bindings": {
             "e0": [
                 {
@@ -369,15 +482,19 @@ However, an ARA also has discretion in the construction of the analysis blocks a
     {
         "node_bindings": {
             "n0": [
-                "id": "diabetes"
+                {
+                 "id": "diabetes"
+                }
             ],
             "n1": [
-                "id": "metformin"
+                {
+                    "id": "metformin"
+                }
             ]
         },
         "analyses":[
             {
-                "reasoner_id": "ara0"
+                "resource_id": "infores:ara0"
                 "edge_bindings": {
                     "e0": [
                         {
@@ -452,7 +569,7 @@ Finally, we can put all of it back together, to show the full message.
                 "predicate": "treats",
                 "attributes": [
                     {
-                        "attribute_type_id": "support graph",
+                        "attribute_type_id": "infores:support_graphs",
                         "values": [
                             "a0"
                         ]
@@ -493,15 +610,19 @@ Finally, we can put all of it back together, to show the full message.
         {
             "node_bindings": {
                 "n0": [
-                    "id": "diabetes"
+                    {
+                        "id": "diabetes"
+                    }
                 ],
                 "n1": [
-                    "id": "metformin"
+                    {
+                        "id": "metformin"
+                    }
                 ]
             },
             "analyses":[
                 {
-                    "reasoner_id": "ara0"
+                    "resource_id": "infores:ara0"
                     "edge_bindings": {
                         "e0": [
                             {
@@ -518,6 +639,259 @@ Finally, we can put all of it back together, to show the full message.
                     ]
                     "score": .7
                 },
+            ]
+        }
+    ]
+}
+```
+
+# TRAPI 1.4 Migration and Implementation Guide - KP
+
+The process for KP's is much simpler. However, in this section we will also go over the changes to source retrieval provenance as well. Although this change does affect ARA's as well, the effect is much greater for KP's.
+
+## TRAPI 1.3 Example Message
+
+We will use a much simpler example message for the KP guide.
+
+```
+"message": {
+    "query_graph": {
+        "nodes": {
+            "n0": {
+                "id": "diabetes"
+            },
+            "n1": {
+                "categories": ["drug"]
+            }
+        },
+        "edges": {
+            "e0": {
+                "predicates":["treats],
+                "subject": "n1",
+                "object": "n0"
+            }
+        }
+    },
+    "knowledge_graph": {
+        "nodes": {
+            "diabetes": {node_info},
+            "metformin": {node_info}
+        },
+        "edges": {
+            "e01": {
+                "subject": "metformin",
+                "object": "diabetes",
+                "predicate": "treats",
+                "attributes": [
+                    {
+                        "attribute_type_id": "biolink:primary_knowledge_source",
+                        "value": ["infores:ks0"],
+                        "attribute_type_id": "biolink:InformationResource",
+                        "attribute_source": "infores:kp0"
+                    },
+                    {
+                        "attribute_type_id": "biolink:aggregator_knowledge_source",
+                        "value": ["infores:ks1"],
+                        "attribute_type_id": "biolink:InformationResource",
+                        "attribute_source": "infores:kp0"
+                    },
+                    {
+                        "attribute_type_id": "biolink:aggregator_knowledge_source",
+                        "value": ["infores:kp0"],
+                        "attribute_type_id": "biolink:InformationResource",
+                        "attribute_source": "infores:kp0"
+                    },
+                ]
+            }
+        }
+    },
+    "results": [
+        {
+            "node_bindings": {
+                "n0": [
+                    {
+                        "id": "diabetes"
+                    }
+                ],
+                "n1": [
+                    {
+                        "id": "metformin"
+                    }
+                ]
+            },
+            "edge_bindings": {
+                "e0": [
+                    {
+                        "id": "e01"
+                    },
+                    {
+                        "id": "creative_edge"
+                    }
+                ]
+            }
+        }
+    ]
+}
+```
+
+This KP response contains one edge. As illustrated, kp0 was able to obtain this edge from two seperate sources: ks0 and ks1. However, kp0 was able to determine that ks1 obtained this assertion from ks0, and this ks0 is the primary knowledge source.
+
+## Migrating to TRAPI 1.4
+
+Like the ARA guide, we will need to modify both the results and the knowledge graph for this example. However, we do not need to create any auxiliary graphs for this example, so that portion of the message may be excluded.
+
+### Knowledge Graph
+
+The main change here will be restructring the provenance information on the edge. This is done using the new "sources" field of an edge.
+
+```
+"e01": {
+    "subject": "metformin",
+    "object": "diabetes",
+    "predicate": "treats",
+    "attributes": []
+    "sources":[
+        {
+            "resource_id": "infores:ks0",
+            "resource_role": "biolink:primary_knowledge_source"
+        },
+        {
+            "resource_id": "infores:ks1",
+            "resource_role": "biolink:aggregator_knowledge_source",
+            "upstream_resource_ids": [
+                "infores:ks0"
+            ]
+        }
+        {
+            "resource_id": "infores:kp0",
+            "resource_role": "biolink:aggregator_knowledge_source",
+            "upstream_resource_ids": [
+                "infores:ks0",
+                "infores:ks1"
+            ]
+        }
+    ]
+}
+```
+
+Note that kp0 has two upstream resources listed, ks1 has one upstream resource listed, and ks0 has none.
+
+### Results
+
+Result generation for KP's is also relatively simple. In this case, we just migrate the edge bindings into the analysis section of the result.
+
+```
+{
+    "node_bindings": {
+        "n0": [
+            {
+                "id": "diabetes"
+            }
+        ],
+        "n1": [
+            {
+                "id": "metformin"
+            }
+        ]
+    },
+    "analyses": [
+        {
+            "resource_id": "infores:kp0",
+            "edge_bindings": {
+                "e0": [
+                    {
+                        "id": "e01"
+                    }
+                ]
+            }
+        }
+    ]
+}
+```
+
+## TRAPI 1.4 Example Message
+
+Now we can put these two sections back together to get the final message.
+
+```
+"message": {
+    "query_graph": {
+        "nodes": {
+            "n0": {
+                "id": "diabetes"
+            },
+            "n1": {
+                "categories": ["drug"]
+            }
+        },
+        "edges": {
+            "e0": {
+                "predicates":["treats],
+                "subject": "n1",
+                "object": "n0"
+            }
+        }
+    },
+    "knowledge_graph": {
+        "nodes": {
+            "diabetes": {node_info},
+            "metformin": {node_info}
+        },
+        "edges": {
+            "e01": {
+                "subject": "metformin",
+                "object": "diabetes",
+                "predicate": "treats",
+                "attributes": [],
+                "sources":[
+                    {
+                        "resource_id": "infores:ks0",
+                        "resource_role": "biolink:primary_knowledge_source"
+                    },
+                    {
+                        "resource_id": "infores:ks1",
+                        "resource_role": "biolink:aggregator_knowledge_source",
+                        "upstream_resource_ids": [
+                            "infores:ks0"
+                        ]
+                    },
+                    {
+                        "resource_id": "infores:kp0",
+                        "resource_role": "biolink:aggregator_knowledge_source",
+                        "upstream_resource_ids": [
+                            "infores:ks0",
+                            "infores:ks1"
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "results": [
+        {
+            "node_bindings": {
+                "n0": [
+                    {
+                        "id": "diabetes"
+                    }
+                ],
+                "n1": [
+                    {
+                        "id": "metformin"
+                    }
+                ]
+            },
+            "analyses": [
+                {
+                    "resource_id": "infores:kp0",
+                    "edge_bindings": {
+                        "e0": [
+                            {
+                                "id": "e01"
+                            }
+                        ]
+                    }
+                }
             ]
         }
     ]
