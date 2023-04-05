@@ -1,4 +1,4 @@
-# The "publications" Attribute Specification
+# The "biolink:publications" Attribute Specification
 
 ## Overview
 
