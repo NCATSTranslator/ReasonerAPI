@@ -11,7 +11,7 @@ In Biolink Model, the `biolink:publications` edge property is defined as:
 
 ```yaml
 publications:
-  aliases: [ supporting publications ]
+  aliases: ["supporting publications", "supporting documents"]
   is_a: association slot
   description: >-
     One or more publications that report the statement expressed in an Association, 
