@@ -11,17 +11,17 @@ In Biolink Model, the `biolink:publications` edge property is defined as:
 
 ```yaml
 publications:
-	aliases: [supporting publications]
-	is_a: association slot
-	description: >-
-      One or more publications that report the statement expressed in an Association, 
-      or provide information used as evidence supporting this statement. 
-      The notion of a ‘Publication’ is considered broadly to include any document made   
-      available for public consumption. It covers scientific journal issues, individual articles, and
-      books - as well as things like pre-prints, white papers, patents, drug
-      labels, web pages, protocol documents,  and even a part of a publication if
-      of significant knowledge scope (e.g. a figure, figure legend, or section
-      highlighted by NLP).
+  aliases: [ supporting publications ]
+  is_a: association slot
+  description: >-
+    One or more publications that report the statement expressed in an Association, 
+    or provide information used as evidence supporting this statement. 
+    The notion of a ‘Publication’ is considered broadly to include any document made   
+    available for public consumption. It covers scientific journal issues, individual articles, and
+    books - as well as things like pre-prints, white papers, patents, drug
+    labels, web pages, protocol documents,  and even a part of a publication if
+    of significant knowledge scope (e.g. a figure, figure legend, or section
+    highlighted by NLP).
     range: publication
 ```
 
