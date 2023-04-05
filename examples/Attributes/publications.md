@@ -22,7 +22,7 @@ publications:
     labels, web pages, protocol documents,  and even a part of a publication if
     of significant knowledge scope (e.g. a figure, figure legend, or section
     highlighted by NLP).
-    range: publication
+  range: publication
 ```
 
 Note, the range for `publications` is `publication` which is actually a [Biolink Model class](https://biolink.github.io/biolink-model/docs/Publication.html#class-publication).  
