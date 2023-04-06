@@ -894,3 +894,165 @@ Now we can put these two sections back together to get the final message.
     ]
 }
 ```
+
+# Subclassing
+
+In TRAPI 1.3, when a query is issued with one identifier (such as MONDO:0005015 for Diabetes) and the KP or ARA is able to return 
+a subclass of that identifier (such as MONDO:0005148 for Type 2 Diabetes), the return should the subclass identifier 
+in the knowledge graph and the results. 
+
+TRAPI 1.4 provides a more structured way to handle this situation using auxiliary graphs. The 1.4 response will contain
+an edge in the knowledge graph that matches the entity as expressed in the query graph, and an auxiliary graph 
+will contain the subclass information.
+
+## TRAPI 1.3 Example Message
+
+```
+"message": {
+    "query_graph": {
+        "nodes": {
+            "query_node_0": {
+                "ids": ["MONDO:0005015"]
+                "name": "Diabetes Mellitus"
+            },
+            "query_node_1": {
+                "categories": ["biolink:SmallMolecule"]
+            }
+        },
+        "edges": {
+            "query_edge_0": {
+                "predicates":["biolink:treats"],
+                "subject": "query_node_1",
+                "object": "query_node_0",
+                "knowledge_type": "lookup"
+            }
+        }
+    },
+    "knowledge_graph": {
+        "nodes": {
+            "type2diabetes": {node_info},
+            "metformin": {node_info}
+        },
+        "edges": {
+            "kg_edge_0": {
+                "subject": "metformin",
+                "object": "type2diabetes",
+                "predicate": "biolink:treats"
+            },
+        }
+    }
+    "results": [
+        {
+            "node_bindings": {
+                "query_node_0": [
+                    {
+                        "id": "type2diabetes"
+                        "query_id": "MONDO:0005015"
+                    }
+                ],
+                "query_node_1": [
+                    {
+                        "id": "metformin"
+                    }
+                ]
+            },
+            "edge_bindings": {
+                "query_edge_0": [
+                    {
+                        "id": "kg_edge_0"
+                    }
+                ]
+            }
+        }
+    ]
+}
+```
+
+## TRAPI 1.4 Example Message
+
+```
+"message": {
+    "query_graph": {
+        "nodes": {
+            "query_node_0": {
+                "ids": ["MONDO:0005148"]
+                "name": "Diabetes Mellitus"
+            },
+            "query_node_1": {
+                "categories": ["biolink:SmallMolecule"]
+            }
+        },
+        "edges": {
+            "query_edge_0": {
+                "predicates":["biolink:treats"],
+                "subject": "query_node_1",
+                "object": "query_node_0",
+                "knowledge_type": "lookup"
+            }
+        }
+    },
+    "knowledge_graph": {
+        "nodes": {
+            "diabetes": {node_info},
+            "type2diabetes": {node_info},
+            "metformin": {node_info}
+        },
+        "edges": {
+            "kg_edge_0": {
+                "subject": "metformin",
+                "object": "type2diabetes",
+                "predicate": "biolink:treats",
+            },
+            "kg_edge_1": {
+                "subject": "type2diabetes",
+                "object": "diabetes",
+                "predicate": "biolink:subclass_of",
+            },
+            "kg_edge_2": {
+                "subject": "metformin",
+                "object": "diabetes",
+                "predicate": "biolink:treats"
+                "attributes": [
+                    {
+                        "attribute_type_id": "infores:support_graphs",
+                        "values": [
+                            "a0"
+                        ]
+                    }
+                ]
+            },
+        }
+    },
+    "auxiliary_graphs": {
+        "subclass_explanation_1": {
+            "edges": [
+                "kg_edge_0",
+                "kg_edge_1"
+            ]
+        }
+    },
+    "results": [
+        {
+            "node_bindings": {
+                "query_node_0": [
+                    {
+                        "id": "diabetes"
+                    }
+                ],
+                "query_node_1": [
+                    {
+                        "id": "metformin"
+                    }
+                ]
+            },
+            "edge_bindings": {
+                "query_edge_0": [
+                    {
+                        "id": "kg_edge_2"
+                    }
+                ]
+            }
+        }
+    ]
+}
+```
