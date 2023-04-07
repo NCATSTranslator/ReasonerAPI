@@ -1045,13 +1045,17 @@ will contain the subclass information.
                     }
                 ]
             },
-            "edge_bindings": {
-                "query_edge_0": [
-                    {
-                        "id": "kg_edge_2"
+            "analyses": [
+                {
+                    "edge_bindings": {
+                        "query_edge_0": [
+                            {
+                                "id": "kg_edge_2"
+                            }
+                        ]
                     }
-                ]
-            }
+                }
+            ]
         }
     ]
 }
