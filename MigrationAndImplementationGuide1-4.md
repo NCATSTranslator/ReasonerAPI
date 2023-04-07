@@ -1047,6 +1047,7 @@ will contain the subclass information.
             },
             "analyses": [
                 {
+                    "resource_id": "kp0"
                     "edge_bindings": {
                         "query_edge_0": [
                             {
