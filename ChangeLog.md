@@ -42,6 +42,8 @@ Minor updates during the beta phase:
 
 - Change Analysis.reasoner_id to Analysis.resource_id
 
+- Version v1.4.0-beta2 was corrupted somehow and should not be used. It is replaced by v1.4.0-beta3
+
 
 # Change Log TRAPI 1.2 -> 1.3
 
