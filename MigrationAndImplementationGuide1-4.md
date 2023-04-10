@@ -1014,9 +1014,9 @@ will contain the subclass information.
                 "predicate": "biolink:treats"
                 "attributes": [
                     {
-                        "attribute_type_id": "infores:support_graphs",
+                        "attribute_type_id": "biolink:support_graphs",
                         "values": [
-                            "a0"
+                            "subclass_explanation_1"
                         ]
                     }
                 ]
