@@ -686,19 +686,19 @@ We will use a much simpler example message for the KP guide.
                     {
                         "attribute_type_id": "biolink:primary_knowledge_source",
                         "value": ["infores:ks0"],
-                        "attribute_type_id": "biolink:InformationResource",
+                        "value_type_id": "biolink:InformationResource",
                         "attribute_source": "infores:kp0"
                     },
                     {
                         "attribute_type_id": "biolink:aggregator_knowledge_source",
                         "value": ["infores:ks1"],
-                        "attribute_type_id": "biolink:InformationResource",
+                        "value_type_id": "biolink:InformationResource",
                         "attribute_source": "infores:kp0"
                     },
                     {
                         "attribute_type_id": "biolink:aggregator_knowledge_source",
                         "value": ["infores:kp0"],
-                        "attribute_type_id": "biolink:InformationResource",
+                        "value_type_id": "biolink:InformationResource",
                         "attribute_source": "infores:kp0"
                     },
                 ]
