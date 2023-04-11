@@ -1,4 +1,4 @@
-This guide is split into two major sections. The first section focusses on ARA's. The second section focusses on KP's.
+This guide is split into two major sections. The first section focuses on ARAs. The second section focusses on KPs.
 
 # TRAPI 1.4 Migration and Implementation Guide - ARA
 
@@ -6,7 +6,7 @@ TRAPI 1.4 implements a few major breaking changes, and is therefore not backward
 
 ## TRAPI 1.3 Example Message
 
-First we will start with an example TRAPI 1.3 message. For ease of reading, this message won't be exactly what a real message would look like. For instance, proper CURIE's will not be used in the example in many cases (like edge predicates) where they normally would be, instead being replaced by more easily readable words and names. CURIE's will be used in some instances where using the CURIE is pertinent to the change. The example presented is a representation of a message sent by an ARA to the ARS, however this can be fairly easily generalized.
+First we will start with an example TRAPI 1.3 message. For ease of reading, this message won't be exactly what a real message would look like. For instance, proper CURIEs will not be used in the example in many cases (like edge predicates) where they normally would be, instead being replaced by more easily readable words and names. CURIEs will be used in some instances where using the CURIE is pertinent to the change. The example presented is a representation of a message sent by an ARA to the ARS, however this can be fairly easily generalized.
 
 ```
 "message": {
@@ -334,7 +334,7 @@ Most of the knowledge graph will remain the same in this example. Only one of th
     "predicate": "treats",
     "attributes": [
         {
-            "attribute_type_id": "infores:support_graphs",
+            "attribute_type_id": "biolink:support_graphs",
             "values": [
                 "a0"
             ]
@@ -569,7 +569,7 @@ Finally, we can put all of it back together, to show the full message.
                 "predicate": "treats",
                 "attributes": [
                     {
-                        "attribute_type_id": "infores:support_graphs",
+                        "attribute_type_id": "biolink:support_graphs",
                         "values": [
                             "a0"
                         ]
@@ -975,7 +975,7 @@ will contain the subclass information.
     "query_graph": {
         "nodes": {
             "query_node_0": {
-                "ids": ["MONDO:0005148"]
+                "ids": ["MONDO:0005015"]
                 "name": "Diabetes Mellitus"
             },
             "query_node_1": {
