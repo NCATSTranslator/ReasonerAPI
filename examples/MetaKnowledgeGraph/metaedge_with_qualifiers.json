@@ -37,8 +37,8 @@
         {
           "qualifier_type_id": "biolink:subject_aspect_qualifier",
           "applicable_values": [
-            "expression",
-            "abundance"
+            "abundance",
+            "degradation"
           ]
         },
         {
