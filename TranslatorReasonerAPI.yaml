@@ -1301,8 +1301,6 @@ components:
           nullable: true
           type: array
         association:
-          type: object
-          $ref: '#/components/schemas/BiolinkEntity'
           description: >-
             The Biolink association type (entity) that this edge represents.
             Associations are classes in Biolink
@@ -1313,7 +1311,8 @@ components:
             is filled out, then the testing harness can
             help validate that the qualifiers are being used
             correctly.
-          example: biolink:ChemicalToGeneAssociation
+          example: 'biolink:ChemicalToGeneAssociation'
+          $ref: '#/components/schemas/BiolinkEntity'
       required:
         - subject
         - predicate
