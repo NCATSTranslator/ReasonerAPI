@@ -37,12 +37,12 @@
         {
           "qualifier_type_id": "biolink:subject_aspect_qualifier",
           "applicable_values": [
-            "expression",
-            "abundance"
+            "abundance",
+            "degradation"
           ]
         },
         {
-          "qualifier_type_id": "biolink:subject_aspect_qualifier",
+          "qualifier_type_id": "biolink:object_aspect_qualifier",
           "applicable_values": [
             "expression",
             "abundance",
