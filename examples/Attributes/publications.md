@@ -100,7 +100,7 @@ MUST report the CURIE form of this identifier, e.g.:
 5. Where multiple types of publication identifiers or URLs exist for a single Publication (e.g. a PMID, PMCID, 
 and DOI for the same journal article):
 - Knowledge Providers MUST provide only one identifier/URL per publication.
-- PMIDs CURIE identifiers SHOULD be used when available.
+- PMID CURIEs MUST be used when available.
 
 6. Where multiple distinct CURIES/URIs support a single Edge, these MUST be reported in a single Attribute object 
 as a list in the value field, as below:
