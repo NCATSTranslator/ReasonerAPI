@@ -4,8 +4,9 @@
 
 This specification describes how the `biolink:publications` attribute MUST be used to report the collection of 
 publications (broadly defined here to include any document made available for public consumption) that support
-the declared Edge.
+a declared Edge.
 
+Biolink Model describes the `biolink:publications` attribute as follows:
 ```yaml
 publications:
   aliases: ["supporting publications", "supporting documents"]
