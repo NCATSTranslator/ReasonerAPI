@@ -2,27 +2,17 @@
 
 ## Overview
 
-Translator Knowledge Graphs represent knowledge in the form of Associations, which hold a core Statement expressed using subject, 
-predicate, object, and qualifier slots, along with optional evidence, provenance, and confidence (EPC) metadata. In a TRAPI message, 
-this EPC information is captured in key-value based Attribute objects.  
+This specification describes how the `biolink:publications` attribute MUST be used to report the collection of 
+publications (broadly defined here to include any document made available for public consumption) that support
+the declared Edge.
 
-Consistent and computable representation of a particular type of EPC information requires a normative specification for how the key and value fields are populated in an Attribute, including:
-
-  1. a standard Biolink edge property or properties that can populate the key `attribute_type_id` field; and  
-  2. a standard datatype, syntax, and/or enumeration for populating the `value` field.  
-
-One critical type of EPC  information that Translator users want to see are publications (considered broadly to include white papers, 
-pre-prints, patents, drug labels, web pages, etc.) that report the knowledge expressed in an Edge, or describe evidence supporting it.
-
-The specification below describes how information about supporting publications should be captured in an Edge Attribute object, using 
-the `biolink:publications` property as the key attribute_type_id, as defined below:
 
 ```yaml
 publications:
   aliases: ["supporting publications", "supporting documents"]
   is_a: association slot
   description: >-
-    One or more publications that report the statement expressed in an Association, 
+    A list of one or more publications that report the statement expressed in an Association, 
     or provide information used as evidence supporting this statement. 
     The notion of a ‘Publication’ is considered broadly to include any document made   
     available for public consumption. It covers scientific journal issues, individual articles, and
@@ -33,22 +23,19 @@ publications:
   range: publication
 ```
 
-Note, the range for `biolink:publications` is `biolink:publication` which is actually a [Biolink Model class](https://biolink.github.io/biolink-model/docs/Publication.html#class-publication).  However, using a collection of CURIEs as shorthand syntax for representing a full list of `biolink:Publication` objects 
-is expected in a TRAPI message (see below).
-
-
 ### Implementation Guidance
 
-1. The `biolink:publications` edge property MUST be used as the `attribute_type_id` in Attributes reporting publications that support an Edge.
+1. The `biolink:publications` edge property MUST be used as the `attribute_type_id` in Attributes reporting 
+publications that support an Edge.
 
-```json
+```
 "attribute_type_id": "biolink:publications"
 ```
 
 2. Where multiple distinct publications support a single Edge, these MAY be reported together in a single Attribute object 
 as a list in the `value` field, as below:
 
-```json
+```
 "value": ["PMID:31737390", "PMID:6815562","http://info.gov.hk/gia/general/201011/02/P201011020204.htm"] 
 ```
 
