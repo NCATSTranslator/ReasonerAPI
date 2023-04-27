@@ -26,10 +26,11 @@ publications:
 ### Implementation Guidance
 
 1. The `biolink:publications` edge property MUST be used as the `attribute_type_id` to report 
-publications that support an Edge.
+publications that support an Edge.  Each reported edge must have at least one Attribute object with 
+`attribute_type_id`:`biolink:publications`
 
-2. Supporting publications are typically referenced using a [CURIE](https://www.w3.org/TR/2010/NOTE-curie-20101216/) or 
-[URI/URL](https://www.w3.org/Addressing/) but may also be captured as free-text strings that describe the publication. 
+2. `biolink:publications` are typically referenced using a [CURIE](https://www.w3.org/TR/2010/NOTE-curie-20101216/) or 
+[URI/URL](https://www.w3.org/Addressing/) but may also be captured as free-text strings. 
 If a source provides an Edge where some publications are referenced as CURIE/URIs, and others reported as free-text 
 descriptions, the publications referenced by CURIE or URI MUST be captured separately from those referenced as free-text.  
 
