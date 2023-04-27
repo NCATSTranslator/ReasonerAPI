@@ -1326,8 +1326,7 @@ components:
             in this sources list with resource_role = 'primary_knowledge_source'.
           items:
             $ref: '#/components/schemas/RetrievalSource'
-          minItems: 1
-          nullable: false
+          nullable: true
       required:
         - subject
         - predicate
