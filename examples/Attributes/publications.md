@@ -26,17 +26,16 @@ publications:
 ### Implementation Guidance
 
 1. The `biolink:publications` edge property MUST be used as the `attribute_type_id` to report 
-publications that support an Edge.  Each reported edge must have at least one Attribute object with 
+publications that support an Edge.  Each reported edge MUST have at least one Attribute object with 
 `attribute_type_id`:`biolink:publications`
+
 
 2. `biolink:publications` are typically referenced using a [CURIE](https://www.w3.org/TR/2010/NOTE-curie-20101216/) or 
 [URI/URL](https://www.w3.org/Addressing/) but may also be captured as free-text strings. 
 If a source provides an Edge where some publications are referenced as CURIE/URIs, and others reported as free-text 
-descriptions, the publications referenced by CURIE or URI MUST be captured separately from those referenced as free-text.  
+descriptions, the publications referenced by CURIE or URI MUST be captured separately from those referenced as free-text.  For example:
 
-For example:
-
-a. A source providing only URIs and CURIEs:
+A source providing only URIs and CURIEs:
 ```json
 {
   "edges": [
@@ -56,7 +55,7 @@ a. A source providing only URIs and CURIEs:
 }
 ```
 
-b. A source providing only free-text descriptions (note the change in value_type_id):
+A source providing only free-text descriptions (note the change in value_type_id):
 ```json
 {
   "edges": [
@@ -81,9 +80,9 @@ b. A source providing only free-text descriptions (note the change in value_type
 }
 ```
 
-c. A source providing CURIEs, URIs, and free-text descriptions (note the existance of two attribute objects to 
+A source providing CURIEs, URIs, and free-text descriptions.  Note the existance of two attribute objects to 
 disambiguate the `uriorcurie` typed `biolink:publications` list from the `**[T.B.D]**` typed `biolink:publications` 
-list):
+list:
 
 ```json
 {
@@ -122,16 +121,19 @@ list):
 3. If a source provides a CURIE identifier for a supporting publication, it MUST follow the
 prefix spelling and casing match that in the Biolink Model [prefix map](https://github.com/biolink/biolink-model/blob/master/prefix-map/biolink-model-prefix-map.json). (e.g "PMID:1593752", "doi:10.1177/00928615010300134").
 
+
 4. A source MAY provide a URL as one of the values of the `biolink:publications` attribute, EXCEPT in cases where  
 a Pubmed, Pubmed Central, or DOI identifier is part of a full URL. In such cases, the identifier MUST be reported 
-in its CURIE form :  
-    a. (URI) http://www.ncbi.nlm.nih.gov/pubmed/29076384   →     (CURIE) PMID: 29076384  
-    b. (URI) http://europepmc.org/articles/PMC6246007      →     (CURIE) PMC:6246007  
-    c. (URI) https://doi.org/10.1080/17512433.2018.1398644 →     (CURIE) DOI:0.1080/17512433.2018.1398644  
+in its CURIE form:  
+    a. http://www.ncbi.nlm.nih.gov/pubmed/29076384   →  **PMID: 29076384**  
+    b. http://europepmc.org/articles/PMC6246007      →  **PMC:6246007**  
+    c. https://doi.org/10.1080/17512433.2018.1398644 →  **DOI:0.1080/17512433.2018.1398644**  
+
 
 5. Where multiple types of publication CURIEs exist for a single Publication (e.g. a PMID, PMCID, 
 and DOI for the same journal article):  
     a. PMID CURIEs MUST be used when available. 
+
 
 6. Knowledge Providers can expect consumers to obtain metadata about a supporting journal articles that 
 are index by Pubmed (e.g. title, journal, abstract, dates), from the Text Mining Knowledge Provider’s 
