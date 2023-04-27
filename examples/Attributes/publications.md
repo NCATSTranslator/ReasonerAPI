@@ -39,17 +39,15 @@ A source providing only URIs and CURIEs:
 ```json
 {
   "edges": [
-        {
-          "attribute_type_id": "biolink:publications",
-          "value": [
-            "PMID:31737390",
-            "PMID:6815562",
-            "http://info.gov.hk/gia/general/201011/02/P201011020204.htm"
-          ],
-          "value_type_id": "biolink:Uriorcurie",
-          "attribute_source": "infores:hmdb"
-        }
-      ]
+    {
+      "attribute_type_id": "biolink:publications",
+      "value": [
+        "PMID:31737390",
+        "PMID:6815562",
+        "http://info.gov.hk/gia/general/201011/02/P201011020204.htm"
+      ],
+      "value_type_id": "biolink:Uriorcurie",
+      "attribute_source": "infores:hmdb"
     }
   ]
 }
