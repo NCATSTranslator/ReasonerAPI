@@ -33,21 +33,29 @@ publications that support an Edge.  Each reported edge MUST have at least one At
 2. `biolink:publications` are typically referenced using a [CURIE](https://www.w3.org/TR/2010/NOTE-curie-20101216/) or 
 [URI/URL](https://www.w3.org/Addressing/) but may also be captured as free-text strings. 
 If a source provides an Edge where some publications are referenced as CURIE/URIs, and others reported as free-text 
-descriptions, the publications referenced by CURIE or URI MUST be captured separately from those referenced as free-text.  For example:
+descriptions, the publications referenced by CURIE or URI MUST be captured in a separate Attribute from those referenced as free-text.  For example:
 
 A source providing only URIs and CURIEs:
 ```json
 {
   "edges": [
     {
-      "attribute_type_id": "biolink:publications",
-      "value": [
-        "PMID:31737390",
-        "PMID:6815562",
-        "http://info.gov.hk/gia/general/201011/02/P201011020204.htm"
-      ],
-      "value_type_id": "biolink:Uriorcurie",
-      "attribute_source": "infores:hmdb"
+      "id": "Association001",
+      "subject": "CHEBI:3215",
+      "predicate": "biolink:interacts_with",
+      "object": "NCBIGene:51176",
+      "attributes": [
+        {
+          "attribute_type_id": "biolink:publications",
+          "value": [
+            "PMID:31737390",
+            "PMID:6815562",
+            "http://info.gov.hk/gia/general/201011/02/P201011020204.htm"
+          ],
+          "value_type_id": "biolink:Uriorcurie",
+          "attribute_source": "infores:hmdb"
+        }
+      ]
     }
   ]
 }
