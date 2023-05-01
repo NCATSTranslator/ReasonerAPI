@@ -128,7 +128,7 @@ prefix spelling and casing match that in the Biolink Model [prefix map](https://
 
 4. A source MAY provide a URL as one of the values of the `biolink:publications` attribute, EXCEPT in cases where  
 a Pubmed, Pubmed Central, or DOI identifier is part of the full URL. In such cases, the identifier MUST be reported 
-in its CURIE form, listed below in order of preference for use in Translator (most preferred to least preferred):
+in its CURIE form, listed below in order of preference for use in Translator (most preferred to least preferred).
 If a source provides more than one of the above identifiers for a single publication, the source MUST only report one 
 identifier. The preferred order of reporting is: PMID, PMCID, DOI. 
 
