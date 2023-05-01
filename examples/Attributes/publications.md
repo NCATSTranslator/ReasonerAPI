@@ -26,9 +26,7 @@ publications:
 ### Implementation Guidance
 
 1. The `biolink:publications` edge property MUST be used as the `attribute_type_id` to report 
-publications that support an Edge.  Each reported edge MUST have at least one Attribute object with 
-`attribute_type_id`:`biolink:publications`
-
+publications that support an Edge.
 
 2. `biolink:publications` are typically referenced using a [CURIE](https://www.w3.org/TR/2010/NOTE-curie-20101216/) or 
 [URI/URL](https://www.w3.org/Addressing/) but may also be captured as free-text strings. 
@@ -121,12 +119,15 @@ prefix spelling and casing match that in the Biolink Model [prefix map](https://
 
 
 4. A source MAY provide a URL as one of the values of the `biolink:publications` attribute, EXCEPT in cases where  
-a Pubmed, Pubmed Central, or DOI identifier is part of a full URL. In such cases, the identifier MUST be reported 
-in its CURIE form:  
-    a. http://www.ncbi.nlm.nih.gov/pubmed/29076384   →  **PMID: 29076384**  
-    b. http://europepmc.org/articles/PMC6246007      →  **PMC:6246007**  
-    c. https://doi.org/10.1080/17512433.2018.1398644 →  **DOI:0.1080/17512433.2018.1398644**  
-
+a Pubmed, Pubmed Central, or DOI identifier is part of the full URL. In such cases, the identifier MUST be reported 
+in its CURIE form, listed below in order of preference for use in Translator (most preferred to least preferred):
+```
+    http://www.ncbi.nlm.nih.gov/pubmed/29076384   →  **PMID: 29076384**  
+    http://europepmc.org/articles/PMC6246007      →  **PMC:6246007**  
+    https://doi.org/10.1080/17512433.2018.1398644 →  **DOI:0.1080/17512433.2018.1398644**  
+```
+   a. If a source provides more than one of the above identifiers for a single publication, the source MUST only report 
+one of them, and MUST follow the preference order listed above.  
 
 5. Where multiple types of publication CURIEs exist for a single Publication (e.g. a PMID, PMCID, 
 and DOI for the same journal article):  
