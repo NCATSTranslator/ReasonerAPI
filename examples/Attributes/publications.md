@@ -51,7 +51,7 @@ A source providing only URIs and CURIEs:
             "PMID:6815562",
             "http://info.gov.hk/gia/general/201011/02/P201011020204.htm"
           ],
-          "value_type_id": "linkml:UriOrCurie",
+          "value_type_id": "linkml:Uriorcurie",
           "attribute_source": "infores:hmdb"
         }
       ]
@@ -86,7 +86,7 @@ A source providing only free-text descriptions (note the change in value_type_id
 ```
 
 A source providing CURIEs, URIs, and free-text descriptions.  Note the existance of two attribute objects to 
-disambiguate the `uriorcurie` typed `biolink:publications` list from the `**[T.B.D]**` typed `biolink:publications` 
+disambiguate the `Uriorcurie` typed `biolink:publications` list from the `**[T.B.D]**` typed `biolink:publications` 
 list:
 
 ```json
@@ -114,7 +114,7 @@ list:
             "PMID:6815562",
             "http://info.gov.hk/gia/general/201011/02/P201011020204.htm"
           ],
-          "value_type_id": "linkml:UriOrCurie",
+          "value_type_id": "linkml:Uriorcurie",
           "attribute_source": "infores:hmdb"
         }
       ]
