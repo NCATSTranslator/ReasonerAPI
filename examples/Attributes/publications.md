@@ -50,7 +50,7 @@ A source providing only URIs and CURIEs:
             "PMID:6815562",
             "http://info.gov.hk/gia/general/201011/02/P201011020204.htm"
           ],
-          "value_type_id": "biolink:Uriorcurie",
+          "value_type_id": "linkml:UriOrCurie",
           "attribute_source": "infores:hmdb"
         }
       ]
@@ -113,7 +113,7 @@ list:
             "PMID:6815562",
             "http://info.gov.hk/gia/general/201011/02/P201011020204.htm"
           ],
-          "value_type_id": "biolink:Uriorcurie",
+          "value_type_id": "linkml:UriOrCurie",
           "attribute_source": "infores:hmdb"
         }
       ]
