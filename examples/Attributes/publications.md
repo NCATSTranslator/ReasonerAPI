@@ -129,20 +129,17 @@ prefix spelling and casing match that in the Biolink Model [prefix map](https://
 4. A source MAY provide a URL as one of the values of the `biolink:publications` attribute, EXCEPT in cases where  
 a Pubmed, Pubmed Central, or DOI identifier is part of the full URL. In such cases, the identifier MUST be reported 
 in its CURIE form, listed below in order of preference for use in Translator (most preferred to least preferred):
+If a source provides more than one of the above identifiers for a single publication, the source MUST only report one 
+identifier. The preferred order of reporting is: PMID, PMCID, DOI. 
+
+
 ```
     http://www.ncbi.nlm.nih.gov/pubmed/29076384   →  **PMID: 29076384**  
     http://europepmc.org/articles/PMC6246007      →  **PMC:6246007**  
     https://doi.org/10.1080/17512433.2018.1398644 →  **DOI:0.1080/17512433.2018.1398644**  
 ```
-   a. If a source provides more than one of the above identifiers for a single publication, the source MUST only report 
-one of them, and MUST follow the preference order listed above.  
 
-5. Where multiple types of publication CURIEs exist for a single Publication (e.g. a PMID, PMCID, 
-and DOI for the same journal article):  
-    a. PMID CURIEs MUST be used when available. 
-
-
-6. Knowledge Providers can expect consumers to obtain metadata about a supporting journal articles that 
+5. Knowledge Providers can expect consumers to obtain metadata about a supporting journal articles that 
 are index by Pubmed (e.g. title, journal, abstract, dates), from the Text Mining Knowledge Provider’s 
 Publication Metadata API. However, the Knowledge Providers MAY use the Attribute description and 
 value_url fields to provide additional metadata in the TRAPI message itself.
