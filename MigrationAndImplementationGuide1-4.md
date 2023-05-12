@@ -750,18 +750,18 @@ The main change here will be restructring the provenance information on the edge
     "sources":[
         {
             "resource_id": "infores:ks0",
-            "resource_role": "biolink:primary_knowledge_source"
+            "resource_role": "primary_knowledge_source"
         },
         {
             "resource_id": "infores:ks1",
-            "resource_role": "biolink:aggregator_knowledge_source",
+            "resource_role": "aggregator_knowledge_source",
             "upstream_resource_ids": [
                 "infores:ks0"
             ]
         }
         {
             "resource_id": "infores:kp0",
-            "resource_role": "biolink:aggregator_knowledge_source",
+            "resource_role": "aggregator_knowledge_source",
             "upstream_resource_ids": [
                 "infores:ks0",
                 "infores:ks1"
@@ -843,18 +843,18 @@ Now we can put these two sections back together to get the final message.
                 "sources":[
                     {
                         "resource_id": "infores:ks0",
-                        "resource_role": "biolink:primary_knowledge_source"
+                        "resource_role": "primary_knowledge_source"
                     },
                     {
                         "resource_id": "infores:ks1",
-                        "resource_role": "biolink:aggregator_knowledge_source",
+                        "resource_role": "aggregator_knowledge_source",
                         "upstream_resource_ids": [
                             "infores:ks0"
                         ]
                     },
                     {
                         "resource_id": "infores:kp0",
-                        "resource_role": "biolink:aggregator_knowledge_source",
+                        "resource_role": "aggregator_knowledge_source",
                         "upstream_resource_ids": [
                             "infores:ks0",
                             "infores:ks1"
