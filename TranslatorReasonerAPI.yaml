@@ -565,8 +565,7 @@ components:
         A Result object specifies the nodes and edges in the knowledge graph
         that satisfy the structure or conditions of a user-submitted query
         graph. It must contain a NodeBindings object (list of query graph node
-        to knowledge graph node mappings) and an EdgeBindings object (list of
-        query graph edge to knowledge graph edge mappings).
+        to knowledge graph node mappings) and a list of Analysis objects.
       properties:
         node_bindings:
           type: object
