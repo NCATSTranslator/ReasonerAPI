@@ -2,11 +2,11 @@
 
 ## Overview
 
-This specification describes how the `biolink:publications` attribute MUST be used to report the collection of 
+This specification describes how the `biolink:publications` attribute MUST be used by Knowledge Providers (KPs) to report  
 publications (broadly defined here to include any document made available for public consumption) that support
 a declared Edge.
 
-Biolink Model describes the `biolink:publications` attribute as follows:
+The Biolink Model describes the `biolink:publications` attribute as follows:
 ```yaml
 publications:
   aliases: ["supporting publications", "supporting documents"]
@@ -25,16 +25,30 @@ publications:
 
 ### Implementation Guidance
 
-1. The `biolink:publications` edge property MUST be used as the `attribute_type_id` to report 
-publications that support an Edge.  This is an optional property for edges. 
+**1.** When an external knowledge source reports one or more publication supporting an Edge, KPs MUST use the `biolink:publications` edge property as the value of the `Attribute.attribute_type_id` field in Attribute objects capturing these publications. 
 
+**2.** Knowledge sources typically designate supporting publications using a [CURIE](https://www.w3.org/TR/2010/NOTE-curie-20101216/) or full
+[URI/URL](https://www.w3.org/Addressing/) -  but may in some cases provide only a free-text string title or description. All such publication designators are to be captured in the `Attribute.value` field, as further detailed below.
 
-3. `biolink:publications` are typically referenced using a [CURIE](https://www.w3.org/TR/2010/NOTE-curie-20101216/) or 
-[URI/URL](https://www.w3.org/Addressing/) but may also be captured as free-text strings. 
-If a source provides an Edge where some publications are referenced as CURIE/URIs, and others reported as free-text 
-descriptions, the publications referenced by CURIE or URI MUST be captured in a separate Attribute from those referenced as free-text.  For example:
+**2a.** When an external source provides a CURIE identifier for a supporting publication, the ingesting KP MUST ensure that the
+prefix spelling and casing match that in the Biolink Model [prefix map](https://github.com/biolink/biolink-model/blob/master/prefix-map/biolink-model-prefix-map.json). (e.g "PMID:1593752", "doi:10.1177/00928615010300134").
 
-A source providing only URIs and CURIEs:
+**2b.** When an external source provides a full URL for a publication, the ingesting KP may report the full URL EXCEPT in cases where it contains a Pubmed, Pubmed Central, or DOI identifier. Here, the ingesting KP MUST convert full URLs into CURIE form, using prefixes in the Biolink Model [prefix map](https://github.com/biolink/biolink-model/blob/master/prefix-map/biolink-model-prefix-map.json). e.g.:
+    
+```
+    http://www.ncbi.nlm.nih.gov/pubmed/29076384   →  PMID: 29076384  
+    http://europepmc.org/articles/PMC6246007      →  PMC:6246007
+    https://doi.org/10.1080/17512433.2018.1398644 →  DOI:0.1080/17512433.2018.1398644
+``` 
+  
+**2c.** When an external source provides a free-text description of a supporting publication (e.g. its title, or a formatted reference), the ingesting KP MAY capture this text they see fit.
+    
+**3.** If an external source provides multiple ids of different types for a single Publication (e.g. a PMID, PMCID, and DOI for the same journal article), KPs MUST report only one id per publication, in the following order of preference: PMID > PMCID > DOI.  
+
+**4.** When a knowledge source reports multiple supporting publications for a single Edge, the ingesting KP MUST capture them as a list in the `Attribute.value` field according to the specific instructions below:
+
+**4a.** When all publications supporting the Edge are reported in CURIE or URI/URL format, the KP MUST capture them as a list in a single Attribute object where the `Attribute.value_type_id` is "linkml:Uriorcurie":
+
 ```json
 {
   "edges": [
@@ -59,8 +73,9 @@ A source providing only URIs and CURIEs:
   ]
 }
 ```
+  
+**4b.** When all publications supporting the Edge are reported as free-text descriptions, the KP MUST capture them as a list in a single Attribute object where the `Attribute.value_type_id` is "T.B.D.":
 
-A source providing only free-text descriptions (note the change in value_type_id):
 ```json
 {
   "edges": [
@@ -85,9 +100,8 @@ A source providing only free-text descriptions (note the change in value_type_id
 }
 ```
 
-A source providing CURIEs, URIs, and free-text descriptions.  Note the existance of two attribute objects to 
-disambiguate the `Uriorcurie` typed `biolink:publications` list from the `**[T.B.D]**` typed `biolink:publications` 
-list:
+**4c.** When some of the publications supporting the Edge are in CURIE/URI format and others are free-text, the ingesting KP MUST create two 'publications' Attributes: one to hold those reported in CURIE and URI format, and a second to hold those described as free-text: 
+
 
 ```json
 {
@@ -101,20 +115,20 @@ list:
         {
           "attribute_type_id": "biolink:publications",
           "value": [
-            "Thematic Review Series: Glycerolipids. Phosphatidylserine and phosphatidylethanolamine in mammalian cells: two metabolically related aminophospholipids",
-            "Toranosuke Saito, Takashi Ishibashi, Tomoharu Shiozaki, Tetsuo Shiraishi, 'Developer for pressure-sensitive recording sheets, aqueous dispersion of the developer and method for preparing the developer.' U.S. Patent US5118443, issued September, 1986.: http://www.google.ca/patents/US5118443"
+            "PMID:31737390",
+            "PMID:6815562",
+            "http://info.gov.hk/gia/general/201011/02/P201011020204.htm"
           ],
-          "value_type_id": "**[T.B.D.]**",
+          "value_type_id": "linkml:Uriorcurie",
           "attribute_source": "infores:hmdb"
         },
         {
           "attribute_type_id": "biolink:publications",
           "value": [
-            "PMID:31737390",
-            "PMID:6815562",
-            "http://info.gov.hk/gia/general/201011/02/P201011020204.htm"
+            "Thematic Review Series: Glycerolipids. Phosphatidylserine and phosphatidylethanolamine in mammalian cells: two metabolically related aminophospholipids",
+            "Toranosuke Saito, Takashi Ishibashi, Tomoharu Shiozaki, Tetsuo Shiraishi, 'Developer for pressure-sensitive recording sheets, aqueous dispersion of the developer and method for preparing the developer.' U.S. Patent US5118443, issued September, 1986.: http://www.google.ca/patents/US5118443"
           ],
-          "value_type_id": "linkml:Uriorcurie",
+          "value_type_id": "**[T.B.D.]**",
           "attribute_source": "infores:hmdb"
         }
       ]
@@ -122,23 +136,8 @@ list:
   ]
 }
 ```
-
-3. If a source provides a CURIE identifier for a supporting publication, it MUST follow the
-prefix spelling and casing match that in the Biolink Model [prefix map](https://github.com/biolink/biolink-model/blob/master/prefix-map/biolink-model-prefix-map.json). (e.g "PMID:1593752", "doi:10.1177/00928615010300134").
-
-
-4. A source MAY provide a URL as one of the values of the `biolink:publications` attribute, EXCEPT in cases where  
-a Pubmed, Pubmed Central, or DOI identifier is part of the full URL. In such cases, the identifier MUST be reported 
-in its CURIE form, listed below in order of preference for use in Translator (most preferred to least preferred).
-The preferred order of reporting is: PMID, PMCID, DOI.
-
-```
-    http://www.ncbi.nlm.nih.gov/pubmed/29076384   →  **PMID: 29076384**  
-    http://europepmc.org/articles/PMC6246007      →  **PMC:6246007**  
-    https://doi.org/10.1080/17512433.2018.1398644 →  **DOI:0.1080/17512433.2018.1398644**  
-```
-
-5. Knowledge Providers can expect consumers to obtain metadata about a supporting journal articles that 
-are index by Pubmed (e.g. title, journal, abstract, dates), from the Text Mining Knowledge Provider’s 
-Publication Metadata API. However, the Knowledge Providers MAY use the Attribute description and 
-value_url fields to provide additional metadata in the TRAPI message itself.
+    
+**5.** Knowledge Providers can expect consumers to obtain metadata about supporting journal articles that 
+are index by Pubmed (e.g. title, journal, abstract, dates, equivalent identifiers), from the Text Mining Knowledge Provider’s 
+Publication Metadata API. However, the Knowledge Providers MAY use the `Attribute.description` and 
+`Attribute.value_url` fields to provide additional metadata in the TRAPI message itself.
