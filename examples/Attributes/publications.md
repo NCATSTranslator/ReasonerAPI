@@ -48,9 +48,8 @@ prefix spelling and casing match that in the Biolink Model [prefix map](https://
   
 **---2c.** When a knowledge source provides a **free-text description** of a supporting publication (e.g. its title, or a formatted reference), the ingesting KP MAY capture this text they see fit.
     
-**3.** When a knowledge source reports **multiple publications supporting a single Edge**, the ingesting KP SHOULD capture those with like designator types as a list in a sinlge Attribute object, according to the specific instructions below.  KPs MAY choose to separate individual publications into their own Attribute if they wish to provide specific information about it using other Attribute fields (e.g. `Attribute.description`) or sub-Attribute objects. 
-
-**---3a.** When all publications supporting the Edge are reported **in CURIE or URI/URL format**, the KP SHOULD capture them as a list in a single Attribute object where the `Attribute.value_type_id` is "linkml:Uriorcurie":
+**3.** If a knowledge source reports **multiple publications supporting a single Edge**, the ingesting KP SHOULD organize them into Attribute objects according to the specific instructions below.  
+**---3a.** When all publications supporting the Edge are reported **in CURIE or URI/URL format**, the KP SHOULD capture them as a list in a single Attribute object where the `value_type_id` is "linkml:Uriorcurie":
 
 ```json
 {
@@ -77,7 +76,7 @@ prefix spelling and casing match that in the Biolink Model [prefix map](https://
 }
 ```
   
-**---3b.** When all publications supporting the Edge are reported **as free-text descriptions**, the KP SHOULD capture them as a list in a single Attribute object where the `Attribute.value_type_id` is "T.B.D.":
+**---3b.** When all publications supporting the Edge are reported **as free-text descriptions**, the KP SHOULD capture them as a list in a single Attribute object where the `value_type_id` is "linkml:String":
 
 ```json
 {
@@ -94,7 +93,7 @@ prefix spelling and casing match that in the Biolink Model [prefix map](https://
             "Thematic Review Series: Glycerolipids. Phosphatidylserine and phosphatidylethanolamine in mammalian cells: two metabolically related aminophospholipids",
             "Toranosuke Saito, Takashi Ishibashi, Tomoharu Shiozaki, Tetsuo Shiraishi, 'Developer for pressure-sensitive recording sheets, aqueous dispersion of the developer and method for preparing the developer.' U.S. Patent US5118443, issued September, 1986.: http://www.google.ca/patents/US5118443"
           ],
-          "value_type_id": "**[T.B.D.]**",
+          "value_type_id": "linkml:String",
           "attribute_source": "infores:hmdb"
         }
       ]
@@ -131,7 +130,7 @@ prefix spelling and casing match that in the Biolink Model [prefix map](https://
             "Thematic Review Series: Glycerolipids. Phosphatidylserine and phosphatidylethanolamine in mammalian cells: two metabolically related aminophospholipids",
             "Toranosuke Saito, Takashi Ishibashi, Tomoharu Shiozaki, Tetsuo Shiraishi, 'Developer for pressure-sensitive recording sheets, aqueous dispersion of the developer and method for preparing the developer.' U.S. Patent US5118443, issued September, 1986.: http://www.google.ca/patents/US5118443"
           ],
-          "value_type_id": "**[T.B.D.]**",
+          "value_type_id": "linkml:String",
           "attribute_source": "infores:hmdb"
         }
       ]
@@ -139,6 +138,9 @@ prefix spelling and casing match that in the Biolink Model [prefix map](https://
   ]
 }
 ```
+
+NOTE that at any time, KPs MAY choose to separate and individual publication into its own Attribute, if they wish to provide specific information about it using other Attribute fields (e.g. `description`) or by creating nested Attribute objects. 
+
 **4.** If a knowledge source provides **multiple ids for a single publication supporting an Edge** (e.g. a PMID, PMCID, and DOI for the same journal article), KPs MUST report only one id per publication, in the following order of preference: PMID > PMCID > DOI.  
 
 **5.** KPs can expect consumers to obtain metadata about supporting journal articles that 
