@@ -52,7 +52,7 @@ prefix spelling and casing match that in the Biolink Model [prefix map](https://
 
 **4.** When a knowledge source reports **multiple distinct supporting publications for a single Edge**, the ingesting KP MUST capture them as a list in the `Attribute.value` field according to the specific instructions below:
 
-**4a.** When all publications supporting the Edge are reported in CURIE or URI/URL format, the KP MUST capture them as a list in a single Attribute object where the `Attribute.value_type_id` is "linkml:Uriorcurie":
+**4a.** When all publications supporting the Edge are reported **in CURIE or URI/URL format**, the KP MUST capture them as a list in a single Attribute object where the `Attribute.value_type_id` is "linkml:Uriorcurie":
 
 ```json
 {
@@ -79,7 +79,7 @@ prefix spelling and casing match that in the Biolink Model [prefix map](https://
 }
 ```
   
-**4b.** When all publications supporting the Edge are reported as free-text descriptions, the KP MUST capture them as a list in a single Attribute object where the `Attribute.value_type_id` is "T.B.D.":
+**4b.** When all publications supporting the Edge are reported **as free-text descriptions**, the KP MUST capture them as a list in a single Attribute object where the `Attribute.value_type_id` is "T.B.D.":
 
 ```json
 {
@@ -105,7 +105,7 @@ prefix spelling and casing match that in the Biolink Model [prefix map](https://
 }
 ```
 
-**4c.** When some of the publications supporting the Edge are in CURIE/URI format and others are free-text, the ingesting KP MUST create two 'publications' Attributes: one to hold those reported in CURIE and URI format, and a second to hold those described as free-text: 
+**4c.** When some of the publications supporting the Edge are in **CURIE/URI format** and others are **free-text**, the ingesting KP MUST **create two 'publications' Attributes**: one to hold those reported in CURIE and URI format, and a second to hold those described as free-text: 
 
 
 ```json
