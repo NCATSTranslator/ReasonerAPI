@@ -25,15 +25,20 @@ publications:
 
 ### Implementation Guidance
 
-**1.** When an external knowledge source reports one or more publication supporting an Edge, KPs MUST use the `biolink:publications` edge property as the value of the `Attribute.attribute_type_id` field in Attribute objects capturing these publications. 
+**1.** When an external knowledge source reports one or more publication supporting an Edge, KPs MUST use the `biolink:publications` edge property as the `Attribute.attribute_type_id` field, and capturing the publication designator(s) in the  `Attribute.value` field.
+
+````
+"attribute_type_id": "biolink:publications",
+"value": ["PMID:31737390"]
+````
 
 **2.** Knowledge sources typically designate supporting publications using a [CURIE](https://www.w3.org/TR/2010/NOTE-curie-20101216/) or full
-[URI/URL](https://www.w3.org/Addressing/) -  but may in some cases provide only a free-text string title or description. All such publication designators are to be captured in the `Attribute.value` field, as further detailed below.
+[URI/URL](https://www.w3.org/Addressing/) -  but may in some cases provide only a free-text string title or description. Specific instructions for reporting publications using each of these designator types in the `Attribute.value` field are provided below: 
 
-**2a.** When an external source provides a CURIE identifier for a supporting publication, the ingesting KP MUST ensure that the
+**2a.** When an external source provides a **CURIE identifier** for a supporting publication, the ingesting KP MUST ensure that the
 prefix spelling and casing match that in the Biolink Model [prefix map](https://github.com/biolink/biolink-model/blob/master/prefix-map/biolink-model-prefix-map.json). (e.g "PMID:1593752", "doi:10.1177/00928615010300134").
 
-**2b.** When an external source provides a full URL for a publication, the ingesting KP may report the full URL EXCEPT in cases where it contains a Pubmed, Pubmed Central, or DOI identifier. Here, the ingesting KP MUST convert full URLs into CURIE form, using prefixes in the Biolink Model [prefix map](https://github.com/biolink/biolink-model/blob/master/prefix-map/biolink-model-prefix-map.json). e.g.:
+**2b.** When an external source provides a **full URL** for a publication, the ingesting KP may report the full URL EXCEPT in cases where it contains a Pubmed, Pubmed Central, or DOI identifier. Here, the ingesting KP MUST convert full URLs into CURIE form, using prefixes in the Biolink Model [prefix map](https://github.com/biolink/biolink-model/blob/master/prefix-map/biolink-model-prefix-map.json). e.g.:
     
 ```
     http://www.ncbi.nlm.nih.gov/pubmed/29076384   →  PMID: 29076384  
@@ -41,11 +46,11 @@ prefix spelling and casing match that in the Biolink Model [prefix map](https://
     https://doi.org/10.1080/17512433.2018.1398644 →  DOI:0.1080/17512433.2018.1398644
 ``` 
   
-**2c.** When an external source provides a free-text description of a supporting publication (e.g. its title, or a formatted reference), the ingesting KP MAY capture this text they see fit.
+**2c.** When an external source provides a **free-text description** of a supporting publication (e.g. its title, or a formatted reference), the ingesting KP MAY capture this text they see fit.
     
-**3.** If an external source provides multiple ids of different types for a single Publication (e.g. a PMID, PMCID, and DOI for the same journal article), KPs MUST report only one id per publication, in the following order of preference: PMID > PMCID > DOI.  
+**3.** If an external source provides **multiple ids for a single supporting publication** (e.g. a PMID, PMCID, and DOI for the same journal article), KPs MUST report only one id per publication, in the following order of preference: PMID > PMCID > DOI.  
 
-**4.** When a knowledge source reports multiple supporting publications for a single Edge, the ingesting KP MUST capture them as a list in the `Attribute.value` field according to the specific instructions below:
+**4.** When a knowledge source reports **multiple distinct supporting publications for a single Edge**, the ingesting KP MUST capture them as a list in the `Attribute.value` field according to the specific instructions below:
 
 **4a.** When all publications supporting the Edge are reported in CURIE or URI/URL format, the KP MUST capture them as a list in a single Attribute object where the `Attribute.value_type_id` is "linkml:Uriorcurie":
 
