@@ -279,7 +279,12 @@ Now we will go about transforming this message into a TRAPI 1.4 message, going s
 
 ### Auxiliary Graphs
 
-There is now a top level property of a message named "auxiliary_graphs". Auxiliary graphs are graphs that provide support or evidence for both results and knowledge graph edges. They are created by referencing edges from the knowledge graph. We will now create the auxiliary graphs neccessary for our TRAPI 1.4 message. These use the same edge identifiers used in the knowledge graph of our TRAPI 1.3 message.
+There is now a top level property of a message named "auxiliary_graphs". Auxiliary graphs are graphs that provide support or evidence for both results and knowledge graph edges. They are composed of references to Edges in the knowledge graph.
+
+- Auxiliary graphs SHOULD be referenced as support graphs on edges to provide the support for that edge, e.g. why that edge is inferred to be true
+- Auxiliary graphs SHOULD be referenced as support graphs in Analyses to provide support for the analysis score. e.g. literature co-occurrence edges that do not really support the existence of other edges, but rather used to support scoring of a result, SHOULD be placed in an analysis support graph
+
+We will now create the auxiliary graphs neccessary for our TRAPI 1.4 message. These use the same edge identifiers used in the knowledge graph of our TRAPI 1.3 message.
 
 ```
 "auxiliary_graphs": {
