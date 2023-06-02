@@ -23,7 +23,7 @@ publications:
   range: publication
 ```
 
-### Implementation Guidance
+## Implementation Guidance
 
 1. When a knowledge source reports one or more publication supporting an Edge, KPs MUST use the `biolink:publications` edge property as the `Attribute.attribute_type_id` field, and capture publications as a list in the `Attribute.value` field. e.g.:
 
