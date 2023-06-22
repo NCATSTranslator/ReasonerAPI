@@ -501,13 +501,13 @@ components:
             - $ref: '#/components/schemas/KnowledgeGraph'
           nullable: true
         auxiliary_graphs:
-          type: object
           description: >-
             Dictionary of AuxiliaryGraph instances that are used by Knowledge
             Graph Edges and Result Analyses. These are referenced elsewhere by
             the dictionary key.
-          additionalProperties:
+          oneOf:
             $ref: '#components/schemas/AuxiliaryGraph'
+          nullable: true
       additionalProperties: false
     LogEntry:
       description: >-
@@ -1489,6 +1489,7 @@ components:
             'aggregator' or 'supporting data' sources.
         upstream_resource_ids:
           type: array
+          nullable: true
           items:
             $ref: '#/components/schemas/CURIE'
           description: >-
@@ -1503,6 +1504,7 @@ components:
           example: [infores:automat-mychem-info, infores:molepro]
         source_record_urls:
           type: array
+          nullable: true
           items: 
             type: string
           description: >-
