@@ -506,7 +506,7 @@ components:
             Graph Edges and Result Analyses. These are referenced elsewhere by
             the dictionary key.
           oneOf:
-            $ref: '#components/schemas/AuxiliaryGraph'
+            - $ref: '#components/schemas/AuxiliaryGraph'
           nullable: true
       additionalProperties: false
     LogEntry:
