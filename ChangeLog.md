@@ -1,3 +1,50 @@
+# Change Log TRAPI 1.3 (2022-09-01) -> 1.4-beta (2023-03-23)
+
+https://github.com/NCATSTranslator/ReasonerAPI/compare/v1.3.0...1.4
+  
+- Edge.predicate switched to nullable false and made required, Edge.subject and Edge.object switched to nullable false
+  https://github.com/NCATSTranslator/ReasonerAPI/pull/377/files
+
+- External workflow schema updated from version 1.0.0 to version 1.3.2 
+  https://github.com/NCATSTranslator/ReasonerAPI/pull/365/files
+  
+- Node.categories clarified that they SHOULD be Biolink Model categories and MUST NOT be of type 'abstract' or 'mixin'. 'deprecated' categories SHOULD also be avoided.
+  https://github.com/NCATSTranslator/ReasonerAPI/pull/383/files
+
+- In MetaKnowledgeGraph component, added MetaEdge.qualifiers as list of new MetaQualifier types
+  https://github.com/NCATSTranslator/ReasonerAPI/pull/387/files
+ 
+- Add /async_query_status/{job_id} endpoint
+  https://github.com/NCATSTranslator/ReasonerAPI/pull/395/files
+  
+- Constrain Qualifier.qualifier_type_id to be a biolink CURIE
+  https://github.com/NCATSTranslator/ReasonerAPI/pull/391/files
+ 
+- Encoding extra supporting graph information in TRAPI
+  This is a complex breaking change that moves Result.edge_bindings into Result.analyses which link to AuxiliaryGraph objects
+  https://github.com/NCATSTranslator/ReasonerAPI/pull/389/files
+
+- Enhance encoding of EPC retrieval sources by adding Edge.sources as list of RetrievalSource items (required, minItems: 1)
+  https://github.com/NCATSTranslator/ReasonerAPI/pull/393/files
+
+- Switch all cases of "allOf" to "oneOf" to be compatible with actual schema semantics and TRAPI (JSONSchema) validation
+  https://github.com/NCATSTranslator/ReasonerAPI/pull/403/files
+
+- New properties Response.schema_version and Response.biolink_version to aid in TRAPI (JSONSchema) validation
+  https://github.com/NCATSTranslator/ReasonerAPI/pull/405/files
+
+Minor updates during the beta phase:
+
+- Everyone should be tagging at 1.4.0: https://github.com/NCATSTranslator/ReasonerAPI/pull/419/files
+
+- Change RetrievalSource.resource and upstream_resources to RetrievalSource.resource_id and upstream_resource_ids for consistency:
+  https://github.com/NCATSTranslator/ReasonerAPI/pull/418/files
+
+- Change Analysis.reasoner_id to Analysis.resource_id
+
+- Version v1.4.0-beta2 was corrupted somehow and should not be used. It is replaced by v1.4.0-beta3
+
+
 # Change Log TRAPI 1.2 -> 1.3
 
 https://github.com/NCATSTranslator/ReasonerAPI/compare/v1.2.0...1.3

@@ -1,0 +1,61 @@
+{
+  "nodes": {
+    "biolink:MolecularActivity": {
+      "id_prefixes": [
+        "RHEA",
+        "REACT",
+        "GO",
+        "UMLS"
+      ]
+    },
+    "biolink:SmallMolecule": {
+      "id_prefixes": [
+        "CHEBI",
+        "CHEMBL.COMPOUND",
+        "UMLS",
+        "UNII",
+        "PUBCHEM.COMPOUND",
+        "DRUGBANK",
+        "MESH",
+        "KEGG.COMPOUND",
+        "HMDB",
+        "CAS",
+        "KEGG.DRUG"
+      ]
+    }
+  },
+  "edges": [
+    {
+      "subject": "biolink:ChemicalEntity",
+      "predicate": "biolink:affects",
+      "object": "biolink:Gene",
+      "knowledge_types": [
+        "lookup"
+      ],
+      "association": "biolink:ChemicalToGeneAssociation",
+      "qualifiers": [
+        {
+          "qualifier_type_id": "biolink:subject_aspect_qualifier",
+          "applicable_values": [
+            "abundance",
+            "degradation"
+          ]
+        },
+        {
+          "qualifier_type_id": "biolink:object_aspect_qualifier",
+          "applicable_values": [
+            "expression",
+            "abundance",
+            "activity"
+          ]
+        },
+        {
+          "qualifier_type_id": "biolink:qualified_predicate",
+          "applicable_values": [
+            "biolink:causes"
+          ]
+        }
+      ]
+    }
+  ]
+}
