@@ -84,8 +84,7 @@ In this scenario, the knoweldge expressed in the Edge being retreived was origin
 
 In the scenario diagrammed below, data from two soruces (DB1, DB2) is retrieved by KP1, where the data is analyzed to generate an Edge. This makes KP1 the "primary source" of the knowledge, and DB1 and DB2 "supporting data sources". ARA1 then retreives this edges from KP1 and then passes it along to the UI. 
 
-![image](https://github.com/NCATSTranslator/ReasonerAPI/assets/5184212/9166546f-70b7-4a67-b5c1-6bf7c3e1bbc8)
-
+![image](https://github.com/NCATSTranslator/ReasonerAPI/assets/5184212/40cce738-1235-4ab3-8628-fca92e348761)
 *DB = an external data source. KP = a Translator Knowledge Provider.  ARA = a Translator Automated Reasoning Agent, UI  = the Translator User Interface.
 Each arrow (R1-R5) represents a distinct retrieval event (grey arrows/text indicates the retreival of *data* rather than knowledge).*
 
