@@ -501,12 +501,13 @@ components:
             - $ref: '#/components/schemas/KnowledgeGraph'
           nullable: true
         auxiliary_graphs:
+          type: object
           description: >-
             Dictionary of AuxiliaryGraph instances that are used by Knowledge
             Graph Edges and Result Analyses. These are referenced elsewhere by
             the dictionary key.
-          oneOf:
-            - $ref: '#components/schemas/AuxiliaryGraph'
+          additionalProperties:
+            $ref: '#components/schemas/AuxiliaryGraph'
           nullable: true
       additionalProperties: false
     LogEntry:
