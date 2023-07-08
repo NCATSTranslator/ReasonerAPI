@@ -278,7 +278,7 @@ components:
         workflow:
           description: List of workflow steps to be executed.
           oneOf:
-            - $ref: http://standards.ncats.io/workflow/1.3.4/schema
+            - $ref: http://standards.ncats.io/workflow/1.3.5/schema
           nullable: true
         submitter:
           type: string
