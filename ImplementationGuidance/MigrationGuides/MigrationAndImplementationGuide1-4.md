@@ -828,7 +828,7 @@ Now we can put these two sections back together to get the final message.
         },
         "edges": {
             "e0": {
-                "predicates":["treats],
+                "predicates":["treats"],
                 "subject": "n1",
                 "object": "n0"
             }
@@ -836,8 +836,8 @@ Now we can put these two sections back together to get the final message.
     },
     "knowledge_graph": {
         "nodes": {
-            "diabetes": {node_info},
-            "metformin": {node_info}
+            "diabetes": {"ids": ["MONDO:0005148"]},
+            "metformin":  {"categories": ["biolink:Drug"]}
         },
         "edges": {
             "e01": {
