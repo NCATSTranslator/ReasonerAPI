@@ -820,7 +820,7 @@ Now we can put these two sections back together to get the final message.
     "query_graph": {
         "nodes": {
             "n0": {
-                "id": "diabetes"
+                "ids": ["diabetes"]
             },
             "n1": {
                 "categories": ["drug"]
@@ -836,7 +836,7 @@ Now we can put these two sections back together to get the final message.
     },
     "knowledge_graph": {
         "nodes": {
-            "diabetes": {"ids": ["MONDO:0005148"]},
+            "diabetes": {"name": ["MONDO:0005148"]},
             "metformin":  {"categories": ["biolink:Drug"]}
         },
         "edges": {
