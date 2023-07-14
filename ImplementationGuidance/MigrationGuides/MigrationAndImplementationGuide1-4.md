@@ -823,12 +823,12 @@ Now we can put these two sections back together to get the final message.
                 "ids": ["diabetes"]
             },
             "n1": {
-                "categories": ["drug"]
+                "categories": ["biolink:Drug"]
             }
         },
         "edges": {
             "e0": {
-                "predicates":["treats"],
+                "predicates":["biolink:treats"],
                 "subject": "n1",
                 "object": "n0"
             }
@@ -836,14 +836,14 @@ Now we can put these two sections back together to get the final message.
     },
     "knowledge_graph": {
         "nodes": {
-            "diabetes": {"name": ["MONDO:0005148"]},
-            "metformin":  {"categories": ["biolink:Drug"]}
+            "MONDO:0005148": {"name": "diabetes", "categories": ["biolink:Disease"]},
+            "ncats.drug:9100L32L2N":  {"name": "metformin", "categories": ["biolink:Drug"]}
         },
         "edges": {
             "e01": {
-                "subject": "metformin",
-                "object": "diabetes",
-                "predicate": "treats",
+                "subject": "ncats.drug:9100L32L2N",
+                "object": "MONDO:0005148",
+                "predicate": "biolink:treats",
                 "attributes": [],
                 "sources":[
                     {
@@ -874,12 +874,12 @@ Now we can put these two sections back together to get the final message.
             "node_bindings": {
                 "n0": [
                     {
-                        "id": "diabetes"
+                        "id": "MONDO:0005148"
                     }
                 ],
                 "n1": [
                     {
-                        "id": "metformin"
+                        "id": "ncats.drug:9100L32L2N"
                     }
                 ]
             },
