@@ -813,7 +813,7 @@ Result generation for KP's is also relatively simple. In this case, we just migr
 
 ## TRAPI 1.4 Example Message
 
-Now we can put these two sections back together to get the final message.
+Now we can put these two sections back together to get the final message. The various JSON properties are given some credible final values not all present in the above text (but this allows this sample to validate properly using the reasoner-validator):
 
 ```
 "message": {
