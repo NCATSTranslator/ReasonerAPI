@@ -153,4 +153,4 @@ publications:
           "attribute_source": "infores:chembl"
         }, 
 
-   - **NOTE** however that we will soon be moving to **use of a new `supporting_studies` Edge property** to capture supporting clincial trials and other types of studies in a seperate Attribute from publications. A specification for this is forthcoming. 
+   - **NOTE** however that we will soon be moving to **use of a new `supporting_studies` Edge property** to capture supporting clincial trials and other types of studies in a seperate Attribute from publications (per discussions [here](https://github.com/NCATSTranslator/ReasonerAPI/issues/398)). A specification for this is forthcoming. 
