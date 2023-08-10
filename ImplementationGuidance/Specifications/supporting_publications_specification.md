@@ -153,4 +153,9 @@ publications:
           "attribute_source": "infores:chembl"
         }, 
 
-   - **NOTE** however that we will soon be moving to **use of a new `supporting_studies` Edge property** to capture supporting clincial trials and other types of studies in a seperate Attribute from publications. A specification for this is forthcoming. 
+   - **NOTE** however that we will soon be moving to **use of a new `supporting_studies` Edge property** to capture supporting clincial trials and other types of studies in a seperate Attribute from publications. A specification for this is forthcoming.
+
+---------
+
+### An Important Clarification about Retrieval Source URLs 
+Above we define "publications" broadly to include any publically avaialble document, and include web pages in this scope.  *However*, if a data provider wants to reference the **"retrieval source"** for an Edge (i.e. a specific web page or record that represents the source from which they programmatically retrieved the knowledge the Edge expresses) - a URL for this web page should be captured in the `RetrievalSource` object, per the [Retrieval Provenance specification](https://github.com/NCATSTranslator/ReasonerAPI/blob/master/ImplementationGuidance/Specifications/retrieval_provenance_specification.md), and not as a supporting publication per the specification above.
