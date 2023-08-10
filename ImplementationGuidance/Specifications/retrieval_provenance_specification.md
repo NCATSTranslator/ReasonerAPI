@@ -15,7 +15,14 @@ The diagram below shows the classes and properties defined in the [TRAPI schema]
 
 ![image](https://github.com/NCATSTranslator/ReasonerAPI/assets/5184212/840b8061-2fe4-4e15-968f-97cd87de22ab)
 
-Briefly, the `Edge.sources` property points to one or more `RetreivalSource` objects - which capture information about how a particular InformationResource served as a source from which knowledge expressed in an Edge, or data used to generate this knowledge, was retrieved. This incudes the infores CURIE of the resource, the role it played (priamry knowledge source, aggregator knowledge source, or supporting data source), and Inforamtion Resources that were directly upstream in the retrieval chain. In addition, data providres can capture URLs of specific records in the Resource where the information reported in the Edge can be found.
+The `Edge.sources` property points to one or more `RetreivalSource` objects - which capture information about how a particular InformationResource served as a source from which knowledge expressed in an Edge, or data used to generate this knowledge, was retrieved. 
+
+| Property | Description |
+| ------------- | ------------- |
+| resource_id | (required) The CURIE for an Information Resource that served as a source of knowledge expressed in an Edge, or a source of data used to generate this knowledge.  |
+| resource_role  | (required) The role played by the InformationResource in serving as a source for an Edge (primary_knowledge_source, aggregator_knowledge_source, supporting_data_source).  |
+| upstream_resource_ids| (optional) An upstream InformationResource from which the resource being described directly retrieved a record of the knowledge expressed in the Edge, or data used to generate this knowledge. |
+| source_record_urls | (optional) A URL linking to a specific web page or document provided by the source, that contains a record of the knowledge expressed in the  Edge. |
 
 
 ## Implementation Guidance
@@ -23,7 +30,7 @@ A quick guide for implementers. Using the model describd above:
 
 1. All Edges MUST report **one and only one** Retrieval Source serving as the `primary knowledge source`. 
 
-2. All Edges MUST provide a list of any Retrieval Sources that served as `aggregator knowlege sources` by retrieving the knowledge expressed in the Edge from the priamry source of another aggregator.  
+2. All Edges MUST provide a list of any Retrieval Sources that served as `aggregator knowledge sources` by retrieving the knowledge expressed in the Edge from the priamry source of another aggregator.  
 
 3. All Edges representing knowledge generated through analysis of data by a Translator Knoledge Provider (KP) SHOULD report any Retrieval Sources providing the data that they operated on as a `supporting data source`. 
 4. Values of the `RetrievalSource.resource_id` MUST be an CURIE from the InfoRes Catalog [here]([url](https://github.com/biolink/biolink-model/blob/master/infores_catalog.yaml)) (e.g. “infores:dgidb”, “infores:molepro”)
