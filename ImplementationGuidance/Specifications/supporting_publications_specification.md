@@ -157,5 +157,40 @@ publications:
 
 ---------
 
-### An Important Clarification about Retrieval Source URLs 
-Above we define "publications" broadly to include any publically avaialble document, and include web pages in this scope.  *However*, if a data provider wants to reference the **"retrieval source"** for an Edge (i.e. a specific web page or record that represents the source from which they programmatically retrieved the knowledge the Edge expresses) - a URL for this web page should be captured in the `RetrievalSource` object, per the [Retrieval Provenance specification](https://github.com/NCATSTranslator/ReasonerAPI/blob/master/ImplementationGuidance/Specifications/retrieval_provenance_specification.md), and not as a supporting publication per the specification above.
+### An Important Clarification about Retrieval Source URLs vs Supporting Publications 
+Above we define "publications" broadly to include any publically availsble document, and include web pages in this scope. However, if a data provider wants to share web pages that display the source record from which they retrieved knowledge expressed in their edge, a URL for this web page should be captured NOT as a supporting publication per the specification above, but rather in the `RetrievalSource` object, per the [Retrieval Provenance Specification](https://github.com/NCATSTranslator/ReasonerAPI/blob/master/ImplementationGuidance/Specifications/retrieval_provenance_specification.md).
+
+For example, consider an edge provided by the **SRI Reference KG** connecting the BRCA2 gene to Hereditary Breast Ovarian Cancer Syndrome, with the following ClinVar record as its primary source:
+[image](https://github.com/NCATSTranslator/ReasonerAPI/assets/5184212/9f3be816-b7ff-4709-89bd-c7e314f67bfd)
+
+The SRI KG wants to report the **six journal articles** that ClinVar provides as support for this statement, and also provide the **URL of the ClinVar web page** where the user can explore the source record. Technically, Biolink would consider this ClinVar web page as fitting under its broad definition of 'Publication' - and thus allow for it to be captured in an Attribute using the `publications` edge property.  However, we provide a dedicated `soruce_record_url` property in the RetrievalSource object for reporting web pages that display the source record from which the KP retrieved knowledge expressed in their edge.  
+
+So in this case, the correct way to capture the six supporting publications and the soruce record url would be as follows. 
+
+````json
+"subject": "BRCA2"
+"predicate": "associated with"
+"object":  "Hereditary Breast Ovarian Cancer Syndrome"
+"sources": [
+  {
+    "resource_id": "infores:clinvar",
+    "resource_role": "primary knowledge source",
+    "source_record_url": "https://www.ncbi.nlm.nih.gov/clinvar/variation/9342/"
+  },
+  {
+    "resource_id": "infores:sri-reference-kg",
+    "resource_role": "aggregator knowledge source",
+    "upstream_resource_ids": "infores:clinvar"
+  }
+]
+"attributes": [
+  {
+  "attribute_type_id": "biolink:publications",
+  "value": ["PMID:12373604", "PMID:18703817", "PMID:24156927", "PMID:18465347", "PMID:22798144", "PMID:26657402"],
+  "value_type_id": "linkml:Uriorcurie",
+  "attribute_source": "infores:clinvar"
+  }
+]
+````
+
+The key thing to note here is that the URL of the source record from ClinVar is captured not as a `publication`, but as a `source_record_url` - because it is where we want to direct users to explore the primary source of the knowledge expressed in the edge. 
