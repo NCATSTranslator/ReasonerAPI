@@ -153,19 +153,19 @@ publications:
           "attribute_source": "infores:chembl"
         }, 
 
-   - **NOTE** however that we will soon be moving to **use of a new `supporting_studies` Edge property** to capture supporting clincial trials and other types of studies in a seperate Attribute from publications. A specification for this is forthcoming.
+   - **NOTE** however that we will soon be moving to **use of a new `supporting_studies` Edge property** to capture supporting clincial trials and other types of studies in a separate Attribute from publications. A specification for this is forthcoming.
 
 ---------
 
 ### An Important Clarification about Retrieval Source URLs vs Supporting Publications 
-Above we define "publications" broadly to include any publically availsble document, and include web pages in this scope. However, if a data provider wants to share web pages that display the source record from which they retrieved knowledge expressed in their edge, a URL for this web page should be captured NOT as a supporting publication per the specification above, but rather in the `RetrievalSource` object, per the [Retrieval Provenance Specification](https://github.com/NCATSTranslator/ReasonerAPI/blob/master/ImplementationGuidance/Specifications/retrieval_provenance_specification.md).
+Above we define "publications" broadly to include any publicly available document, and include web pages in this scope. However, if a data provider wants to share web pages that display the source record from which they retrieved knowledge expressed in their edge, a URL for this web page should be captured NOT as a supporting publication per the specification above, but rather in the `RetrievalSource` object, per the [Retrieval Provenance Specification](https://github.com/NCATSTranslator/ReasonerAPI/blob/master/ImplementationGuidance/Specifications/retrieval_provenance_specification.md).
 
 For example, consider an edge provided by the **SRI Reference KG** connecting the BRCA2 gene to Hereditary Breast Ovarian Cancer Syndrome, with the following ClinVar record as its primary source:
 [image](https://github.com/NCATSTranslator/ReasonerAPI/assets/5184212/9f3be816-b7ff-4709-89bd-c7e314f67bfd)
 
-The SRI KG wants to report the **six journal articles** that ClinVar provides as support for this statement, and also provide the **URL of the ClinVar web page** where the user can explore the source record. Technically, Biolink would consider this ClinVar web page as fitting under its broad definition of 'Publication' - and thus allow for it to be captured in an Attribute using the `publications` edge property.  However, we provide a dedicated `soruce_record_url` property in the RetrievalSource object for reporting web pages that display the source record from which the KP retrieved knowledge expressed in their edge.  
+The SRI KG wants to report the **six journal articles** that ClinVar provides as support for this statement, and also provide the **URL of the ClinVar web page** where the user can explore the source record. Technically, Biolink would consider this ClinVar web page as fitting under its broad definition of 'Publication' - and thus allow for it to be captured in an Attribute using the `publications` edge property.  However, we provide a dedicated `source_record_url` property in the RetrievalSource object for reporting web pages that display the source record from which the KP retrieved knowledge expressed in their edge.  
 
-So in this case, the correct way to capture the six supporting publications and the soruce record url would be as follows. 
+So in this case, the correct way to capture the six supporting publications and the source record url would be as follows. 
 
 ````json
 "subject": "BRCA2"
