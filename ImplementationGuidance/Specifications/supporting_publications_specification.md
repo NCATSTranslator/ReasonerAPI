@@ -155,8 +155,6 @@ publications:
 
    - **NOTE** however that we will soon be moving to **use of a new `supporting_studies` Edge property** to capture supporting clincial trials and other types of studies in a seperate Attribute from publications. A specification for this is forthcoming.
 
----------
-
 ### An Important Clarification about Retrieval Source URLs vs Supporting Publications 
 Above we define "publications" broadly to include any publically availsble document, and include web pages in this scope. However, if a data provider wants to share web pages that display the source record from which they retrieved knowledge expressed in their edge, a URL for this web page should be captured NOT as a supporting publication per the specification above, but rather in the `RetrievalSource` object, per the [Retrieval Provenance Specification](https://github.com/NCATSTranslator/ReasonerAPI/blob/master/ImplementationGuidance/Specifications/retrieval_provenance_specification.md).
 
