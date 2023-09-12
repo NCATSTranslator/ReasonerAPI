@@ -952,13 +952,16 @@ components:
             categories should also be avoided.
           items:
             $ref: '#/components/schemas/BiolinkEntity'
-          nullable: true
+          minItems: 1
+          nullable: false
         attributes:
           type: array
           description: A list of attributes describing the node
           items:
             $ref: '#/components/schemas/Attribute'
           nullable: true
+      required:
+        - categories
       additionalProperties: false
     Attribute:
       type: object
