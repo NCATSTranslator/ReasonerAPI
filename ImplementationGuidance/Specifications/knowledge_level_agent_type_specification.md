@@ -59,7 +59,7 @@ The scope of this initial AAG specification covers two properties:
 
 3. The main challenge in applying this standard concerns selecting appropriate agent type and knowledge level terms for a given Edge.  Here we offer three forms of guidance:  
   
-   a. Detailed descriptions of each knowledge level and agent type permissible value (see [Biolink Model definitions](https://github.com/biolink/biolink-model/blob/master/biolink-model.yaml) - but descriptions will soon be imported as Appendix I in this document).  
+   a. Detailed descriptions of each knowledge level and agent type permissible value (see [Biolink Model definitions](https://github.com/biolink/biolink-model/blob/knowledge_level_agent_type/biolink-model.yaml) - but descriptions will soon be imported as Appendix I in this document).  
      
    b. Specific guidance for assigning agent type and knowledge level to Edges in the context of Translator knowledge graphs - including mappings between Knowledge Provider resources and the types of agent type and knowledge level values relevant to each  (see [here](https://docs.google.com/document/d/1_Iol_nQhONsRyQp6ibDUBbtiY0zp7Txbs7mg6xSMXSU/edit#heading=h.1ptdqc6t27xt) - soon to be imported as Appendix II in this document).  
      
