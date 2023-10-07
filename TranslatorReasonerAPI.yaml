@@ -1123,7 +1123,7 @@ components:
             CURIE for a Biolink 'qualifier' association slot, generally taken
             from Biolink association slots designated for this purpose
             (that is, association slots with names ending in 'qualifier')
-            e.g. biolink:subject_aspect_qualifier, 
+            e.g. biolink:subject_aspect_qualifier,
             biolink:subject_direction_qualifier,
             biolink:object_aspect_qualifier, etc. Such qualifiers are used
             to elaborate a second layer of meaning of a knowledge graph edge.
@@ -1201,9 +1201,15 @@ components:
         by a colon, such as UniProtKB:P00738. Via an external context
         definition, the CURIE prefix and colon may be replaced by a URI
         prefix, such as http://identifiers.org/uniprot/, to form a full
-        URI.
+        URI. Conforms to https://www.w3.org/TR/curie/
       externalDocs:
         url: https://www.w3.org/TR/2010/NOTE-curie-20101216/
+      pattern: ^\S+:\S+$
+    URL:
+      type: string
+      description: >-
+        A Uniform Resource Locator, such as https://www.example.com.
+      pattern: ^(http(s)?:\/\/.)?(www\.)?\S+$
     MetaKnowledgeGraph:
       type: object
       description: >-
