@@ -892,6 +892,12 @@ components:
             $ref: '#/components/schemas/BiolinkPredicate'
           minItems: 1
           nullable: true
+        negated:
+          type: boolean
+          description: >-
+            If set to true, then the query seeks assertions that are
+            explictly negated. i.e. evidence of absence is required, rather
+            than absence of evidence.
         subject:
           type: string
           example: https://omim.org/entry/603903
@@ -1064,6 +1070,13 @@ components:
           oneOf:
             - $ref: '#/components/schemas/BiolinkPredicate'
           nullable: false
+        negated:
+          type: boolean
+          description: >-
+            If set to true, then the assertion is explictly negated with
+            evidence of absence, rather than absence of evidence.
+          nullable: false
+          default: false
         subject:
           description: >-
             Corresponds to the map key CURIE of the
@@ -1276,6 +1289,16 @@ components:
           description: >-
             Object node category of this relationship edge.
           example: biolink:Protein
+        can_be_negated:
+          type: boolean
+          description: >-
+            Indicates that this edge can be negated in the data source
+            presenting the edge. The edge property is different here from the
+            negated property in the Edge object in order to reuse the same edge
+            in the meta knowledge graph to represent both positive and negated 
+            edges of this type.
+          example: false
+          default: false
         knowledge_types:
           description: >-
             A list of knowledge_types that are supported by the service.
