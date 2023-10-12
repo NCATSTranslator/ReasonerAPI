@@ -1,6 +1,8 @@
 # A TRAPI Specification for Knowledge Level and Agent Type Edge Annotations
 
-### NOTE: The specification described below is the long term goal.  In the short term, we have defined and will implement a smaller set of 5 terms that collapse KL and AT categories, and focus on distinctions most useful for end users. These terms are defined, and the implementation approach is described, in the [document here](https://docs.google.com/document/d/1RsVOZnIz95ylFik0EQBf_7O-p8WJzzkCc7u-6CR34Zg/edit).
+### NOTE: The specification below is a work in progress that describes the long term goal for edge-based annotation of knowledge level and agent type.  In the short term, we have defined and will implement a smaller set of 5 terms that collapse KL and AT categories, and focuses on minimal distinctions most useful for end users. This short term approach is described in the [document here](https://docs.google.com/document/d/1TQtQCtHWvGRsSbyQSVMwkJF0WcRt4-qZWXbUKnyTI8Q/edit#).  
+
+### Importantly, the short term plan does not require any effort on the part of KPs/ARAs - it is based on annotations to the Infores catalog make by the SRI team, which the UI team will use to populate the interface with KL/AT information. The specification below will be updated once long term plans are settled, and responsibilities of KPs and ARAs are clear. 
 
 ## Overview
 ‘At-a-Glance’ (AAG) provenance information allow users to make a first-pass assessment of the strength, relevance, and utility of a given Edge or Result. They are supported by five specific edge properties defined in the Biolink Model:
