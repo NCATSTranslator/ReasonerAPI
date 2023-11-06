@@ -263,7 +263,9 @@ components:
       type: object
       properties:
         message:
-          $ref: '#/components/schemas/Message'
+          oneOf:
+            $ref: '#/components/schemas/Message'
+          nullable: false
           description: >-
             The query Message is a serialization of the user request. Content
             of the Message object depends on the intended TRAPI operation. For
@@ -299,6 +301,7 @@ components:
       properties:
         callback:
           type: string
+          nullable: false
           format: uri
           pattern: ^https?://
           description: >-
@@ -311,7 +314,9 @@ components:
             does not succeed, the server SHOULD retry the POST at least
             once.
         message:
-          $ref: '#/components/schemas/Message'
+          oneOf:
+            $ref: '#/components/schemas/Message'
+          nullable: false
           description: >-
             The query Message is a serialization of the user request. Content
             of the Message object depends on the intended TRAPI operation. For
