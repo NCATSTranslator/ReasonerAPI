@@ -603,7 +603,9 @@ components:
           Binding must bind directly to node in the original Query Graph.
       properties:
         id:
-          $ref: '#/components/schemas/CURIE'
+          oneOf:
+            - $ref: '#/components/schemas/CURIE'
+          nullable: false
           description: >-
             The CURIE of a Node within the Knowledge Graph.
         query_id:
@@ -629,6 +631,7 @@ components:
             result.
           items:
             $ref: '#/components/schemas/Attribute'
+          minItems: 1
           nullable: true
       additionalProperties: true
       required:
