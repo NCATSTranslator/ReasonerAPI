@@ -486,6 +486,7 @@ components:
           items:
             $ref: '#/components/schemas/Result'
           nullable: true
+          minItems: 1
         query_graph:
           description: >-
             QueryGraph object that contains a serialization of a query in the
