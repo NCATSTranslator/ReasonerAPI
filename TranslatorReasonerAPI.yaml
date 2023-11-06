@@ -401,6 +401,7 @@ components:
           items:
             $ref: '#/components/schemas/LogEntry'
           nullable: false
+          minItems: 1
         response_url:
           description: >-
             Optional URL that can be queried to restrieve the full TRAPI
@@ -449,6 +450,7 @@ components:
           items:
             $ref: '#/components/schemas/LogEntry'
           nullable: true
+          minItems: 1
         workflow:
           description: List of workflow steps that were executed.
           oneOf:
