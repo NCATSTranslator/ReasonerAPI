@@ -581,6 +581,8 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/NodeBinding'
+            minItems: 1
+          nullable: false 
         analyses:
           type: array
           description: >-
@@ -588,6 +590,8 @@ components:
             See below for Analysis components.
           items:
             $ref: '#/components/schemas/Analysis'
+          minItems: 1
+          nullable: false 
       additionalProperties: true
       required:
         - node_bindings
