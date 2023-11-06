@@ -428,7 +428,7 @@ components:
             Contains the knowledge of the response (query graph, knowledge
             graph, and results).
           oneOf:
-            $ref: '#/components/schemas/Message'
+            - $ref: '#/components/schemas/Message'
           nullable: false
         status:
           description: >-
