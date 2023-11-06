@@ -770,6 +770,7 @@ components:
             referenced elsewhere in the TRAPI output by the dictionary key.
           additionalProperties:
             $ref: '#/components/schemas/Node'
+          nullable: false
         edges:
           type: object
           description: >-
@@ -777,6 +778,7 @@ components:
             referenced elsewhere in the TRAPI output by the dictionary key.
           additionalProperties:
             $ref: '#/components/schemas/Edge'
+          nullable: false
       additionalProperties: true
       required:
         - nodes
@@ -796,6 +798,7 @@ components:
             on bound nodes.
           additionalProperties:
             $ref: '#/components/schemas/QNode'
+          nullable: false
         edges:
           type: object
           description: >-
@@ -805,6 +808,7 @@ components:
             QNodes.
           additionalProperties:
             $ref: '#/components/schemas/QEdge'
+          nullable: false
       additionalProperties: true
       required:
         - nodes
@@ -855,7 +859,8 @@ components:
             to AND)
           items:
             $ref: '#/components/schemas/AttributeConstraint'
-          default: []
+          minItems: 1
+          nullable: true
       additionalProperties: true
     QEdge:
       type: object
@@ -899,6 +904,7 @@ components:
             Corresponds to the map key identifier of the
             subject concept node anchoring the query filter
             pattern for the query relationship edge.
+          nullable: false
         object:
           type: string
           example: https://www.uniprot.org/uniprot/P00738
@@ -906,6 +912,7 @@ components:
             Corresponds to the map key identifier of the
             object concept node anchoring the query filter
             pattern for the query relationship edge.
+          nullable: false
         attribute_constraints:
           type: array
           description: >-
@@ -914,7 +921,8 @@ components:
             to AND)
           items:
             $ref: '#/components/schemas/AttributeConstraint'
-          default: []
+          nullable: true
+          minItems: 1
         qualifier_constraints:
           type: array
           description: >-
@@ -927,7 +935,8 @@ components:
             because these complex use cases are not supported at this time.
           items:
             $ref: '#/components/schemas/QualifierConstraint'
-          default: []
+          nullable: true
+          minItems: 1
       additionalProperties: true
       required:
         - subject
