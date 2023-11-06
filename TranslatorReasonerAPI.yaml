@@ -645,8 +645,10 @@ components:
         generation of the score).
       properties:
         resource_id:
-          $ref: '#/components/schemas/CURIE'
+          oneOf:
+            - $ref: '#/components/schemas/CURIE'
           description: The id of the resource generating this Analysis
+          nullable: false
         score:
           type: number
           format: float
@@ -669,6 +671,8 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/EdgeBinding'
+            minItems: 1
+          nullable: false
         support_graphs:
           type: array
           description: >-
@@ -679,6 +683,7 @@ components:
           nullable: true
           items:
             type: string
+          minItems: 1
         scoring_method:
           type: string
           description: >-
@@ -691,6 +696,7 @@ components:
             The attributes of this particular Analysis.
           items:
             $ref: '#/components/schemas/Attribute'
+          minItems: 1
           nullable: true
       additionalProperties: true
       required:
