@@ -427,7 +427,9 @@ components:
           description: >-
             Contains the knowledge of the response (query graph, knowledge
             graph, and results).
-          $ref: '#/components/schemas/Message'
+          oneOf:
+            $ref: '#/components/schemas/Message'
+          nullable: false
         status:
           description: >-
             One of a standardized set of short codes,
@@ -458,10 +460,12 @@ components:
           type: string
           example: 1.4.0
           description: Version label of the TRAPI schema used in this document
+          nullable: true
         biolink_version:
           type: string
           example: 3.1.2
           description: Version label of the Biolink model used in this document
+          nullable: true
       additionalProperties: true
       required:
         - message
