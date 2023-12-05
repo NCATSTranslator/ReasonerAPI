@@ -264,7 +264,7 @@ components:
       properties:
         message:
           oneOf:
-            $ref: '#/components/schemas/Message'
+            - $ref: '#/components/schemas/Message'
           nullable: false
           description: >-
             The query Message is a serialization of the user request. Content
@@ -315,7 +315,7 @@ components:
             once.
         message:
           oneOf:
-            $ref: '#/components/schemas/Message'
+            - $ref: '#/components/schemas/Message'
           nullable: false
           description: >-
             The query Message is a serialization of the user request. Content
