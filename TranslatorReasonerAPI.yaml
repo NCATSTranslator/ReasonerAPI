@@ -720,11 +720,12 @@ components:
             result.
           items:
             $ref: '#/components/schemas/Attribute'
-          minItems: 1
-          nullable: true
+          minItems: 0
+          nullable: false
       additionalProperties: true
       required:
         - id
+        - attributes
     AuxiliaryGraph:
       type: object
       description: >-
@@ -751,11 +752,12 @@ components:
             Attributes of the Auxiliary Graph
           items:
             $ref: '#/components/schemas/Attribute'
-          minItems: 1
-          nullable: true
+          minItems: 0
+          nullable: false
       additionalProperties: true
       required:
         - edges
+        - attributes
     KnowledgeGraph:
       type: object
       description: >-
