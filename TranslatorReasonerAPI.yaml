@@ -485,8 +485,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Result'
-          nullable: true
-          minItems: 1
+          nullable: false
+          minItems: 0
         query_graph:
           description: >-
             QueryGraph object that contains a serialization of a query in the
@@ -510,6 +510,8 @@ components:
           additionalProperties:
             $ref: '#/components/schemas/AuxiliaryGraph'
           nullable: true
+      required:
+        - results
       additionalProperties: false
     LogEntry:
       description: >-
