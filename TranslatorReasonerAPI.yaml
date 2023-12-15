@@ -943,8 +943,8 @@ components:
       required:
         - subject
         - object
-        - attribute_constraints:
-        - qualifier_constraints:
+        - attribute_constraints
+        - qualifier_constraints
     Node:
       type: object
       description: >-
