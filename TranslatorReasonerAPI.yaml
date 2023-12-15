@@ -680,10 +680,10 @@ components:
             that supported the analysis of a Result as performed by the
             reasoning service. Each item in the list is the key of a
             single Auxiliary Graph.
-          nullable: true
+          nullable: false
           items:
             type: string
-          minItems: 1
+          minItems: 0
         scoring_method:
           type: string
           description: >-
@@ -696,8 +696,8 @@ components:
             The attributes of this particular Analysis.
           items:
             $ref: '#/components/schemas/Attribute'
-          minItems: 1
-          nullable: true
+          minItems: 0
+          nullable: false
       additionalProperties: true
       required:
         - resource_id
