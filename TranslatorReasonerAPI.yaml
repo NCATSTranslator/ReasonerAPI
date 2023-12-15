@@ -859,8 +859,10 @@ components:
             to AND)
           items:
             $ref: '#/components/schemas/AttributeConstraint'
-          minItems: 1
-          nullable: true
+          minItems: 0
+          nullable: false
+      required:
+        - constraints
       additionalProperties: true
     QEdge:
       type: object
@@ -921,8 +923,8 @@ components:
             to AND)
           items:
             $ref: '#/components/schemas/AttributeConstraint'
-          nullable: true
-          minItems: 1
+          nullable: false
+          minItems: 0
         qualifier_constraints:
           type: array
           description: >-
@@ -935,12 +937,14 @@ components:
             because these complex use cases are not supported at this time.
           items:
             $ref: '#/components/schemas/QualifierConstraint'
-          nullable: true
-          minItems: 1
+          nullable: false
+          minItems: 0
       additionalProperties: true
       required:
         - subject
         - object
+        - attribute_constraints:
+        - qualifier_constraints:
     Node:
       type: object
       description: >-
