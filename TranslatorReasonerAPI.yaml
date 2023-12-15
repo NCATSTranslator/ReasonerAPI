@@ -481,11 +481,15 @@ components:
           description: >-
             List of all returned Result objects for the query posed.
             The list SHOULD NOT be assumed to be ordered. The 'score' property,
-             if present, MAY be used to infer result rankings.
+            if present, MAY be used to infer result rankings. If Results are
+            not expected (such as for a query Message), this property SHOULD
+            be null or absent. If Results are expected (such as for a response
+            Message) and no Results are available, this property SHOULD be an
+            array with 0 Results in it.
           type: array
           items:
             $ref: '#/components/schemas/Result'
-          nullable: false
+          nullable: true
           minItems: 0
         query_graph:
           description: >-
@@ -510,8 +514,6 @@ components:
           additionalProperties:
             $ref: '#/components/schemas/AuxiliaryGraph'
           nullable: true
-      required:
-        - results
       additionalProperties: false
     LogEntry:
       description: >-
