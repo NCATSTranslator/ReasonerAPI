@@ -631,11 +631,12 @@ components:
             result.
           items:
             $ref: '#/components/schemas/Attribute'
-          minItems: 1
-          nullable: true
+          minItems: 0
+          nullable: false
       additionalProperties: true
       required:
         - id
+        - attributes
     Analysis:
       type: object
       description: >-
