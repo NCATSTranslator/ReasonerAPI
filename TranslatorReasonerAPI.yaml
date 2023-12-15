@@ -959,10 +959,11 @@ components:
           description: A list of attributes describing the node
           items:
             $ref: '#/components/schemas/Attribute'
-          minItems: 1
-          nullable: true
+          minItems: 0
+          nullable: false
       required:
         - categories
+        - attributes
       additionalProperties: false
     Attribute:
       type: object
