@@ -719,6 +719,7 @@ components:
         id:
           type: string
           description: The key identifier of a specific KnowledgeGraph Edge.
+          nullable: false
         attributes:
           type: array
           description: >-
@@ -728,10 +729,12 @@ components:
             result.
           items:
             $ref: '#/components/schemas/Attribute'
-          nullable: true
+          minItems: 0
+          nullable: false
       additionalProperties: true
       required:
         - id
+        - attributes
     AuxiliaryGraph:
       type: object
       description: >-
@@ -758,10 +761,12 @@ components:
             Attributes of the Auxiliary Graph
           items:
             $ref: '#/components/schemas/Attribute'
-          nullable: true
+          minItems: 0
+          nullable: false
       additionalProperties: true
       required:
         - edges
+        - attributes
     KnowledgeGraph:
       type: object
       description: >-
