@@ -702,6 +702,8 @@ components:
       required:
         - resource_id
         - edge_bindings
+        - support_graphs
+        - attributes
     EdgeBinding:
       type: object
       description: >-
