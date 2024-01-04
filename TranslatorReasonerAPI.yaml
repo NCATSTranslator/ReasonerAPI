@@ -590,7 +590,7 @@ components:
             See below for Analysis components.
           items:
             $ref: '#/components/schemas/Analysis'
-          minItems: 1
+          minItems: 0
           nullable: false 
       additionalProperties: true
       required:
