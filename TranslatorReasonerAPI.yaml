@@ -289,6 +289,12 @@ components:
             purpose of this optional field is to aid in the tracking of
             the source of queries for development and issue resolution.
           nullable: true
+        bypass_cache:
+          type: boolean
+          default: false
+          description: >-
+            Set to true in order to bypass any possible cached
+            response and try to answer the query from scratch
       additionalProperties: true
       required:
         - message
@@ -340,6 +346,12 @@ components:
             purpose of this optional field is to aid in the tracking of
             the source of queries for development and issue resolution.
           nullable: true
+        bypass_cache:
+          type: boolean
+          default: false
+          description: >-
+            Set to true in order to bypass any possible cached
+            response and try to answer the query from scratch
       additionalProperties: true
       required:
         - callback
