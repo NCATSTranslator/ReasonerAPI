@@ -293,8 +293,10 @@ components:
           type: boolean
           default: false
           description: >-
-            Set to true in order to bypass any possible cached
-            response and try to answer the query from scratch
+            Set to true in order to request that the agent obtain
+            fresh information from its sources in all cases where
+            it has a viable choice between requesting fresh information
+            in real time and using cached information.
       additionalProperties: true
       required:
         - message
@@ -350,8 +352,10 @@ components:
           type: boolean
           default: false
           description: >-
-            Set to true in order to bypass any possible cached
-            response and try to answer the query from scratch
+            Set to true in order to request that the agent obtain
+            fresh information from its sources in all cases where
+            it has a viable choice between requesting fresh information
+            in real time and using cached information.
       additionalProperties: true
       required:
         - callback
