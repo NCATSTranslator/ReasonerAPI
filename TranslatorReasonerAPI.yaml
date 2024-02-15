@@ -847,21 +847,7 @@ components:
             $ref: '#/components/schemas/BiolinkEntity'
           minItems: 1
           nullable: true
-        is_set:
-          type: boolean
-          description: >-
-            Boolean that if set to true, indicates that this QNode MAY have
-            multiple KnowledgeGraph Nodes bound to it within each Result.
-            The nodes in a set should be considered as a set of independent
-            nodes, rather than a set of dependent nodes, i.e., the answer
-            would still be valid if the nodes in the set were instead returned
-            individually. Multiple QNodes may have is_set=True. If a QNode
-            (n1) with is_set=True is connected to a QNode (n2) with
-            is_set=False, each n1 must be connected to n2. If a QNode (n1)
-            with is_set=True is connected to a QNode (n2) with is_set=True,
-            each n1 must be connected to at least one n2.
-          default: false
-        collection_type:
+        set_interpretation:
           type: string
           description: >-
             Indicates how multiple CURIEs in the ids property MUST be
@@ -989,6 +975,12 @@ components:
           items:
             $ref: '#/components/schemas/Attribute'
           nullable: true
+        is_set:
+          type: boolean
+          description: >-
+            Indicates that the node represents a set of entities.
+          default: false
+          nullable: true        
       required:
         - categories
       additionalProperties: false
