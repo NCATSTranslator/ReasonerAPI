@@ -861,6 +861,21 @@ components:
             with is_set=True is connected to a QNode (n2) with is_set=True,
             each n1 must be connected to at least one n2.
           default: false
+        collection_type:
+          type: string
+          description: >-
+            Indicates how multiple CURIEs in the ids property MUST be
+            interpreted. BATCH indicates that the query is intended to be
+            a batch query and each CURIE is treated independently. ALL means
+            that all specified CURIES MUST appear in each Result.
+            MANY means that member CURIEs MUST form one or more
+            sets in the Results, and sets with more members are generally
+            considered more desirable that sets with fewer members.
+          default: BATCH
+          enum:
+            - BATCH
+            - ALL
+            - MANY
         constraints:
           type: array
           description: >-
