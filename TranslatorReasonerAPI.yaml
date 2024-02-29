@@ -862,6 +862,7 @@ components:
             - BATCH
             - ALL
             - MANY
+          nullable: true
         constraints:
           type: array
           description: >-
@@ -979,7 +980,8 @@ components:
           type: boolean
           description: >-
             Indicates that the node represents a set of entities.
-          default: false
+            If the is property is missing or null, it is assumed to be
+            false.
           nullable: true        
       required:
         - categories
