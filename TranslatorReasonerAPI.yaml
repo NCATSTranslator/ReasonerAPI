@@ -1002,7 +1002,8 @@ components:
           description: A list of attributes describing the node
           items:
             $ref: '#/components/schemas/Attribute'
-          nullable: true
+          minItems: 0
+          nullable: false
         is_set:
           type: boolean
           description: >-
@@ -1012,6 +1013,7 @@ components:
           nullable: true        
       required:
         - categories
+        - attributes
       additionalProperties: false
     Attribute:
       type: object
