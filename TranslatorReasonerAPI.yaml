@@ -857,7 +857,7 @@ components:
             MANY means that member CURIEs MUST form one or more
             sets in the Results, and sets with more members are generally
             considered more desirable that sets with fewer members.
-          default: BATCH
+            If this property is missing or null, the default is BATCH.
           enum:
             - BATCH
             - ALL
@@ -980,7 +980,7 @@ components:
           type: boolean
           description: >-
             Indicates that the node represents a set of entities.
-            If the is property is missing or null, it is assumed to be
+            If this property is missing or null, it is assumed to be
             false.
           nullable: true        
       required:
