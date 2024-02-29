@@ -37,26 +37,26 @@ https://github.com/NCATSTranslator/ReasonerAPI/compare/v1.4.0...1.5
   https://github.com/NCATSTranslator/ReasonerAPI/commit/6d5bfdb7cff85a216df3830fce36a63db22976d3
 
 - Set_interpretation and is_set changes
-  https://github.com/NCATSTranslator/ReasonerAPI/pull/475
+  https://github.com/NCATSTranslator/ReasonerAPI/pull/475/files
 
 - Add bypass_cache
-  https://github.com/NCATSTranslator/ReasonerAPI/pull/473
+  https://github.com/NCATSTranslator/ReasonerAPI/pull/473/files
 
 - Clarify minItems 1 for Attributes
-  https://github.com/NCATSTranslator/ReasonerAPI/pull/472
+  https://github.com/NCATSTranslator/ReasonerAPI/pull/472/files
 
 - Clarify NodeBinding
-  https://github.com/NCATSTranslator/ReasonerAPI/pull/468
+  https://github.com/NCATSTranslator/ReasonerAPI/pull/468/files
 
 - Make Message.Results minItems 0
   https://github.com/NCATSTranslator/ReasonerAPI/pull/464/files
 
 - Make logs minItems: 1
-  https://github.com/NCATSTranslator/ReasonerAPI/pull/466
+  https://github.com/NCATSTranslator/ReasonerAPI/pull/466/files
 
 - PENDING: Clarify Result
   Not yet merged. Abrar checking on a potential snag
-  https://github.com/NCATSTranslator/ReasonerAPI/pull/467
+  https://github.com/NCATSTranslator/ReasonerAPI/pull/467/files
 
 Documentation updates:
 
