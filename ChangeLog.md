@@ -36,6 +36,28 @@ https://github.com/NCATSTranslator/ReasonerAPI/compare/v1.4.0...1.5
 - Fix EdgeBinding and AuxGraph
   https://github.com/NCATSTranslator/ReasonerAPI/commit/6d5bfdb7cff85a216df3830fce36a63db22976d3
 
+- Set_interpretation and is_set changes
+  https://github.com/NCATSTranslator/ReasonerAPI/pull/475
+
+- Add bypass_cache
+  https://github.com/NCATSTranslator/ReasonerAPI/pull/473
+
+- Clarify minItems 1 for Attributes
+  https://github.com/NCATSTranslator/ReasonerAPI/pull/472
+
+- Clarify NodeBinding
+  https://github.com/NCATSTranslator/ReasonerAPI/pull/468
+
+- Make Message.Results minItems 0
+  https://github.com/NCATSTranslator/ReasonerAPI/pull/464/files
+
+- Make logs minItems: 1
+  https://github.com/NCATSTranslator/ReasonerAPI/pull/466
+
+- PENDING: Clarify Result
+  Not yet merged. Abrar checking on a potential snag
+  https://github.com/NCATSTranslator/ReasonerAPI/pull/467
+
 Documentation updates:
 
 - Update retrieval_provenance_specification
