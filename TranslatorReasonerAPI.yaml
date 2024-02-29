@@ -289,6 +289,14 @@ components:
             purpose of this optional field is to aid in the tracking of
             the source of queries for development and issue resolution.
           nullable: true
+        bypass_cache:
+          type: boolean
+          default: false
+          description: >-
+            Set to true in order to request that the agent obtain
+            fresh information from its sources in all cases where
+            it has a viable choice between requesting fresh information
+            in real time and using cached information.
       additionalProperties: true
       required:
         - message
@@ -340,6 +348,14 @@ components:
             purpose of this optional field is to aid in the tracking of
             the source of queries for development and issue resolution.
           nullable: true
+        bypass_cache:
+          type: boolean
+          default: false
+          description: >-
+            Set to true in order to request that the agent obtain
+            fresh information from its sources in all cases where
+            it has a viable choice between requesting fresh information
+            in real time and using cached information.
       additionalProperties: true
       required:
         - callback
