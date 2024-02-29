@@ -681,8 +681,10 @@ components:
         generation of the score).
       properties:
         resource_id:
-          $ref: '#/components/schemas/CURIE'
+          oneOf:
+            - $ref: '#/components/schemas/CURIE'
           description: The id of the resource generating this Analysis
+          nullable: false
         score:
           type: number
           format: float
@@ -705,6 +707,8 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/EdgeBinding'
+            minItems: 1
+          nullable: false
         support_graphs:
           type: array
           description: >-
@@ -712,9 +716,10 @@ components:
             that supported the analysis of a Result as performed by the
             reasoning service. Each item in the list is the key of a
             single Auxiliary Graph.
-          nullable: true
+          nullable: false
           items:
             type: string
+          minItems: 0
         scoring_method:
           type: string
           description: >-
@@ -727,11 +732,14 @@ components:
             The attributes of this particular Analysis.
           items:
             $ref: '#/components/schemas/Attribute'
-          nullable: true
+          minItems: 0
+          nullable: false
       additionalProperties: true
       required:
         - resource_id
         - edge_bindings
+        - support_graphs
+        - attributes
     EdgeBinding:
       type: object
       description: >-
