@@ -421,6 +421,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/LogEntry'
+          minItems: 1
           nullable: false
         response_url:
           description: >-
@@ -471,7 +472,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/LogEntry'
-          nullable: true
+          minItems: 0
+          nullable: false
         workflow:
           description: List of workflow steps that were executed.
           oneOf:
