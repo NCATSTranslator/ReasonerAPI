@@ -847,20 +847,22 @@ components:
             $ref: '#/components/schemas/BiolinkEntity'
           minItems: 1
           nullable: true
-        is_set:
-          type: boolean
+        set_interpretation:
+          type: string
           description: >-
-            Boolean that if set to true, indicates that this QNode MAY have
-            multiple KnowledgeGraph Nodes bound to it within each Result.
-            The nodes in a set should be considered as a set of independent
-            nodes, rather than a set of dependent nodes, i.e., the answer
-            would still be valid if the nodes in the set were instead returned
-            individually. Multiple QNodes may have is_set=True. If a QNode
-            (n1) with is_set=True is connected to a QNode (n2) with
-            is_set=False, each n1 must be connected to n2. If a QNode (n1)
-            with is_set=True is connected to a QNode (n2) with is_set=True,
-            each n1 must be connected to at least one n2.
-          default: false
+            Indicates how multiple CURIEs in the ids property MUST be
+            interpreted. BATCH indicates that the query is intended to be
+            a batch query and each CURIE is treated independently. ALL means
+            that all specified CURIES MUST appear in each Result.
+            MANY means that member CURIEs MUST form one or more
+            sets in the Results, and sets with more members are generally
+            considered more desirable that sets with fewer members.
+            If this property is missing or null, the default is BATCH.
+          enum:
+            - BATCH
+            - ALL
+            - MANY
+          nullable: true
         constraints:
           type: array
           description: >-
@@ -974,6 +976,13 @@ components:
           items:
             $ref: '#/components/schemas/Attribute'
           nullable: true
+        is_set:
+          type: boolean
+          description: >-
+            Indicates that the node represents a set of entities.
+            If this property is missing or null, it is assumed to be
+            false.
+          nullable: true        
       required:
         - categories
       additionalProperties: false
