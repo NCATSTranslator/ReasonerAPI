@@ -54,7 +54,7 @@ https://github.com/NCATSTranslator/ReasonerAPI/compare/v1.4.0...1.5
 - Make logs minItems: 1
   https://github.com/NCATSTranslator/ReasonerAPI/pull/466/files
 
-- PENDING: Clarify Result
+- Clarify Result
   Not yet merged. Abrar checking on a potential snag
   https://github.com/NCATSTranslator/ReasonerAPI/pull/467/files
 
