@@ -64,7 +64,7 @@ Documentation updates:
   https://github.com/NCATSTranslator/ReasonerAPI/commit/78dafcf07f33dc0511e8a18c7f801fd68226d73e
   https://github.com/NCATSTranslator/ReasonerAPI/commit/4d3e457b7e46425548cf855562127e67de2757e5
 
-- Update Update supporting_publications_specification
+- Update supporting_publications_specification
   https://github.com/NCATSTranslator/ReasonerAPI/commit/b856d79c4df1fe2dbba937ddb339019958cb1150
 
 Minor updates during the beta phase:
