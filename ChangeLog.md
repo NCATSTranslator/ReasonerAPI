@@ -1,3 +1,84 @@
+# Change Log TRAPI 1.4.0 (2023-06-23) -> 1.5-beta (2023-03-01)
+
+https://github.com/NCATSTranslator/ReasonerAPI/compare/v1.4.0...1.5
+  
+- Change workflow schema to https and version 1.3.5
+  https://github.com/NCATSTranslator/ReasonerAPI/commit/aeddb4323ed9fd5aead5986c5e5ffbab167e6524
+  https://github.com/NCATSTranslator/ReasonerAPI/commit/1fdd0351c8edfb59d8fcf52dfe387f5547f1fc27
+  https://github.com/NCATSTranslator/ReasonerAPI/commit/6c4215a92a5895cdb9062124700a5c84b5e1c249
+  
+- Revert OneOf to additionalProperties (TRAPI 1.4.2 correction)
+  https://github.com/NCATSTranslator/ReasonerAPI/commit/795b13836bde2042687cbd7927f10e6dbee923e1
+  https://github.com/NCATSTranslator/ReasonerAPI/commit/98077dd71f6c582ff71ac32719c708c118132245
+
+- Make Query.message a oneOf $ref and nullable false
+  https://github.com/NCATSTranslator/ReasonerAPI/commit/1f9a9828a1dbeb146bb34de9b8bda2277895b985
+
+- Fix ambiguiities in Response
+  https://github.com/NCATSTranslator/ReasonerAPI/commit/55ccfdfa9a9988a1f271dd28708c9ade0fc347bf
+
+- convert to oneOf with -
+  https://github.com/NCATSTranslator/ReasonerAPI/commit/505ddb954310eab37d58d37be881006751dda5e2
+
+- Fix EdgeBinding and AuxGraph
+  https://github.com/NCATSTranslator/ReasonerAPI/commit/91cd63b174b81d6d7629ae478f0a8d4eb4bd60ec
+
+- Insert missing dashes at lines 267 and 320
+  https://github.com/NCATSTranslator/ReasonerAPI/commit/c17fe1be1dbc131800cfab444a7b739b8b75a3cc
+  https://github.com/NCATSTranslator/ReasonerAPI/commit/ffb2fedf1a8788e75714e9f140afee936feba060
+
+- Make attributes required with minItems 0
+  https://github.com/NCATSTranslator/ReasonerAPI/commit/e5f52be4f47391e8f3496dcfc538c0764a5824b3
+
+- Make Query.message a oneOf $ref and nullable false
+  https://github.com/NCATSTranslator/ReasonerAPI/commit/cc2b67d1c5f93dd62c934080c11607a2e15c5100
+
+- Fix EdgeBinding and AuxGraph
+  https://github.com/NCATSTranslator/ReasonerAPI/commit/6d5bfdb7cff85a216df3830fce36a63db22976d3
+
+- Set_interpretation and is_set changes
+  https://github.com/NCATSTranslator/ReasonerAPI/pull/475/files
+
+- Add bypass_cache
+  https://github.com/NCATSTranslator/ReasonerAPI/pull/473/files
+
+- Clarify minItems 1 for Attributes
+  https://github.com/NCATSTranslator/ReasonerAPI/pull/472/files
+
+- Clarify NodeBinding
+  https://github.com/NCATSTranslator/ReasonerAPI/pull/468/files
+
+- Make Message.Results minItems 0
+  https://github.com/NCATSTranslator/ReasonerAPI/pull/464/files
+
+- Make logs minItems: 1
+  https://github.com/NCATSTranslator/ReasonerAPI/pull/466/files
+
+- PENDING: Clarify Result
+  Not yet merged. Abrar checking on a potential snag
+  https://github.com/NCATSTranslator/ReasonerAPI/pull/467/files
+
+Documentation updates:
+
+- Update retrieval_provenance_specification
+  https://github.com/NCATSTranslator/ReasonerAPI/commit/78dafcf07f33dc0511e8a18c7f801fd68226d73e
+  https://github.com/NCATSTranslator/ReasonerAPI/commit/4d3e457b7e46425548cf855562127e67de2757e5
+
+- Update Update supporting_publications_specification
+  https://github.com/NCATSTranslator/ReasonerAPI/commit/b856d79c4df1fe2dbba937ddb339019958cb1150
+
+Minor updates during the beta phase:
+
+- Pending
+
+
+
+
+
+
+
+
+
 # Change Log TRAPI 1.3 (2022-09-01) -> 1.4-beta (2023-03-23)
 
 https://github.com/NCATSTranslator/ReasonerAPI/compare/v1.3.0...1.4
