@@ -263,7 +263,9 @@ components:
       type: object
       properties:
         message:
-          $ref: '#/components/schemas/Message'
+          oneOf:
+            - $ref: '#/components/schemas/Message'
+          nullable: false
           description: >-
             The query Message is a serialization of the user request. Content
             of the Message object depends on the intended TRAPI operation. For
@@ -287,6 +289,14 @@ components:
             purpose of this optional field is to aid in the tracking of
             the source of queries for development and issue resolution.
           nullable: true
+        bypass_cache:
+          type: boolean
+          default: false
+          description: >-
+            Set to true in order to request that the agent obtain
+            fresh information from its sources in all cases where
+            it has a viable choice between requesting fresh information
+            in real time and using cached information.
       additionalProperties: true
       required:
         - message
@@ -299,6 +309,7 @@ components:
       properties:
         callback:
           type: string
+          nullable: false
           format: uri
           pattern: ^https?://
           description: >-
@@ -311,7 +322,9 @@ components:
             does not succeed, the server SHOULD retry the POST at least
             once.
         message:
-          $ref: '#/components/schemas/Message'
+          oneOf:
+            - $ref: '#/components/schemas/Message'
+          nullable: false
           description: >-
             The query Message is a serialization of the user request. Content
             of the Message object depends on the intended TRAPI operation. For
@@ -335,6 +348,14 @@ components:
             purpose of this optional field is to aid in the tracking of
             the source of queries for development and issue resolution.
           nullable: true
+        bypass_cache:
+          type: boolean
+          default: false
+          description: >-
+            Set to true in order to request that the agent obtain
+            fresh information from its sources in all cases where
+            it has a viable choice between requesting fresh information
+            in real time and using cached information.
       additionalProperties: true
       required:
         - callback
@@ -400,6 +421,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/LogEntry'
+          minItems: 1
           nullable: false
         response_url:
           description: >-
@@ -427,7 +449,9 @@ components:
           description: >-
             Contains the knowledge of the response (query graph, knowledge
             graph, and results).
-          $ref: '#/components/schemas/Message'
+          oneOf:
+            - $ref: '#/components/schemas/Message'
+          nullable: false
         status:
           description: >-
             One of a standardized set of short codes,
@@ -448,7 +472,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/LogEntry'
-          nullable: true
+          minItems: 0
+          nullable: false
         workflow:
           description: List of workflow steps that were executed.
           oneOf:
@@ -458,10 +483,12 @@ components:
           type: string
           example: 1.4.0
           description: Version label of the TRAPI schema used in this document
+          nullable: true
         biolink_version:
           type: string
           example: 3.1.2
           description: Version label of the Biolink model used in this document
+          nullable: true
       additionalProperties: true
       required:
         - message
@@ -481,11 +508,16 @@ components:
           description: >-
             List of all returned Result objects for the query posed.
             The list SHOULD NOT be assumed to be ordered. The 'score' property,
-             if present, MAY be used to infer result rankings.
+            if present, MAY be used to infer result rankings. If Results are
+            not expected (such as for a query Message), this property SHOULD
+            be null or absent. If Results are expected (such as for a response
+            Message) and no Results are available, this property SHOULD be an
+            array with 0 Results in it.
           type: array
           items:
             $ref: '#/components/schemas/Result'
           nullable: true
+          minItems: 0
         query_graph:
           description: >-
             QueryGraph object that contains a serialization of a query in the
@@ -581,6 +613,8 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/NodeBinding'
+            minItems: 1
+          nullable: false 
         analyses:
           type: array
           description: >-
@@ -588,6 +622,8 @@ components:
             See below for Analysis components.
           items:
             $ref: '#/components/schemas/Analysis'
+          minItems: 0
+          nullable: false 
       additionalProperties: true
       required:
         - node_bindings
@@ -603,7 +639,9 @@ components:
           Binding must bind directly to node in the original Query Graph.
       properties:
         id:
-          $ref: '#/components/schemas/CURIE'
+          oneOf:
+            - $ref: '#/components/schemas/CURIE'
+          nullable: false
           description: >-
             The CURIE of a Node within the Knowledge Graph.
         query_id:
@@ -629,10 +667,12 @@ components:
             result.
           items:
             $ref: '#/components/schemas/Attribute'
-          nullable: true
+          minItems: 0
+          nullable: false
       additionalProperties: true
       required:
         - id
+        - attributes
     Analysis:
       type: object
       description: >-
@@ -710,6 +750,7 @@ components:
         id:
           type: string
           description: The key identifier of a specific KnowledgeGraph Edge.
+          nullable: false
         attributes:
           type: array
           description: >-
@@ -719,10 +760,12 @@ components:
             result.
           items:
             $ref: '#/components/schemas/Attribute'
-          nullable: true
+          minItems: 0
+          nullable: false
       additionalProperties: true
       required:
         - id
+        - attributes
     AuxiliaryGraph:
       type: object
       description: >-
@@ -749,10 +792,12 @@ components:
             Attributes of the Auxiliary Graph
           items:
             $ref: '#/components/schemas/Attribute'
-          nullable: true
+          minItems: 0
+          nullable: false
       additionalProperties: true
       required:
         - edges
+        - attributes
     KnowledgeGraph:
       type: object
       description: >-
@@ -833,20 +878,22 @@ components:
             $ref: '#/components/schemas/BiolinkEntity'
           minItems: 1
           nullable: true
-        is_set:
-          type: boolean
+        set_interpretation:
+          type: string
           description: >-
-            Boolean that if set to true, indicates that this QNode MAY have
-            multiple KnowledgeGraph Nodes bound to it within each Result.
-            The nodes in a set should be considered as a set of independent
-            nodes, rather than a set of dependent nodes, i.e., the answer
-            would still be valid if the nodes in the set were instead returned
-            individually. Multiple QNodes may have is_set=True. If a QNode
-            (n1) with is_set=True is connected to a QNode (n2) with
-            is_set=False, each n1 must be connected to n2. If a QNode (n1)
-            with is_set=True is connected to a QNode (n2) with is_set=True,
-            each n1 must be connected to at least one n2.
-          default: false
+            Indicates how multiple CURIEs in the ids property MUST be
+            interpreted. BATCH indicates that the query is intended to be
+            a batch query and each CURIE is treated independently. ALL means
+            that all specified CURIES MUST appear in each Result.
+            MANY means that member CURIEs MUST form one or more
+            sets in the Results, and sets with more members are generally
+            considered more desirable that sets with fewer members.
+            If this property is missing or null, the default is BATCH.
+          enum:
+            - BATCH
+            - ALL
+            - MANY
+          nullable: true
         constraints:
           type: array
           description: >-
@@ -952,13 +999,25 @@ components:
             categories should also be avoided.
           items:
             $ref: '#/components/schemas/BiolinkEntity'
-          nullable: true
+          minItems: 1
+          nullable: false
         attributes:
           type: array
           description: A list of attributes describing the node
           items:
             $ref: '#/components/schemas/Attribute'
-          nullable: true
+          minItems: 0
+          nullable: false
+        is_set:
+          type: boolean
+          description: >-
+            Indicates that the node represents a set of entities.
+            If this property is missing or null, it is assumed to be
+            false.
+          nullable: true        
+      required:
+        - categories
+        - attributes
       additionalProperties: false
     Attribute:
       type: object
