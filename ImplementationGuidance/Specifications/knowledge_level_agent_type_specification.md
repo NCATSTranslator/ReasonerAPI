@@ -24,7 +24,7 @@ A short term implementation, uses a single `knowledge_type` property to capture 
 - `predicted`: statements generated computationally through inference over less direct forms of evidence (without human intervention or review)
 - `text_mined`: statements extracted from published text by NLP agents (without human intervention or review)
 - `correlation`: statistical associations calculated between variables in a clinical or omics dataset, by an automated analysis pipeline
-- observed`: edge reports a phenomenon that was reported/observed to have occurred (and possibly some quantification. e.g. how many times, at what frequency)
+- `observed`: edge reports a phenomenon that was reported/observed to have occurred (and possibly some quantification. e.g. how many times, at what frequency)
 - `not provided`: knowledge level may not fit into the categories above, or is not provided/able to be determined.
 - `mixed`: used for sources that might provide edges with different knowledge levels, e.g. correlations in addition to curated Edges - set tag to Curated, unless predicate rules override
 
