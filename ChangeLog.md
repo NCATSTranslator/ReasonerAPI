@@ -41,6 +41,7 @@ https://github.com/NCATSTranslator/ReasonerAPI/compare/v1.4.0...1.5
 
 - Add bypass_cache
   https://github.com/NCATSTranslator/ReasonerAPI/pull/473/files
+  Implementation note: bypass_cache MUST be passed down to downstream queries: ARS -> ARAs -> KP2 -> NodeNorm
 
 - Clarify minItems 1 for Attributes
   https://github.com/NCATSTranslator/ReasonerAPI/pull/472/files
