@@ -296,7 +296,9 @@ components:
             Set to true in order to request that the agent obtain
             fresh information from its sources in all cases where
             it has a viable choice between requesting fresh information
-            in real time and using cached information.
+            in real time and using cached information. The agent
+            receiving this flag MUST also include it in TRAPI sent to
+            downstream sources (e.g., ARS -> ARAs -> KPs -> NodeNorm).
       additionalProperties: true
       required:
         - message
@@ -355,7 +357,9 @@ components:
             Set to true in order to request that the agent obtain
             fresh information from its sources in all cases where
             it has a viable choice between requesting fresh information
-            in real time and using cached information.
+            in real time and using cached information. The agent
+            receiving this flag MUST also include it in TRAPI sent to
+            downstream sources (e.g., ARS -> ARAs -> KPs -> NodeNorm).
       additionalProperties: true
       required:
         - callback
