@@ -298,7 +298,7 @@ components:
             it has a viable choice between requesting fresh information
             in real time and using cached information. The agent
             receiving this flag MUST also include it in TRAPI sent to
-            downstream sources (e.g., ARS -> ARAs -> KPs -> NodeNorm).
+            downstream sources (e.g., ARS -> ARAs -> KPs).
       additionalProperties: true
       required:
         - message
@@ -359,7 +359,7 @@ components:
             it has a viable choice between requesting fresh information
             in real time and using cached information. The agent
             receiving this flag MUST also include it in TRAPI sent to
-            downstream sources (e.g., ARS -> ARAs -> KPs -> NodeNorm).
+            downstream sources (e.g., ARS -> ARAs -> KPs).
       additionalProperties: true
       required:
         - callback
