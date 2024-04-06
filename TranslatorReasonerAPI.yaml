@@ -899,16 +899,18 @@ components:
             - MANY
           nullable: true
         set_id:
-          $ref: '#/components/schemas/CURIE'
           description: >-
-            A CURIE-based identifier for a set that is defined as the QNode. A   
-            set id MUST be created by the system that defines the queried set, 
-            whenever the set_interpretation value is 'MANY' or 'ALL'. A set id 
+            A CURIE-based identifier for a QNode that is defined as a set. A   
+            set_id MUST be created by the system that defines the queried set, 
+            whenever the set_interpretation value is 'MANY' or 'ALL'. A set_id 
             MUST NOT be created when the set_interpretation value is 'BATCH'. 
             Any form/syntax and method for minting curie-based ids for sets can 
             be used, including UUIDs or bespoke prefixes and strings. Downstream
-            systems MUST re-use the original set ids as possible in the messages  
+            systems MUST re-use the original set_id as possible in the messages  
             they create/send, to facilitate any required merging operations.
+          nullable: true
+          oneOf:
+            - $ref: '#/components/schemas/CURIE'
         constraints:
           type: array
           description: >-
