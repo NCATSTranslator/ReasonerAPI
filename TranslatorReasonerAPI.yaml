@@ -870,7 +870,10 @@ components:
             $ref: '#/components/schemas/CURIE'
           minItems: 1
           example: [OMIM:603903]
-          description: CURIE identifier for this node
+          description: >-
+            A single CURIE identifier, or list of identifiers, for this node.
+            The 'set_interpretation' field indicates how to treat a list
+            of identifiers when executing a query.
           nullable: true
         categories:
           type: array
