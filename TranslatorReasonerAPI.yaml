@@ -873,7 +873,7 @@ components:
           description: >-
             A CURIE identifier (or list of identifiers) for this node. 
             The 'ids' field will hold a list of CURIEs only in the case of a
-            BATCH set_interpretation, where each CURIE is to be queried 
+            BATCH set_interpretation, where each CURIE is queried 
             separately. If a list of queried CURIEs is to be considered as a  
             set (as under a MANY or ALL set_interpretation), the 'ids' field 
             will hold a single id representing this set, and the individual members 
