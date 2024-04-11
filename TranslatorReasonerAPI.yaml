@@ -874,9 +874,9 @@ components:
             A CURIE identifier (or list of identifiers) for this node. 
             The 'ids' field will hold a list of CURIEs only in the case of a
             BATCH set_interpretation, where each CURIE is to be queried 
-            separately. If a set of queried CURIEs is to be considered as a  
-            set, as under a MANY or ALL set_interpretation, the 'ids' field 
-            will hold a single id representing this set. The individual members 
+            separately. If a list of queried CURIEs is to be considered as a  
+            set (as under a MANY or ALL set_interpretation), the 'ids' field 
+            will hold a single id representing this set, and the individual members 
             of this set will be captured in a separate 'member_ids' field. 
             Note that the set id MUST be created as a UUID by the system that 
             defines the queried set, using a centralized nodenorm service. 
