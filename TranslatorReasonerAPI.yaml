@@ -869,7 +869,7 @@ components:
           items:
             $ref: '#/components/schemas/CURIE'
           minItems: 1
-          example: [OMIM:603903]
+          example: ["OMIM:603903"]
           description: >-
             A CURIE identifier (or list of identifiers) for this node. 
             The 'ids' field will hold a list of CURIEs only in the case of a
@@ -920,7 +920,7 @@ components:
             of BATCH.
           nullable: true
           items:
-            - $ref: '#/components/schemas/CURIE'
+            $ref: '#/components/schemas/CURIE'
         constraints:
           type: array
           description: >-
@@ -1588,7 +1588,7 @@ components:
             an Edge provided by the ARAGORN ARA can expressing knowledge it
             retrieved from both the automat-mychem-info and molepro KPs,
             which both provided it with records of this single fact.
-          example: [infores:automat-mychem-info, infores:molepro]
+          example: ["infores:automat-mychem-info", "infores:molepro"]
         source_record_urls:
           type: array
           nullable: true
