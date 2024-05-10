@@ -920,7 +920,7 @@ components:
             of BATCH.
           nullable: true
           items:
-            - $ref: '#/components/schemas/CURIE'
+            $ref: '#/components/schemas/CURIE'
         constraints:
           type: array
           description: >-
