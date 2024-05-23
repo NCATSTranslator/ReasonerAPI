@@ -23,6 +23,7 @@ info:
         production/x-translator/
   x-trapi:
     version: 1.5.0
+    multicuriequery: REPLACE-WITH-true-IF-multicurie-queries-ARE-IMPLEMENTED-ELSE-false
     asyncquery: REPLACE-WITH-true-IF-/asyncquery-IS-IMPLEMENTED-ELSE-false
     operations:
       - LIST-ALL-SUPPORTED-OPERATION-IDS-HERE-OR-REMOVE-THIS-SECTION
