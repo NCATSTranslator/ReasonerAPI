@@ -1,6 +1,21 @@
-# Change Log TRAPI 1.4.0 (2023-06-23) -> 1.5-beta (2023-03-01)
+# Change Log TRAPI 1.4.0 (2023-06-23) -> 1.5.0 (2023-05-26)
 
 https://github.com/NCATSTranslator/ReasonerAPI/compare/v1.4.0...1.5
+  
+- Add x-trapi pathfinderquery: true/false
+  https://github.com/NCATSTranslator/ReasonerAPI/pull/487/files
+  
+- Add x-trapi multicuriequery: true/false
+  https://github.com/NCATSTranslator/ReasonerAPI/pull/488/files
+  
+- Fix minor syntax errors
+  https://github.com/NCATSTranslator/ReasonerAPI/pull/485/files
+  
+- Update knowledge_level_agent_type_specification.md
+  https://github.com/NCATSTranslator/ReasonerAPI/pull/486/files
+  
+- Add QNode.member_ids
+  https://github.com/NCATSTranslator/ReasonerAPI/pull/481/files
   
 - Change workflow schema to https and version 1.3.5
   https://github.com/NCATSTranslator/ReasonerAPI/commit/aeddb4323ed9fd5aead5986c5e5ffbab167e6524
