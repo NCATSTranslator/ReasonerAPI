@@ -24,6 +24,7 @@ info:
   x-trapi:
     version: 1.5.0
     asyncquery: REPLACE-WITH-true-IF-/asyncquery-IS-IMPLEMENTED-ELSE-false
+    pathfinderquery: REPLACE-WITH-true-IF-pathfinder-queries-ARE-IMPLEMENTED-ELSE-false
     operations:
       - LIST-ALL-SUPPORTED-OPERATION-IDS-HERE-OR-REMOVE-THIS-SECTION
     batch_size_limit: ADD-BATCH-SIZE-LIMIT-OR-REMOVE-IF-NO-LIMIT
