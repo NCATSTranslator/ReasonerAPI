@@ -1421,7 +1421,7 @@ components:
                 The list of values that are possible for this qualifier.
           items:
             type: string
-            example: [expression, activity, abundance, degradation]
+          example: [expression, activity, abundance, degradation]
       required:
         - qualifier_type_id
     MetaAttribute:
