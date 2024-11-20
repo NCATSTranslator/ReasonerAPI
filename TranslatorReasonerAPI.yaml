@@ -1101,6 +1101,8 @@ components:
             about how a particular Information Resource served
             as a source from which the knowledge expressed in an Edge,
             or data used to generate this knowledge, was retrieved.
+            Every Edge must have at least one RetrievalSource object
+            in this sources list with resource_role = 'primary_knowledge_source'.
           items:
             $ref: '#/components/schemas/RetrievalSource'
           minItems: 1
@@ -1313,6 +1315,18 @@ components:
             correctly.
           example: 'biolink:ChemicalToGeneAssociation'
           $ref: '#/components/schemas/BiolinkEntity'
+        sources:
+          type: array
+          description: >-
+            A list of RetrievalSource objects that provide information
+            about how a particular Information Resource served
+            as a source from which the knowledge expressed in an Edge,
+            or data used to generate this knowledge, was retrieved.
+            Every MetaEdge must have at least one RetrievalSource object
+            in this sources list with resource_role = 'primary_knowledge_source'.
+          items:
+            $ref: '#/components/schemas/RetrievalSource'
+          nullable: true
       required:
         - subject
         - predicate
