@@ -716,14 +716,14 @@ components:
             items:
               $ref: '#/components/schemas/EdgeBinding'
         path_bindings:
-          additionalProperties:
-            items:
-              $ref: '#/components/schemas/PathBinding'
-            type: array
+          type: object
           description: >-
             The dictionary of input Query Graph paths to Analysis paths, specifically only
             for pathfinder queries.
-          type: object
+          additionalProperties:
+            type: array
+            items:
+              $ref: '#/components/schemas/PathBinding'
         support_graphs:
           type: array
           description: >-
@@ -781,27 +781,26 @@ components:
         - id
         - attributes
     PathBinding:
-      additionalProperties: true
+      type: object
       description: >-
         A instance of PathBinding is a single binding of an input QueryGraph path
         (the key to this object) with the AuxiliaryGraph id containing a list of
         edges in the path.
       properties:
         id:
-          description: The key identifier of a specific auxiliary graph.
           type: string
+          description: The key identifier of a specific auxiliary graph.
         attributes:
+          type: array
           description: >-
             A list of attributes providing further information about the path
             binding.
           items:
             $ref: '#/components/schemas/Attribute'
           nullable: true
-          type: array
+      additionalProperties: true
       required:
-      - id
-      title: PathBinding
-      type: object
+        - id
     AuxiliaryGraph:
       type: object
       description: >-
@@ -887,14 +886,14 @@ components:
           additionalProperties:
             $ref: '#/components/schemas/QEdge'
         paths:
-          additionalProperties:
-            $ref: '#/components/schemas/QPath'
+          type: object
           description: >-
             The QueryGraph path specification, used only for pathfinder type
             queries. The keys of this map are unique path identifiers and the
             corresponding values include the constraints on bound paths, in
             addition to specifying the subject, object, and intermediate QNodes.
-          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/QPath'
       additionalProperties: true
       required:
         - nodes
@@ -1047,32 +1046,33 @@ components:
         - subject
         - object
     QPath:
-      additionalProperties: true
+      type: object
       description: >-
         A path in the QueryGraph used for pathfinder queries only, flowing from
         subject to intermediate nodes, if any, to object.
       properties:
         subject:
+          type: string
           description: >-
             Corresponds to the map key identifier of the subject concept node for
             the start of the queried path.
           example: n0
-          type: string
         object:
+          type: string
           description: >-
             Corresponds to the map key identifier of the object concept node for
             the end of the queried path.
           example: n1
-          type: string
         intermediate_nodes:
-          default: []
+          type: array
           description: >-
             An ordered list of intermediate nodes, if any, in the direction of 
             subject to object in the query path.
           items:
             type: string
-          type: array
+          default: []
         predicates:
+          type: array
           description: >-
             These should be Biolink Model predicates and are allowed to be of type
             'abstract' or 'mixin' (only in QGraphs!). Use of 'deprecated'
@@ -1081,22 +1081,20 @@ components:
             $ref: '#/components/schemas/BiolinkPredicate'
           minItems: 1
           nullable: true
-          type: array
         attribute_constraints:
-          default: []
+          type: array
           description: >-
             A list of attribute contraints applied to a query edge. If there are
             multiple items, they must all be true (equivalent to AND)
           items:
             $ref: '#/components/schemas/AttributeConstraint'
-          type: array
+          default: []
+      additionalProperties: true
       required:
-      - intermediate_nodes
-      - object
-      - predicates
-      - subject
-      title: QPath
-      type: object
+        - intermediate_nodes
+        - object
+        - predicates
+        - subject
     Node:
       type: object
       description: >-
