@@ -529,7 +529,8 @@ components:
             QueryGraph object that contains a serialization of a query in the
             form of a graph
           oneOf:
-            - $ref: '#/components/schemas/QueryGraph'
+            - $ref: '#/components/schemas/RegularQueryGraph'
+            - $ref: '#/components/schemas/PathfinderQueryGraph'
           nullable: true
         knowledge_graph:
           description: >-
@@ -882,7 +883,7 @@ components:
       required:
         - nodes
         - edges
-    QueryGraph:
+    SharedQueryGraphProperties:
       type: object
       description: >-
         A graph representing a biomedical question. It serves as a template for
@@ -897,27 +898,47 @@ components:
             on bound nodes.
           additionalProperties:
             $ref: '#/components/schemas/QNode'
-        edges:
-          type: object
-          description: >-
-            The edge specifications. The keys of this map are unique edge
-            identifiers and the corresponding values include the constraints
-            on bound edges, in addition to specifying the subject and object
-            QNodes.
-          additionalProperties:
-            $ref: '#/components/schemas/QEdge'
-        paths:
-          type: object
-          description: >-
-            The QueryGraph path specification, used only for pathfinder type
-            queries. The keys of this map are unique path identifiers and the
-            corresponding values include the constraints on bound paths, in
-            addition to specifying the subject, object, and intermediate QNodes.
-          additionalProperties:
-            $ref: '#/components/schemas/QPath'
       additionalProperties: true
       required:
         - nodes
+    RegularQueryGraph:
+      allOf: 
+        - $ref: '#/components/schemas/SharedQueryGraphProperties'
+        - type: object
+          description: >-
+            A non-Pathfinder query SHOULD have edges following the QEdge schema
+            and SHOULD NOT have paths
+          required: 
+            - edges
+          properties:
+            edges:
+              type: object
+              description: >-
+                The edge specifications. The keys of this map are unique edge
+                identifiers and the corresponding values include the constraints
+                on bound edges, in addition to specifying the subject and object
+                QNodes.
+              additionalProperties:
+                $ref: '#/components/schemas/QEdge'
+    PathfinderQueryGraph:
+      allOf: 
+        - $ref: '#/components/schemas/SharedQueryGraphProperties'
+        - type: object
+          description: >-
+            A Pathfinder query SHOULD have paths following the QPath schema
+            and SHOULD NOT have edges
+          required: 
+            - paths
+          properties:
+            paths:
+              type: object
+              description: >-
+                The QueryGraph path specification, used only for pathfinder type
+                queries. The keys of this map are unique path identifiers and the
+                corresponding values include the constraints on bound paths, in
+                addition to specifying the subject, object, and intermediate QNodes.
+              additionalProperties:
+                $ref: '#/components/schemas/QPath'
     QNode:
       type: object
       description: A node in the QueryGraph used to represent an entity in a
