@@ -627,7 +627,9 @@ components:
             The list of all Analysis components that contribute to the result.
             See below for Analysis components.
           items:
-            $ref: '#/components/schemas/Analysis'
+            oneOf:
+              - $ref: '#/components/schemas/RegularAnalysis'
+              - $ref: '#/components/schemas/PathfinderAnalysis'
           minItems: 0
           nullable: false 
       additionalProperties: true
@@ -679,7 +681,7 @@ components:
       required:
         - id
         - attributes
-    Analysis:
+    SharedAnalysisProperties:
       type: object
       description: >-
         An analysis is a dictionary that contains information about
@@ -702,28 +704,6 @@ components:
             relevance or confidence of this result relative to others in the
             returned set. Higher MUST be better.
           nullable: true
-        edge_bindings:
-          type: object
-          description: >-
-            The dictionary of input Query Graph to Knowledge Graph edge
-            bindings where the dictionary keys are the key identifiers of the
-            Query Graph edges and the associated values of those keys are
-            instances of EdgeBinding schema type (see below). This value is an
-            array of EdgeBindings since a given query edge may resolve to
-            multiple Knowledge Graph Edges.
-          additionalProperties:
-            type: array
-            items:
-              $ref: '#/components/schemas/EdgeBinding'
-        path_bindings:
-          type: object
-          description: >-
-            The dictionary of input Query Graph paths to Analysis paths, specifically only
-            for pathfinder queries.
-          additionalProperties:
-            type: array
-            items:
-              $ref: '#/components/schemas/PathBinding'
         support_graphs:
           type: array
           description: >-
@@ -750,6 +730,47 @@ components:
       additionalProperties: true
       required:
         - resource_id
+    RegularAnalysis:
+      allOf: 
+        - $ref: '#/components/schemas/SharedAnalysisProperties'
+        - type: object
+          description: >-
+            An analysis for results from a non-Pathfinder query SHOULD have
+            edge_bindings and SHOULD NOT have path_bindings
+          required: 
+            - edge_bindings
+          properties:
+            edge_bindings:
+              type: object
+              description: >-
+                The dictionary of input Query Graph to Knowledge Graph edge
+                bindings where the dictionary keys are the key identifiers of
+                the Query Graph edges and the associated values of those keys
+                are instances of EdgeBinding schema type (see below). This
+                value is an array of EdgeBindings since a given query edge may
+                resolve to multiple Knowledge Graph Edges.
+              additionalProperties:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EdgeBinding'
+    PathfinderAnalysis:
+      allOf: 
+        - $ref: '#/components/schemas/SharedAnalysisProperties'
+        - type: object
+          description: >-
+            An analysis for results from a Pathfinder query SHOULD have
+            path_bindings and SHOULD NOT have edge_bindings
+          required: 
+            - path_bindings
+          properties:
+            path_bindings:
+              additionalProperties:
+                items:
+                  $ref: '#/components/schemas/PathBinding'
+                type: array
+              description: >-
+                The dictionary of input Query Graph paths to Analysis paths, specifically only for pathfinder queries.
+              type: object
     EdgeBinding:
       type: object
       description: >-
