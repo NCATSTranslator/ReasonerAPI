@@ -1123,14 +1123,6 @@ components:
             $ref: '#/components/schemas/BiolinkPredicate'
           minItems: 1
           nullable: true
-        attribute_constraints:
-          type: array
-          description: >-
-            A list of attribute contraints applied to a query edge. If there are
-            multiple items, they must all be true (equivalent to AND)
-          items:
-            $ref: '#/components/schemas/AttributeConstraint'
-          default: []
       additionalProperties: true
       required:
         - intermediate_nodes
