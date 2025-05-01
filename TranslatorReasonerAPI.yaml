@@ -529,7 +529,7 @@ components:
             QueryGraph object that contains a serialization of a query in the
             form of a graph
           oneOf:
-            - $ref: '#/components/schemas/RegularQueryGraph'
+            - $ref: '#/components/schemas/QueryGraph'
             - $ref: '#/components/schemas/PathfinderQueryGraph'
           nullable: true
         knowledge_graph:
@@ -629,7 +629,7 @@ components:
             See below for Analysis components.
           items:
             oneOf:
-              - $ref: '#/components/schemas/RegularAnalysis'
+              - $ref: '#/components/schemas/Analysis'
               - $ref: '#/components/schemas/PathfinderAnalysis'
           minItems: 0
           nullable: false 
@@ -682,7 +682,7 @@ components:
       required:
         - id
         - attributes
-    SharedAnalysisProperties:
+    BaseAnalysis:
       type: object
       description: >-
         An analysis is a dictionary that contains information about
@@ -731,9 +731,9 @@ components:
       additionalProperties: true
       required:
         - resource_id
-    RegularAnalysis:
+    Analysis:
       allOf: 
-        - $ref: '#/components/schemas/SharedAnalysisProperties'
+        - $ref: '#/components/schemas/BaseAnalysis'
         - type: object
           description: >-
             An analysis for results from a non-Pathfinder query SHOULD have
@@ -756,7 +756,7 @@ components:
                   $ref: '#/components/schemas/EdgeBinding'
     PathfinderAnalysis:
       allOf: 
-        - $ref: '#/components/schemas/SharedAnalysisProperties'
+        - $ref: '#/components/schemas/BaseAnalysis'
         - type: object
           description: >-
             An analysis for results from a Pathfinder query SHOULD have
@@ -883,7 +883,7 @@ components:
       required:
         - nodes
         - edges
-    SharedQueryGraphProperties:
+    BaseQueryGraph:
       type: object
       description: >-
         A graph representing a biomedical question. It serves as a template for
@@ -901,9 +901,9 @@ components:
       additionalProperties: true
       required:
         - nodes
-    RegularQueryGraph:
+    QueryGraph:
       allOf: 
-        - $ref: '#/components/schemas/SharedQueryGraphProperties'
+        - $ref: '#/components/schemas/BaseQueryGraph'
         - type: object
           description: >-
             A non-Pathfinder query SHOULD have edges following the QEdge schema
@@ -922,7 +922,7 @@ components:
                 $ref: '#/components/schemas/QEdge'
     PathfinderQueryGraph:
       allOf: 
-        - $ref: '#/components/schemas/SharedQueryGraphProperties'
+        - $ref: '#/components/schemas/BaseQueryGraph'
         - type: object
           description: >-
             A Pathfinder query SHOULD have paths following the QPath schema
