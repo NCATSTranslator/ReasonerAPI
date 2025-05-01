@@ -1105,14 +1105,6 @@ components:
             Corresponds to the map key identifier of the object concept node for
             the end of the queried path.
           example: n1
-        intermediate_nodes:
-          type: array
-          description: >-
-            An ordered list of intermediate nodes, if any, in the direction of 
-            subject to object in the query path.
-          items:
-            type: string
-          default: []
         predicates:
           type: array
           description: >-
@@ -1123,12 +1115,26 @@ components:
             $ref: '#/components/schemas/BiolinkPredicate'
           minItems: 1
           nullable: true
+        constraints:
+          $ref: '#/components/schemas/PathConstraint'
       additionalProperties: true
       required:
-        - intermediate_nodes
         - object
         - predicates
         - subject
+    PathConstraint:
+      type: object
+      properties:
+        intermediate_categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/BiolinkEntity'
+          minItems: 1
+          maxItems: 1
+          nullable: true
+      additionalProperties: true
+      required:
+        - intermediate_categories
     Node:
       type: object
       description: >-
