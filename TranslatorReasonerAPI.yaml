@@ -530,6 +530,7 @@ components:
             form of a graph
           oneOf:
             - $ref: '#/components/schemas/QueryGraph'
+            - $ref: '#/components/schemas/PathfinderQueryGraph'
           nullable: true
         knowledge_graph:
           description: >-
@@ -627,7 +628,9 @@ components:
             The list of all Analysis components that contribute to the result.
             See below for Analysis components.
           items:
-            $ref: '#/components/schemas/Analysis'
+            oneOf:
+              - $ref: '#/components/schemas/Analysis'
+              - $ref: '#/components/schemas/PathfinderAnalysis'
           minItems: 0
           nullable: false 
       additionalProperties: true
@@ -679,7 +682,7 @@ components:
       required:
         - id
         - attributes
-    Analysis:
+    BaseAnalysis:
       type: object
       description: >-
         An analysis is a dictionary that contains information about
@@ -702,27 +705,6 @@ components:
             relevance or confidence of this result relative to others in the
             returned set. Higher MUST be better.
           nullable: true
-        edge_bindings:
-          type: object
-          description: >-
-            The dictionary of input Query Graph to Knowledge Graph edge
-            bindings where the dictionary keys are the key identifiers of the
-            Query Graph edges and the associated values of those keys are
-            instances of EdgeBinding schema type (see below). This value is an
-            array of EdgeBindings since a given query edge may resolve to
-            multiple Knowledge Graph Edges.
-          additionalProperties:
-            type: array
-            items:
-              $ref: '#/components/schemas/EdgeBinding'
-        path_bindings:
-          additionalProperties:
-            items:
-              $ref: '#/components/schemas/PathBinding'
-            type: array
-          description: The dictionary of input Query Graph paths to Analysis paths,
-            specifically only for pathfinder queries.
-          type: object
         support_graphs:
           type: array
           description: >-
@@ -749,6 +731,47 @@ components:
       additionalProperties: true
       required:
         - resource_id
+    Analysis:
+      allOf: 
+        - $ref: '#/components/schemas/BaseAnalysis'
+        - type: object
+          description: >-
+            An analysis for results from a non-Pathfinder query SHOULD have
+            edge_bindings and SHOULD NOT have path_bindings
+          required: 
+            - edge_bindings
+          properties:
+            edge_bindings:
+              type: object
+              description: >-
+                The dictionary of input Query Graph to Knowledge Graph edge
+                bindings where the dictionary keys are the key identifiers of
+                the Query Graph edges and the associated values of those keys
+                are instances of EdgeBinding schema type (see below). This
+                value is an array of EdgeBindings since a given query edge may
+                resolve to multiple Knowledge Graph Edges.
+              additionalProperties:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EdgeBinding'
+    PathfinderAnalysis:
+      allOf: 
+        - $ref: '#/components/schemas/BaseAnalysis'
+        - type: object
+          description: >-
+            An analysis for results from a Pathfinder query SHOULD have
+            path_bindings and SHOULD NOT have edge_bindings
+          required: 
+            - path_bindings
+          properties:
+            path_bindings:
+              additionalProperties:
+                items:
+                  $ref: '#/components/schemas/PathBinding'
+                type: array
+              description: >-
+                The dictionary of input Query Graph paths to Analysis paths, specifically only for pathfinder queries.
+              type: object
     EdgeBinding:
       type: object
       description: >-
@@ -780,25 +803,26 @@ components:
         - id
         - attributes
     PathBinding:
-      additionalProperties: true
-      description: A instance of PathBinding is a single binding of an input Query
-        Graph path (the key to this object) with the auxiary graph id containing
-        a list of edges in the path.
+      type: object
+      description: >-
+        A instance of PathBinding is a single binding of an input QueryGraph path
+        (the key to this object) with the AuxiliaryGraph id containing a list of
+        edges in the path.
       properties:
         id:
-          description: The key identifier of a specific auxiliary graph.
           type: string
+          description: The key identifier of a specific auxiliary graph.
         attributes:
-          description: A list of attributes providing further information about the
-            path binding.
+          type: array
+          description: >-
+            A list of attributes providing further information about the path
+            binding.
           items:
             $ref: '#/components/schemas/Attribute'
           nullable: true
-          type: array
+      additionalProperties: true
       required:
-      - id
-      title: PathBinding
-      type: object
+        - id
     AuxiliaryGraph:
       type: object
       description: >-
@@ -859,7 +883,7 @@ components:
       required:
         - nodes
         - edges
-    QueryGraph:
+    BaseQueryGraph:
       type: object
       description: >-
         A graph representing a biomedical question. It serves as a template for
@@ -874,27 +898,47 @@ components:
             on bound nodes.
           additionalProperties:
             $ref: '#/components/schemas/QNode'
-        edges:
-          type: object
-          description: >-
-            The edge specifications. The keys of this map are unique edge
-            identifiers and the corresponding values include the constraints
-            on bound edges, in addition to specifying the subject and object
-            QNodes.
-          additionalProperties:
-            $ref: '#/components/schemas/QEdge'
-        paths:
-          additionalProperties:
-            $ref: '#/components/schemas/QPath'
-          description: The QueryGraph path specification, used only for pathfinder
-            type queries. The keys of this map are unique path
-            identifiers and the corresponding values include the constraints on bound
-            paths, in addition to specifying the subject, object, and intermediate
-            QNodes.
-          type: object
       additionalProperties: true
       required:
         - nodes
+    QueryGraph:
+      allOf: 
+        - $ref: '#/components/schemas/BaseQueryGraph'
+        - type: object
+          description: >-
+            A non-Pathfinder query SHOULD have edges following the QEdge schema
+            and SHOULD NOT have paths
+          required: 
+            - edges
+          properties:
+            edges:
+              type: object
+              description: >-
+                The edge specifications. The keys of this map are unique edge
+                identifiers and the corresponding values include the constraints
+                on bound edges, in addition to specifying the subject and object
+                QNodes.
+              additionalProperties:
+                $ref: '#/components/schemas/QEdge'
+    PathfinderQueryGraph:
+      allOf: 
+        - $ref: '#/components/schemas/BaseQueryGraph'
+        - type: object
+          description: >-
+            A Pathfinder query SHOULD have paths following the QPath schema
+            and SHOULD NOT have edges
+          required: 
+            - paths
+          properties:
+            paths:
+              type: object
+              description: >-
+                The QueryGraph path specification, used only for pathfinder type
+                queries. The keys of this map are unique path identifiers and the
+                corresponding values include the constraints on bound paths, in
+                addition to specifying the subject, object, and intermediate QNodes.
+              additionalProperties:
+                $ref: '#/components/schemas/QPath'
     QNode:
       type: object
       description: A node in the QueryGraph used to represent an entity in a
@@ -1044,50 +1088,55 @@ components:
         - subject
         - object
     QPath:
-      additionalProperties: true
-      description: A path in the QueryGraph used for pathfinder queries only, flowing
-        from subject to intermediate nodes, if any, to object.
+      type: object
+      description: >-
+        A path in the QueryGraph used for pathfinder queries only, flowing from
+        subject to intermediate nodes, if any, to object.
       properties:
         subject:
-          description: Corresponds to the map key identifier of the subject concept
-            node for the start of the queried path.
+          type: string
+          description: >-
+            Corresponds to the map key identifier of the subject concept node for
+            the start of the queried path.
           example: n0
-          type: string
         object:
-          description: Corresponds to the map key identifier of the object concept
-            node for the end of the queried path.
-          example: n1
           type: string
+          description: >-
+            Corresponds to the map key identifier of the object concept node for
+            the end of the queried path.
+          example: n1
         intermediate_nodes:
-          default: []
-          description: An ordered list of intermediate nodes, if any, in the direction of
+          type: array
+          description: >-
+            An ordered list of intermediate nodes, if any, in the direction of 
             subject to object in the query path.
           items:
             type: string
-          type: array
+          default: []
         predicates:
-          description: These should be Biolink Model predicates and are allowed to
-            be of type 'abstract' or 'mixin' (only in QGraphs!). Use of 'deprecated'
+          type: array
+          description: >-
+            These should be Biolink Model predicates and are allowed to be of type
+            'abstract' or 'mixin' (only in QGraphs!). Use of 'deprecated'
             predicates should be avoided.
           items:
             $ref: '#/components/schemas/BiolinkPredicate'
           minItems: 1
           nullable: true
-          type: array
         attribute_constraints:
-          default: []
-          description: A list of attribute contraints applied to a query edge. If
-            there are multiple items, they must all be true (equivalent to AND)
+          type: array
+          description: >-
+            A list of attribute contraints applied to a query edge. If there are
+            multiple items, they must all be true (equivalent to AND)
           items:
             $ref: '#/components/schemas/AttributeConstraint'
-          type: array
+          default: []
+      additionalProperties: true
       required:
-      - intermediate_nodes
-      - object
-      - predicates
-      - subject
-      title: QPath
-      type: object
+        - intermediate_nodes
+        - object
+        - predicates
+        - subject
     Node:
       type: object
       description: >-
