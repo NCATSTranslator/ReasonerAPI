@@ -1116,7 +1116,14 @@ components:
           minItems: 1
           nullable: true
         constraints:
-          $ref: '#/components/schemas/PathConstraint'
+          type: array
+          description: >-
+            A list of constraints for the QPath.
+          items:
+            $ref: '#/components/schemas/PathConstraint'
+          minItems: 1
+          maxItems: 1
+          nullable: true
       additionalProperties: true
       required:
         - object
