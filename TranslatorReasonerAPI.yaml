@@ -1108,6 +1108,9 @@ components:
         predicates:
           type: array
           description: >-
+            QPath predicates are intended convey what type of paths are desired,
+            NOT a constraint on the types of predicates that may bein result paths.
+            ...Abrar...
             These should be Biolink Model predicates and are allowed to be of type
             'abstract' or 'mixin' (only in QGraphs!). Use of 'deprecated'
             predicates should be avoided.
@@ -1131,6 +1134,8 @@ components:
         - subject
     PathConstraint:
       type: object
+      description: >-
+        ... to be filled in by Abrar
       properties:
         intermediate_categories:
           type: array
@@ -1140,8 +1145,6 @@ components:
           maxItems: 1
           nullable: true
       additionalProperties: true
-      required:
-        - intermediate_categories
     Node:
       type: object
       description: >-
