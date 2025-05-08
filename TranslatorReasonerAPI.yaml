@@ -765,13 +765,13 @@ components:
             - path_bindings
           properties:
             path_bindings:
-              additionalProperties:
-                items:
-                  $ref: '#/components/schemas/PathBinding'
-                type: array
+              type: object
               description: >-
                 The dictionary of input Query Graph paths to Analysis paths, specifically only for pathfinder queries.
-              type: object
+              additionalProperties:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PathBinding'
     EdgeBinding:
       type: object
       description: >-
