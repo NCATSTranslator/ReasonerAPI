@@ -812,14 +812,6 @@ components:
         id:
           type: string
           description: The key identifier of a specific auxiliary graph.
-        attributes:
-          type: array
-          description: >-
-            A list of attributes providing further information about the path
-            binding.
-          items:
-            $ref: '#/components/schemas/Attribute'
-          nullable: true
       additionalProperties: true
       required:
         - id
