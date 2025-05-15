@@ -931,6 +931,8 @@ components:
                 addition to specifying the subject, object, and intermediate QNodes.
               additionalProperties:
                 $ref: '#/components/schemas/QPath'
+              minProperties: 1
+              maxProperties: 1
     QNode:
       type: object
       description: A node in the QueryGraph used to represent an entity in a
