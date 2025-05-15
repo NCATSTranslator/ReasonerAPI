@@ -1124,7 +1124,6 @@ components:
       additionalProperties: true
       required:
         - object
-        - predicates
         - subject
     PathConstraint:
       type: object
