@@ -820,10 +820,10 @@ components:
       type: object
       description: >-
         A single AuxiliaryGraph instance that is used by Knowledge Graph
-        Edges Result Analysis support graphs, and Path Bindings. 
+        Edges, Result Analysis support graphs, and Path Bindings. 
         Edges comprising an Auxiliary Graph are a subset of the 
         Knowledge Graph in the message. Data creators can 
-        create an AuxiliaryGraph to assemble a specific collections
+        create an AuxiliaryGraph to assemble a specific collection
         of edges from the Knowledge Graph into a named graph that can be
         referenced from an Edge as evidence/explanation supporting that Edge,
         from a Result Analysis as information used to generate a score, or 
@@ -833,9 +833,9 @@ components:
           type: array
           description: >-
             List of edges that form the Auxiliary Graph. Each item is a
-            reference to a single Knowledge Graph edge. This list is not
-            ordered, nor is it intended to convey any relationship bwtween 
-            the edges that form this Auxiliary Graph.
+            reference to a single Knowledge Graph Edge. This list is not
+            ordered, nor is the order intended to convey any relationship 
+            between the edges that form this Auxiliary Graph.
           items:
             type: string
           nullable: false
@@ -1090,7 +1090,8 @@ components:
       type: object
       description: >-
         A path in the QueryGraph used for pathfinder queries. Both subject and object
-        MUAT be pinned, and paths returned which bind to this QPATH can represent some
+        MUST reference QNodes with a specified ids.
+        Paths returned that bind to this QPath can represent some
         relationship between subject and object.
       properties:
         subject:
@@ -1109,9 +1110,9 @@ components:
           type: array
           description: >-
             QPath predicates are intended to convey what type of paths are desired,
-            NOT a constraint on the types of predicates that may bein result paths.
+            NOT a constraint on the types of predicates that may be in result paths.
             If no predicate is listed, the ARA SHOULD find paths such that the
-            relationship represented by the path is a "related_to" relation.
+            relationship represented by the path is a "related_to" relationship.
             These should be Biolink Model predicates and are allowed to be of type
             'abstract' or 'mixin' (only in QGraphs!). Use of 'deprecated'
             predicates should be avoided.
@@ -1142,10 +1143,10 @@ components:
         intermediate_categories:
           type: array
           description: >-
-            A list of categories by which to constrain paths returned. If multiple
-            categories are listed, it should be interpreted as an AND relationship.
-            Each path returned by ARAs  MUST contain at least one node of each
-            category listed.
+            A list of Biolink model categories by which to constrain paths returned.
+            If multiple categories are listed, it should be interpreted as an AND
+            relationship. Each path returned by ARAs MUST contain at least one node
+            of each category listed.
           items:
             $ref: '#/components/schemas/BiolinkEntity'
           minItems: 1
