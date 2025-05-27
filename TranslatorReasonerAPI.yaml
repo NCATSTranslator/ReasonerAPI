@@ -1090,7 +1090,7 @@ components:
       type: object
       description: >-
         A path in the QueryGraph used for pathfinder queries. Both subject and object
-        MUST reference QNodes with a specified ids.
+        MUST reference QNodes that have a CURIE in their ids field.
         Paths returned that bind to this QPath can represent some
         relationship between subject and object.
       properties:
