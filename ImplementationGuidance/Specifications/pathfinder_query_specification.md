@@ -1,6 +1,6 @@
 # Pathfinder Implementation Guide
 
-The following guide is intended to provide information on how to generate pathfinder queries, as well as general rules on how pathfinder queries should be interpreted. This guide also will provde information on how to interpret the results returned by those queries.
+The following guide is intended to provide information on how to generate pathfinder queries, as well as general rules on how pathfinder queries should be interpreted. This guide also will provide information on how to interpret the results returned by those queries.
 
 ## General Message Structure
 
@@ -151,7 +151,7 @@ Using the knowledge graph above, we can construct the auxiliary graphs shown in 
 }
 ```
 
-As shown, each path that is generated has a distinct list of nodes. Additionally, no auxiliary graph has any brainching paths included. Even though a0 and a1 share an intermediate node, since a1 contains a node that a0 does not, they are kept separate. Additionally, a0 also contains two parallel, but not branching, edges between two of its nodes. Also, note that a2 represents the direct lookup edge between Crohn's and Parkinson's. If a lookup edge between the two input nodes exists, this edge should be returned as a path as well. 
+As shown, each path that is generated has a distinct list of nodes. Additionally, no auxiliary graph has any branching paths included. Even though a0 and a1 share an intermediate node, since a1 contains a node that a0 does not, they are kept separate. Additionally, a0 also contains two parallel, but not branching, edges between two of its nodes. Also, note that a2 represents the direct lookup edge between Crohn's and Parkinson's. If a lookup edge between the two input nodes exists, this edge should be returned as a path as well. 
 
 These paths are the ones that would be returned by the unconstrained version of the intial query shown aboce, but running the constrained version as well would return slightly different paths.
 
@@ -174,13 +174,13 @@ These paths are the ones that would be returned by the unconstrained version of 
 }
 ```
 
-Note that a2 is now removed because it did not contain and Gene nodes. Therefore, it is not a valid path for the constrained version of the query.
+Note that a2 is now removed because it did not contain any Gene nodes. Therefore, it is not a valid path for the constrained version of the query.
 
 ## Results
 
-Each individual result is structured similarly as well, with node bindings and and analyses. However, as both input nodes are pinned, and there exist no unpinned nodes in the query graph, that means there is only one single result for each query, contained within the "Results" field of the Message.  This result would have many analyses, each one corresponding to a different path. This follows the same result merging rules used in other query types, where results that contain the same nodes but different analyses are combined into a sinble result, with their analyses concatenated.
+Each individual result is structured similarly as well, with node bindings and and analyses. However, as both input nodes are pinned, and there exist no unpinned nodes in the query graph, that means there is only one single result for each query, contained within the "Results" field of the Message.  This result would have many analyses, each one corresponding to a different path. This follows the same result merging rules used in other query types, where results that contain the same nodes but different analyses are combined into a single result, with their analyses concatenated.
 
-Each analysis no longer contains edge bindings, with no query graph edges to bind to. Instead, this analysus utilizes path bindings to bind to query graph paths. Each path binding binds an auxiliary graph, by id, to a query graph path, similar to how edge bindings bind a knowledge graph edge, by id, to a query graph edge. 
+Each analysis no longer contains edge bindings, with no query graph edges to bind to. Instead, this analysis utilizes path bindings to bind to query graph paths. Each path binding binds an auxiliary graph, by id, to a query graph path, similar to how edge bindings bind a knowledge graph edge, by id, to a query graph edge. 
 
 ```
 "results": [
