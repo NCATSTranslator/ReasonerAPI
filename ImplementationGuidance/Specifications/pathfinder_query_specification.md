@@ -28,7 +28,7 @@ The Query Graph still has a field for nodes, as a traditional query graph would,
         "p0": {
             "subject": "n0",
             "object": "n1",
-            "predicate": "biolink:related_to"
+            "predicates": ["biolink:related_to"]
         }
     }
 }
@@ -308,7 +308,7 @@ Finally, we can put all of these parts of the message together, to create one fi
                 "p0": {
                     "subject": "n0",
                     "object": "n1",
-                    "predicate": "biolink:related_to"
+                    "predicates": ["biolink:related_to"]
                 }
             }
         },
