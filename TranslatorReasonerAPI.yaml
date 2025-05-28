@@ -767,7 +767,8 @@ components:
             path_bindings:
               type: object
               description: >-
-                The dictionary of input QueryGraph paths to Analysis path bindings, specifically only for pathfinder queries. The dictionary keys
+                The dictionary of input QueryGraph paths to Analysis path bindings,
+                specifically only for pathfinder queries. The dictionary keys
                 are the key identifiers of the QueryGraph paths and the
                 associated values are the AuxiliaryGraph ids of the Analysis paths.
                 Each AuxiliaryGraph contains a list of edges in the path, which
