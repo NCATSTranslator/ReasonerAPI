@@ -203,9 +203,7 @@ Each analysis no longer contains edge bindings, with no query graph edges to bin
             {
                 "path_bindings": {
                     "p0": [
-                        {
-                            "id": "a0"
-                        }
+                        "a0"
                     ],
                 },
                 "score": .85
@@ -213,9 +211,7 @@ Each analysis no longer contains edge bindings, with no query graph edges to bin
             {
                 "path_bindings": {
                     "p0": [
-                        {
-                            "id": "a1"
-                        }
+                        "a1"
                     ],
                 },
                 "score": .7
@@ -223,9 +219,7 @@ Each analysis no longer contains edge bindings, with no query graph edges to bin
             {
                 "path_bindings": {
                     "p0": [
-                        {
-                            "id": "a2"
-                        }
+                        "a2"
                     ],
                 },
                 "score": .9
@@ -258,9 +252,7 @@ Once again, just as it was for auxiliary graphs, this is only valid for the unco
             {
                 "path_bindings": {
                     "p0": [
-                        {
-                            "id": "a0"
-                        }
+                        "a0"
                     ],
                 },
                 "score": .85
@@ -268,9 +260,7 @@ Once again, just as it was for auxiliary graphs, this is only valid for the unco
             {
                 "path_bindings": {
                     "p0": [
-                        {
-                            "id": "a1"
-                        }
+                        "a1"
                     ],
                 },
                 "score": .7
@@ -401,9 +391,7 @@ Finally, we can put all of these parts of the message together, to create one fi
                     {
                         "path_bindings": {
                             "p0": [
-                                {
-                                    "id": "a0"
-                                }
+                                "a0"
                             ],
                         },
                         "score": .85
@@ -411,9 +399,7 @@ Finally, we can put all of these parts of the message together, to create one fi
                     {
                         "path_bindings": {
                             "p0": [
-                                {
-                                    "id": "a1"
-                                }
+                                "a1"
                             ],
                         },
                         "score": .7
@@ -421,9 +407,7 @@ Finally, we can put all of these parts of the message together, to create one fi
                     {
                         "path_bindings": {
                             "p0": [
-                                {
-                                    "id": "a2"
-                                }
+                                "a2"
                             ],
                         },
                         "score": .9
@@ -544,9 +528,7 @@ Finally, we can put all of these parts of the message together, to create one fi
                     {
                         "path_bindings": {
                             "p0": [
-                                {
-                                    "id": "a0"
-                                }
+                                "a0"
                             ],
                         },
                         "score": .85
@@ -554,9 +536,7 @@ Finally, we can put all of these parts of the message together, to create one fi
                     {
                         "path_bindings": {
                             "p0": [
-                                {
-                                    "id": "a1"
-                                }
+                                "a1"
                             ],
                         },
                         "score": .7
