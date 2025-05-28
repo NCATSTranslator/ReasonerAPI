@@ -767,7 +767,12 @@ components:
             path_bindings:
               type: object
               description: >-
-                The dictionary of input Query Graph paths to Analysis paths, specifically only for pathfinder queries.
+                The dictionary of input QueryGraph paths to Analysis path bindings,
+                specifically only for pathfinder queries. The dictionary keys
+                are the key identifiers of the QueryGraph paths and the
+                associated values are the AuxiliaryGraph ids of the Analysis paths.
+                Each AuxiliaryGraph contains a list of edges in the path, which
+                does not convey any order of the edges in the path. 
               additionalProperties:
                 type: array
                 items:
@@ -803,19 +808,9 @@ components:
         - id
         - attributes
     PathBinding:
-      type: object
+      type: string
       description: >-
-        A instance of PathBinding is a single binding of an input QueryGraph path
-        (the key to this object) with the AuxiliaryGraph id containing a list of
-        edges in the path. The Auxiliary Graph does not convey any order of edges
-        in the path.
-      properties:
-        id:
-          type: string
-          description: The key identifier of a specific auxiliary graph.
-      additionalProperties: true
-      required:
-        - id
+        The key identifier of a specific auxiliary graph representing a path.
     AuxiliaryGraph:
       type: object
       description: >-
