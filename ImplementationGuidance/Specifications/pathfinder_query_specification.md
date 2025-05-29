@@ -8,7 +8,7 @@ interpret the results they return.
 * Pathfinder QueryGraph(s) do not contain edges, but instead contain Paths.
 * Pathfinder Messages contain a QueryGraph, a KnowledgeGraph, AuxiliaryGraph, 
 and Results.
-* A Path can include constraints, but currently only `intermediate categories` constraints.
+* A Path can include constraints, but currently only `intermediate_categories` constraints.
 * Paths are represented within AuxiliaryGraph and are expected to be linear (A-->B-->C-->D).  
 * No branching Paths, or paths that skip nodes are allowed in AuxiliaryGraph.
 * Paths have a distinct set of Nodes.
@@ -50,7 +50,7 @@ Disease with Parkinson's. All paths returned must connect these two nodes.
 }
 ```
 
-A Path can include constraints.  Currently, the only supported constraint type is `intermediate categories`, 
+A Path can include constraints.  Currently, the only supported constraint type is `intermediate_categories`, 
 which requires that all returned paths contain at least one node matching the specified category.
 In the example below, the intermediate category constraint listed requires that paths have at least one `Gene`
 node between them.
@@ -184,7 +184,7 @@ includes two parallel (but not branching) edges between a pair of nodes.
 Path `a2` represents a direct lookup edge between Crohn’s and Parkinson’s. If such a direct edge exists between the two
 input nodes, it should be included as a valid path.
 
-The Paths shown correspond to the unconstrained version of the initial query. Applying `intermediate category` 
+The Paths shown correspond to the unconstrained version of the initial query. Applying `intermediate_categories` 
 constraints would yield a slightly different set of paths. As show below in the constrained version of the 
 AuxiliaryGraphs, `a2` is  removed because it does not contain any `Gene` nodes. Therefore, it is not a valid Path 
 for the constrained version of the query.
@@ -274,7 +274,7 @@ This is similar to how EdgeBindings bind a KnowledgeGraph Edge, by id, to a Quer
 ]
 ```
 
-This is only valid for the unconstrained version of the query. The `intermediate category` constraint version
+This is only valid for the unconstrained version of the query. The `intermediate_categories` constraint version
 would look like this.
 
 ```
