@@ -5,23 +5,24 @@ interpret the results they return.
 
 ### Summary
 
-* Pathfinder Query Graphs do not contain edges, but instead contain Paths.
-* Pathfinder Messages contain a Query Graph, a Knowledge Graph, Auxiliary Graphs, and Results.
+* Pathfinder QueryGraph(s) do not contain edges, but instead contain Paths.
+* Pathfinder Messages contain a QueryGraph, a KnowledgeGraph, AuxiliaryGraph, 
+and Results.
 * A Path can include constraints, but currently only `intermediate categories` constraints.
-* Paths are represented within Auxiliary Graphs and are expected to be linear, with no way to skip any node in the path.
+* Paths are represented within AuxiliaryGraph and are expected to be linear (A-->B-->C-->D).  
+* No branching Paths, or paths that skip nodes are allowed in AuxiliaryGraph.
 * Paths have a distinct set of Nodes.
-* No branching Paths are allowed in Auxiliary Graphs.
 
 ## General Message Structure
 
 Pathfinder queries utilize the same general message structure as other query types. This means that a Message still
-has a Query Graph, a Knowledge Graph, Results, and Auxiliary Graphs.
+has a Query Graph, a Knowledge Graph, Results, and AuxiliaryGraphs.
 
 ## Query Graph
 
-The Query Graph is not a traditional Query Graph, as it does not contain Edges. Instead, it contains Paths.
+The QueryGraph is not a traditional QueryGraph, as it does not contain Edges. Instead, it contains Paths.
 
-The Query Graph still has a field for Nodes, as a traditional Query Graph would, but instead of a field for Edges, it
+The QueryGraph still has a field for Nodes, as a traditional QueryGraph would, but instead of a field for Edges, it
 has a field for Paths. This example shows a query that requests Paths connecting Crohn's
 Disease with Parkinson's. All paths returned must connect these two nodes.
 
@@ -86,8 +87,8 @@ node between them.
 
 ## Knowledge and Auxiliary Graphs
 
-The Knowledge Graph in the message should have nodes and edges listed as usual. These correspond to whatever Nodes
-and Edges are required to construct the paths between the subject and object nodes of the Query Graph Path. The Nodes
+The KnowledgeGraph in the message should have nodes and edges listed as usual. These correspond to whatever Nodes
+and Edges are required to construct the paths between the subject and object nodes of the QPath. The Nodes
 and Edges both follow the same rules as all other queries, although for the sake of brevity, the example below does not
 contain all the required information typically found in a valid knowledge graph node and edge, such as knowledge
 level or source.
@@ -143,14 +144,14 @@ level or source.
 }
 ```
 
-Paths are represented within Auxiliary Graphs. Each Path references edges from the Knowledge Graph by key, stored in the
-Auxiliary Graph's `edges` field. These Edges are unordered; their sequence does not convey Path structure. Instead, the
+Paths are represented within AuxiliaryGraphs. Each Path references edges from the KnowledgeGraph by key, stored in the
+AuxiliaryGraph's `edges` field. These Edges are unordered; their sequence does not convey Path structure. Instead, the
 Path must be reconstructed from the graph itself.
 
 Paths are expected to be linear—there should be no way to skip or bypass any node in the Path. However, parallel edges
 between two nodes are allowed.
 
-Using the Knowledge Graph above, we can construct the Auxiliary Graphs shown in the example below:
+Using the Knowledge Graph above, we can construct the AuxiliaryGraphs shown in the example below:
 
 ```
 "auxiliary_graphs": {
@@ -176,7 +177,7 @@ Using the Knowledge Graph above, we can construct the Auxiliary Graphs shown in 
 }
 ```
 
-Each generated Path has a distinct set of Nodes, and no Auxiliary Graph contains branching Paths. For example, while `a0`
+Each generated Path has a distinct set of Nodes, and no AuxiliaryGraph contains branching Paths. For example, while `a0`
 and `a1` share an intermediate node, they differ by at least one Node, so they are treated as separate Paths. Path `a0`
 includes two parallel (but not branching) edges between a pair of nodes.
 
@@ -185,7 +186,7 @@ input nodes, it should be included as a valid path.
 
 The Paths shown correspond to the unconstrained version of the initial query. Applying `intermediate category` 
 constraints would yield a slightly different set of paths. As show below in the constrained version of the 
-Auxiliary Graphs, `a2` is  removed because it does not contain any `Gene` nodes. Therefore, it is not a valid Path 
+AuxiliaryGraphs, `a2` is  removed because it does not contain any `Gene` nodes. Therefore, it is not a valid Path 
 for the constrained version of the query.
 
 ```
@@ -210,15 +211,15 @@ for the constrained version of the query.
 
 ## Results
 
-Each individual Result is structured similarly, with Node Bindings and Analyses. Both input
-nodes must be pinned, and therefor no unpinned nodes will exist in the Query Graph.  This means there is only one result
+Each individual Result is structured similarly, with NodeBindings and Analyses. Both input
+nodes must be pinned, and therefor no unpinned nodes will exist in the QueryGraph.  This means there is only one result
 for each query, contained within the Results field of the Message. This Result can have many Analyses, each one
 corresponding to a different Path. This follows the same Result-merging rules used in other query types, where results
 that contain the same nodes but different analyses are combined into a single result, with their analyses concatenated.
 
-Each analysis no longer contains Edge Bindings, with no Query Graph edges to bind to. Instead, the Analysis utilizes
-Path Bindings to bind to Query Graph Paths. Each Path Binding binds an Auxiliary Graph by `id` to a Query Graph Path.
-This is similar to how Edge Bindings bind a Knowledge Graph Edge, by id, to a Query Graph Edge.
+Each analysis no longer contains EdgeBindings, with no QueryGraph edges to bind to. Instead, the Analysis utilizes
+PathBindings to bind to QPath. Each Path Binding binds an Auxiliary Graph by `id` to a QPath.
+This is similar to how EdgeBindings bind a KnowledgeGraph Edge, by id, to a QueryGraph Edge.
 
 ```
 "results": [
@@ -323,7 +324,7 @@ The Analysis containing the Path generated by the lookup Query is removed.
 
 ## Complete Message
 
-The complete Message for the unconstrained query is shown below, with the Query Graph, Knowledge Graph, Auxiliary Graphs
+The complete Message for the unconstrained query is shown below, with the QueryGraph, KnowledgeGraph, AuxiliaryGraphs
 and Results all included. The constrained version is shown after that.
 
 ### Unconstrained
