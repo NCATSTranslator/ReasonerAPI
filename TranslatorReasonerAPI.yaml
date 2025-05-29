@@ -1129,7 +1129,6 @@ components:
           items:
             $ref: '#/components/schemas/PathConstraint'
           minItems: 1
-          maxItems: 1
           nullable: true
       additionalProperties: true
       required:
@@ -1150,7 +1149,6 @@ components:
           items:
             $ref: '#/components/schemas/BiolinkEntity'
           minItems: 1
-          maxItems: 1
           nullable: true
       additionalProperties: true
     Node:
