@@ -1,14 +1,29 @@
 # Pathfinder Implementation Guide
 
-The following guide is intended to provide information on how to generate pathfinder queries, as well as general rules on how pathfinder queries should be interpreted. This guide also will provide information on how to interpret the results returned by those queries.
+This guide explains how to construct Pathfinder queries, outlines general interpretation rules, and describes how to 
+interpret the results they return.
+
+### Summary
+
+* Pathfinder Query Graphs do not contain edges, but instead contain Paths.
+* Pathfinder Messages contain a Query Graph, a Knowledge Graph, Auxiliary Graphs, and Results.
+* A Path can include constraints, but currently only `intermediate categories` constraints.
+* Paths are represented within Auxiliary Graphs and are expected to be linear, with no way to skip any node in the path.
+* Paths have a distinct set of Nodes.
+* No branching Paths are allowed in Auxiliary Graphs.
 
 ## General Message Structure
 
-Pathfinder queries utilize the same general message structure as other query types. This means that a Message still has a Query Graph, a Knowledge Graph, Results, and Auxiliary Graphs.
+Pathfinder queries utilize the same general message structure as other query types. This means that a Message still
+has a Query Graph, a Knowledge Graph, Results, and Auxiliary Graphs.
 
 ## Query Graph
 
-The Query Graph still has a field for nodes, as a traditional query graph would, but instead of a field for edges, it has a field for paths instead, as shown bellow. This example shows a query that requests paths connecting Crohn's Disease with Parkinson's. All paths returned must connect these two nodes.
+The Query Graph is not a traditional Query Graph, as it does not contain Edges. Instead, it contains Paths.
+
+The Query Graph still has a field for Nodes, as a traditional Query Graph would, but instead of a field for Edges, it
+has a field for Paths. This example shows a query that requests Paths connecting Crohn's
+Disease with Parkinson's. All paths returned must connect these two nodes.
 
 ```
 "query_graph": {
@@ -34,9 +49,10 @@ The Query Graph still has a field for nodes, as a traditional query graph would,
 }
 ```
 
-A path can also have constraints listed on them. This constraint is intended to provide additional information to the pathfinder tool on how to process the query, allowing for smarter pruning. Presently, only intermediate categories are acceptable path constraints, and these intermediate category constraints are meant to allow the tool to understand that it should only return paths with at least one node that fits that category. All paths returned in the results are required to have at least one node of the category listed.
-
-In the example below, utilizing the same query looking for paths between Crohn's and Parkinson's, the constraint listed requires that paths have at least one Gene node between them.
+A Path can include constraints.  Currently, the only supported constraint type is `intermediate categories`, 
+which requires that all returned paths contain at least one node matching the specified category.
+In the example below, the intermediate category constraint listed requires that paths have at least one `Gene`
+node between them.
 
 ```
 "query_graph": {
@@ -66,11 +82,15 @@ In the example below, utilizing the same query looking for paths between Crohn's
 }
 ```
 
-The query graph should not have any edges.
+* Note: The query graph should not have any edges.
 
 ## Knowledge and Auxiliary Graphs
 
-The Knowledge Graph in the message should have nodes and edges listed as usual. These would correspond to whatever nodes and edges are required to construct the paths between the subject and object nodes of the query graph path. The nodes and edges both follow the same rules as all other queries, although for the sake of brevity, the example below does not contain all of the required information typically found in a valid knowledge graph node and edge, such as knowledge level or source.
+The Knowledge Graph in the message should have nodes and edges listed as usual. These correspond to whatever Nodes
+and Edges are required to construct the paths between the subject and object nodes of the Query Graph Path. The Nodes
+and Edges both follow the same rules as all other queries, although for the sake of brevity, the example below does not
+contain all the required information typically found in a valid knowledge graph node and edge, such as knowledge
+level or source.
 
 ```
 "knowledge_graph": {
@@ -123,9 +143,14 @@ The Knowledge Graph in the message should have nodes and edges listed as usual. 
 }
 ```
 
-Paths themselves are encoded within the Auxiliary Graphs. Edges from the knowledge graph are referenced based on key in an auxiliary graph, within the aux graph's 'edges' field. These edges are not listed in any particular order, and the order they are listed in does not provide any additional information on the path. The path is implicitly defined by the auxiliary graph, and must be constructed. Additionally, the path is expected to be linear, meaning there should be no way to circumvent any node included in the path, although parallel edges between a pair of nodes is allowed.
+Paths are represented within Auxiliary Graphs. Each Path references edges from the Knowledge Graph by key, stored in the
+Auxiliary Graph's `edges` field. These Edges are unordered; their sequence does not convey Path structure. Instead, the
+Path must be reconstructed from the graph itself.
 
-Using the knowledge graph above, we can construct the auxiliary graphs shown in the example below
+Paths are expected to be linear—there should be no way to skip or bypass any node in the Path. However, parallel edges
+between two nodes are allowed.
+
+Using the Knowledge Graph above, we can construct the Auxiliary Graphs shown in the example below:
 
 ```
 "auxiliary_graphs": {
@@ -151,9 +176,17 @@ Using the knowledge graph above, we can construct the auxiliary graphs shown in 
 }
 ```
 
-As shown, each path that is generated has a distinct list of nodes. Additionally, no auxiliary graph has any branching paths included. Even though a0 and a1 share an intermediate node, since a1 contains a node that a0 does not, they are kept separate. Additionally, a0 also contains two parallel, but not branching, edges between two of its nodes. Also, note that a2 represents the direct lookup edge between Crohn's and Parkinson's. If a lookup edge between the two input nodes exists, this edge should be returned as a path as well. 
+Each generated Path has a distinct set of Nodes, and no Auxiliary Graph contains branching Paths. For example, while `a0`
+and `a1` share an intermediate node, they differ by at least one Node, so they are treated as separate Paths. Path `a0`
+includes two parallel (but not branching) edges between a pair of nodes.
 
-These paths are the ones that would be returned by the unconstrained version of the intial query shown aboce, but running the constrained version as well would return slightly different paths.
+Path `a2` represents a direct lookup edge between Crohn’s and Parkinson’s. If such a direct edge exists between the two
+input nodes, it should be included as a valid path.
+
+The Paths shown correspond to the unconstrained version of the initial query. Applying `intermediate category` 
+constraints would yield a slightly different set of paths. As show below in the constrained version of the 
+Auxiliary Graphs, `a2` is  removed because it does not contain any `Gene` nodes. Therefore, it is not a valid Path 
+for the constrained version of the query.
 
 ```
 "auxiliary_graphs": {
@@ -174,13 +207,18 @@ These paths are the ones that would be returned by the unconstrained version of 
 }
 ```
 
-Note that a2 is now removed because it did not contain any Gene nodes. Therefore, it is not a valid path for the constrained version of the query.
 
 ## Results
 
-Each individual result is structured similarly as well, with node bindings and and analyses. However, as both input nodes are pinned, and there exist no unpinned nodes in the query graph, that means there is only one single result for each query, contained within the "Results" field of the Message.  This result would have many analyses, each one corresponding to a different path. This follows the same result merging rules used in other query types, where results that contain the same nodes but different analyses are combined into a single result, with their analyses concatenated.
+Each individual Result is structured similarly, with Node Bindings and Analyses. Both input
+nodes must be pinned, and therefor no unpinned nodes will exist in the Query Graph.  This means there is only one result
+for each query, contained within the Results field of the Message. This Result can have many Analyses, each one
+corresponding to a different Path. This follows the same Result-merging rules used in other query types, where results
+that contain the same nodes but different analyses are combined into a single result, with their analyses concatenated.
 
-Each analysis no longer contains edge bindings, with no query graph edges to bind to. Instead, this analysis utilizes path bindings to bind to query graph paths. Each path binding binds an auxiliary graph, by id, to a query graph path, similar to how edge bindings bind a knowledge graph edge, by id, to a query graph edge. 
+Each analysis no longer contains Edge Bindings, with no Query Graph edges to bind to. Instead, the Analysis utilizes
+Path Bindings to bind to Query Graph Paths. Each Path Binding binds an Auxiliary Graph by `id` to a Query Graph Path.
+This is similar to how Edge Bindings bind a Knowledge Graph Edge, by id, to a Query Graph Edge.
 
 ```
 "results": [
@@ -235,7 +273,8 @@ Each analysis no longer contains edge bindings, with no query graph edges to bin
 ]
 ```
 
-Once again, just as it was for auxiliary graphs, this is only valid for the unconstrained version of the query. The constrained version would instead look like this.
+This is only valid for the unconstrained version of the query. The `intermediate category` constraint version
+would look like this.
 
 ```
 "results": [
@@ -280,11 +319,12 @@ Once again, just as it was for auxiliary graphs, this is only valid for the unco
 ]
 ```
 
-Once again, the analysis containing the path generated by the lookup query is removed.
+The Analysis containing the Path generated by the lookup Query is removed.
 
 ## Complete Message
 
-Finally, we can put all of these parts of the message together, to create one final message.
+The complete Message for the unconstrained query is shown below, with the Query Graph, Knowledge Graph, Auxiliary Graphs
+and Results all included. The constrained version is shown after that.
 
 ### Unconstrained
 
