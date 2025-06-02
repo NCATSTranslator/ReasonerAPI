@@ -208,15 +208,29 @@ Field Name | Type | Description
 ---|:---:|---
 nodes | Map[`string`, [QNode](#qnode-)] | **REQUIRED**. The node specifications. The keys of this map are unique node identifiers and the corresponding values include the constraints on bound nodes.
 
-#### QueryGraph [?](https://github.com/NCATSTranslator/ReasonerAPI/blob/master/TranslatorReasonerAPI.yaml#L901:L919)
+#### QueryGraph [?](https://github.com/NCATSTranslator/ReasonerAPI/blob/master/TranslatorReasonerAPI.yaml#L901:L925)
 
+A non-Pathfinder query SHOULD have edges following the QEdge schema and SHOULD NOT have paths
 
-``
-#### PathfinderQueryGraph [?](https://github.com/NCATSTranslator/ReasonerAPI/blob/master/TranslatorReasonerAPI.yaml#L920:L940)
+##### Fixed Fields
 
+Field Name | Type | Description
+---|:---:|---
+nodes | Map[`string`, [QNode](#qnode-)] | The node specifications. The keys of this map are unique node identifiers and the corresponding values include the constraints on bound nodes.
+edges | Map[`string`, [QEdge](#qedge-)] | **REQUIRED**. The edge specifications. The keys of this map are unique edge identifiers and the corresponding values include the constraints on bound edges, in addition to specifying the subject and object QNodes.
 
-``
-#### QNode [?](https://github.com/NCATSTranslator/ReasonerAPI/blob/master/TranslatorReasonerAPI.yaml#L941:L1013)
+#### PathfinderQueryGraph [?](https://github.com/NCATSTranslator/ReasonerAPI/blob/master/TranslatorReasonerAPI.yaml#L926:L952)
+
+A Pathfinder query SHOULD have paths following the QPath schema and SHOULD NOT have edges
+
+##### Fixed Fields
+
+Field Name | Type | Description
+---|:---:|---
+nodes | Map[`string`, [QNode](#qnode-)] | The node specifications. The keys of this map are unique node identifiers and the corresponding values include the constraints on bound nodes.
+paths | Map[`string`, [QPath](#qpath-)] | **REQUIRED**. The QueryGraph path specification, used only for pathfinder type queries. The keys of this map are unique path identifiers and the corresponding values include the constraints on bound paths, in addition to specifying the subject, object, and intermediate QNodes.
+
+#### QNode [?](https://github.com/NCATSTranslator/ReasonerAPI/blob/master/TranslatorReasonerAPI.yaml#L953:L1025)
 
 A node in the QueryGraph used to represent an entity in a query. If a CURIE is not specified, any nodes matching the category of the QNode will be returned in the Results.
 
@@ -230,7 +244,7 @@ set_interpretation | `string` | Indicates how multiple CURIEs in the ids propert
 member_ids | [[CURIE](#curie-)] | A list of CURIE identifiers for members of a queried set. This  field MUST be populated under a set_interpretation of MANY or ALL, when the 'ids' field holds a UUID representing the set  itself. This field MUST NOT be used under a set_interpretation  of BATCH.
 constraints | [[AttributeConstraint](#attributeconstraint-)] | A list of constraints applied to a query node. If there are multiple items, they must all be true (equivalent to AND)
 
-#### QEdge [?](https://github.com/NCATSTranslator/ReasonerAPI/blob/master/TranslatorReasonerAPI.yaml#L1014:L1088)
+#### QEdge [?](https://github.com/NCATSTranslator/ReasonerAPI/blob/master/TranslatorReasonerAPI.yaml#L1026:L1100)
 
 An edge in the QueryGraph used as a filter pattern specification in a query. If the optional predicate property is not specified, it is assumed to be a wildcard match to the target knowledge space. If specified, the ontological inheritance hierarchy associated with the term provided is assumed, such that edge bindings returned may be an exact match to the given QEdge predicate term, or to a term that is a descendant of the QEdge predicate term.
 
@@ -245,7 +259,7 @@ object | `string` | **REQUIRED**. Corresponds to the map key identifier of the o
 attribute_constraints | [[AttributeConstraint](#attributeconstraint-)] | A list of attribute constraints applied to a query edge. If there are multiple items, they must all be true (equivalent to AND)
 qualifier_constraints | [[QualifierConstraint](#qualifierconstraint-)] | A list of QualifierConstraints that provide nuance to the QEdge. If multiple QualifierConstraints are provided, there is an OR relationship between them. If the QEdge has multiple predicates or if the QNodes that correspond to the subject or object of this QEdge have multiple categories or multiple curies, then qualifier_constraints MUST NOT be specified because these complex use cases are not supported at this time.
 
-#### QPath [?](https://github.com/NCATSTranslator/ReasonerAPI/blob/master/TranslatorReasonerAPI.yaml#L1089:L1136)
+#### QPath [?](https://github.com/NCATSTranslator/ReasonerAPI/blob/master/TranslatorReasonerAPI.yaml#L1101:L1148)
 
 A path in the QueryGraph used for pathfinder queries. Both subject and object MUST reference QNodes that have a CURIE in their ids field. Paths returned that bind to this QPath can represent some relationship between subject and object.
 
@@ -258,7 +272,7 @@ object | `string` | **REQUIRED**. Corresponds to the map key identifier of the o
 predicates | [[BiolinkPredicate](#biolinkpredicate-)] | QPath predicates are intended to convey what type of paths are desired, NOT a constraint on the types of predicates that may be in result paths. If no predicate is listed, the ARA SHOULD find paths such that the relationship represented by the path is a "related_to" relationship. These should be Biolink Model predicates and are allowed to be of type 'abstract' or 'mixin' (only in QGraphs!). Use of 'deprecated' predicates should be avoided.
 constraints | [[PathConstraint](#pathconstraint-)] | A list of constraints for the QPath. If multiple constraints are listed, it should be interpreted as an OR relationship. Each path returned is required to comply with at least one constraint.
 
-#### PathConstraint [?](https://github.com/NCATSTranslator/ReasonerAPI/blob/master/TranslatorReasonerAPI.yaml#L1137:L1153)
+#### PathConstraint [?](https://github.com/NCATSTranslator/ReasonerAPI/blob/master/TranslatorReasonerAPI.yaml#L1149:L1165)
 
 A constraint for paths. ARAs must comply with constraints when finding paths.
 
@@ -268,7 +282,7 @@ Field Name | Type | Description
 ---|:---:|---
 intermediate_categories | [[BiolinkEntity](#biolinkentity-)] | A list of Biolink model categories by which to constrain paths returned. If multiple categories are listed, it should be interpreted as an AND relationship. Each path returned by ARAs MUST contain at least one node of each category listed.
 
-#### Node [?](https://github.com/NCATSTranslator/ReasonerAPI/blob/master/TranslatorReasonerAPI.yaml#L1154:L1193)
+#### Node [?](https://github.com/NCATSTranslator/ReasonerAPI/blob/master/TranslatorReasonerAPI.yaml#L1166:L1205)
 
 A node in the KnowledgeGraph which represents some biomedical concept. Nodes are identified by the keys in the KnowledgeGraph Node mapping.
 
@@ -281,7 +295,7 @@ categories | [[BiolinkEntity](#biolinkentity-)] | **REQUIRED**. These should be 
 attributes | [[Attribute](#attribute-)] | **REQUIRED**. A list of attributes describing the node
 is_set | `boolean` | Indicates that the node represents a set of entities. If this property is missing or null, it is assumed to be false.
 
-#### Attribute [?](https://github.com/NCATSTranslator/ReasonerAPI/blob/master/TranslatorReasonerAPI.yaml#L1194:L1279)
+#### Attribute [?](https://github.com/NCATSTranslator/ReasonerAPI/blob/master/TranslatorReasonerAPI.yaml#L1206:L1291)
 
 Generic attribute for a node or an edge that expands the key-value pair concept by including fields for additional metadata. These fields can be used to describe the source of the statement made in a key-value pair of the attribute object, or describe the attribute's value itself including its semantic type, or a url providing additional information about it. An attribute may be further qualified with sub-attributes (for example to provide confidence intervals on a value).
 
@@ -298,7 +312,7 @@ value_url | `string` | Human-consumable URL linking to a web document that provi
 description | `string` | Human-readable description for the attribute and its value.
 attributes | [[Attribute](#attribute-)] | A list of attributes providing further information about the parent attribute (for example to provide provenance information about the parent attribute).
 
-#### Edge [?](https://github.com/NCATSTranslator/ReasonerAPI/blob/master/TranslatorReasonerAPI.yaml#L1280:L1344)
+#### Edge [?](https://github.com/NCATSTranslator/ReasonerAPI/blob/master/TranslatorReasonerAPI.yaml#L1292:L1356)
 
 A specification of the semantic relationship linking two concepts that are expressed as nodes in the knowledge "thought" graph resulting from a query upon the underlying knowledge source.
 
@@ -313,7 +327,7 @@ attributes | [[Attribute](#attribute-)] | A list of additional attributes for th
 qualifiers | [[Qualifier](#qualifier-)] | A set of Qualifiers that act together to add nuance or detail to the statement expressed in an Edge.
 sources | [[RetrievalSource](#retrievalsource-)] | **REQUIRED**. A list of RetrievalSource objects that provide information about how a particular Information Resource served as a source from which the knowledge expressed in an Edge, or data used to generate this knowledge, was retrieved.
 
-#### Qualifier [?](https://github.com/NCATSTranslator/ReasonerAPI/blob/master/TranslatorReasonerAPI.yaml#L1345:L1381)
+#### Qualifier [?](https://github.com/NCATSTranslator/ReasonerAPI/blob/master/TranslatorReasonerAPI.yaml#L1357:L1393)
 
 An additional nuance attached to an assertion
 
@@ -324,7 +338,7 @@ Field Name | Type | Description
 qualifier_type_id | [CURIE](#curie-) | **REQUIRED**. CURIE for a Biolink 'qualifier' association slot, generally taken from Biolink association slots designated for this purpose (that is, association slots with names ending in 'qualifier') e.g. biolink:subject_aspect_qualifier,  biolink:subject_direction_qualifier, biolink:object_aspect_qualifier, etc. Such qualifiers are used to elaborate a second layer of meaning of a knowledge graph edge. Available qualifiers are edge properties in the Biolink Model (see https://biolink.github.io/biolink-model/docs/edge_properties.html) which have slot names with the suffix string 'qualifier'.
 qualifier_value | `string` | **REQUIRED**. The value associated with the type of the qualifier, drawn from a set of controlled values by the type as specified in the Biolink model (e.g. 'expression' or 'abundance' for the qualifier type 'biolink:subject_aspect_qualifier', etc). The enumeration of qualifier values for a given qualifier type is generally going to be constrained by the category of edge (i.e. biolink:Association subtype) of the (Q)Edge.
 
-#### QualifierConstraint [?](https://github.com/NCATSTranslator/ReasonerAPI/blob/master/TranslatorReasonerAPI.yaml#L1382:L1404)
+#### QualifierConstraint [?](https://github.com/NCATSTranslator/ReasonerAPI/blob/master/TranslatorReasonerAPI.yaml#L1394:L1416)
 
 Defines a query constraint based on the qualifier_types and qualifier_values of a set of Qualifiers attached to an edge. For example, it can constrain a "ChemicalX - affects - ?Gene" query to return only edges where ChemicalX specifically affects the 'expression' of the Gene, by constraining on the qualifier_type "biolink:object_aspect_qualifier" with a qualifier_value of "expression".
 
@@ -334,7 +348,7 @@ Field Name | Type | Description
 ---|:---:|---
 qualifier_set | [[Qualifier](#qualifier-)] | **REQUIRED**. A set of Qualifiers that serves to add nuance to a query, by constraining allowed values held by Qualifiers on queried Edges.
 
-#### BiolinkEntity [?](https://github.com/NCATSTranslator/ReasonerAPI/blob/master/TranslatorReasonerAPI.yaml#L1405:L1415)
+#### BiolinkEntity [?](https://github.com/NCATSTranslator/ReasonerAPI/blob/master/TranslatorReasonerAPI.yaml#L1417:L1427)
 
 Compact URI (CURIE) for a Biolink class, biolink:NamedThing or a child thereof. The CURIE must use the prefix 'biolink:' followed by the PascalCase class name.
 
@@ -346,7 +360,7 @@ Compact URI (CURIE) for a Biolink class, biolink:NamedThing or a child thereof. 
 "biolink:PhenotypicFeature"
 ```
 
-#### BiolinkPredicate [?](https://github.com/NCATSTranslator/ReasonerAPI/blob/master/TranslatorReasonerAPI.yaml#L1416:L1427)
+#### BiolinkPredicate [?](https://github.com/NCATSTranslator/ReasonerAPI/blob/master/TranslatorReasonerAPI.yaml#L1428:L1439)
 
 CURIE for a Biolink 'predicate' slot, taken from the Biolink slot ('is_a') hierarchy rooted in biolink:related_to (snake_case). This predicate defines the Biolink relationship between the subject and object nodes of a biolink:Association defining a knowledge graph edge.
 
@@ -358,12 +372,12 @@ CURIE for a Biolink 'predicate' slot, taken from the Biolink slot ('is_a') hiera
 "biolink:interacts_with"
 ```
 
-#### CURIE [?](https://github.com/NCATSTranslator/ReasonerAPI/blob/master/TranslatorReasonerAPI.yaml#L1428:L1437)
+#### CURIE [?](https://github.com/NCATSTranslator/ReasonerAPI/blob/master/TranslatorReasonerAPI.yaml#L1440:L1449)
 
 A Compact URI, consisting of a prefix and a reference separated by a colon, such as UniProtKB:P00738. Via an external context definition, the CURIE prefix and colon may be replaced by a URI prefix, such as http://identifiers.org/uniprot/, to form a full URI.
 
 `string`
-#### MetaKnowledgeGraph [?](https://github.com/NCATSTranslator/ReasonerAPI/blob/master/TranslatorReasonerAPI.yaml#L1438:L1464)
+#### MetaKnowledgeGraph [?](https://github.com/NCATSTranslator/ReasonerAPI/blob/master/TranslatorReasonerAPI.yaml#L1450:L1476)
 
 Knowledge-map representation of this TRAPI web service. The meta knowledge graph is composed of the union of most specific categories and predicates for each node and edge.
 
@@ -374,7 +388,7 @@ Field Name | Type | Description
 nodes | Map[`string`, [MetaNode](#metanode-)] | **REQUIRED**. Collection of the most specific node categories provided by this TRAPI web service, indexed by Biolink class CURIEs. A node category is only exposed here if there is node for which that is the most specific category available.
 edges | [[MetaEdge](#metaedge-)] | **REQUIRED**. List of the most specific edges/predicates provided by this TRAPI web service. A predicate is only exposed here if there is an edge for which the predicate is the most specific available.
 
-#### MetaNode [?](https://github.com/NCATSTranslator/ReasonerAPI/blob/master/TranslatorReasonerAPI.yaml#L1465:L1488)
+#### MetaNode [?](https://github.com/NCATSTranslator/ReasonerAPI/blob/master/TranslatorReasonerAPI.yaml#L1477:L1500)
 
 Description of a node category provided by this TRAPI web service.
 
@@ -385,7 +399,7 @@ Field Name | Type | Description
 id_prefixes | [`string`] | **REQUIRED**. List of CURIE prefixes for the node category that this TRAPI web service understands and accepts on the input.
 attributes | [[MetaAttribute](#metaattribute-)] | Node attributes provided by this TRAPI web service.
 
-#### MetaEdge [?](https://github.com/NCATSTranslator/ReasonerAPI/blob/master/TranslatorReasonerAPI.yaml#L1489:L1551)
+#### MetaEdge [?](https://github.com/NCATSTranslator/ReasonerAPI/blob/master/TranslatorReasonerAPI.yaml#L1501:L1563)
 
 Edge in a meta knowledge map describing relationship between a subject Biolink class and an object Biolink class.
 
@@ -401,7 +415,7 @@ attributes | [[MetaAttribute](#metaattribute-)] | Edge attributes provided by th
 qualifiers | [[MetaQualifier](#metaqualifier-)] | Qualifiers that are possible to be found on this edge type.
 association | [BiolinkEntity](#biolinkentity-) | The Biolink association type (entity) that this edge represents. Associations are classes in Biolink that represent a relationship between two entities. For example, the association 'gene interacts with gene' is represented by the Biolink class, 'biolink:GeneToGeneAssociation'.  If association is filled out, then the testing harness can help validate that the qualifiers are being used correctly.
 
-#### MetaQualifier [?](https://github.com/NCATSTranslator/ReasonerAPI/blob/master/TranslatorReasonerAPI.yaml#L1552:L1569)
+#### MetaQualifier [?](https://github.com/NCATSTranslator/ReasonerAPI/blob/master/TranslatorReasonerAPI.yaml#L1564:L1581)
 
 
 ##### Fixed Fields
@@ -411,7 +425,7 @@ Field Name | Type | Description
 qualifier_type_id | [CURIE](#curie-) | **REQUIRED**. The CURIE of the qualifier type.
 applicable_values | [`string`] | The list of values that are possible for this qualifier.
 
-#### MetaAttribute [?](https://github.com/NCATSTranslator/ReasonerAPI/blob/master/TranslatorReasonerAPI.yaml#L1570:L1607)
+#### MetaAttribute [?](https://github.com/NCATSTranslator/ReasonerAPI/blob/master/TranslatorReasonerAPI.yaml#L1582:L1619)
 
 
 ##### Fixed Fields
@@ -424,7 +438,7 @@ original_attribute_names | [`string`] | Names of an the attribute as provided by
 constraint_use | `boolean` | Indicates whether this attribute can be used as a query constraint.
 constraint_name | `string` | Human-readable name or label for the constraint concept. Required whenever constraint_use is true.
 
-#### AttributeConstraint [?](https://github.com/NCATSTranslator/ReasonerAPI/blob/master/TranslatorReasonerAPI.yaml#L1608:L1699)
+#### AttributeConstraint [?](https://github.com/NCATSTranslator/ReasonerAPI/blob/master/TranslatorReasonerAPI.yaml#L1620:L1711)
 
 Generic query constraint for a query node or query edge
 
@@ -440,7 +454,7 @@ value | any | **REQUIRED**. Value of the attribute. May be any data type, includ
 unit_id | any | CURIE of the units of the value or list of values in the 'value' property. The Units of Measurement Ontology (UO) should be used if possible. The unit_id MUST be provided for (lists of) numerical values that correspond to a quantity that has units.
 unit_name | any | Term name that is associated with the CURIE of the units of the value or list of values in the 'value' property. The Units of Measurement Ontology (UO) SHOULD be used if possible. This property SHOULD be provided if a unit_id is provided. This is redundant but recommended for human readability.
 
-#### RetrievalSource [?](https://github.com/NCATSTranslator/ReasonerAPI/blob/master/TranslatorReasonerAPI.yaml#L1700:L1756)
+#### RetrievalSource [?](https://github.com/NCATSTranslator/ReasonerAPI/blob/master/TranslatorReasonerAPI.yaml#L1712:L1768)
 
 Provides information about how a particular InformationResource served as a source from which knowledge expressed in an Edge, or data used to generate this knowledge, was retrieved.
 
@@ -453,7 +467,7 @@ resource_role | [ResourceRoleEnum](#resourceroleenum-) | **REQUIRED**. The role 
 upstream_resource_ids | [[CURIE](#curie-)] | An upstream InformationResource from which the resource being described directly retrieved a record of the knowledge expressed in the Edge, or data used to generate this knowledge. This is an array because there are cases where a merged Edge holds knowledge that was retrieved from multiple sources. e.g. an Edge provided by the ARAGORN ARA can expressing knowledge it retrieved from both the automat-mychem-info and molepro KPs, which both provided it with records of this single fact.
 source_record_urls | [`string`] | A URL linking to a specific web page or document provided by the  source, that contains a record of the knowledge expressed in the  Edge. If the knowledge is contained in more than one web page on  an Information Resource's site, urls MAY be provided for each.  For example, Therapeutic Targets Database (TTD) has separate web  pages for 'Imatinib' and its protein target KIT, both of which hold  the claim that 'the KIT protein is a therapeutic target for Imatinib'.         
 
-#### ResourceRoleEnum [?](https://github.com/NCATSTranslator/ReasonerAPI/blob/master/TranslatorReasonerAPI.yaml#L1757:L1768)
+#### ResourceRoleEnum [?](https://github.com/NCATSTranslator/ReasonerAPI/blob/master/TranslatorReasonerAPI.yaml#L1769:L1780)
 
 The role played by the InformationResource in serving as a source for an Edge. Note that a given Edge should have one and only one 'primary' source, and may have any number of 'aggregator' or 'supporting data' sources.  This enumeration is found in Biolink Model, but is repeated here for convenience.
 
