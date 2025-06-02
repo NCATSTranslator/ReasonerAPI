@@ -31,7 +31,7 @@ def main():
     """Generate README."""
     yamlpath = os.path.join(
         THIS_DIR,
-        "../TranslatorReasonerAPI.yaml",
+        "TranslatorReasonerAPI.yaml",
     )
 
     j2_env = Environment(

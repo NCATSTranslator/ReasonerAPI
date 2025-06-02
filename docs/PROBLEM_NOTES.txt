@@ -1,0 +1,6 @@
+Note from Eric on 2025-06-02:
+
+The autogen scripts did not seem to work with the Base** inheritance setup.
+
+So I copied the yaml in the parent directory into this directory and manually copied over
+all the properties from the Base classes to the inheriting classes so that the docgen worked correctly.
