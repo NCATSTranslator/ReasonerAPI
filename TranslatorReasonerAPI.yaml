@@ -1082,14 +1082,6 @@ components:
           items:
             $ref: '#/components/schemas/QualifierConstraint'
           default: []
-        source_constraints:
-          type: object
-          description: >-
-            Source constraints applied to a query edge. It MAY be a
-            combination of inclusion and exclusion constraints.
-          allOf:
-            $ref: '#/components/schemas/SourceConstraints'
-          nullable: true
       additionalProperties: true
       required:
         - subject
@@ -1774,28 +1766,3 @@ components:
         - primary_knowledge_source
         - aggregator_knowledge_source
         - supporting_data_source
-    SourceConstraints:
-      type: array
-      description: >-
-        Query constraint for a included and excluded sources
-      properties:
-        include_list:
-          type: array
-          description: >-
-            A list of infores CURIEs to allow in each edge. Each
-            retained edge MUST have a source (primary or aggregator)
-            that is at least one of the items in this list.
-          items:
-            - $ref: '#/components/schemas/CURIE'
-          minItems: 1
-          nullable: true
-        exclude_list:
-          type: array
-          description: >-
-            A list of infores CURIEs to exclude from each edge. Each
-            retained edge MUST NOT have any of the items in this list.
-          items:
-            - $ref: '#/components/schemas/CURIE'
-          minItems: 1
-          nullable: true
-      additionalProperties: false
