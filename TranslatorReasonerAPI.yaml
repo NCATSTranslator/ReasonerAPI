@@ -548,6 +548,7 @@ components:
           additionalProperties:
             $ref: '#/components/schemas/AuxiliaryGraph'
           nullable: true
+      minProperties: 1
       additionalProperties: false
     LogEntry:
       description: >-
@@ -621,6 +622,7 @@ components:
             items:
               $ref: '#/components/schemas/NodeBinding'
             minItems: 1
+          minProperties: 1
           nullable: false 
         analyses:
           type: array
@@ -631,7 +633,7 @@ components:
             oneOf:
               - $ref: '#/components/schemas/Analysis'
               - $ref: '#/components/schemas/PathfinderAnalysis'
-          minItems: 0
+          minItems: 1
           nullable: false 
       additionalProperties: true
       required:
@@ -753,6 +755,9 @@ components:
                 type: array
                 items:
                   $ref: '#/components/schemas/EdgeBinding'
+                minItems: 1
+              minProperties: 1
+              nullable: false
     PathfinderAnalysis:
       allOf: 
         - $ref: '#/components/schemas/BaseAnalysis'
@@ -771,6 +776,9 @@ components:
                 type: array
                 items:
                   $ref: '#/components/schemas/PathBinding'
+                minItems: 1
+              minProperties: 1
+              nullable: false
     EdgeBinding:
       type: object
       description: >-
@@ -866,6 +874,8 @@ components:
             referenced elsewhere in the TRAPI output by the dictionary key.
           additionalProperties:
             $ref: '#/components/schemas/Node'
+          minProperties: 1
+          nullable: false
         edges:
           type: object
           description: >-
@@ -873,6 +883,8 @@ components:
             referenced elsewhere in the TRAPI output by the dictionary key.
           additionalProperties:
             $ref: '#/components/schemas/Edge'
+          minProperties: 1
+          nullable: false
       additionalProperties: true
       required:
         - nodes
@@ -892,6 +904,8 @@ components:
             on bound nodes.
           additionalProperties:
             $ref: '#/components/schemas/QNode'
+          minProperties: 1
+          nullable: false
       additionalProperties: true
       required:
         - nodes
@@ -914,6 +928,8 @@ components:
                 QNodes.
               additionalProperties:
                 $ref: '#/components/schemas/QEdge'
+              minProperties: 1
+              nullable: false
     PathfinderQueryGraph:
       allOf: 
         - $ref: '#/components/schemas/BaseQueryGraph'
@@ -935,6 +951,7 @@ components:
                 $ref: '#/components/schemas/QPath'
               minProperties: 1
               maxProperties: 1
+              nullable: false
     QNode:
       type: object
       description: A node in the QueryGraph used to represent an entity in a
@@ -1050,6 +1067,7 @@ components:
             Corresponds to the map key identifier of the
             subject concept node anchoring the query filter
             pattern for the query relationship edge.
+          nullable: false
         object:
           type: string
           example: https://www.uniprot.org/uniprot/P00738
@@ -1057,6 +1075,7 @@ components:
             Corresponds to the map key identifier of the
             object concept node anchoring the query filter
             pattern for the query relationship edge.
+          nullable: false
         attribute_constraints:
           type: array
           description: >-
@@ -1097,12 +1116,14 @@ components:
             Corresponds to the map key identifier of the subject concept node for
             the start of the queried path.
           example: n0
+          nullable: false
         object:
           type: string
           description: >-
             Corresponds to the map key identifier of the object concept node for
             the end of the queried path.
           example: n1
+          nullable: false
         predicates:
           type: array
           description: >-
@@ -1394,6 +1415,7 @@ components:
             on queried Edges.
           items:
             $ref: '#/components/schemas/Qualifier'
+          minItems: 1
           nullable: false
       required:
         - qualifier_set
@@ -1447,6 +1469,8 @@ components:
             node for which that is the most specific category available.
           additionalProperties:
             $ref: '#/components/schemas/MetaNode'
+          minProperties: 1
+          nullable: false
         edges:
           type: array
           description: >-
@@ -1455,6 +1479,8 @@ components:
             for which the predicate is the most specific available.
           items:
             $ref: '#/components/schemas/MetaEdge'
+          minItems: 1
+          nullable: false
       required:
         - nodes
         - edges
@@ -1471,6 +1497,7 @@ components:
           items:
             type: string
           minItems: 1
+          nullable: false
           example: [CHEMBL.COMPOUND, INCHIKEY]
         attributes:
           type: array
