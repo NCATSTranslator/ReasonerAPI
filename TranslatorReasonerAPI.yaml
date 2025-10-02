@@ -278,6 +278,7 @@ components:
           description: The least critical level of logs to return
           oneOf:
             - $ref: '#/components/schemas/LogLevel'
+          type: string
           nullable: true
         workflow:
           description: List of workflow steps to be executed.
@@ -294,6 +295,7 @@ components:
         bypass_cache:
           type: boolean
           default: false
+          nullable: true
           description: >-
             Set to true in order to request that the agent obtain
             fresh information from its sources in all cases where
@@ -355,6 +357,7 @@ components:
         bypass_cache:
           type: boolean
           default: false
+          nullable: true
           description: >-
             Set to true in order to request that the agent obtain
             fresh information from its sources in all cases where
@@ -478,8 +481,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/LogEntry'
-          minItems: 0
-          nullable: false
+          minItems: 1
+          nullable: true
         workflow:
           description: List of workflow steps that were executed.
           oneOf:
@@ -523,7 +526,7 @@ components:
           items:
             $ref: '#/components/schemas/Result'
           nullable: true
-          minItems: 0
+          minItems: 1
         query_graph:
           description: >-
             QueryGraph object that contains a serialization of a query in the
@@ -531,6 +534,7 @@ components:
           oneOf:
             - $ref: '#/components/schemas/QueryGraph'
             - $ref: '#/components/schemas/PathfinderQueryGraph'
+          type: object
           nullable: true
         knowledge_graph:
           description: >-
@@ -538,6 +542,7 @@ components:
             in the thought graph corresponding to the message
           oneOf:
             - $ref: '#/components/schemas/KnowledgeGraph'
+          type: object
           nullable: true
         auxiliary_graphs:
           type: object
@@ -577,6 +582,7 @@ components:
         level:
           oneOf:
             - $ref: '#/components/schemas/LogLevel'
+          type: string
           nullable: true
         code:
           type: string
@@ -668,6 +674,7 @@ components:
             the NodeBinding.id being a descendant of a QNode.id), then
             this query_id MUST be provided. In other cases, there is no
             ambiguity, and this query_id SHOULD NOT be provided.
+          type: string
           nullable: true
         attributes:
           type: array
@@ -714,6 +721,7 @@ components:
             reasoning service. Each item in the list is the key of a
             single Auxiliary Graph.
           nullable: true
+          minItems: 1
           items:
             type: string
         scoring_method:
@@ -729,6 +737,7 @@ components:
           items:
             $ref: '#/components/schemas/Attribute'
           nullable: true
+          minItems: 1
       additionalProperties: true
       required:
         - resource_id
@@ -1014,6 +1023,7 @@ components:
             itself. This field MUST NOT be used under a set_interpretation 
             of BATCH.
           nullable: true
+          minItems: 1
           items:
             $ref: '#/components/schemas/CURIE'
         constraints:
@@ -1024,7 +1034,8 @@ components:
             to AND)
           items:
             $ref: '#/components/schemas/AttributeConstraint'
-          default: []
+          minItems: 1
+          nullable: true
       additionalProperties: true
     QEdge:
       type: object
@@ -1085,7 +1096,8 @@ components:
             to AND)
           items:
             $ref: '#/components/schemas/AttributeConstraint'
-          default: []
+          minItems: 1
+          nullable: true
         qualifier_constraints:
           type: array
           description: >-
@@ -1098,7 +1110,8 @@ components:
             because these complex use cases are not supported at this time.
           items:
             $ref: '#/components/schemas/QualifierConstraint'
-          default: []
+          minItems: 1
+          nullable: true
       additionalProperties: true
       required:
         - subject
@@ -1260,6 +1273,7 @@ components:
             descriptive phrase here and submit the new type for consideration
             by the appropriate authority.
           example: EDAM:data_1187
+          type: string
           nullable: true
         attribute_source:
           type: string
@@ -1292,6 +1306,7 @@ components:
           items:
             $ref: '#/components/schemas/Attribute'
           nullable: true
+          minItems: 1
       required:
         - attribute_type_id
         - value
@@ -1336,12 +1351,14 @@ components:
             $ref: '#/components/schemas/Attribute'
           nullable: true
           type: array
+          minItems: 1
         qualifiers:
           description: >-
             A set of Qualifiers that act together to add nuance
             or detail to the statement expressed in an Edge.
           items:
             $ref: '#/components/schemas/Qualifier'
+          minItems: 1
           nullable: true
           type: array
         sources:
@@ -1508,6 +1525,7 @@ components:
           items:
             $ref: '#/components/schemas/MetaAttribute'
           nullable: true
+          minItems: 1
       required:
         - id_prefixes
       additionalProperties: false
@@ -1549,11 +1567,13 @@ components:
           items:
             $ref: '#/components/schemas/MetaAttribute'
           nullable: true
+          minItems: 1
         qualifiers:
           description: >-
             Qualifiers that are possible to be found on this edge type.
           items:
             $ref: '#/components/schemas/MetaQualifier'
+          minItems: 1
           nullable: true
           type: array
         association:
@@ -1587,6 +1607,8 @@ components:
           type: array
           description: >-
                 The list of values that are possible for this qualifier.
+          nullable: true
+          minItems: 1
           items:
             type: string
             example: [expression, activity, abundance, degradation]
@@ -1621,6 +1643,7 @@ components:
             Indicates whether this attribute can be used as a query
             constraint.
           default: false
+          nullable: true
         constraint_name:
           type: string
           description: >-
@@ -1658,6 +1681,7 @@ components:
         not:
           type: boolean
           default: false
+          nullable: true
         operator:
           type: string
           description: >-
@@ -1708,6 +1732,7 @@ components:
             property. The Units of Measurement Ontology (UO) should be used
             if possible. The unit_id MUST be provided for (lists of)
             numerical values that correspond to a quantity that has units.
+          type: string
           nullable: true
         unit_name:
           example: kilodalton
@@ -1717,6 +1742,7 @@ components:
             property. The Units of Measurement Ontology (UO) SHOULD be used
             if possible. This property SHOULD be provided if a unit_id is
             provided. This is redundant but recommended for human readability.
+          type: string
           nullable: true
       required:
         - name
@@ -1749,6 +1775,7 @@ components:
         upstream_resource_ids:
           type: array
           nullable: true
+          minItems: 1
           items:
             $ref: '#/components/schemas/CURIE'
           description: >-
@@ -1764,6 +1791,7 @@ components:
         source_record_urls:
           type: array
           nullable: true
+          minItems: 1
           items: 
             type: string
           description: >-
