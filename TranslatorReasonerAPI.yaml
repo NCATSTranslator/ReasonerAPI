@@ -267,7 +267,6 @@ components:
         message:
           oneOf:
             - $ref: '#/components/schemas/Message'
-          nullable: false
           description: >-
             The query Message is a serialization of the user request. Content
             of the Message object depends on the intended TRAPI operation. For
@@ -315,7 +314,6 @@ components:
       properties:
         callback:
           type: string
-          nullable: false
           format: uri
           pattern: ^https?://
           description: >-
@@ -330,7 +328,6 @@ components:
         message:
           oneOf:
             - $ref: '#/components/schemas/Message'
-          nullable: false
           description: >-
             The query Message is a serialization of the user request. Content
             of the Message object depends on the intended TRAPI operation. For
@@ -396,7 +393,6 @@ components:
             the job.
           type: string
           example: rXEOAosN3L
-          nullable: false
       additionalProperties: true
       required:
         - job_id
@@ -412,14 +408,12 @@ components:
             Queued, Running, Completed, Failed
           type: string
           example: Running
-          nullable: false
         description:
           description: >-
             A brief human-readable description of the current state
             or summary of the problem if the status is Failed.
           type: string
           example: Callback URL returned 500
-          nullable: false
         logs:
           description: >-
             A list of LogEntry items, containing errors, warnings, debugging
@@ -431,7 +425,6 @@ components:
           items:
             $ref: '#/components/schemas/LogEntry'
           minItems: 1
-          nullable: false
         response_url:
           description: >-
             Optional URL that can be queried to restrieve the full TRAPI
@@ -460,7 +453,6 @@ components:
             graph, and results).
           oneOf:
             - $ref: '#/components/schemas/Message'
-          nullable: false
         status:
           description: >-
             One of a standardized set of short codes,
@@ -578,7 +570,6 @@ components:
             the timezone offset must be provided
             (e.g. 2020-09-03T18:13:49-04:00).
           example: '2020-09-03T18:13:49+00:00'
-          nullable: false
         level:
           oneOf:
             - $ref: '#/components/schemas/LogLevel'
@@ -593,7 +584,6 @@ components:
         message:
           type: string
           description: A human-readable log message
-          nullable: false
       additionalProperties: true
       required:
         - timestamp
@@ -629,7 +619,6 @@ components:
               $ref: '#/components/schemas/NodeBinding'
             minItems: 1
           minProperties: 1
-          nullable: false 
         analyses:
           type: array
           description: >-
@@ -640,7 +629,6 @@ components:
               - $ref: '#/components/schemas/Analysis'
               - $ref: '#/components/schemas/PathfinderAnalysis'
           minItems: 1
-          nullable: false 
       additionalProperties: true
       required:
         - node_bindings
@@ -658,7 +646,6 @@ components:
         id:
           oneOf:
             - $ref: '#/components/schemas/CURIE'
-          nullable: false
           description: >-
             The CURIE of a Node within the Knowledge Graph.
         query_id:
@@ -766,7 +753,6 @@ components:
                   $ref: '#/components/schemas/EdgeBinding'
                 minItems: 1
               minProperties: 1
-              nullable: false
     PathfinderAnalysis:
       allOf: 
         - $ref: '#/components/schemas/BaseAnalysis'
@@ -787,7 +773,6 @@ components:
                   $ref: '#/components/schemas/PathBinding'
                 minItems: 1
               minProperties: 1
-              nullable: false
     EdgeBinding:
       type: object
       description: >-
@@ -802,7 +787,6 @@ components:
         id:
           type: string
           description: The key identifier of a specific KnowledgeGraph Edge.
-          nullable: false
         attributes:
           type: array
           description: >-
@@ -828,7 +812,6 @@ components:
         id:
           type: string
           description: The key identifier of a specific auxiliary graph.
-          nullable: false
       additionalProperties: true
       required:
         - id
@@ -854,7 +837,6 @@ components:
             between the edges that form this Auxiliary Graph.
           items:
             type: string
-          nullable: false
           minItems: 1
         attributes:
           type: array
@@ -885,7 +867,6 @@ components:
           additionalProperties:
             $ref: '#/components/schemas/Node'
           minProperties: 1
-          nullable: false
         edges:
           type: object
           description: >-
@@ -894,7 +875,6 @@ components:
           additionalProperties:
             $ref: '#/components/schemas/Edge'
           minProperties: 1
-          nullable: false
       additionalProperties: true
       required:
         - nodes
@@ -915,7 +895,6 @@ components:
           additionalProperties:
             $ref: '#/components/schemas/QNode'
           minProperties: 1
-          nullable: false
       additionalProperties: true
       required:
         - nodes
@@ -939,7 +918,6 @@ components:
               additionalProperties:
                 $ref: '#/components/schemas/QEdge'
               minProperties: 1
-              nullable: false
     PathfinderQueryGraph:
       allOf: 
         - $ref: '#/components/schemas/BaseQueryGraph'
@@ -961,7 +939,6 @@ components:
                 $ref: '#/components/schemas/QPath'
               minProperties: 1
               maxProperties: 1
-              nullable: false
     QNode:
       type: object
       description: A node in the QueryGraph used to represent an entity in a
@@ -1079,7 +1056,6 @@ components:
             Corresponds to the map key identifier of the
             subject concept node anchoring the query filter
             pattern for the query relationship edge.
-          nullable: false
         object:
           type: string
           example: https://www.uniprot.org/uniprot/P00738
@@ -1087,7 +1063,6 @@ components:
             Corresponds to the map key identifier of the
             object concept node anchoring the query filter
             pattern for the query relationship edge.
-          nullable: false
         attribute_constraints:
           type: array
           description: >-
@@ -1130,14 +1105,12 @@ components:
             Corresponds to the map key identifier of the subject concept node for
             the start of the queried path.
           example: n0
-          nullable: false
         object:
           type: string
           description: >-
             Corresponds to the map key identifier of the object concept node for
             the end of the queried path.
           example: n1
-          nullable: false
         predicates:
           type: array
           description: >-
@@ -1204,7 +1177,6 @@ components:
           items:
             $ref: '#/components/schemas/BiolinkEntity'
           minItems: 1
-          nullable: false
         attributes:
           type: array
           description: A list of attributes describing the node
@@ -1262,7 +1234,6 @@ components:
           description: >-
             Value of the attribute. May be any data type, including a list.
           example: 0.000153
-          nullable: false
         value_type_id:
           oneOf:
             - $ref: '#/components/schemas/CURIE'
@@ -1328,7 +1299,6 @@ components:
           example: biolink:gene_associated_with_condition
           oneOf:
             - $ref: '#/components/schemas/BiolinkPredicate'
-          nullable: false
         subject:
           description: >-
             Corresponds to the map key CURIE of the
@@ -1336,7 +1306,6 @@ components:
           example: MONDO:0011382
           oneOf:
             - $ref: '#/components/schemas/CURIE'
-          nullable: false
         object:
           description: >-
             Corresponds to the map key CURIE of the
@@ -1344,7 +1313,6 @@ components:
           example: UniProtKB:P00738
           oneOf:
             - $ref: '#/components/schemas/CURIE'
-          nullable: false
         attributes:
           description: A list of additional attributes for this edge
           items:
@@ -1371,7 +1339,6 @@ components:
           items:
             $ref: '#/components/schemas/RetrievalSource'
           minItems: 1
-          nullable: false
       additionalProperties: false
       required:
         - object
@@ -1399,7 +1366,6 @@ components:
             which have slot names with the suffix string 'qualifier'.
           pattern: ^biolink:[a-z][a-z_]*$
           example: biolink:subject_aspect_qualifier
-          nullable: false
         qualifier_value:
           type: string
           description: >-
@@ -1411,7 +1377,6 @@ components:
             type is generally going to be constrained by the category
             of edge (i.e. biolink:Association subtype) of the (Q)Edge.
           example: expression
-          nullable: false
       required:
         - qualifier_type_id
         - qualifier_value
@@ -1435,7 +1400,6 @@ components:
           items:
             $ref: '#/components/schemas/Qualifier'
           minItems: 1
-          nullable: false
       required:
         - qualifier_set
       type: object
@@ -1489,7 +1453,6 @@ components:
           additionalProperties:
             $ref: '#/components/schemas/MetaNode'
           minProperties: 1
-          nullable: false
         edges:
           type: array
           description: >-
@@ -1499,7 +1462,6 @@ components:
           items:
             $ref: '#/components/schemas/MetaEdge'
           minItems: 1
-          nullable: false
       required:
         - nodes
         - edges
@@ -1516,7 +1478,6 @@ components:
           items:
             type: string
           minItems: 1
-          nullable: false
           example: [CHEMBL.COMPOUND, INCHIKEY]
         attributes:
           type: array
@@ -1602,7 +1563,6 @@ components:
           description: >-
             The CURIE of the qualifier type.
           example: biolink:subject_aspect_qualifier
-          nullable: false
         applicable_values:
           type: array
           description: >-
@@ -1677,7 +1637,6 @@ components:
             as the 'id'. This is redundant but required for human
             readability.
           example: molecular mass
-          nullable: false
         not:
           type: boolean
           default: false
@@ -1715,7 +1674,6 @@ components:
             - ===
         value:
           example: 57.0
-          nullable: false
           description: >-
             Value of the attribute. May be any data type, including a list.
             If the value is a list and there are multiple items, at least one
@@ -1764,7 +1722,6 @@ components:
             of knowledge expressed in an Edge, or a source of data used to
             generate this knowledge.
           example: infores:drugbank
-          nullable: false
         resource_role:
           $ref: '#/components/schemas/ResourceRoleEnum'
           description: >-
