@@ -819,6 +819,7 @@ components:
         id:
           type: string
           description: The key identifier of a specific auxiliary graph.
+          nullable: false
       additionalProperties: true
       required:
         - id
@@ -1248,6 +1249,7 @@ components:
           description: >-
             Value of the attribute. May be any data type, including a list.
           example: 0.000153
+          nullable: false
         value_type_id:
           oneOf:
             - $ref: '#/components/schemas/CURIE'
@@ -1652,6 +1654,7 @@ components:
             as the 'id'. This is redundant but required for human
             readability.
           example: molecular mass
+          nullable: false
         not:
           type: boolean
           default: false
@@ -1688,6 +1691,7 @@ components:
             - ===
         value:
           example: 57.0
+          nullable: false
           description: >-
             Value of the attribute. May be any data type, including a list.
             If the value is a list and there are multiple items, at least one
