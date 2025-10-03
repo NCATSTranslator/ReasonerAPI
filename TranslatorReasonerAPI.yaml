@@ -479,7 +479,7 @@ components:
           items:
             $ref: '#/components/schemas/LogEntry'
           minItems: 0
-          nullable: false
+          nullable: true
         workflow:
           description: List of workflow steps that were executed.
           oneOf:
@@ -1571,6 +1571,7 @@ components:
             correctly.
           example: 'biolink:ChemicalToGeneAssociation'
           $ref: '#/components/schemas/BiolinkEntity'
+          nullable: true
       required:
         - subject
         - predicate
@@ -1587,6 +1588,7 @@ components:
           nullable: false
         applicable_values:
           type: array
+          nullable: true
           description: >-
                 The list of values that are possible for this qualifier.
           items:
