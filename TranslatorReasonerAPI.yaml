@@ -681,7 +681,6 @@ components:
       additionalProperties: true
       required:
         - id
-        - attributes
     BaseAnalysis:
       type: object
       description: >-
@@ -801,7 +800,6 @@ components:
       additionalProperties: true
       required:
         - id
-        - attributes
     PathBinding:
       type: object
       description: >-
@@ -851,7 +849,6 @@ components:
       additionalProperties: true
       required:
         - edges
-        - attributes
     KnowledgeGraph:
       type: object
       description: >-
@@ -1189,7 +1186,6 @@ components:
           nullable: true        
       required:
         - categories
-        - attributes
       additionalProperties: false
     Attribute:
       type: object
