@@ -548,6 +548,7 @@ components:
           additionalProperties:
             $ref: '#/components/schemas/AuxiliaryGraph'
           nullable: true
+          minProperties: 1
       additionalProperties: false
     LogEntry:
       description: >-
@@ -714,6 +715,7 @@ components:
             reasoning service. Each item in the list is the key of a
             single Auxiliary Graph.
           nullable: true
+          minItems: 1
           items:
             type: string
         scoring_method:
@@ -729,6 +731,7 @@ components:
           items:
             $ref: '#/components/schemas/Attribute'
           nullable: true
+          minItems: 1
       additionalProperties: true
       required:
         - resource_id
@@ -1012,6 +1015,7 @@ components:
             itself. This field MUST NOT be used under a set_interpretation 
             of BATCH.
           nullable: true
+          minItems: 1
           items:
             $ref: '#/components/schemas/CURIE'
         constraints:
@@ -1291,6 +1295,7 @@ components:
           items:
             $ref: '#/components/schemas/Attribute'
           nullable: true
+          minItems: 1
       required:
         - attribute_type_id
         - value
@@ -1334,6 +1339,7 @@ components:
           items:
             $ref: '#/components/schemas/Attribute'
           nullable: true
+          minItems: 1
           type: array
         qualifiers:
           description: >-
@@ -1342,6 +1348,7 @@ components:
           items:
             $ref: '#/components/schemas/Qualifier'
           nullable: true
+          minItems: 1
           type: array
         sources:
           type: array
@@ -1507,6 +1514,7 @@ components:
           items:
             $ref: '#/components/schemas/MetaAttribute'
           nullable: true
+          minItems: 1
       required:
         - id_prefixes
       additionalProperties: false
@@ -1551,12 +1559,14 @@ components:
           items:
             $ref: '#/components/schemas/MetaAttribute'
           nullable: true
+          minItems: 1
         qualifiers:
           description: >-
             Qualifiers that are possible to be found on this edge type.
           items:
             $ref: '#/components/schemas/MetaQualifier'
           nullable: true
+          minItems: 1
           type: array
         association:
           description: >-
@@ -1589,6 +1599,7 @@ components:
         applicable_values:
           type: array
           nullable: true
+          minItems: 1
           description: >-
                 The list of values that are possible for this qualifier.
           items:
@@ -1757,6 +1768,7 @@ components:
         upstream_resource_ids:
           type: array
           nullable: true
+          minItems: 1
           items:
             $ref: '#/components/schemas/CURIE'
           description: >-
@@ -1772,6 +1784,7 @@ components:
         source_record_urls:
           type: array
           nullable: true
+          minItems: 1
           items: 
             type: string
           description: >-
