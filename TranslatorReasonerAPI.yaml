@@ -695,6 +695,7 @@ components:
         resource_id:
           $ref: '#/components/schemas/CURIE'
           description: The id of the resource generating this Analysis
+          nullable: false
         score:
           type: number
           format: float
@@ -742,6 +743,7 @@ components:
           properties:
             edge_bindings:
               type: object
+              nullable: false
               description: >-
                 The dictionary of input Query Graph to Knowledge Graph edge
                 bindings where the dictionary keys are the key identifiers of
@@ -765,6 +767,7 @@ components:
           properties:
             path_bindings:
               type: object
+              nullable: false
               description: >-
                 The dictionary of input Query Graph paths to Analysis paths, specifically only for pathfinder queries.
               additionalProperties:
@@ -811,6 +814,7 @@ components:
         id:
           type: string
           description: The key identifier of a specific auxiliary graph.
+          nullable: false
       additionalProperties: true
       required:
         - id
@@ -861,6 +865,7 @@ components:
       properties:
         nodes:
           type: object
+          nullable: false
           description: >-
             Dictionary of Node instances used in the KnowledgeGraph,
             referenced elsewhere in the TRAPI output by the dictionary key.
@@ -868,6 +873,7 @@ components:
             $ref: '#/components/schemas/Node'
         edges:
           type: object
+          nullable: false
           description: >-
             Dictionary of Edge instances used in the KnowledgeGraph,
             referenced elsewhere in the TRAPI output by the dictionary key.
@@ -886,6 +892,7 @@ components:
       properties:
         nodes:
           type: object
+          nullable: false
           description: >-
             The node specifications. The keys of this map are unique node
             identifiers and the corresponding values include the constraints
@@ -907,6 +914,7 @@ components:
           properties:
             edges:
               type: object
+              nullable: false
               description: >-
                 The edge specifications. The keys of this map are unique edge
                 identifiers and the corresponding values include the constraints
@@ -926,6 +934,7 @@ components:
           properties:
             paths:
               type: object
+              nullable: false
               description: >-
                 The QueryGraph path specification, used only for pathfinder type
                 queries. The keys of this map are unique path identifiers and the
@@ -1045,6 +1054,7 @@ components:
           nullable: true
         subject:
           type: string
+          nullable: false
           example: https://omim.org/entry/603903
           description: >-
             Corresponds to the map key identifier of the
@@ -1052,6 +1062,7 @@ components:
             pattern for the query relationship edge.
         object:
           type: string
+          nullable: false
           example: https://www.uniprot.org/uniprot/P00738
           description: >-
             Corresponds to the map key identifier of the
@@ -1093,12 +1104,14 @@ components:
       properties:
         subject:
           type: string
+          nullable: false
           description: >-
             Corresponds to the map key identifier of the subject concept node for
             the start of the queried path.
           example: n0
         object:
           type: string
+          nullable: false
           description: >-
             Corresponds to the map key identifier of the object concept node for
             the end of the queried path.
@@ -1200,6 +1213,7 @@ components:
       properties:
         attribute_type_id:
           $ref: '#/components/schemas/CURIE'
+          nullable: false
           description: >-
             The 'key' of the attribute object, holding a CURIE of an ontology
             property defining the attribute (preferably the CURIE of a
@@ -1227,6 +1241,7 @@ components:
           description: >-
             Value of the attribute. May be any data type, including a list.
           example: 0.000153
+          nullable: false
         value_type_id:
           oneOf:
             - $ref: '#/components/schemas/CURIE'
@@ -1440,6 +1455,7 @@ components:
       properties:
         nodes:
           type: object
+          nullable: false
           description: >-
             Collection of the most specific node categories provided by
             this TRAPI web service, indexed by Biolink class CURIEs.
@@ -1449,6 +1465,7 @@ components:
             $ref: '#/components/schemas/MetaNode'
         edges:
           type: array
+          nullable: false
           description: >-
             List of the most specific edges/predicates provided by this TRAPI
             web service. A predicate is only exposed here if there is an edge
@@ -1465,6 +1482,7 @@ components:
       properties:
         id_prefixes:
           type: array
+          nullable: false
           description: >-
             List of CURIE prefixes for the node category that this TRAPI web
             service understands and accepts on the input.
@@ -1490,16 +1508,19 @@ components:
       properties:
         subject:
           $ref: '#/components/schemas/BiolinkEntity'
+          nullable: false
           description: >-
             Subject node category of this relationship edge.
           example: biolink:ChemicalEntity
         predicate:
           $ref: '#/components/schemas/BiolinkPredicate'
+          nullable: false
           description: >-
             Biolink relationship between the subject and object categories.
           example: biolink:affects
         object:
           $ref: '#/components/schemas/BiolinkEntity'
+          nullable: false
           description: >-
             Object node category of this relationship edge.
           example: biolink:Protein
@@ -1568,6 +1589,7 @@ components:
       properties:
         attribute_type_id:
           $ref: '#/components/schemas/CURIE'
+          nullable: false
           description: >-
             Type of an attribute provided by this TRAPI web service
             (preferably the CURIE of a Biolink association slot)
@@ -1617,8 +1639,10 @@ components:
             submit the new type for consideration by the appropriate
             authority.
           example: EDAM:data_0844
+          nullable: false
         name:
           type: string
+          nullable: false
           description: >-
             Human-readable name or label for the constraint concept.
             If appropriate, it SHOULD be the term name of the CURIE used
@@ -1630,6 +1654,7 @@ components:
           default: false
         operator:
           type: string
+          nullable: false
           description: >-
             Relationship between the database value and the constraint value
             for the specified id. The operators ==, >, and < mean
@@ -1660,6 +1685,7 @@ components:
             - matches
             - ===
         value:
+          nullable: false
           example: 57.0
           description: >-
             Value of the attribute. May be any data type, including a list.
@@ -1710,6 +1736,7 @@ components:
           nullable: false
         resource_role:
           $ref: '#/components/schemas/ResourceRoleEnum'
+          nullable: false
           description: >-
             The role played by the InformationResource in serving as a
             source for an Edge. Note that a given Edge should have one
