@@ -677,7 +677,7 @@ components:
           items:
             $ref: '#/components/schemas/Attribute'
           minItems: 0
-          nullable: false
+          nullable: true
       additionalProperties: true
       required:
         - id
@@ -796,7 +796,7 @@ components:
           items:
             $ref: '#/components/schemas/Attribute'
           minItems: 0
-          nullable: false
+          nullable: true
       additionalProperties: true
       required:
         - id
@@ -845,7 +845,7 @@ components:
           items:
             $ref: '#/components/schemas/Attribute'
           minItems: 0
-          nullable: false
+          nullable: true
       additionalProperties: true
       required:
         - edges
@@ -1176,7 +1176,7 @@ components:
           items:
             $ref: '#/components/schemas/Attribute'
           minItems: 0
-          nullable: false
+          nullable: true
         is_set:
           type: boolean
           description: >-
