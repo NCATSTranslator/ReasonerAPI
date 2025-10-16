@@ -677,11 +677,10 @@ components:
           items:
             $ref: '#/components/schemas/Attribute'
           minItems: 0
-          nullable: false
+          nullable: true
       additionalProperties: true
       required:
         - id
-        - attributes
     BaseAnalysis:
       type: object
       description: >-
@@ -797,11 +796,10 @@ components:
           items:
             $ref: '#/components/schemas/Attribute'
           minItems: 0
-          nullable: false
+          nullable: true
       additionalProperties: true
       required:
         - id
-        - attributes
     PathBinding:
       type: object
       description: >-
@@ -847,11 +845,10 @@ components:
           items:
             $ref: '#/components/schemas/Attribute'
           minItems: 0
-          nullable: false
+          nullable: true
       additionalProperties: true
       required:
         - edges
-        - attributes
     KnowledgeGraph:
       type: object
       description: >-
@@ -1179,7 +1176,7 @@ components:
           items:
             $ref: '#/components/schemas/Attribute'
           minItems: 0
-          nullable: false
+          nullable: true
         is_set:
           type: boolean
           description: >-
@@ -1189,7 +1186,6 @@ components:
           nullable: true        
       required:
         - categories
-        - attributes
       additionalProperties: false
     Attribute:
       type: object
