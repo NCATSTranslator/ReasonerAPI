@@ -899,7 +899,6 @@ components:
         nodes:
           type: object
           nullable: false
-          minProperties: 1
           description: >-
             The node specifications. The keys of this map are unique node
             identifiers and the corresponding values include the constraints
@@ -922,7 +921,6 @@ components:
             edges:
               type: object
               nullable: false
-              minProperties: 1
               description: >-
                 The edge specifications. The keys of this map are unique edge
                 identifiers and the corresponding values include the constraints
