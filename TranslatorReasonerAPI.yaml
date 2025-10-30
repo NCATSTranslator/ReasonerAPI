@@ -872,7 +872,6 @@ components:
         nodes:
           type: object
           nullable: false
-          minProperties: 1
           description: >-
             Dictionary of Node instances used in the KnowledgeGraph,
             referenced elsewhere in the TRAPI output by the dictionary key.
@@ -881,7 +880,6 @@ components:
         edges:
           type: object
           nullable: false
-          minProperties: 1
           description: >-
             Dictionary of Edge instances used in the KnowledgeGraph,
             referenced elsewhere in the TRAPI output by the dictionary key.
