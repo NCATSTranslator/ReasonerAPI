@@ -1478,7 +1478,6 @@ components:
         edges:
           type: array
           nullable: false
-          minItems: 1
           description: >-
             List of the most specific edges/predicates provided by this TRAPI
             web service. A predicate is only exposed here if there is an edge
