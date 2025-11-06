@@ -669,17 +669,6 @@ components:
             this query_id MUST be provided. In other cases, there is no
             ambiguity, and this query_id SHOULD NOT be provided.
           nullable: true
-        attributes:
-          type: array
-          description: >-
-            A list of attributes providing further information about the
-            node binding. This is not intended for capturing node attributes
-            and should only be used for properties that vary from result to
-            result.
-          items:
-            $ref: '#/components/schemas/Attribute'
-          minItems: 0
-          nullable: true
       additionalProperties: true
       required:
         - id
@@ -795,17 +784,6 @@ components:
           type: string
           description: The key identifier of a specific KnowledgeGraph Edge.
           nullable: false
-        attributes:
-          type: array
-          description: >-
-            A list of attributes providing further information about the
-            edge binding. This is not intended for capturing edge attributes
-            and should only be used for properties that vary from result to
-            result.
-          items:
-            $ref: '#/components/schemas/Attribute'
-          minItems: 0
-          nullable: true
       additionalProperties: true
       required:
         - id
@@ -848,14 +826,6 @@ components:
             type: string
           nullable: false
           minItems: 1
-        attributes:
-          type: array
-          description: >-
-            Attributes of the Auxiliary Graph
-          items:
-            $ref: '#/components/schemas/Attribute'
-          minItems: 0
-          nullable: true
       additionalProperties: true
       required:
         - edges
