@@ -277,19 +277,16 @@ components:
           description: The least critical level of logs to return
           oneOf:
             - $ref: '#/components/schemas/LogLevel'
-          nullable: true
         workflow:
           description: List of workflow steps to be executed.
           oneOf:
             - $ref: https://standards.ncats.io/workflow/1.3.5/schema
-          nullable: true
         submitter:
           type: string
           description: >-
             Any string for self-identifying the submitter of a query. The
             purpose of this optional field is to aid in the tracking of
             the source of queries for development and issue resolution.
-          nullable: true
         bypass_cache:
           type: boolean
           default: false
@@ -336,19 +333,16 @@ components:
           description: The least critical level of logs to return
           oneOf:
             - $ref: '#/components/schemas/LogLevel'
-          nullable: true
         workflow:
           description: List of workflow steps to be executed.
           oneOf:
             - $ref: https://standards.ncats.io/workflow/1.3.5/schema
-          nullable: true
         submitter:
           type: string
           description: >-
             Any string for self-identifying the submitter of a query. The
             purpose of this optional field is to aid in the tracking of
             the source of queries for development and issue resolution.
-          nullable: true
         bypass_cache:
           type: boolean
           default: false
@@ -375,14 +369,12 @@ components:
             e.g. Accepted, QueryNotTraversable, KPsNotAvailable
           type: string
           example: Accepted
-          nullable: true
         description:
           description: >-
             A brief human-readable description of the result of the
             async_query submission.
           type: string
           example: Async_query has been queued
-          nullable: true
         job_id:
           description: >-
             An identifier for the submitted job that can be used with
@@ -428,7 +420,6 @@ components:
             Response.
           type: string
           example: https://arax.ncats.io/api/arax/v1.3/response/116481
-          nullable: true
       additionalProperties: true
       required:
         - status
@@ -456,12 +447,10 @@ components:
             e.g. Success, QueryNotTraversable, KPsNotAvailable
           type: string
           example: Success
-          nullable: true
         description:
           description: A brief human-readable description of the outcome
           type: string
           example: Success. 42 results found.
-          nullable: true
         logs:
           description: >-
             A list of LogEntry items, containing errors, warnings, debugging
@@ -471,22 +460,18 @@ components:
           items:
             $ref: '#/components/schemas/LogEntry'
           minItems: 1
-          nullable: true
         workflow:
           description: List of workflow steps that were executed.
           oneOf:
             - $ref: https://standards.ncats.io/workflow/1.3.5/schema
-          nullable: true
         schema_version:
           type: string
           example: 1.4.0
           description: Version label of the TRAPI schema used in this document
-          nullable: true
         biolink_version:
           type: string
           example: 3.1.2
           description: Version label of the Biolink model used in this document
-          nullable: true
       additionalProperties: true
       required:
         - message
@@ -514,7 +499,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Result'
-          nullable: true
         query_graph:
           description: >-
             QueryGraph object that contains a serialization of a query in the
@@ -522,14 +506,12 @@ components:
           oneOf:
             - $ref: '#/components/schemas/QueryGraph'
             - $ref: '#/components/schemas/PathfinderQueryGraph'
-          nullable: true
         knowledge_graph:
           description: >-
             KnowledgeGraph object that contains lists of nodes and edges
             in the thought graph corresponding to the message
           oneOf:
             - $ref: '#/components/schemas/KnowledgeGraph'
-          nullable: true
         auxiliary_graphs:
           type: object
           description: >-
@@ -538,7 +520,6 @@ components:
             the dictionary key.
           additionalProperties:
             $ref: '#/components/schemas/AuxiliaryGraph'
-          nullable: true
           minProperties: 1
       additionalProperties: false
     LogEntry:
@@ -567,13 +548,11 @@ components:
         level:
           oneOf:
             - $ref: '#/components/schemas/LogLevel'
-          nullable: true
         code:
           type: string
           description: >-
             One of a standardized set of short codes
             e.g. QueryNotTraversable, KPNotAvailable, KPResponseMalformed
-          nullable: true
         message:
           type: string
           description: A human-readable log message
@@ -654,7 +633,6 @@ components:
             the NodeBinding.id being a descendant of a QNode.id), then
             this query_id MUST be provided. In other cases, there is no
             ambiguity, and this query_id SHOULD NOT be provided.
-          nullable: true
         attributes:
           type: array
           description: >-
@@ -665,7 +643,6 @@ components:
           items:
             $ref: '#/components/schemas/Attribute'
           minItems: 0
-          nullable: true
       additionalProperties: true
       required:
         - id
@@ -691,7 +668,6 @@ components:
             A numerical score associated with this result indicating the
             relevance or confidence of this result relative to others in the
             returned set. Higher MUST be better.
-          nullable: true
         support_graphs:
           type: array
           description: >-
@@ -699,7 +675,6 @@ components:
             that supported the analysis of a Result as performed by the
             reasoning service. Each item in the list is the key of a
             single Auxiliary Graph.
-          nullable: true
           minItems: 1
           items:
             type: string
@@ -708,14 +683,12 @@ components:
           description: >-
             An identifier and link to an explanation for the method used
             to generate the score
-          nullable: true
         attributes:
           type: array
           description: >-
             The attributes of this particular Analysis.
           items:
             $ref: '#/components/schemas/Attribute'
-          nullable: true
       additionalProperties: true
       required:
         - resource_id
@@ -786,7 +759,6 @@ components:
           items:
             $ref: '#/components/schemas/Attribute'
           minItems: 0
-          nullable: true
       additionalProperties: true
       required:
         - id
@@ -834,7 +806,6 @@ components:
           items:
             $ref: '#/components/schemas/Attribute'
           minItems: 0
-          nullable: true
       additionalProperties: true
       required:
         - edges
@@ -949,7 +920,6 @@ components:
             Note also that downstream systems MUST re-use the original set UUID 
             in the messages they create/send, which will facilitate merging or 
             caching operations.
-          nullable: true
         categories:
           type: array
           description: >-
@@ -959,7 +929,6 @@ components:
           items:
             $ref: '#/components/schemas/BiolinkEntity'
           minItems: 1
-          nullable: true
         set_interpretation:
           type: string
           description: >-
@@ -975,7 +944,6 @@ components:
             - BATCH
             - ALL
             - MANY
-          nullable: true
         member_ids:
           type: array
           description: >-
@@ -984,7 +952,6 @@ components:
             or ALL, when the 'ids' field holds a UUID representing the set 
             itself. This field MUST NOT be used under a set_interpretation 
             of BATCH.
-          nullable: true
           minItems: 1
           items:
             $ref: '#/components/schemas/CURIE'
@@ -1021,7 +988,6 @@ components:
             'lookup'. This feature is currently experimental and may be
             further extended in the future.
           example: lookup
-          nullable: true
           type: string
         predicates:
           type: array
@@ -1032,7 +998,6 @@ components:
           items:
             $ref: '#/components/schemas/BiolinkPredicate'
           minItems: 1
-          nullable: true
         subject:
           type: string
           example: https://omim.org/entry/603903
@@ -1106,7 +1071,6 @@ components:
           items:
             $ref: '#/components/schemas/BiolinkPredicate'
           minItems: 1
-          nullable: true
         constraints:
           type: array
           description: >-
@@ -1116,7 +1080,6 @@ components:
           items:
             $ref: '#/components/schemas/PathConstraint'
           minItems: 1
-          nullable: true
       additionalProperties: true
       required:
         - object
@@ -1136,7 +1099,6 @@ components:
           items:
             $ref: '#/components/schemas/BiolinkEntity'
           minItems: 1
-          nullable: true
       additionalProperties: true
     Node:
       type: object
@@ -1149,7 +1111,6 @@ components:
           type: string
           example: Haptoglobin
           description: Formal name of the entity
-          nullable: true
         categories:
           type: array
           description: >-
@@ -1164,14 +1125,12 @@ components:
           description: A list of attributes describing the node
           items:
             $ref: '#/components/schemas/Attribute'
-          nullable: true
         is_set:
           type: boolean
           description: >-
             Indicates that the node represents a set of entities.
             If this property is missing or null, it is assumed to be
             false.
-          nullable: true        
       required:
         - categories
       additionalProperties: false
@@ -1210,7 +1169,6 @@ components:
             but the contents of the field could also be a CURIE of a third
             party ontology term.
           example: p-value
-          nullable: true
         value:
           description: >-
             Value of the attribute. May be any data type, including a list.
@@ -1225,7 +1183,6 @@ components:
             descriptive phrase here and submit the new type for consideration
             by the appropriate authority.
           example: EDAM:data_1187
-          nullable: true
         attribute_source:
           type: string
           description: >-
@@ -1233,7 +1190,6 @@ components:
             attribute object. Use a CURIE or namespace designator for this
             resource where possible.
           example: UniProtKB
-          nullable: true
         value_url:
           type: string
           description: >-
@@ -1241,13 +1197,11 @@ components:
             additional information about an  attribute's value (not the node
             or the edge fom which it hangs).
           example: https://pubmed.ncbi.nlm.nih.gov/32529952
-          nullable: true
         description:
           type: string
           description: >-
             Human-readable description for the attribute and its value.
           example: Assertion Authored By Dr. Trans L. Ator
-          nullable: true
         attributes:
           type: array
           description: >-
@@ -1256,7 +1210,6 @@ components:
             information about the parent attribute).
           items:
             $ref: '#/components/schemas/Attribute'
-          nullable: true
       required:
         - attribute_type_id
         - value
@@ -1296,7 +1249,6 @@ components:
           description: A list of additional attributes for this edge
           items:
             $ref: '#/components/schemas/Attribute'
-          nullable: true
           type: array
         qualifiers:
           description: >-
@@ -1304,7 +1256,6 @@ components:
             or detail to the statement expressed in an Edge.
           items:
             $ref: '#/components/schemas/Qualifier'
-          nullable: true
           minItems: 1
           type: array
         sources:
@@ -1462,7 +1413,6 @@ components:
             Node attributes provided by this TRAPI web service.
           items:
             $ref: '#/components/schemas/MetaAttribute'
-          nullable: true
       required:
         - id_prefixes
       additionalProperties: false
@@ -1495,7 +1445,6 @@ components:
           items:
             type: string
           minItems: 1
-          nullable: true
           type: array
         attributes:
           type: array
@@ -1503,13 +1452,11 @@ components:
             Edge attributes provided by this TRAPI web service.
           items:
             $ref: '#/components/schemas/MetaAttribute'
-          nullable: true
         qualifiers:
           description: >-
             Qualifiers that are possible to be found on this edge type.
           items:
             $ref: '#/components/schemas/MetaQualifier'
-          nullable: true
           minItems: 1
           type: array
         association:
@@ -1525,7 +1472,6 @@ components:
             correctly.
           example: 'biolink:ChemicalToGeneAssociation'
           $ref: '#/components/schemas/BiolinkEntity'
-          nullable: true
       required:
         - subject
         - predicate
@@ -1541,7 +1487,6 @@ components:
           example: biolink:subject_aspect_qualifier
         applicable_values:
           type: array
-          nullable: true
           minItems: 1
           description: >-
                 The list of values that are possible for this qualifier.
@@ -1564,14 +1509,12 @@ components:
           description: >-
             Source of an attribute provided by this TRAPI web service.
           example: infores:chembl
-          nullable: true
         original_attribute_names:
           type: array
           items:
             type: string
           description: >-
             Names of an the attribute as provided by the source.
-          nullable: true
           minItems: 1
         constraint_use:
           type: boolean
@@ -1585,7 +1528,6 @@ components:
             Human-readable name or label for the constraint concept.
             Required whenever constraint_use is true.
           example: p-value
-          nullable: true
       required:
         - attribute_type_id
     AttributeConstraint:
@@ -1664,7 +1606,6 @@ components:
             property. The Units of Measurement Ontology (UO) should be used
             if possible. The unit_id MUST be provided for (lists of)
             numerical values that correspond to a quantity that has units.
-          nullable: true
         unit_name:
           example: kilodalton
           description: >-
@@ -1673,7 +1614,6 @@ components:
             property. The Units of Measurement Ontology (UO) SHOULD be used
             if possible. This property SHOULD be provided if a unit_id is
             provided. This is redundant but recommended for human readability.
-          nullable: true
       required:
         - name
         - id
@@ -1703,7 +1643,6 @@ components:
             'aggregator' or 'supporting data' sources.
         upstream_resource_ids:
           type: array
-          nullable: true
           minItems: 1
           items:
             $ref: '#/components/schemas/CURIE'
@@ -1719,7 +1658,6 @@ components:
           example: ["infores:automat-mychem-info", "infores:molepro"]
         source_record_urls:
           type: array
-          nullable: true
           minItems: 1
           items: 
             type: string
