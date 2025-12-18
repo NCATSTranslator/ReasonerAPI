@@ -1013,6 +1013,7 @@ components:
             A list of attribute constraints applied to a query edge.
             If there are multiple items, they must all be true (equivalent
             to AND)
+          minItems: 1
           items:
             $ref: '#/components/schemas/AttributeConstraint'
         qualifiers:
@@ -1025,6 +1026,7 @@ components:
             object of this QEdge have multiple categories or multiple
             curies, then constraints.qualifiers MUST NOT be specified
             because these complex use cases are not supported at this time.
+          minItems: 1
           items:
             $ref: '#/components/schemas/QualifierSetConstraint'
         sources:
@@ -1044,6 +1046,7 @@ components:
                   description: >-
                     These SHOULD be infores CURIEs, so this is a subschema that
                     is more stringent than the one in AllowDenyConstraint.
+                  minItems: 1
                   items:
                     $ref: '#/components/schemas/CURIE'
                 primary_only:
@@ -1073,6 +1076,7 @@ components:
           - DENY
         values:
           type: array
+          minItems: 1
           items:
             type: string
       required:
