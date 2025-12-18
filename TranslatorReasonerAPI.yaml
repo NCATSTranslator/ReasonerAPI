@@ -1051,7 +1051,6 @@ components:
             are not required to conform to the given constraints.
           oneOf:
             - $ref: '#/components/schemas/QEdgeConstraints'
-          nullable: true
       additionalProperties: true
       required:
         - subject
@@ -1094,7 +1093,6 @@ components:
             CURIEs MUST be present.
             If `behavior` is set to "DENY", then ALL given infores CURIEs MUST NOT
             be present.
-          nullable: true
           allOf:
             - $ref: '#/components/schemas/AllowDenyConstraint'
             - type: object
