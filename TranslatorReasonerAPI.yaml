@@ -1046,7 +1046,7 @@ components:
         constraints:
           description: >-
             An object containing all constraints placed on the QEdge.
-            ALL edges bound to this QEdge MUST conform to the given constraints;
+            ALL edges bound to this QEdge MUST conform to ALL given constraints;
             underlying edges (such as those appearing in supporting graphs)
             are not required to conform to the given constraints.
           oneOf:
@@ -1060,7 +1060,7 @@ components:
       type: object
       description: >-
         A subschema for constraints that may be placed on a given QEdge.
-        ALL edges bound to the given QEdge MUST conform to the given constraints;
+        ALL edges bound to the given QEdge MUST conform to ALL given constraints;
         underlying edges (such as those appearing in supporting graphs)
         are not required to conform to the given constraints.
       minProperties: 1
@@ -1074,7 +1074,6 @@ components:
             to AND)
           items:
             $ref: '#/components/schemas/AttributeConstraint'
-          default: []
         qualifiers:
           type: array
           description: >-
@@ -1087,7 +1086,6 @@ components:
             because these complex use cases are not supported at this time.
           items:
             $ref: '#/components/schemas/QualifierSetConstraint'
-          default: []
         sources:
           description: >-
             A list of infores CURIEs which are either allowed or denied in the
@@ -1112,10 +1110,9 @@ components:
                   type: boolean
                   description: >-
                     When set to `false` (the default), the ALLOW/DENY constraint
-                    of the given values MUST be applied to ALL RetrievalSources in
-                    the sources of the bound Edge for that edge to validly be
-                    bound in a result.
-                    When set to `true`, the constraint SHOULD ONLY be applied to the
+                    of `values` applies to ALL RetrievalSources in
+                    the sources of the bound Edge.
+                    When set to `true`, the constraint ONLY applies to the
                     RetrievalSource with the resource_role primary_knowledge_source.
                   default: false
     AllowDenyConstraint:
