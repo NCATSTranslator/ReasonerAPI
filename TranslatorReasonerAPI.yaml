@@ -1063,6 +1063,8 @@ components:
         ALL edges bound to the given QEdge MUST conform to the given constraints;
         underlying edges (such as those appearing in supporting graphs)
         are not required to conform to the given constraints.
+      minProperties: 1
+      additionalProperties: true
       properties:
         attributes:
           type: array
