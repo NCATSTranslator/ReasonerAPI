@@ -633,16 +633,6 @@ components:
             the NodeBinding.id being a descendant of a QNode.id), then
             this query_id MUST be provided. In other cases, there is no
             ambiguity, and this query_id SHOULD NOT be provided.
-        attributes:
-          type: array
-          description: >-
-            A list of attributes providing further information about the
-            node binding. This is not intended for capturing node attributes
-            and should only be used for properties that vary from result to
-            result.
-          items:
-            $ref: '#/components/schemas/Attribute'
-          minItems: 0
       additionalProperties: true
       required:
         - id
@@ -749,16 +739,6 @@ components:
         id:
           type: string
           description: The key identifier of a specific KnowledgeGraph Edge.
-        attributes:
-          type: array
-          description: >-
-            A list of attributes providing further information about the
-            edge binding. This is not intended for capturing edge attributes
-            and should only be used for properties that vary from result to
-            result.
-          items:
-            $ref: '#/components/schemas/Attribute'
-          minItems: 0
       additionalProperties: true
       required:
         - id
@@ -799,13 +779,6 @@ components:
           items:
             type: string
           minItems: 1
-        attributes:
-          type: array
-          description: >-
-            Attributes of the Auxiliary Graph
-          items:
-            $ref: '#/components/schemas/Attribute'
-          minItems: 0
       additionalProperties: true
       required:
         - edges
