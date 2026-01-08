@@ -684,13 +684,13 @@ components:
       required:
         - resource_id
     Analysis:
-      allOf: 
+      allOf:
         - $ref: '#/components/schemas/BaseAnalysis'
         - type: object
           description: >-
             An analysis for results from a non-Pathfinder query SHOULD have
             edge_bindings and SHOULD NOT have path_bindings
-          required: 
+          required:
             - edge_bindings
           properties:
             edge_bindings:
@@ -708,13 +708,13 @@ components:
                 items:
                   $ref: '#/components/schemas/EdgeBinding'
     PathfinderAnalysis:
-      allOf: 
+      allOf:
         - $ref: '#/components/schemas/BaseAnalysis'
         - type: object
           description: >-
             An analysis for results from a Pathfinder query SHOULD have
             path_bindings and SHOULD NOT have edge_bindings
-          required: 
+          required:
             - path_bindings
           properties:
             path_bindings:
@@ -761,13 +761,13 @@ components:
       type: object
       description: >-
         A single AuxiliaryGraph instance that is used by Knowledge Graph
-        Edges, Result Analysis support graphs, and Path Bindings. 
-        Edges comprising an Auxiliary Graph are a subset of the 
-        Knowledge Graph in the message. Data creators can 
+        Edges, Result Analysis support graphs, and Path Bindings.
+        Edges comprising an Auxiliary Graph are a subset of the
+        Knowledge Graph in the message. Data creators can
         create an AuxiliaryGraph to assemble a specific collection
         of edges from the Knowledge Graph into a named graph that can be
         referenced from an Edge as evidence/explanation supporting that Edge,
-        from a Result Analysis as information used to generate a score, or 
+        from a Result Analysis as information used to generate a score, or
         from a Path Binding as the path for that Analysis.
       properties:
         edges:
@@ -775,7 +775,7 @@ components:
           description: >-
             List of edges that form the Auxiliary Graph. Each item is a
             reference to a single Knowledge Graph Edge. This list is not
-            ordered, nor is the order intended to convey any relationship 
+            ordered, nor is the order intended to convey any relationship
             between the edges that form this Auxiliary Graph.
           items:
             type: string
@@ -830,13 +830,13 @@ components:
       required:
         - nodes
     QueryGraph:
-      allOf: 
+      allOf:
         - $ref: '#/components/schemas/BaseQueryGraph'
         - type: object
           description: >-
             A non-Pathfinder query SHOULD have edges following the QEdge schema
             and SHOULD NOT have paths
-          required: 
+          required:
             - edges
           properties:
             edges:
@@ -849,13 +849,13 @@ components:
               additionalProperties:
                 $ref: '#/components/schemas/QEdge'
     PathfinderQueryGraph:
-      allOf: 
+      allOf:
         - $ref: '#/components/schemas/BaseQueryGraph'
         - type: object
           description: >-
             A Pathfinder query SHOULD have paths following the QPath schema
             and SHOULD NOT have edges
-          required: 
+          required:
             - paths
           properties:
             paths:
@@ -883,17 +883,17 @@ components:
           examples:
             - ["OMIM:603903"]
           description: >-
-            A CURIE identifier (or list of identifiers) for this node. 
+            A CURIE identifier (or list of identifiers) for this node.
             The 'ids' field will hold a list of CURIEs only in the case of a
-            BATCH set_interpretation, where each CURIE is queried 
-            separately. If a list of queried CURIEs is to be considered as a  
-            set (as under a MANY or ALL set_interpretation), the 'ids' field 
-            will hold a single id representing this set, and the individual members 
-            of this set will be captured in a separate 'member_ids' field. 
-            Note that the set id MUST be created as a UUID by the system that 
-            defines the queried set, using a centralized nodenorm service. 
-            Note also that downstream systems MUST re-use the original set UUID 
-            in the messages they create/send, which will facilitate merging or 
+            BATCH set_interpretation, where each CURIE is queried
+            separately. If a list of queried CURIEs is to be considered as a
+            set (as under a MANY or ALL set_interpretation), the 'ids' field
+            will hold a single id representing this set, and the individual members
+            of this set will be captured in a separate 'member_ids' field.
+            Note that the set id MUST be created as a UUID by the system that
+            defines the queried set, using a centralized nodenorm service.
+            Note also that downstream systems MUST re-use the original set UUID
+            in the messages they create/send, which will facilitate merging or
             caching operations.
         categories:
           type: array
@@ -922,10 +922,10 @@ components:
         member_ids:
           type: array
           description: >-
-            A list of CURIE identifiers for members of a queried set. This 
+            A list of CURIE identifiers for members of a queried set. This
             field MUST be populated under a set_interpretation of MANY
-            or ALL, when the 'ids' field holds a UUID representing the set 
-            itself. This field MUST NOT be used under a set_interpretation 
+            or ALL, when the 'ids' field holds a UUID representing the set
+            itself. This field MUST NOT be used under a set_interpretation
             of BATCH.
           minItems: 1
           items:
@@ -1036,7 +1036,7 @@ components:
         sources:
           description: >-
             A list of infores CURIEs which are either allowed or denied in the
-            sources (resource_id) of the bound Edge. 
+            sources (resource_id) of the bound Edge.
             If `behavior` is set to "ALLOW", ANY (at least 1) of the given infores
             CURIEs MUST be present.
             If `behavior` is set to "DENY", then ALL given infores CURIEs MUST NOT
@@ -1343,7 +1343,7 @@ components:
             CURIE for a Biolink 'qualifier' association slot, generally taken
             from Biolink association slots designated for this purpose
             (that is, association slots with names ending in 'qualifier')
-            e.g. biolink:subject_aspect_qualifier, 
+            e.g. biolink:subject_aspect_qualifier,
             biolink:subject_direction_qualifier,
             biolink:object_aspect_qualifier, etc. Such qualifiers are used
             to elaborate a second layer of meaning of a knowledge graph edge.
@@ -1729,16 +1729,16 @@ components:
         source_record_urls:
           type: array
           minItems: 1
-          items: 
+          items:
             type: string
           description: >-
-            A URL linking to a specific web page or document provided by the 
-            source, that contains a record of the knowledge expressed in the 
-            Edge. If the knowledge is contained in more than one web page on 
-            an Information Resource's site, urls MAY be provided for each. 
-            For example, Therapeutic Targets Database (TTD) has separate web 
-            pages for 'Imatinib' and its protein target KIT, both of which hold 
-            the claim that 'the KIT protein is a therapeutic target for Imatinib'.         
+            A URL linking to a specific web page or document provided by the
+            source, that contains a record of the knowledge expressed in the
+            Edge. If the knowledge is contained in more than one web page on
+            an Information Resource's site, urls MAY be provided for each.
+            For example, Therapeutic Targets Database (TTD) has separate web
+            pages for 'Imatinib' and its protein target KIT, both of which hold
+            the claim that 'the KIT protein is a therapeutic target for Imatinib'.
           examples:
             - [https://db.idrblab.net/ttd/data/drug/details/d0az3c,
                https://db.idrblab.net/ttd/data/target/details/t57700]
