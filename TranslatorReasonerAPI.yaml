@@ -1011,6 +1011,18 @@ components:
       minProperties: 1
       additionalProperties: true
       properties:
+        knowledge_level:
+          $ref: '#/components/schemas/AllowDenyConstraint'
+          description: >-
+            A list of knowledge_level values which are either allowed or denied
+            on bound edges.
+            Provided string(s) MUST be a valid biolink knowledge_level value.
+        agent_type:
+          $ref: '#/components/schemas/AllowDenyConstraint'
+          description: >-
+            a list of agent_type values which are either allowed or denied
+            on bound edges.
+            Provided string(s) MUST be a valid biolink agent_type value.
         attributes:
           type: array
           description: >-
@@ -1325,12 +1337,32 @@ components:
           items:
             $ref: '#/components/schemas/RetrievalSource'
           minItems: 1
+        knowledge_level:
+          type: string
+          description: >-
+            A biolink `knowledge level` string that provides the level of knowledge
+            the Edge represents.
+          examples:
+            - knowledge_assertion
+            - logical_entailment
+            - prediction
+        agent_type:
+          type: string
+          description: >-
+            A biolink `agent type` string that provides the kind of agent
+            that originated the knowledge presented by the Edge.
+          examples:
+            - manual_agent
+            - automated_agent
+            - text_mining_agent
       additionalProperties: false
       required:
         - object
         - predicate
         - subject
         - sources
+        - knowledge_level
+        - agent_type
     Qualifier:
       additionalProperties: false
       description: >-
