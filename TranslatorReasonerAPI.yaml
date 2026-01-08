@@ -1398,9 +1398,9 @@ components:
         with a qualifier_value of "expression".
         Multiple type-value pairs have an AND relationship.
       minProperties: 1
-      additionalProperties:
-        type:
-          string
+      patternProperties:
+        '^biolink:':
+          type: string
     BiolinkEntity:
       description: >-
         Compact URI (CURIE) for a Biolink class, biolink:NamedThing
