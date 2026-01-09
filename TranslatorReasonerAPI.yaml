@@ -224,11 +224,11 @@ paths:
         - in: path
           name: job_id
           description: Identifier of the job for status request
-          examples:
-            - rXEOAosN3L
           required: true
           schema:
             type: string
+            examples:
+              - rXEOAosN3L
       responses:
         '200':
           description: >-
@@ -1740,9 +1740,8 @@ components:
             pages for 'Imatinib' and its protein target KIT, both of which hold 
             the claim that 'the KIT protein is a therapeutic target for Imatinib'.         
           examples:
-            - >-
-              [https://db.idrblab.net/ttd/data/drug/details/d0az3c, 
-              https://db.idrblab.net/ttd/data/target/details/t57700]
+            - [https://db.idrblab.net/ttd/data/drug/details/d0az3c,
+               https://db.idrblab.net/ttd/data/target/details/t57700]
       required:
         - resource_id
         - resource_role
