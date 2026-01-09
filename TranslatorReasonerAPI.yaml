@@ -1,4 +1,4 @@
-openapi: 3.0.1
+openapi: 3.1.2
 info:
   description: INSERT-DESCRIPTION-OF-YOUR-SERVICE-HERE
   version: INSERT-VERSION-OF-YOUR-SERVICE-HERE
@@ -224,10 +224,11 @@ paths:
         - in: path
           name: job_id
           description: Identifier of the job for status request
-          example: rXEOAosN3L
           required: true
           schema:
             type: string
+            examples:
+              - rXEOAosN3L
       responses:
         '200':
           description: >-
@@ -265,8 +266,7 @@ components:
       type: object
       properties:
         message:
-          oneOf:
-            - $ref: '#/components/schemas/Message'
+          $ref: '#/components/schemas/Message'
           description: >-
             The query Message is a serialization of the user request. Content
             of the Message object depends on the intended TRAPI operation. For
@@ -274,13 +274,11 @@ components:
             as part of the Message, whereas other operations, e.g. overlay,
             require non-empty results and knowledge_graph fields.
         log_level:
+          $ref: '#/components/schemas/LogLevel'
           description: The least critical level of logs to return
-          oneOf:
-            - $ref: '#/components/schemas/LogLevel'
         workflow:
+          $ref: https://standards.ncats.io/workflow/1.3.5/schema
           description: List of workflow steps to be executed.
-          oneOf:
-            - $ref: https://standards.ncats.io/workflow/1.3.5/schema
         submitter:
           type: string
           description: >-
@@ -321,8 +319,7 @@ components:
             does not succeed, the server SHOULD retry the POST at least
             once.
         message:
-          oneOf:
-            - $ref: '#/components/schemas/Message'
+          $ref: '#/components/schemas/Message'
           description: >-
             The query Message is a serialization of the user request. Content
             of the Message object depends on the intended TRAPI operation. For
@@ -330,13 +327,11 @@ components:
             as part of the Message, whereas other operations, e.g. overlay,
             require non-empty results and knowledge_graph fields.
         log_level:
+          $ref: '#/components/schemas/LogLevel'
           description: The least critical level of logs to return
-          oneOf:
-            - $ref: '#/components/schemas/LogLevel'
         workflow:
+          $ref: https://standards.ncats.io/workflow/1.3.5/schema
           description: List of workflow steps to be executed.
-          oneOf:
-            - $ref: https://standards.ncats.io/workflow/1.3.5/schema
         submitter:
           type: string
           description: >-
@@ -368,20 +363,23 @@ components:
             One of a standardized set of short codes:
             e.g. Accepted, QueryNotTraversable, KPsNotAvailable
           type: string
-          example: Accepted
+          examples:
+            - Accepted
         description:
           description: >-
             A brief human-readable description of the result of the
             async_query submission.
           type: string
-          example: Async_query has been queued
+          examples:
+            - Async_query has been queued
         job_id:
           description: >-
             An identifier for the submitted job that can be used with
             /async_query_status to receive an update on the status of
             the job.
           type: string
-          example: rXEOAosN3L
+          examples:
+            - rXEOAosN3L
       additionalProperties: true
       required:
         - job_id
@@ -396,13 +394,15 @@ components:
             One of a standardized set of short codes:
             Queued, Running, Completed, Failed
           type: string
-          example: Running
+          examples:
+            - Running
         description:
           description: >-
             A brief human-readable description of the current state
             or summary of the problem if the status is Failed.
           type: string
-          example: Callback URL returned 500
+          examples:
+            - Callback URL returned 500
         logs:
           description: >-
             A list of LogEntry items, containing errors, warnings, debugging
@@ -419,7 +419,8 @@ components:
             Optional URL that can be queried to restrieve the full TRAPI
             Response.
           type: string
-          example: https://arax.ncats.io/api/arax/v1.3/response/116481
+          examples:
+            - https://arax.ncats.io/api/arax/v1.3/response/116481
       additionalProperties: true
       required:
         - status
@@ -436,21 +437,22 @@ components:
         about the response.
       properties:
         message:
+          $ref: '#/components/schemas/Message'
           description: >-
             Contains the knowledge of the response (query graph, knowledge
             graph, and results).
-          oneOf:
-            - $ref: '#/components/schemas/Message'
         status:
           description: >-
             One of a standardized set of short codes,
             e.g. Success, QueryNotTraversable, KPsNotAvailable
           type: string
-          example: Success
+          examples:
+            - Success
         description:
           description: A brief human-readable description of the outcome
           type: string
-          example: Success. 42 results found.
+          examples:
+            - Success. 42 results found.
         logs:
           description: >-
             A list of LogEntry items, containing errors, warnings, debugging
@@ -461,16 +463,17 @@ components:
             $ref: '#/components/schemas/LogEntry'
           minItems: 1
         workflow:
+          $ref: https://standards.ncats.io/workflow/1.3.5/schema
           description: List of workflow steps that were executed.
-          oneOf:
-            - $ref: https://standards.ncats.io/workflow/1.3.5/schema
         schema_version:
           type: string
-          example: 1.4.0
+          examples:
+            - 1.4.0
           description: Version label of the TRAPI schema used in this document
         biolink_version:
           type: string
-          example: 3.1.2
+          examples:
+            - 3.1.2
           description: Version label of the Biolink model used in this document
       additionalProperties: true
       required:
@@ -507,11 +510,10 @@ components:
             - $ref: '#/components/schemas/QueryGraph'
             - $ref: '#/components/schemas/PathfinderQueryGraph'
         knowledge_graph:
+          $ref: '#/components/schemas/KnowledgeGraph'
           description: >-
             KnowledgeGraph object that contains lists of nodes and edges
             in the thought graph corresponding to the message
-          oneOf:
-            - $ref: '#/components/schemas/KnowledgeGraph'
         auxiliary_graphs:
           type: object
           description: >-
@@ -544,10 +546,10 @@ components:
             (e.g 2020-09-03T18:13:49Z), or, if local time is provided,
             the timezone offset must be provided
             (e.g. 2020-09-03T18:13:49-04:00).
-          example: '2020-09-03T18:13:49+00:00'
+          examples:
+            - '2020-09-03T18:13:49+00:00'
         level:
-          oneOf:
-            - $ref: '#/components/schemas/LogLevel'
+          $ref: '#/components/schemas/LogLevel'
         code:
           type: string
           description: >-
@@ -616,13 +618,11 @@ components:
           Binding must bind directly to node in the original Query Graph.
       properties:
         id:
-          oneOf:
-            - $ref: '#/components/schemas/CURIE'
+          $ref: '#/components/schemas/CURIE'
           description: >-
             The CURIE of a Node within the Knowledge Graph.
         query_id:
-          oneOf:
-            - $ref: '#/components/schemas/CURIE'
+          $ref: '#/components/schemas/CURIE'
           description: >-
             An optional property to provide the CURIE in the QueryGraph to
             which this binding applies. If the bound QNode does not have an
@@ -653,7 +653,8 @@ components:
         score:
           type: number
           format: float
-          example: 163.233
+          examples:
+            - 163.233
           description: >-
             A numerical score associated with this result indicating the
             relevance or confidence of this result relative to others in the
@@ -879,7 +880,8 @@ components:
           items:
             $ref: '#/components/schemas/CURIE'
           minItems: 1
-          example: ["OMIM:603903"]
+          examples:
+            - ["OMIM:603903"]
           description: >-
             A CURIE identifier (or list of identifiers) for this node. 
             The 'ids' field will hold a list of CURIEs only in the case of a
@@ -960,7 +962,8 @@ components:
             property is absent or null, it MUST be assumed to mean
             'lookup'. This feature is currently experimental and may be
             further extended in the future.
-          example: lookup
+          examples:
+            - lookup
           type: string
         predicates:
           type: array
@@ -973,26 +976,27 @@ components:
           minItems: 1
         subject:
           type: string
-          example: https://omim.org/entry/603903
+          examples:
+            - https://omim.org/entry/603903
           description: >-
             Corresponds to the map key identifier of the
             subject concept node anchoring the query filter
             pattern for the query relationship edge.
         object:
           type: string
-          example: https://www.uniprot.org/uniprot/P00738
+          examples:
+            - https://www.uniprot.org/uniprot/P00738
           description: >-
             Corresponds to the map key identifier of the
             object concept node anchoring the query filter
             pattern for the query relationship edge.
         constraints:
+          $ref: '#/components/schemas/QEdgeConstraints'
           description: >-
             An object containing all constraints placed on the QEdge.
             ALL edges bound to this QEdge MUST conform to ALL given constraints;
             underlying edges (such as those appearing in supporting graphs)
             are not required to conform to the given constraints.
-          oneOf:
-            - $ref: '#/components/schemas/QEdgeConstraints'
       additionalProperties: true
       required:
         - subject
@@ -1095,13 +1099,15 @@ components:
           description: >-
             Corresponds to the map key identifier of the subject concept node for
             the start of the queried path.
-          example: n0
+          examples:
+            - n0
         object:
           type: string
           description: >-
             Corresponds to the map key identifier of the object concept node for
             the end of the queried path.
-          example: n1
+          examples:
+            - n1
         predicates:
           type: array
           description: >-
@@ -1153,7 +1159,8 @@ components:
       properties:
         name:
           type: string
-          example: Haptoglobin
+          examples:
+            - Haptoglobin
           description: Formal name of the entity
         categories:
           type: array
@@ -1200,7 +1207,8 @@ components:
             '0.000153' represents a p-value supporting an edge, or that
             a value of 'ChEMBL' represents the original source of the knowledge
             expressed in the edge.
-          example: biolink:synonym
+          examples:
+            - biolink:synonym
         original_attribute_name:
           type: string
           description: >-
@@ -1212,40 +1220,45 @@ components:
             what the original source said. Note that the data type is string'
             but the contents of the field could also be a CURIE of a third
             party ontology term.
-          example: p-value
+          examples:
+            - p-value
         value:
           description: >-
             Value of the attribute. May be any data type, including a list.
-          example: 0.000153
+          examples:
+            - 0.000153
         value_type_id:
-          oneOf:
-            - $ref: '#/components/schemas/CURIE'
+          $ref: '#/components/schemas/CURIE'
           description: >-
             CURIE describing the semantic type of an  attribute's value. Use
             a Biolink class if possible, otherwise a term from an external
             ontology. If a suitable CURIE/identifier does not exist, enter a
             descriptive phrase here and submit the new type for consideration
             by the appropriate authority.
-          example: EDAM:data_1187
+          examples:
+            - EDAM:data_1187
         attribute_source:
           type: string
           description: >-
             The source of the core assertion made by the key-value pair of an
             attribute object. Use a CURIE or namespace designator for this
             resource where possible.
-          example: UniProtKB
+          examples:
+            - UniProtKB
         value_url:
           type: string
           description: >-
             Human-consumable URL linking to a web document that provides
             additional information about an  attribute's value (not the node
             or the edge fom which it hangs).
-          example: https://pubmed.ncbi.nlm.nih.gov/32529952
+          examples:
+            - https://pubmed.ncbi.nlm.nih.gov/32529952
         description:
           type: string
           description: >-
             Human-readable description for the attribute and its value.
-          example: Assertion Authored By Dr. Trans L. Ator
+          examples:
+            - Assertion Authored By Dr. Trans L. Ator
         attributes:
           type: array
           description: >-
@@ -1266,29 +1279,29 @@ components:
         resulting from a query upon the underlying knowledge source.
       properties:
         predicate:
+          $ref: '#/components/schemas/BiolinkPredicate'
           description: >-
             The type of relationship between the subject and object
             for the statement expressed in an Edge. These should be
             Biolink Model predicate terms and are NOT allowed
             to be of type 'abstract' or 'mixin'. Returning 'deprecated'
             predicate terms should also be avoided.
-          example: biolink:gene_associated_with_condition
-          oneOf:
-            - $ref: '#/components/schemas/BiolinkPredicate'
+          examples:
+            - biolink:gene_associated_with_condition
         subject:
+          $ref: '#/components/schemas/CURIE'
           description: >-
             Corresponds to the map key CURIE of the
             subject concept node of this relationship edge.
-          example: MONDO:0011382
-          oneOf:
-            - $ref: '#/components/schemas/CURIE'
+          examples:
+            - MONDO:0011382
         object:
+          $ref: '#/components/schemas/CURIE'
           description: >-
             Corresponds to the map key CURIE of the
             object concept node of this relationship edge.
-          example: UniProtKB:P00738
-          oneOf:
-            - $ref: '#/components/schemas/CURIE'
+          examples:
+            - UniProtKB:P00738
         attributes:
           description: A list of additional attributes for this edge
           items:
@@ -1338,7 +1351,8 @@ components:
             https://biolink.github.io/biolink-model/docs/edge_properties.html)
             which have slot names with the suffix string 'qualifier'.
           pattern: ^biolink:[a-z][a-z_]*$
-          example: biolink:subject_aspect_qualifier
+          examples:
+            - biolink:subject_aspect_qualifier
         qualifier_value:
           type: string
           description: >-
@@ -1349,7 +1363,8 @@ components:
             The enumeration of qualifier values for a given qualifier
             type is generally going to be constrained by the category
             of edge (i.e. biolink:Association subtype) of the (Q)Edge.
-          example: expression
+          examples:
+            - expression
       required:
         - qualifier_type_id
         - qualifier_value
@@ -1366,9 +1381,9 @@ components:
         with a qualifier_value of "expression".
         Multiple type-value pairs have an AND relationship.
       minProperties: 1
-      additionalProperties:
-        type:
-          string
+      patternProperties:
+        '^biolink:':
+          type: string
     BiolinkEntity:
       description: >-
         Compact URI (CURIE) for a Biolink class, biolink:NamedThing
@@ -1379,7 +1394,8 @@ components:
       externalDocs:
         description: Biolink model entities
         url: https://biolink.github.io/biolink-model/docs/NamedThing.html
-      example: biolink:PhenotypicFeature
+      examples:
+        - biolink:PhenotypicFeature
     BiolinkPredicate:
       description: >-
         CURIE for a Biolink 'predicate' slot, taken from the Biolink slot
@@ -1391,7 +1407,8 @@ components:
       externalDocs:
         description: Biolink model predicates
         url: https://biolink.github.io/biolink-model/docs/related_to.html
-      example: biolink:interacts_with
+      examples:
+        - biolink:interacts_with
     CURIE:
       type: string
       description: >-
@@ -1443,7 +1460,8 @@ components:
           items:
             type: string
           minItems: 1
-          example: [CHEMBL.COMPOUND, INCHIKEY]
+          examples:
+            - [CHEMBL.COMPOUND, INCHIKEY]
         attributes:
           type: array
           description: >-
@@ -1463,17 +1481,20 @@ components:
           $ref: '#/components/schemas/BiolinkEntity'
           description: >-
             Subject node category of this relationship edge.
-          example: biolink:ChemicalEntity
+          examples:
+            - biolink:ChemicalEntity
         predicate:
           $ref: '#/components/schemas/BiolinkPredicate'
           description: >-
             Biolink relationship between the subject and object categories.
-          example: biolink:affects
+          examples:
+            - biolink:affects
         object:
           $ref: '#/components/schemas/BiolinkEntity'
           description: >-
             Object node category of this relationship edge.
-          example: biolink:Protein
+          examples:
+            - biolink:Protein
         knowledge_types:
           description: >-
             A list of knowledge_types that are supported by the service.
@@ -1507,7 +1528,8 @@ components:
             is filled out, then the testing harness can
             help validate that the qualifiers are being used
             correctly.
-          example: 'biolink:ChemicalToGeneAssociation'
+          examples:
+            - 'biolink:ChemicalToGeneAssociation'
           $ref: '#/components/schemas/BiolinkEntity'
       required:
         - subject
@@ -1521,7 +1543,8 @@ components:
           $ref: '#/components/schemas/CURIE'
           description: >-
             The CURIE of the qualifier type.
-          example: biolink:subject_aspect_qualifier
+          examples:
+            - biolink:subject_aspect_qualifier
         applicable_values:
           type: array
           minItems: 1
@@ -1529,7 +1552,8 @@ components:
                 The list of values that are possible for this qualifier.
           items:
             type: string
-          example: [expression, activity, abundance, degradation]
+          examples:
+            - [expression, activity, abundance, degradation]
       required:
         - qualifier_type_id
     MetaAttribute:
@@ -1540,12 +1564,14 @@ components:
           description: >-
             Type of an attribute provided by this TRAPI web service
             (preferably the CURIE of a Biolink association slot)
-          example: biolink:p_value
+          examples:
+            - biolink:p_value
         attribute_source:
           type: string
           description: >-
             Source of an attribute provided by this TRAPI web service.
-          example: infores:chembl
+          examples:
+            - infores:chembl
         original_attribute_names:
           type: array
           items:
@@ -1564,7 +1590,8 @@ components:
           description: >-
             Human-readable name or label for the constraint concept.
             Required whenever constraint_use is true.
-          example: p-value
+          examples:
+            - p-value
       required:
         - attribute_type_id
     AttributeConstraint:
@@ -1573,8 +1600,7 @@ components:
         Generic query constraint for a query node or query edge
       properties:
         id:
-          oneOf:
-            - $ref: '#/components/schemas/CURIE'
+          $ref: '#/components/schemas/CURIE'
           description: >-
             CURIE of the concept being constrained. For properties
             defined by the Biolink model this SHOULD be a biolink CURIE.
@@ -1582,7 +1608,8 @@ components:
             CURIE does not exist, enter a descriptive phrase here and
             submit the new type for consideration by the appropriate
             authority.
-          example: EDAM:data_0844
+          examples:
+            - EDAM:data_0844
         name:
           type: string
           description: >-
@@ -1590,7 +1617,8 @@ components:
             If appropriate, it SHOULD be the term name of the CURIE used
             as the 'id'. This is redundant but required for human
             readability.
-          example: molecular mass
+          examples:
+            - molecular mass
         not:
           type: boolean
           default: false
@@ -1626,7 +1654,8 @@ components:
             - matches
             - ===
         value:
-          example: 57.0
+          examples:
+            - 57.0
           description: >-
             Value of the attribute. May be any data type, including a list.
             If the value is a list and there are multiple items, at least one
@@ -1637,14 +1666,16 @@ components:
             encode extraneous comparisons, but this is permitted as it is in
             SQL and other languages.
         unit_id:
-          example: UO:0000222
+          examples:
+            - UO:0000222
           description: >-
             CURIE of the units of the value or list of values in the 'value'
             property. The Units of Measurement Ontology (UO) should be used
             if possible. The unit_id MUST be provided for (lists of)
             numerical values that correspond to a quantity that has units.
         unit_name:
-          example: kilodalton
+          examples:
+            - kilodalton
           description: >-
             Term name that is associated with the CURIE of the units
             of the value or list of values in the 'value'
@@ -1670,7 +1701,8 @@ components:
             The CURIE for an Information Resource that served as a source
             of knowledge expressed in an Edge, or a source of data used to
             generate this knowledge.
-          example: infores:drugbank
+          examples:
+            - infores:drugbank
         resource_role:
           $ref: '#/components/schemas/ResourceRoleEnum'
           description: >-
@@ -1692,7 +1724,8 @@ components:
             an Edge provided by the ARAGORN ARA can expressing knowledge it
             retrieved from both the automat-mychem-info and molepro KPs,
             which both provided it with records of this single fact.
-          example: ["infores:automat-mychem-info", "infores:molepro"]
+          examples:
+            - ["infores:automat-mychem-info", "infores:molepro"]
         source_record_urls:
           type: array
           minItems: 1
@@ -1706,9 +1739,9 @@ components:
             For example, Therapeutic Targets Database (TTD) has separate web 
             pages for 'Imatinib' and its protein target KIT, both of which hold 
             the claim that 'the KIT protein is a therapeutic target for Imatinib'.         
-          example: >-
-            [https://db.idrblab.net/ttd/data/drug/details/d0az3c, 
-            https://db.idrblab.net/ttd/data/target/details/t57700]
+          examples:
+            - [https://db.idrblab.net/ttd/data/drug/details/d0az3c,
+               https://db.idrblab.net/ttd/data/target/details/t57700]
       required:
         - resource_id
         - resource_role
