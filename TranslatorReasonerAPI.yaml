@@ -985,32 +985,103 @@ components:
             Corresponds to the map key identifier of the
             object concept node anchoring the query filter
             pattern for the query relationship edge.
-        attribute_constraints:
+        constraints:
+          description: >-
+            An object containing all constraints placed on the QEdge.
+            ALL edges bound to this QEdge MUST conform to ALL given constraints;
+            underlying edges (such as those appearing in supporting graphs)
+            are not required to conform to the given constraints.
+          oneOf:
+            - $ref: '#/components/schemas/QEdgeConstraints'
+      additionalProperties: true
+      required:
+        - subject
+        - object
+    QEdgeConstraints:
+      type: object
+      description: >-
+        A subschema for constraints that may be placed on a given QEdge.
+        ALL edges bound to the given QEdge MUST conform to ALL given constraints;
+        underlying edges (such as those appearing in supporting graphs)
+        are not required to conform to the given constraints.
+      minProperties: 1
+      additionalProperties: true
+      properties:
+        attributes:
           type: array
           description: >-
             A list of attribute constraints applied to a query edge.
             If there are multiple items, they must all be true (equivalent
             to AND)
+          minItems: 1
           items:
             $ref: '#/components/schemas/AttributeConstraint'
-          default: []
-        qualifier_constraints:
+        qualifiers:
           type: array
           description: >-
-            A list of QualifierConstraints that provide nuance to the QEdge.
-            If multiple QualifierConstraints are provided, there is an OR
+            A list of QualifierSetConstraints applied to a QEdge.
+            If multiple QualifierSetConstraints are provided, there is an OR
             relationship between them. If the QEdge has multiple
             predicates or if the QNodes that correspond to the subject or
             object of this QEdge have multiple categories or multiple
-            curies, then qualifier_constraints MUST NOT be specified
+            curies, then constraints.qualifiers MUST NOT be specified
             because these complex use cases are not supported at this time.
+          minItems: 1
           items:
-            $ref: '#/components/schemas/QualifierConstraint'
-          default: []
-      additionalProperties: true
+            $ref: '#/components/schemas/QualifierSetConstraint'
+        sources:
+          description: >-
+            A list of infores CURIEs which are either allowed or denied in the
+            sources (resource_id) of the bound Edge. 
+            If `behavior` is set to "ALLOW", ANY (at least 1) of the given infores
+            CURIEs MUST be present.
+            If `behavior` is set to "DENY", then ALL given infores CURIEs MUST NOT
+            be present.
+          allOf:
+            - $ref: '#/components/schemas/AllowDenyConstraint'
+            - type: object
+              properties:
+                values:
+                  type: array
+                  description: >-
+                    These SHOULD be infores CURIEs, so this is a subschema that
+                    is more stringent than the one in AllowDenyConstraint.
+                  minItems: 1
+                  items:
+                    $ref: '#/components/schemas/CURIE'
+                primary_only:
+                  type: boolean
+                  description: >-
+                    When set to `false` (the default), the ALLOW/DENY constraint
+                    of `values` applies to ALL RetrievalSources in
+                    the sources of the bound Edge.
+                    When set to `true`, the constraint ONLY applies to the
+                    RetrievalSource with the resource_role primary_knowledge_source.
+                  default: false
+    AllowDenyConstraint:
+      type: object
+      description: >-
+        A list of values which are to either be allowed or denied.
+        If `behavior` is set to "ALLOW", then ANY (at least 1) of the given values
+        MUST appear in the constrained property in order for it to meet the
+        constraint (OR relationship).
+        If `behavior` is set to "DENY", then ALL of the given values MUST NOT
+        appear in the constrained property in order for it to meet the constraint
+        (NOT (x OR y) relationship).
+      properties:
+        behavior:
+          type: string
+          enum:
+          - ALLOW
+          - DENY
+        values:
+          type: array
+          minItems: 1
+          items:
+            type: string
       required:
-        - subject
-        - object
+        - behavior
+        - values
     QPath:
       type: object
       description: >-
@@ -1282,29 +1353,22 @@ components:
       required:
         - qualifier_type_id
         - qualifier_value
-    QualifierConstraint:
-      additionalProperties: false
+    QualifierSetConstraint:
+      type: object
       description: >-
-        Defines a query constraint based on the
-        qualifier_types and qualifier_values of a set of
-        Qualifiers attached to an edge. For example, it can constrain a
+        A constraint on the qualifiers of a bound Edge (types and values).
+        A given key-value pair defines the required qualifier_type_id
+        and qualifier_value of one Qualifier, respectively.
+        For example, a QualifierSetConstraint can constrain a
         "ChemicalX - affects - ?Gene" query to return only edges where
         ChemicalX specifically affects the 'expression' of the Gene, by
         constraining on the qualifier_type "biolink:object_aspect_qualifier"
         with a qualifier_value of "expression".
-      properties:
-        qualifier_set:
-          type: array
-          description: >-
-            A set of Qualifiers that serves to add nuance to a query,
-            by constraining allowed values held by Qualifiers
-            on queried Edges.
-          items:
-            $ref: '#/components/schemas/Qualifier'
-          minItems: 1
-      required:
-        - qualifier_set
-      type: object
+        Multiple type-value pairs have an AND relationship.
+      minProperties: 1
+      additionalProperties:
+        type:
+          string
     BiolinkEntity:
       description: >-
         Compact URI (CURIE) for a Biolink class, biolink:NamedThing
