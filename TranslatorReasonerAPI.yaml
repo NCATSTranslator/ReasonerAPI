@@ -124,6 +124,15 @@ paths:
             application/json:
               schema:
                 type: string
+        '409':
+          description: >-
+            There is a conflict between client-given TRAPI parameters and server
+            capabilities. The response body may contain additional details about
+            the conflict.
+          content:
+            application/json:
+              schema:
+                type: string
         '413':
           description: >-
             Payload too large. Indicates that batch size was over the limit
@@ -181,6 +190,15 @@ paths:
             Bad request. The request is invalid according to this OpenAPI
             schema OR a specific identifier is believed to be invalid somehow
             (not just unrecognized).
+          content:
+            application/json:
+              schema:
+                type: string
+        '409':
+          description: >-
+            There is a conflict between client-given TRAPI parameters and server
+            capabilities. The response body may contain additional details about
+            the conflict.
           content:
             application/json:
               schema:
@@ -268,6 +286,19 @@ components:
       x-body-name: request_body
       type: object
       properties:
+        submitter:
+          type: string
+          description: >-
+            Any string for self-identifying the submitter of a query. The
+            purpose of this optional field is to aid in the tracking of
+            the source of queries for development and issue resolution.
+        parameters:
+          $ref: '#/components/schemas/QueryParameters'
+          description: >-
+            Query-time parameters that don't affect the semantics
+            of the query or intended workflow, but may affect overall
+            behavior of the server in the execution of this query.
+            The server MUST maintain parameters it is given in the response.
         message:
           $ref: '#/components/schemas/Message'
           description: >-
@@ -276,28 +307,9 @@ components:
             example, the fill operation requires a non-empty query_graph field
             as part of the Message, whereas other operations, e.g. overlay,
             require non-empty results and knowledge_graph fields.
-        log_level:
-          $ref: '#/components/schemas/LogLevel'
-          description: The least critical level of logs to return
         workflow:
           $ref: https://standards.ncats.io/workflow/1.3.5/schema
           description: List of workflow steps to be executed.
-        submitter:
-          type: string
-          description: >-
-            Any string for self-identifying the submitter of a query. The
-            purpose of this optional field is to aid in the tracking of
-            the source of queries for development and issue resolution.
-        bypass_cache:
-          type: boolean
-          default: false
-          description: >-
-            Set to true in order to request that the agent obtain
-            fresh information from its sources in all cases where
-            it has a viable choice between requesting fresh information
-            in real time and using cached information. The agent
-            receiving this flag MUST also include it in TRAPI sent to
-            downstream sources (e.g., ARS -> ARAs -> KPs).
       additionalProperties: true
       required:
         - message
@@ -305,42 +317,47 @@ components:
       description: >-
         The AsyncQuery class is effectively the same as the Query class but
         it requires a callback property.
-      x-body-name: request_body
+      allOf:
+        - $ref: '#/components/schemas/Query'
+        - type: object
+          properties:
+            callback:
+              type: string
+              format: uri
+              pattern: ^https?://
+              description: >-
+                Upon completion, this server will send a POST request to the
+                callback URL with `Content-Type: application/json` header and
+                request body containing a JSON-encoded `Response` object.
+                The server MAY POST `Response` objects before work is fully
+                complete to provide interim results with a Response.status
+                value of 'Running'. If a POST operation to the callback URL
+                does not succeed, the server SHOULD retry the POST at least
+                once.
+          additionalProperties: true
+          required:
+            - callback
+    QueryParameters:
       type: object
+      description: >-
+        Query-time parameters that don't affect the semantics
+        of a query or intended workflow, but may affect overall
+        behavior of the server in the execution of this query.
+        The server MUST maintain parameters it is given in the response.
       properties:
-        callback:
-          type: string
-          format: uri
-          pattern: ^https?://
+        timeout:
+          type: number
           description: >-
-            Upon completion, this server will send a POST request to the
-            callback URL with `Content-Type: application/json` header and
-            request body containing a JSON-encoded `Response` object.
-            The server MAY POST `Response` objects before work is fully
-            complete to provide interim results with a Response.status
-            value of 'Running'. If a POST operation to the callback URL
-            does not succeed, the server SHOULD retry the POST at least
-            once.
-        message:
-          $ref: '#/components/schemas/Message'
-          description: >-
-            The query Message is a serialization of the user request. Content
-            of the Message object depends on the intended TRAPI operation. For
-            example, the fill operation requires a non-empty query_graph field
-            as part of the Message, whereas other operations, e.g. overlay,
-            require non-empty results and knowledge_graph fields.
+            Custom time in seconds that the client is willing to wait for a response.
+            After this time has elapsed, the service MAY consider the query
+            failed and respond with logs indicating as such.
+            If the service knows it cannot respond in the given time, it MAY respond
+            with an HTTP 409 and a response explaining its time capabilities.
+            Negative values SHOULD be interpreted as disabling any default
+            timeout the server implements.
         log_level:
           $ref: '#/components/schemas/LogLevel'
-          description: The least critical level of logs to return
-        workflow:
-          $ref: https://standards.ncats.io/workflow/1.3.5/schema
-          description: List of workflow steps to be executed.
-        submitter:
-          type: string
-          description: >-
-            Any string for self-identifying the submitter of a query. The
-            purpose of this optional field is to aid in the tracking of
-            the source of queries for development and issue resolution.
+          description: The least critical level of logs to return.
         bypass_cache:
           type: boolean
           default: false
@@ -352,9 +369,6 @@ components:
             receiving this flag MUST also include it in TRAPI sent to
             downstream sources (e.g., ARS -> ARAs -> KPs).
       additionalProperties: true
-      required:
-        - callback
-        - message
     AsyncQueryResponse:
       type: object
       description: >-
@@ -439,6 +453,11 @@ components:
         The status, description, and logs properties provide additional details
         about the response.
       properties:
+        parameters:
+          $ref: '#/components/schemas/QueryParameters'
+          description: >-
+            Query-time parameters that the service received in the original query.
+            The server MUST maintain parameters it is given in the response.
         message:
           $ref: '#/components/schemas/Message'
           description: >-
