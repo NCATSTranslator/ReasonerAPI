@@ -1014,15 +1014,17 @@ components:
         knowledge_level:
           $ref: '#/components/schemas/AllowDenyConstraint'
           description: >-
-            A list of knowledge_level values which are either allowed or denied
+            A constraint defining knowledge_level values which are either allowed or denied
             on bound edges.
             Provided string(s) MUST be a valid biolink knowledge_level value.
+            (See https://biolink.github.io/biolink-model/KnowledgeLevelEnum/)
         agent_type:
           $ref: '#/components/schemas/AllowDenyConstraint'
           description: >-
-            a list of agent_type values which are either allowed or denied
+            A constraint defining agent_type values which are either allowed or denied
             on bound edges.
             Provided string(s) MUST be a valid biolink agent_type value.
+            (See https://biolink.github.io/biolink-model/AgentTypeEnum/)
         attributes:
           type: array
           description: >-
@@ -1340,8 +1342,9 @@ components:
         knowledge_level:
           type: string
           description: >-
-            A biolink `knowledge level` string that provides the level of knowledge
-            the Edge represents.
+            One of the biolink-enumerated permissible values for `knowledge level`
+            that provides the level of knowledge the Edge represents.
+            (See https://biolink.github.io/biolink-model/KnowledgeLevelEnum/)
           examples:
             - knowledge_assertion
             - logical_entailment
@@ -1349,8 +1352,10 @@ components:
         agent_type:
           type: string
           description: >-
-            A biolink `agent type` string that provides the kind of agent
-            that originated the knowledge presented by the Edge.
+            One of the biolink-enumerated permissible values for `agent type`
+            that provides the kind of agent which originated the knowledge
+            presented by the Edge.
+            (See https://biolink.github.io/biolink-model/AgentTypeEnum/)
           examples:
             - manual_agent
             - automated_agent
