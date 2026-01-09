@@ -265,6 +265,12 @@ components:
       x-body-name: request_body
       type: object
       properties:
+        submitter:
+          type: string
+          description: >-
+            Any string for self-identifying the submitter of a query. The
+            purpose of this optional field is to aid in the tracking of
+            the source of queries for development and issue resolution.
         parameters:
           $ref: '#/components/schemas/QueryParameters'
           description: >-
@@ -331,12 +337,6 @@ components:
         log_level:
           $ref: '#/components/schemas/LogLevel'
           description: The least critical level of logs to return.
-        submitter:
-          type: string
-          description: >-
-            Any string for self-identifying the submitter of a query. The
-            purpose of this optional field is to aid in the tracking of
-            the source of queries for development and issue resolution.
         bypass_cache:
           type: boolean
           default: false
