@@ -351,8 +351,8 @@ components:
             Custom time in seconds that the client is willing to wait for a response.
             After this time has elapsed, the service MAY consider the query
             failed and respond with logs indicating as such.
-            If the service knows it cannot respond in the given time, it MAY respond
-            with an HTTP 409 and a response explaining its time capabilities.
+            If the service knows it cannot respond in the given time, it MAY
+            respond with an HTTP 409 and a response explaining its time capabilities.
             Negative values SHOULD be interpreted as disabling any default
             timeout the server implements.
         log_level:
@@ -743,8 +743,8 @@ components:
               type: object
               minProperties: 1
               description: >-
-                The dictionary of input Query Graph paths to Analysis paths, specifically
-                only for pathfinder queries.
+                The dictionary of input Query Graph paths to Analysis paths,
+                specifically only for pathfinder queries.
               additionalProperties:
                 type: array
                 items:
@@ -769,10 +769,10 @@ components:
     PathBinding:
       type: object
       description: >-
-        A instance of PathBinding is a single binding of an input QueryGraph path
-        (the key to this object) with the AuxiliaryGraph id containing a list of
-        edges in the path. The Auxiliary Graph does not convey any order of edges
-        in the path.
+        A instance of PathBinding is a single binding of an input QueryGraph
+        path (the key to this object) with the AuxiliaryGraph id containing
+        a list of edges in the path. The Auxiliary Graph does not convey any
+        order of edges in the path.
       properties:
         id:
           type: string
@@ -885,18 +885,19 @@ components:
               type: object
               description: >-
                 The QueryGraph path specification, used only for pathfinder type
-                queries. The keys of this map are unique path identifiers and the
-                corresponding values include the constraints on bound paths, in
-                addition to specifying the subject, object, and intermediate QNodes.
+                queries. The keys of this map are unique path identifiers and
+                the corresponding values include the constraints on bound paths,
+                in addition to specifying the subject, object, and intermediate
+                QNodes.
               additionalProperties:
                 $ref: '#/components/schemas/QPath'
               minProperties: 1
               maxProperties: 1
     QNode:
       type: object
-      description: A node in the QueryGraph used to represent an entity in a query.
-        If a CURIE is not specified, any nodes matching the category of the QNode
-        will be returned in the Results.
+      description: A node in the QueryGraph used to represent an entity in a
+        query. If a CURIE is not specified, any nodes matching the category of
+        the QNode will be returned in the Results.
       properties:
         ids:
           type: array
@@ -1037,15 +1038,15 @@ components:
         knowledge_level:
           $ref: '#/components/schemas/AllowDenyConstraint'
           description: >-
-            A constraint defining knowledge_level values which are either allowed or denied
-            on bound edges.
+            A constraint defining knowledge_level values which are either allowed
+            or denied on bound edges.
             Provided string(s) MUST be a valid biolink knowledge_level value.
             (See https://biolink.github.io/biolink-model/KnowledgeLevelEnum/)
         agent_type:
           $ref: '#/components/schemas/AllowDenyConstraint'
           description: >-
-            A constraint defining agent_type values which are either allowed or denied
-            on bound edges.
+            A constraint defining agent_type values which are either allowed
+            or denied on bound edges.
             Provided string(s) MUST be a valid biolink agent_type value.
             (See https://biolink.github.io/biolink-model/AgentTypeEnum/)
         attributes:
@@ -1076,8 +1077,8 @@ components:
             sources (resource_id) of the bound Edge.
             If `behavior` is set to "ALLOW", ANY (at least 1) of the given infores
             CURIEs MUST be present.
-            If `behavior` is set to "DENY", then ALL given infores CURIEs MUST NOT
-            be present.
+            If `behavior` is set to "DENY", then ALL given infores CURIEs MUST
+            NOT be present.
           allOf:
             - $ref: '#/components/schemas/AllowDenyConstraint'
             - type: object
@@ -1126,34 +1127,35 @@ components:
     QPath:
       type: object
       description: >-
-        A path in the QueryGraph used for pathfinder queries. Both subject and object
-        MUST reference QNodes that have a CURIE in their ids field.
+        A path in the QueryGraph used for pathfinder queries. Both subject and
+        object MUST reference QNodes that have a CURIE in their ids field.
         Paths returned that bind to this QPath can represent some
         relationship between subject and object.
       properties:
         subject:
           type: string
           description: >-
-            Corresponds to the map key identifier of the subject concept node for
-            the start of the queried path.
+            Corresponds to the map key identifier of the subject concept node
+            for the start of the queried path.
           examples:
             - n0
         object:
           type: string
           description: >-
-            Corresponds to the map key identifier of the object concept node for
-            the end of the queried path.
+            Corresponds to the map key identifier of the object concept node
+            for the end of the queried path.
           examples:
             - n1
         predicates:
           type: array
           description: >-
             QPath predicates are intended to convey what type of paths are desired,
-            NOT a constraint on the types of predicates that may be in result paths.
+            NOT a constraint on the types of predicates that may be in result
+            paths.
             If no predicate is listed, the ARA SHOULD find paths such that the
             relationship represented by the path is a "related_to" relationship.
-            These should be Biolink Model predicates and are allowed to be of type
-            'abstract' or 'mixin' (only in QGraphs!). Use of 'deprecated'
+            These should be Biolink Model predicates and are allowed to be of
+            type 'abstract' or 'mixin' (only in QGraphs!). Use of 'deprecated'
             predicates should be avoided.
           items:
             $ref: '#/components/schemas/BiolinkPredicate'
@@ -1161,9 +1163,9 @@ components:
         constraints:
           type: array
           description: >-
-            A list of constraints for the QPath. If multiple constraints are listed,
-            it should be interpreted as an OR relationship. Each path returned is
-            required to comply with at least one constraint.
+            A list of constraints for the QPath. If multiple constraints are
+            listed, it should be interpreted as an OR relationship. Each path
+            returned is required to comply with at least one constraint.
           items:
             $ref: '#/components/schemas/PathConstraint'
           minItems: 1
@@ -1174,15 +1176,16 @@ components:
     PathConstraint:
       type: object
       description: >-
-        A constraint for paths. ARAs must comply with constraints when finding paths.
+        A constraint for paths. ARAs must comply with constraints when finding
+        paths.
       properties:
         intermediate_categories:
           type: array
           description: >-
             A list of Biolink model categories by which to constrain paths returned.
-            If multiple categories are listed, it should be interpreted as an AND
-            relationship. Each path returned by ARAs MUST contain at least one node
-            of each category listed.
+            If multiple categories are listed, it should be interpreted as an
+            AND relationship. Each path returned by ARAs MUST contain at least
+            one node of each category listed.
           items:
             $ref: '#/components/schemas/BiolinkEntity'
           minItems: 1
@@ -1791,6 +1794,9 @@ components:
           minItems: 1
           items:
             type: string
+            examples:
+              - https://db.idrblab.net/ttd/data/drug/details/d0az3c
+              - https://db.idrblab.net/ttd/data/target/details/t57700
           description: >-
             A URL linking to a specific web page or document provided by the
             source, that contains a record of the knowledge expressed in the
@@ -1799,9 +1805,6 @@ components:
             For example, Therapeutic Targets Database (TTD) has separate web
             pages for 'Imatinib' and its protein target KIT, both of which hold
             the claim that 'the KIT protein is a therapeutic target for Imatinib'.
-          examples:
-            - [https://db.idrblab.net/ttd/data/drug/details/d0az3c,
-               https://db.idrblab.net/ttd/data/target/details/t57700]
       required:
         - resource_id
         - resource_role
