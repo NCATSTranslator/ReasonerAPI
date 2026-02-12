@@ -610,11 +610,7 @@ components:
             array of NodeBindings since a given query node may have multiple
             knowledge graph Node bindings in the result.
           additionalProperties:
-            type: array
-            items:
-              $ref: '#/components/schemas/NodeBinding'
-            minItems: 1
-          minProperties: 1
+            $ref: '#/components/schemas/NodeBinding'
         analyses:
           type: array
           description: >-
@@ -639,10 +635,12 @@ components:
         (such annotation is not yet fully standardized). Each Node
         Binding must bind directly to node in the original Query Graph.
       properties:
-        id:
-          $ref: '#/components/schemas/CURIE'
+        ids:
+          type: array
+          items:
+            $ref: '#/components/schemas/CURIE'
           description: >-
-            The CURIE of a Node within the Knowledge Graph.
+            The CURIEs of Nodes within the Knowledge Graph.
       additionalProperties: true
       required:
         - id
@@ -714,9 +712,7 @@ components:
                 value is an array of EdgeBindings since a given query edge may
                 resolve to multiple Knowledge Graph Edges.
               additionalProperties:
-                type: array
-                items:
-                  $ref: '#/components/schemas/EdgeBinding'
+                $ref: '#/components/schemas/EdgeBinding'
     PathfinderAnalysis:
       allOf:
         - $ref: '#/components/schemas/BaseAnalysis'
@@ -734,9 +730,7 @@ components:
                 The dictionary of input Query Graph paths to Analysis paths,
                 specifically only for pathfinder queries.
               additionalProperties:
-                type: array
-                items:
-                  $ref: '#/components/schemas/PathBinding'
+                $ref: '#/components/schemas/PathBinding'
     EdgeBinding:
       type: object
       description: >-
@@ -748,9 +742,11 @@ components:
         object because the Edges in the Knowledge Graph that get bound to
         the input Query Graph may differ between reasoners.
       properties:
-        id:
-          type: string
-          description: The key identifier of a specific KnowledgeGraph Edge.
+        ids:
+          type: array
+          items:
+            type: string
+          description: The key identifiers of specific KnowledgeGraph Edges.
       additionalProperties: true
       required:
         - id
@@ -762,9 +758,11 @@ components:
         a list of edges in the path. The Auxiliary Graph does not convey any
         order of edges in the path.
       properties:
-        id:
-          type: string
-          description: The key identifier of a specific auxiliary graph.
+        ids:
+          type: array
+          items:
+            type: string
+          description: The key identifier of specific auxiliary graphs.
       additionalProperties: true
       required:
         - id
