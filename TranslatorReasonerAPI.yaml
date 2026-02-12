@@ -837,6 +837,7 @@ components:
             QNodes.
           additionalProperties:
             $ref: '#/components/schemas/QEdge'
+          minProperties: 1
         paths:
           type: object
           description: >-
