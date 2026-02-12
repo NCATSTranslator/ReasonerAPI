@@ -982,7 +982,7 @@ components:
             field MUST be populated under a set_interpretation of MANY
             or ALL, when the 'ids' field holds a UUID representing the set 
             itself. This field MUST NOT be used under a set_interpretation 
-            of BATCH or COLLATE or when set_interpretation is absent or null.
+            of BATCH or COLLATE or when set_interpretation is absent.
           nullable: true
           minItems: 1
           items:
