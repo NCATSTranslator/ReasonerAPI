@@ -965,11 +965,11 @@ components:
             sets in the Results, and sets with more members are generally
             considered more desirable that sets with fewer members.
             Only when there are no ids provided, set_interpretation MAY be
-            set to COLLATE to indicate that each result MUST collate
-            all applicable IDs matching this query node.
-            If this property is absent or null, the default is BATCH when
-            ids are present and the default is COLLATE when ids are not
-            present.
+            set to COLLATE to indicate that mulitple matching nodes MUST be
+            collated into a single Result, rather than separated into
+            separate Results. If this property is absent, the default is
+            BATCH when ids are present, and the default is to separate nodes
+            into mutliple Results (i.e. not collate) when ids are not present.
           enum:
             - BATCH
             - ALL
