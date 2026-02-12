@@ -624,7 +624,6 @@ components:
       additionalProperties: true
       required:
         - node_bindings
-        - analyses
     NodeBinding:
       type: object
       description: >-
