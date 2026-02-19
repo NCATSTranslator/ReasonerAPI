@@ -712,10 +712,9 @@ components:
       additionalProperties: true
       required:
         - resource_id
-      oneOf:
+      anyOf:
         - required: [edge_bindings]
         - required: [path_bindings]
-        - required: [edge_bindings, path_bindings]
     EdgeBinding:
       type: object
       description: >-
