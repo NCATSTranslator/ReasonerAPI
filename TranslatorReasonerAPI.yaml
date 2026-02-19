@@ -816,6 +816,7 @@ components:
             on bound nodes.
           additionalProperties:
             $ref: '#/components/schemas/QNode'
+          minProperties: 1
         edges:
           type: object
           description: >-
