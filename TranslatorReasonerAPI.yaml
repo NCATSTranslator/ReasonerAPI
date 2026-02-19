@@ -604,14 +604,11 @@ components:
             The dictionary of Input Query Graph to Result Knowledge Graph node
             bindings where the dictionary keys are the key identifiers of the
             Query Graph nodes and the associated values of those keys are
-            instances of NodeBinding schema type (see below). This value is an
-            array of NodeBindings since a given query node may have multiple
-            knowledge graph Node bindings in the result.
+            instances of NodeBinding schema type (see below). Because a given
+            QNode may have multiple knowledge Nodes bound in the result,
+            the NodeBinding object may list multiple knowledge Nodes.
           additionalProperties:
-            type: array
-            items:
-              $ref: '#/components/schemas/NodeBinding'
-            minItems: 1
+            $ref: '#/components/schemas/NodeBinding'
           minProperties: 1
         analyses:
           type: array
@@ -627,20 +624,23 @@ components:
     NodeBinding:
       type: object
       description: >-
-        An instance of NodeBinding is a single KnowledgeGraph Node mapping,
-        identified by the corresponding 'id' object key identifier of the
-        Node within the Knowledge Graph. Instances of NodeBinding may
+        A NodeBinding object defines all relevant KnowledgeGraph Node mappings,
+        identified by the corresponding object key identifier(s) of the
+        Node(s) within the Knowledge Graph. Instances of NodeBinding may
         include extra annotation in the form of additional properties.
         (such annotation is not yet fully standardized). Each Node
         Binding must bind directly to node in the original Query Graph.
       properties:
-        id:
-          $ref: '#/components/schemas/CURIE'
+        ids:
+          type: array
+          items:
+            $ref: '#/components/schemas/CURIE'
+          minItems: 1
           description: >-
-            The CURIE of a Node within the Knowledge Graph.
+            The CURIEs of one or more Nodes within the Knowledge Graph.
       additionalProperties: true
       required:
-        - id
+        - ids
     Analysis:
       type: object
       description: >-
@@ -662,13 +662,11 @@ components:
             The dictionary of input Query Graph to Knowledge Graph edge
             bindings where the dictionary keys are the key identifiers of
             the Query Graph edges and the associated values of those keys
-            are instances of EdgeBinding schema type (see below). This
-            value is an array of EdgeBindings since a given query edge may
-            resolve to multiple Knowledge Graph Edges.
+            are instances of EdgeBinding schema type (see below). Because
+            a given QEdge may have multiple knowledge Edges bound in the
+            result, the EdgeBinding object may list multiple knowledge Edges.
           additionalProperties:
-            type: array
-            items:
-              $ref: '#/components/schemas/EdgeBinding'
+            $ref: '#/components/schemas/EdgeBinding'
         path_bindings:
           type: object
           minProperties: 1
@@ -676,9 +674,7 @@ components:
             The dictionary of input Query Graph paths to Analysis paths,
             specifically only for pathfinder queries.
           additionalProperties:
-            type: array
-            items:
-              $ref: '#/components/schemas/PathBinding'
+            $ref: '#/components/schemas/PathBinding'
         score:
           type: number
           format: float
@@ -718,7 +714,7 @@ components:
     EdgeBinding:
       type: object
       description: >-
-        A instance of EdgeBinding is a single KnowledgeGraph Edge mapping,
+        An EdgeBinding object defines all relevant KnowledgeGraph Edge mappings,
         identified by the corresponding 'id' object key identifier of the
         Edge within the Knowledge Graph. Instances of EdgeBinding may include
         extra annotation (such annotation is not yet fully standardized).
@@ -726,26 +722,32 @@ components:
         object because the Edges in the Knowledge Graph that get bound to
         the input Query Graph may differ between reasoners.
       properties:
-        id:
-          type: string
-          description: The key identifier of a specific KnowledgeGraph Edge.
+        ids:
+          type: array
+          items:
+            type: string
+          minItems: 1
+          description: The key identifiers of specific KnowledgeGraph Edges.
       additionalProperties: true
       required:
-        - id
+        - ids
     PathBinding:
       type: object
       description: >-
-        A instance of PathBinding is a single binding of an input QueryGraph
-        path (the key to this object) with the AuxiliaryGraph id containing
+        A PathBinding object binds a single QueryGraph path (the key to
+        this object) to one or more relevant AuxiliaryGraph ids containing
         a list of edges in the path. The Auxiliary Graph does not convey any
         order of edges in the path.
       properties:
-        id:
-          type: string
-          description: The key identifier of a specific auxiliary graph.
+        ids:
+          type: array
+          items:
+            type: string
+          minItems: 1
+          description: The key identifiers of specific auxiliary graphs.
       additionalProperties: true
       required:
-        - id
+        - ids
     AuxiliaryGraph:
       type: object
       description: >-
