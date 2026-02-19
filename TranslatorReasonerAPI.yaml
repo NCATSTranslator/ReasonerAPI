@@ -605,7 +605,7 @@ components:
             bindings where the dictionary keys are the key identifiers of the
             Query Graph nodes and the associated values of those keys are
             instances of NodeBinding schema type (see below). Because a given
-            QNode may have multple knowledge Nodes bound in the result,
+            QNode may have multiple knowledge Nodes bound in the result,
             the NodeBinding object may list multiple knowledge Nodes.
           additionalProperties:
             $ref: '#/components/schemas/NodeBinding'
@@ -625,8 +625,8 @@ components:
       type: object
       description: >-
         A NodeBinding object defines all relevant KnowledgeGraph Node mappings,
-        identified by the corresponding 'id' object key identifier of the
-        Node within the Knowledge Graph. Instances of NodeBinding may
+        identified by the corresponding object key identifier(s) of the
+        Node(s) within the Knowledge Graph. Instances of NodeBinding may
         include extra annotation in the form of additional properties.
         (such annotation is not yet fully standardized). Each Node
         Binding must bind directly to node in the original Query Graph.
@@ -640,7 +640,7 @@ components:
             The CURIEs of one or more Nodes within the Knowledge Graph.
       additionalProperties: true
       required:
-        - id
+        - ids
     Analysis:
       type: object
       description: >-
@@ -663,8 +663,8 @@ components:
             bindings where the dictionary keys are the key identifiers of
             the Query Graph edges and the associated values of those keys
             are instances of EdgeBinding schema type (see below). Because
-            a given QEdge may have multple knowledge Edges bound in the
-            result, the EdgeBinding object may list multiple knowledge Nodes.
+            a given QEdge may have multiple knowledge Edges bound in the
+            result, the EdgeBinding object may list multiple knowledge Edges.
           additionalProperties:
             $ref: '#/components/schemas/EdgeBinding'
         path_bindings:
@@ -731,7 +731,7 @@ components:
           description: The key identifiers of specific KnowledgeGraph Edges.
       additionalProperties: true
       required:
-        - id
+        - ids
     PathBinding:
       type: object
       description: >-
@@ -748,7 +748,7 @@ components:
           description: The key identifiers of specific auxiliary graphs.
       additionalProperties: true
       required:
-        - id
+        - ids
     AuxiliaryGraph:
       type: object
       description: >-
