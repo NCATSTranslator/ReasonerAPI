@@ -11,7 +11,7 @@ object: NCBIGene:2099  # ESR1
 object_aspect_qualifier: degradation
 object_direction_qualifier: decreased
 ```
-* [object_qualifiers.json](object_qualifiers.json)
+* [object_qualifiers.json](../DataExamples/object_qualifiers.json)
 
 Note: the predicate chosen should reflect the relationship between the subject and the object, and is not required
 to be "affects".  For example, below we see a statement where the relationship between Bisphenol A and ESR1 is
@@ -42,7 +42,7 @@ object_aspect_qualifier: expression
 object_direction_qualifier: increased
 ```
 
-* [subject_and_object_qualifiers.json](subject_and_object_qualifiers.json)
+* [subject_and_object_qualifiers.json](../DataExamples/subject_and_object_qualifiers.json)
 
 _"Fenofibrate is an agonist of PPARA protein"_
 
@@ -76,21 +76,21 @@ pathway_context_qualifier: GO:0038134 # ERBB2-EGFR signaling pathway
 Please note, pathway_context_qualifier is still under discussion in the Biolink Model. If you are trying to 
 represent GO-CAMs, please contact the Biolink Model team for more information.
 
-* [complex_gocam_qualifiers.json](complex_gocam_qualifiers.json)
+* [complex_gocam_qualifiers.json](../DataExamples/complex_gocam_qualifiers.json)
 
 
 ### Querying for "_affects transport of_ *OR* _affects localization of_" with qualifiers instead of predicates.
 
 _"What chemicals affect either the localization or the transport of ADRB2"_
 
-* [localization_or_transport.json](localization_or_transport.json)
+* [localization_or_transport.json](../DataExamples/localization_or_transport.json)
 
 
 ### When to use predicate=causes vs. qualified_predicate=causes
 
 _"What chemicals cause increased activity of PPARA protein"_
 
-* [causes_predicate_vs_qualifier.json](causes_predicate_vs_qualifier.json)
+* [causes_predicate_vs_qualifier.json](../DataExamples/causes_predicate_vs_qualifier.json)
 
 Note: in this example we need to convert the user's request for "causes" (predicate) to an "affects" predicate 
 with a "causes" qualified_predicate.
