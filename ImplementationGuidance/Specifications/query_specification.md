@@ -91,8 +91,8 @@ The terms MUST, SHOULD, MAY are used as defined in RFC 2119  https://tools.ietf.
   return a runtime error gracefully.
 
 ## Specifying permitted and excluded KPs to an ARA
-- The proper syntax for specifying or excluding specific KPs to consult to an ARA MUST be done
-  via a `attribute_constraint` on a QEdge. The following is a complete Query example that disallows the
+- The proper syntax for specifying or excluding specific knowledge sources (infores CURIEs) to an ARA MUST be done
+  via a `sources` constraint on a QEdge within the `constraints` object. The following is a complete Query example that disallows the
   use of SemMedDB:
 
 ```
@@ -106,15 +106,14 @@ The terms MUST, SHOULD, MAY are used as defined in RFC 2119  https://tools.ietf.
           "predicates": [
             "biolink:entity_negatively_regulates_entity"
           ],
-          "attribute_constraints": [
-            {
-              "id": "biolink:knowledge_source",
-              "name": "knowledge source",
-              "value": "infores:semmeddb",
-              "not": true,
-              "operator": "=="
+          "constraints": {
+            "sources": {
+              "behavior": "DENY",
+              "values": [
+                "infores:semmeddb"
+              ]
             }
-          ]
+          }
         }
       },
       "nodes": {
@@ -139,36 +138,31 @@ The terms MUST, SHOULD, MAY are used as defined in RFC 2119  https://tools.ietf.
 
 A general "allowlist" SHOULD look like this:
 ```
-      "attribute_constraints": [
-        {
-          "id": "biolink:knowledge_source",
-          "name": "knowledge source",
-          "value": [
+      "constraints": {
+        "sources": {
+          "behavior": "ALLOW",
+          "values": [
             "infores:rtx-kg2",
-            "infores:biothings-explorer",
-          ],
-          "operator": "=="
+            "infores:biothings-explorer"
+          ]
         }
-      ],
+      },
 ```
 
-(when the value is a list, the "==" operator works like a SQL "IN" clause, as clearly documented in the TRAPI yaml)
+(when `behavior` is set to "ALLOW", ANY (at least 1) of the given infores CURIEs MUST be present in the sources of bound edges)
 
 Here is what a general "denylist" should look like:
 ```
-      "attribute_constraints": [
-        {
-          "id": "biolink:knowledge_source",
-          "name": "knowledge source",
-          "value": [
+      "constraints": {
+        "sources": {
+          "behavior": "DENY",
+          "values": [
             "infores:rtx-kg2",
-            "infores:biothings-explorer",
-          ],
-          "not": true,
-          "operator": "=="
+            "infores:biothings-explorer"
+          ]
         }
-      ],
+      },
 ```
 
-(when the value is a list, the "==" operator combined with ' "not": true ' works like a SQL "NOT IN" clause, as clearly documented in the TRAPI yaml)
+(when `behavior` is set to "DENY", ALL of the given infores CURIEs MUST NOT be present in the sources of bound edges)
 
