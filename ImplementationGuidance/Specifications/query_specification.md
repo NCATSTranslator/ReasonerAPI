@@ -16,11 +16,19 @@ The terms MUST, SHOULD, MAY are used as defined in RFC 2119  https://tools.ietf.
 ## QNode.ids
 - MAY be null, or MAY be missing. The meaning is the same.
 - MUST NOT be an empty array (#199)
-- If more than one element is present, the elements MUST be treated in the sense of an "or" list.
-  This effectively creates a simple batch query mechanism.
+- If more than one element is present, the elements MUST be treated accoring to Qnode.set_interpretation.
 - The list SHOULD NOT be used by the client to provide equivalent CURIEs to the server
 - If the server considers a subset of items in the list as equivalent CURIEs,
   the server SHOULD merge the subset into a single KnowledgeGraph Node
+
+## QNode.set_interpretation
+- MAY be null, or MAY be missing. If null or missing, the default is "BATCH".
+- MUST be one of the following values: "BATCH", "ALL", "MANY", or "COLLATE"
+- If set_interpretation is "BATCH", each CURIE in the ids list is treated independently. Results MUST include answers for each queried CURIE separately.
+- If set_interpretation is "ALL", all specified CURIEs MUST appear in each Result. Multiple CURIEs are combined into a set, and the ids field MUST hold a single UUID representing this set, with individual members in member_ids.
+- If set_interpretation is "MANY", member CURIEs MUST form one or more sets in the Results. Multiple CURIEs are combined into a set, and the ids field MUST hold a single UUID representing this set, with individual members in member_ids. Sets with more members are generally considered more desirable than sets with fewer members.
+- If set_interpretation is "COLLATE", it MAY only be used when no ids are provided (QNode.ids is null or missing). Multiple matching nodes MUST be collated into a single Result rather than separated into separate Results.
+
 
 ## QNode.categories
 - MAY be null, or MAY be missing. The meaning is the same: matching Nodes may be any category
