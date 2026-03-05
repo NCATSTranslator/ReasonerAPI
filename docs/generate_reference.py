@@ -61,7 +61,7 @@ def main():
         sha=sha,
     )
 
-    with Path("reference.md").open("w") as stream:
+    with SCRIPT_DIR.joinpath("reference.md").open("w") as stream:
         _ = stream.write(markdown)
 
 
