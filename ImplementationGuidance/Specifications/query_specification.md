@@ -90,7 +90,7 @@ The terms MUST, SHOULD, MAY are used as defined in RFC 2119  https://tools.ietf.
   large (e.g., if the client specified `MONDO:0000001: disease or disorder`), the server SHOULD
   return a runtime error gracefully.
 
-## Specifying permitted and excluded KPs to an ARA
+## Specifying permitted and excluded sources to an ARA
 - The proper syntax for specifying or excluding specific knowledge sources (infores CURIEs) to an ARA MUST be done
   via a `sources` constraint on a QEdge within the `constraints` object. The following is a complete Query example that disallows the
   use of SemMedDB:
@@ -136,33 +136,29 @@ The terms MUST, SHOULD, MAY are used as defined in RFC 2119  https://tools.ietf.
 }
 ```
 
-A general "allowlist" SHOULD look like this:
+An allowlist with `behavior` set to "ALLOW" requires at least one of the specified infores CURIEs to be present in the sources of bound edges:
 ```
       "constraints": {
         "sources": {
           "behavior": "ALLOW",
           "values": [
-            "infores:rtx-kg2",
-            "infores:biothings-explorer"
+            "infores:chembl",
+            "infores:chebi"
           ]
         }
       },
 ```
 
-(when `behavior` is set to "ALLOW", ANY (at least 1) of the given infores CURIEs MUST be present in the sources of bound edges)
-
-Here is what a general "denylist" should look like:
+A denylist with `behavior` set to "DENY" excludes all of the specified infores CURIEs from the sources of bound edges:
 ```
       "constraints": {
         "sources": {
           "behavior": "DENY",
           "values": [
-            "infores:rtx-kg2",
-            "infores:biothings-explorer"
+            "infores:ctd",
+            "infores:reactome"
           ]
         }
       },
 ```
-
-(when `behavior` is set to "DENY", ALL of the given infores CURIEs MUST NOT be present in the sources of bound edges)
 
