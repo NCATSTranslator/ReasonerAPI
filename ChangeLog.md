@@ -1,4 +1,34 @@
-# Change Log TRAPI 1.4.0 (2023-06-23) -> 1.5.0 (2023-05-26)
+# Change Log  1.6.0-beta (2025-06-06) -> 2.0.0-dev (2026-03-01)
+
+- Migrate from OpenAPI 3.0.1 to OpenAPI 3.1.2 specification (Note that 'example' becomes 'examples' in OpenAPI 3.1.2)
+
+- Add Query.parameters to contain additional and extensible query parameters
+
+- QEdge.attribute_constraints has been renamed to QEdge.constraints which is an object that can contain constraints for knowledge_level, agent_type, attributes, qualifiers, and sources
+
+- A separate 'sources' constraint now has ALLOW and DENY constructs with an optional 'primary_only' flag
+
+- Edge.knowledge_level and Edge.agent_type are now direct Edge properties instead of within 'attributes'
+
+- The 'attributes' property is no longer required
+
+- Remove all 'nullable' attributes. Properties with no data must now be *absent* from TRAPI JSON rather than allowed to be present but with a null value
+
+- Remove 'attributes' from NodeBinding and EdgeBinding
+
+- Empty lists no longer permitted to say "no data". Must now be absent property
+
+- BaseQueryGraph and BaseAnalysis base classes removed in favor of a single QueryGraph and Analysis that support both pathfinder and regular queries
+
+- EdgeBinding has been simplified
+
+- Add new enumerated value COLLATE for QNode.set_interpretation
+
+# Change Log TRAPI 1.5.0 (2024-05-26) -> 1.6.0-beta (2025-06-06)
+
+- TBD
+
+# Change Log TRAPI 1.4.0 (2023-06-23) -> 1.5.0 (2024-05-26)
 
 https://github.com/NCATSTranslator/ReasonerAPI/compare/v1.4.0...1.5
   
