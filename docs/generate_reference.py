@@ -2,6 +2,7 @@
 
 from pathlib import Path
 import re
+import sys
 from typing import Any, Hashable, override
 
 from jinja2 import Environment, FileSystemLoader
@@ -52,6 +53,8 @@ def main():
     schemas = components["schemas"]
 
     sha = "master"
+    if len(sys.argv) >= 2:
+        sha = sys.argv[1]
 
     markdown = j2_env.get_template("reference_template.md").render(
         schemas=schemas,
