@@ -140,20 +140,32 @@ This example Edge (not real!) would fulfill the constraints (properties put in s
 ```
 
 
-## 2. Query/Response Parameters
+### 2. New Query/Response Parameters
 
-In TRAPI 1.6.0-beta, `log_level` and `bypass_cache` were top-level properties in `Query` and `AsyncQuery`. In TRAPI 2.0, these move under `parameters`, and a new `timeout` parameter is introduced.
+#### BEFORE
 
-TRAPI 2.0 adds `Response.parameters`, intended to preserve the query-time parameters received in the request.
+In 1.6.0-beta, `log_level` and `bypass_cache` were top-level properties in `Query` and `AsyncQuery`. 
 
-a. `/query` and `/asyncquery` add HTTP `409` for query parameter/server capability conflicts.
+A query with them would look like this: 
 
 ```json
-// TODO: Insert before/after request+response snippet showing:
-// - old request: query.log_level, query.bypass_cache
-// - new request: query.parameters.log_level, query.parameters.bypass_cache, query.parameters.timeout
-// - new response: response.parameters echo behavior
+// TO-DO: snippet of a query - include those two, message {...}. Don't include custom param like data tier? 
 ```
+
+#### AFTER
+
+In 2.0, these are moved under a new top-level property `parameters` (their behavior is otherwise kept the same). `parameters` also includes a new parameter/property `timeout`, so a client can state how long they will wait for a response.
+
+Tools can also use the new `parameters` property to hold undefined query-time parameters that affect overall behavior of the server in query execution, like specifying data-tier in the Translator ecosystem. 
+
+`parameters` has also been added to `Response`; the server receiving a Query/AsyncQuery with `parameters` MUST echo them in its Response. If there is a conflict between the `parameters` and the server's capabilities, the server SHOULD return HTTP `409`.
+
+A query with the same parameters (plus timeout and custom data-tier) would look like this:
+
+```json
+// TO-DO: AFTER snippet + timeout and custom data-tier
+```
+
 
 ## 3. Binding Structure Changes (Node/Edge/Path)
 
