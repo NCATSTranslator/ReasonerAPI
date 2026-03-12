@@ -58,7 +58,7 @@ A QEdge in 1.6.0-beta with all of these constraints would look like this:
 
 In 2.0, there is instead one property on a QEdge, `constraints`, that holds all the types of constraints, organized by key. There are 5 keys currently specified:
 
-* `knowledge_level`: we moved KL/AT out of Edge `attributes` and into its own top-level properties on an Edge, so they need corresponding separate constraints. This constraint is an object with two keys: `behavior` (`ALLOW` or `DENY`) and `values` (an array of strings). 
+* `knowledge_level`: we moved KL/AT out of Edge `attributes` and into its own top-level properties on an Edge (see #4), so they need corresponding separate constraints. This constraint is an object with two keys: `behavior` (`ALLOW` or `DENY`) and `values` (an array of strings). 
    * `ALLOW` means "ANY (at least 1) of the `values` MUST be in the matched Edge's corresponding property". 
    * `DENY` means "ALL of the `values` MUST NOT be in the matched Edge's corresponding property". 
 * `agent_type`: see above (KL)
@@ -351,13 +351,25 @@ Changes:
 </details>
 
 
-## 4. Edge Output Now Requires `knowledge_level` and `agent_type`
+### 4. KL/AT turned into top-level Edge properties, now required 
 
-TRAPI 2.0 requires both fields on `Edge` in addition to existing required edge fields.
+In 1.6.0-beta, `knowledge_level` and `agent_type` are stored in `Edge.attributes`, which is not a required property. However, for several years the Translator Consortium has actually required KL/AT on Edges. 
+
+In 2.0, they are now top-level properties that are required on an `Edge`. The way to constrain them in queries has also changed (own keys under `QEdge.constraints`) - see #1 for details.
+
+Example snippet of an `Edge` in 2.0, showing the top-level KL/AT:
 
 ```json
-// TODO: Insert old/new Edge snippet showing required knowledge_level and agent_type
+{
+    "subject": "NCBIGene:1234",
+    "object": "MONDO:1234",
+    "predicate": "biolink:associated_with",
+    "agent_type": "data_analysis_pipeline",    // top-level properties!
+    "knowledge_level": "statistical_association",
+    "sources": [...],
+}
 ```
+
 
 ## 5. `QNode.set_interpretation` Adds `COLLATE`
 
