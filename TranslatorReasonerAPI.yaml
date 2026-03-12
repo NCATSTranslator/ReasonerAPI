@@ -801,7 +801,6 @@ components:
       additionalProperties: true
       required:
         - nodes
-        - edges
     QueryGraph:
       type: object
       description: >-
