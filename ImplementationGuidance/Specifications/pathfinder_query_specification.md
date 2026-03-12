@@ -421,18 +421,16 @@ and Results all included. The constrained version is shown after that.
         "results": [
             {
                 "node_bindings": {
-                    "n0": [
-                        {
-                            "id": "MONDO:0005011",
-                            "attributes": []
-                        }
-                    ],
-                    "n1": [
-                        {
-                            "id": "MONDO:0005180",
-                            "attributes": []
-                        }
-                    ]
+                    "n0": {
+                        "ids": [
+                            "MONDO:0005011"
+                        ]
+                        },
+                    "n1": {
+                        "ids": [
+                            "MONDO:0005180"
+                        ]
+                    }
                 },
                 "analyses": [
                     {
@@ -564,18 +562,16 @@ and Results all included. The constrained version is shown after that.
         "results": [
             {
                 "node_bindings": {
-                    "n0": [
-                        {
-                            "id": "MONDO:0005011",
-                            "attributes": []
-                        }
-                    ],
-                    "n1": [
-                        {
-                            "id": "MONDO:0005180",
-                            "attributes": []
-                        }
-                    ]
+                    "n0": {
+                        "ids": [
+                            "MONDO:0005011"
+                        ]
+                        },
+                    "n1": {
+                        "ids": [
+                            "MONDO:0005180"
+                        ]
+                    }
                 },
                 "analyses": [
                     {
