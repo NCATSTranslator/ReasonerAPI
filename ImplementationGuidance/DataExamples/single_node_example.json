@@ -203,13 +203,7 @@
                             "MONDO:0004979"
                         ]
                     }
-                },
-                "analyses": [
-                    {
-                        "resource_id": "infores:arax",
-                        "edge_bindings": {}
-                    }
-                ]
+                }
             }
         ]
     }
