@@ -391,21 +391,27 @@ The `node_bindings.[Gene QNode].ids` would include Genes A, B, and C. The edge_b
 
 
 ## Other Changes
-A. `nullable` lines are removed in TRAPI 2.0, consistent with OpenAPI 3.1 and JSON Schema handling of nullability. This means `null` is generally not valid unless the schema explicitly allows it. For fields that are not required, clients should omit the field instead of sending `null`. For required fields, clients must send a value that matches the declared type. Parsers and validators should be updated to treat omitted and `null` values differently.
-B. minItems/minProperties set to 1. Explanation: "if present, must have data - at least 1 element"
-C. AuxiliaryGraph.attributes removed (previously required)
-D. Changed to not required
-E. Analysis allows both EdgeBinding and PathBinding (for experimental use only, small change introduced when simplifying schema classes)
+
+1. `null` is no longer a valid value in queries and responses. To convey "no data", omit the field or use an empty array/object if the schema allows (doesn't set `minProperties`/`minItems`). However, unless the field's description explicitly states that the empty array/object should be used, we strongly encourage omitting fields instead to reduce needless bloat. Examples:
+   * `Message.knowledge_graph` should omitted, not be set to `null`, when there is no data (ex: a query, or a response with no data found).
+   * `Message.results` should not be set to `null` when there is no data. Its description states when it should be omitted (when not expected, like a query) VS an empty array (when it is expected and there's no data, like a response).
+2. For many optional array and object properties, `minItems`/`minProperties` was set to 1. This was to reduce bloat (only include the field if there's data). See the Changelog for the list of changed properties.
+3. `AuxiliaryGraph.attributes` was removed. It was previously required, but never used and its empty arrays bloated responses.
+4. These properties were changed to not required:
+   * `Nodes.attributes`
+   * `QueryGraph` `edges` and `paths`: to accommodate queries with only nodes
+   * `Result.analyses`: same reason as above
+5. Analysis allows edge_bindings and path_bindings to be present together (for experimental use only, small change introduced when simplifying schema classes)
 
 
-## Large Example: 1.6.0-beta Response (+Query)
+## Full Example: 1.6.0-beta Response
 
 ```json
-// TODO: Insert full-size TRAPI 1.6.0-beta response example
+// TODO: full-size 1.6.0-beta response example
 ```
 
-## Large Example: 2.0 Response (+Query)
+## Full Example: 2.0 Response
 
 ```json
-// TODO: Insert full-size TRAPI 2.0 response example
+// TODO: full-size 2.0 response example
 ```
