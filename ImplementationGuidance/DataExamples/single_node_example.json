@@ -6,7 +6,6 @@
                     "categories": [
                         "biolink:Disease"
                     ],
-                    "constraints": [],
                     "ids": [
                         "MONDO:0004979"
                     ]
@@ -26,13 +25,13 @@
                     "name": "asthma",
                     "attributes": [
                         {
-                            "attribute_type_id": "biolink:log_odds_ratio_95_ci",
+                            "attribute_type_id": "biolink:log_odds_ratio",
                             "value": 100.0,
                             "value_type_id": "EDAM:data_0006",
-                            "original_attribute_name": "information_content"
+                            "original_attribute_name": "log_odds_ratio"
                         },
                         {
-                            "attribute_type_id": "biolink:Attribute",
+                            "attribute_type_id": "biolink:information_content",
                             "value": 77.1,
                             "original_attribute_name": "information_content"
                         },
@@ -43,28 +42,13 @@
                             "attribute_source": "infores:rtx-kg2"
                         },
                         {
-                            "attribute_type_id": "biolink:Attribute",
-                            "value": true,
-                            "original_attribute_name": "MONDO_SUPERCLASS_disease"
-                        },
-                        {
                             "attribute_type_id": "dct:description",
                             "value": "A bronchial disease that is characterized by chronic inflammation and narrowing of the airways, which is caused by a combination of environmental and genetic factors resulting in recurring periods of wheezing (a whistling sound while breathing), chest tightness, shortness of breath, mucus production and coughing. The symptoms appear due to a variety of triggers such as allergens, irritants, respiratory infections, weather changes, exercise, stress, reflux disease, medications, foods and emotional anxiety.",
                             "value_type_id": "EDAM:data_0006",
                             "original_attribute_name": "description"
                         },
                         {
-                            "attribute_type_id": "biolink:Attribute",
-                            "value": 77.4,
-                            "original_attribute_name": "information_content"
-                        },
-                        {
-                            "attribute_type_id": "biolink:Attribute",
-                            "value": true,
-                            "original_attribute_name": "MONDO_SUPERCLASS_lower_respiratory_tract_disorder"
-                        },
-                        {
-                            "attribute_type_id": "biolink:Attribute",
+                            "attribute_type_id": "biolink:xref",
                             "value": [
                                 "MEDDRA:10003553",
                                 "MEDDRA:10037993",
@@ -98,49 +82,6 @@
                             "original_attribute_name": "equivalent_identifiers"
                         },
                         {
-                            "attribute_type_id": "biolink:description",
-                            "value": "A bronchial disease that is characterized by chronic inflammation and narrowing of the airways, which is caused by a combination of environmental and genetic factors resulting in recurring periods of wheezing (a whistling sound while breathing), chest tightness, shortness of breath, mucus production and coughing. The symptoms appear due to a variety of triggers such as allergens, irritants, respiratory infections, weather changes, exercise, stress, reflux disease, medications, foods and emotional anxiety.",
-                            "value_type_id": "dct:description",
-                            "original_attribute_name": "description"
-                        },
-                        {
-                            "attribute_type_id": "biolink:Attribute",
-                            "value": [
-                                "MONDO:0004979",
-                                "DOID:2841",
-                                "UMLS:C0004096",
-                                "UMLS:C0085129",
-                                "UMLS:C0340062",
-                                "UMLS:C3714497",
-                                "MESH:D001249",
-                                "MESH:D016535",
-                                "MEDDRA:10003553",
-                                "MEDDRA:10003555",
-                                "MEDDRA:10003560",
-                                "MEDDRA:10003561",
-                                "MEDDRA:10003565",
-                                "MEDDRA:10006450",
-                                "MEDDRA:10037993",
-                                "MEDDRA:10056285",
-                                "MEDDRA:10066091",
-                                "MEDDRA:10066863",
-                                "MEDDRA:10082852",
-                                "NCIT:C28397",
-                                "SNOMEDCT:195967001",
-                                "SNOMEDCT:991000119106",
-                                "ICD10:J45",
-                                "ICD9:493",
-                                "KEGG.DISEASE:05310",
-                                "HP:0002099"
-                            ],
-                            "original_attribute_name": "equivalent_identifiers"
-                        },
-                        {
-                            "attribute_type_id": "biolink:Attribute",
-                            "value": true,
-                            "original_attribute_name": "MONDO_SUPERCLASS_human_disease"
-                        },
-                        {
                             "attribute_type_id": "biolink:synonym",
                             "value": [
                                 "Asthma",
@@ -158,38 +99,6 @@
                             "value": "http://purl.obolibrary.org/obo/MONDO_0004979",
                             "value_type_id": "metatype:Uri",
                             "attribute_source": "infores:rtx-kg2"
-                        },
-                        {
-                            "attribute_type_id": "biolink:log_odds_ratio_95_ci",
-                            "value": [
-                                "MONDO:0004979",
-                                "DOID:2841",
-                                "UMLS:C0004099",
-                                "MESH:D001249",
-                                "MESH:D001250",
-                                "MEDDRA:10003557",
-                                "MEDDRA:10015649",
-                                "MEDDRA:10079895",
-                                "NCIT:C28397",
-                                "SNOMEDCT:31387002",
-                                "medgen:2109",
-                                "ICD10:J45",
-                                "ICD9:493",
-                                "KEGG.DISEASE:05310",
-                                "HP:0012652"
-                            ],
-                            "value_type_id": "EDAM:data_0006",
-                            "original_attribute_name": "equivalent_identifiers"
-                        },
-                        {
-                            "attribute_type_id": "biolink:Attribute",
-                            "value": true,
-                            "original_attribute_name": "MONDO_SUPERCLASS_respiratory_system_disorder"
-                        },
-                        {
-                            "attribute_type_id": "biolink:Attribute",
-                            "value": 78.2,
-                            "original_attribute_name": "information_content"
                         }
                     ]
                 }
