@@ -198,13 +198,18 @@
         "results": [
             {
                 "node_bindings": {
-                    "n0": [
-                        {
-                            "id": "MONDO:0004979",
-                            "attributes": []
-                        }
-                    ]
-                }
+                    "n0": {
+                        "ids": [
+                            "MONDO:0004979"
+                        ]
+                    }
+                },
+                "analyses": [
+                    {
+                        "resource_id": "infores:arax",
+                        "edge_bindings": {}
+                    }
+                ]
             }
         ]
     }

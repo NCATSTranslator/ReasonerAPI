@@ -35,57 +35,83 @@
             "x17770": {
                 "predicate": "biolink:related_to",
                 "subject": "MONDO:0005737",
-                "object": "HGNC:17770"
+                "object": "HGNC:17770",
+                "sources": [
+                  {
+                    "resource_id": "infores:chembl",
+                    "resource_role": "primary_knowledge_source"
+                  }
+                ],
+                "knowledge_level": "knowledge_assertion",
+                "agent_type": "manual_agent"
             },
             "x13236": {
                 "predicate": "biolink:related_to",
                 "subject": "MONDO:0005737",
-                "object": "HGNC:13236"
+                "object": "HGNC:13236",
+                "sources": [
+                  {
+                    "resource_id": "infores:chembl",
+                    "resource_role": "primary_knowledge_source"
+                  }
+                ],
+                "knowledge_level": "knowledge_assertion",
+                "agent_type": "manual_agent"
             }
         }
     },
     "results": [
         {
             "node_bindings": {
-                "n0": [
-                    {
-                        "id": "MONDO:0005737"
-                    }
-                ],
-                "n1": [
-                    {
-                        "id": "HGNC:17770"
-                    }
-                ]
+                "n0": {
+                    "ids": [
+                        "MONDO:0005737"
+                    ]
+                },
+                "n1": {
+                    "ids": [
+                        "HGNC:17770"
+                    ]
+                }
             },
-            "edge_bindings": {
-                "e01": [
-                    {
-                        "id": "x17770"
+            "analyses": [
+                {
+                    "resource_id": "infores:arax",
+                    "edge_bindings": {
+                        "e01": {
+                            "ids": [
+                                "x17770"
+                            ]
+                        }
                     }
-                ]
-            }
+                }
+            ]
         },
         {
             "node_bindings": {
-                "n0": [
-                    {
-                        "id": "MONDO:0005737"
-                    }
-                ],
-                "n1": [
-                    {
-                        "id": "HGNC:13236"
-                    }
-                ]
+                "n0": {
+                    "ids": [
+                        "MONDO:0005737"
+                    ]
+                },
+                "n1": {
+                    "ids": [
+                        "HGNC:13236"
+                    ]
+                }
             },
-            "edge_bindings": {
-                "e01": [
-                    {
-                        "id": "x13236"
+            "analyses": [
+                {
+                    "resource_id": "infores:arax",
+                    "edge_bindings": {
+                        "e01": {
+                            "ids": [
+                                "x13236"
+                            ]
+                        }
                     }
-                ]
-            }
+                }
+            ]
         }
     ]
 }

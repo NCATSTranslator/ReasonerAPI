@@ -22,32 +22,17 @@
         "predicates": [
           "biolink:affects"
         ],
-        "qualifier_constraints": [
-          {
-            "qualifier_set": [
-              {
-                "qualifier_type_id": "biolink:subject_aspect_qualifier",
-                "qualifier_value": "abundance"
-              },
-              {
-                "qualifier_type_id": "biolink:subject_direction_qualifier",
-                "qualifier_value": "decreased"
-              },
-              {
-                "qualifier_type_id": "biolink:object_aspect_qualifier",
-                "qualifier_value": "expression"
-              },
-              {
-                "qualifier_type_id": "biolink:object_direction_qualifier",
-                "qualifier_value": "increased"
-              },
-              {
-                "qualifier_type_id": "biolink:qualified_predicate",
-                "qualifier_value": "biolink:causes"
-              }
-            ]
-          }
-        ]
+        "constraints": {
+          "qualifiers": [
+            {
+              "biolink:subject_aspect_qualifier": "abundance",
+              "biolink:subject_direction_qualifier": "decreased",
+              "biolink:object_aspect_qualifier": "expression",
+              "biolink:object_direction_qualifier": "increased",
+              "biolink:qualified_predicate": "biolink:causes"
+            }
+          ]
+        }
       }
     }
   },
@@ -92,31 +77,44 @@
                 "qualifier_type_id": "biolink:object_direction_qualifier",
                 "qualifier_value": "increased"
               }
-        ]
+        ],
+        "sources": [
+          {
+            "resource_id": "infores:chembl",
+            "resource_role": "primary_knowledge_source"
+          }
+        ],
+        "knowledge_level": "knowledge_assertion",
+        "agent_type": "manual_agent"
       }
     }
   },
   "results": [
     {
       "node_bindings": {
-        "n0": [
-          {
-            "id": "PUBCHEM.COMPOUND:6137"
-          }
-        ],
-        "n1": [
-          {
-            "id": "HGNC:286"
-          }
-        ]
+        "n0": {
+          "ids": [
+            "PUBCHEM.COMPOUND:6137"
+          ]
+        },
+        "n1": {
+          "ids": [
+            "HGNC:286"
+          ]
+        }
       },
-      "edge_bindings": {
-        "e01": [
-          {
-            "id": "x17770"
+      "analyses": [
+        {
+          "resource_id": "infores:arax",
+          "edge_bindings": {
+            "e01": {
+              "ids": [
+                "x17770"
+              ]
+            }
           }
-        ]
-      }
+        }
+      ]
     }
   ]
 }

@@ -33,6 +33,14 @@
         "lookup"
       ],
       "association": "biolink:ChemicalToGeneAssociation",
+      "sources": [
+        {
+          "resource_id": "infores:chembl",
+          "resource_role": "primary_knowledge_source"
+        }
+      ],
+      "knowledge_level": "knowledge_assertion",
+      "agent_type": "manual_agent",
       "qualifiers": [
         {
           "qualifier_type_id": "biolink:subject_aspect_qualifier",
