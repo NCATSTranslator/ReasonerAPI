@@ -225,47 +225,45 @@ This is similar to how EdgeBindings bind a KnowledgeGraph Edge, by id, to a Quer
 "results": [
     {
         "node_bindings": {
-            "n0": [
-                {
-                    "id": "MONDO:0005011",
-                    "attributes": []
-                }
-            ],
-            "n1": [
-                {
-                    "id": "MONDO:0005180",
-                    "attributes": []
-                }
-            ]
+            "n0": {
+                "ids": [
+                    "MONDO:0005011"
+                ]
+            },
+            "n1": {
+                "ids": [
+                    "MONDO:0005180"
+                ]
+            }
         },
         "analyses": [
             {
                 "path_bindings": {
-                    "p0": [
-                        {
-                            "id": "a0"
-                        }
-                    ],
+                    "p0": {
+                        "ids": [
+                            "a0"
+                        ]
+                    }
                 },
                 "score": .85
             },
             {
                 "path_bindings": {
-                    "p0": [
-                        {
-                            "id": "a1"
-                        }
-                    ],
+                    "p0": {
+                        "ids": [
+                            "a1"
+                        ]
+                    }
                 },
                 "score": .7
             },
             {
                 "path_bindings": {
-                    "p0": [
-                        {
-                            "id": "a2"
-                        }
-                    ],
+                    "p0": {
+                        "ids": [
+                            "a2"
+                        ]
+                    }
                 },
                 "score": .9
             }
@@ -281,37 +279,35 @@ would look like this.
 "results": [
     {
         "node_bindings": {
-            "n0": [
-                {
-                    "id": "MONDO:0005011",
-                    "attributes": []
-                }
-            ],
-            "n1": [
-                {
-                    "id": "MONDO:0005180",
-                    "attributes": []
-                }
-            ]
+            "n0": {
+                "ids": [
+                    "MONDO:0005011"
+                ]
+            },
+            "n1": {
+                "ids": [
+                    "MONDO:0005180"
+                ]
+            }
         },
         "analyses": [
             {
                 "path_bindings": {
-                    "p0": [
-                        {
-                            "id": "a0"
-                        }
-                    ],
+                    "p0": {
+                        "ids": [
+                            "a0"
+                        ]
+                    }
                 },
                 "score": .85
             },
             {
                 "path_bindings": {
-                    "p0": [
-                        {
-                            "id": "a1"
-                        }
-                    ],
+                    "p0": {
+                        "ids": [
+                            "a1"
+                        ]
+                    }
                 },
                 "score": .7
             }
@@ -441,31 +437,31 @@ and Results all included. The constrained version is shown after that.
                 "analyses": [
                     {
                         "path_bindings": {
-                            "p0": [
-                                {
-                                    "id": "a0"
-                                }
-                            ],
+                            "p0": {
+                                "ids": [
+                                    "a0"
+                                ]
+                            }
                         },
                         "score": .85
                     },
                     {
                         "path_bindings": {
-                            "p0": [
-                                {
-                                    "id": "a1"
-                                }
-                            ],
+                            "p0": {
+                                "ids": [
+                                    "a1"
+                                ]
+                            }
                         },
                         "score": .7
                     },
                     {
                         "path_bindings": {
-                            "p0": [
-                                {
-                                    "id": "a2"
-                                }
-                            ],
+                            "p0": {
+                                "ids": [
+                                    "a2"
+                                ]
+                            }
                         },
                         "score": .9
                     }
@@ -584,21 +580,21 @@ and Results all included. The constrained version is shown after that.
                 "analyses": [
                     {
                         "path_bindings": {
-                            "p0": [
-                                {
-                                    "id": "a0"
-                                }
-                            ],
+                            "p0": {
+                                "ids": [
+                                    "a0"
+                                ]
+                            }
                         },
                         "score": .85
                     },
                     {
                         "path_bindings": {
-                            "p0": [
-                                {
-                                    "id": "a1"
-                                }
-                            ],
+                            "p0": {
+                                "ids": [
+                                    "a1"
+                                ]
+                            }
                         },
                         "score": .7
                     }
