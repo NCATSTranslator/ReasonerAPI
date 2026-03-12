@@ -167,35 +167,189 @@ A query with the same parameters (plus timeout and custom data-tier) would look 
 ```
 
 
-## 3. Binding Structure Changes (Node/Edge/Path)
+### 3. Binding Structure Changes (Node/Edge/Path)
 
-TRAPI 1.6.0-beta `NodeBinding` used fields such as `id`, `query_id`, and optional `attributes`.  
-TRAPI 2.0 uses:
-- `NodeBinding.ids` (array, required)
+#### BEFORE 
 
-Also, in results:
-- old: `result.node_bindings[qnode]` was an array of `NodeBinding`
-- new: `result.node_bindings[qnode]` is a single `NodeBinding` object containing `ids`
-
-TRAPI 1.6.0-beta `EdgeBinding` used `id` (+ optional attributes).  
-TRAPI 2.0 uses:
-- `EdgeBinding.ids` (array, required)
-
-Also, in analyses:
-- old: `analysis.edge_bindings[qedge]` was an array of `EdgeBinding`
-- new: `analysis.edge_bindings[qedge]` is a single `EdgeBinding` object containing `ids`
-
-TRAPI 1.6.0-beta `PathBinding` used `id`.  
-TRAPI 2.0 uses:
-- `PathBinding.ids` (array, required)
+In 1.6.0-beta, the 3 kinds of bindings have this format: 
 
 ```json
-// TODO: Insert old/new bindings snippet covering:
-// - NodeBinding: id/query_id/attributes -> ids[]
-// - EdgeBinding: id/attributes -> ids[]
-// - PathBinding: id -> ids[]
-// - container shape updates in result.node_bindings and analysis.*_bindings
+...
+"<node/edge/path>_bindings": {
+          "key1": [
+            {
+              "id": "<CURIE/EdgeID/AuxGraphID>",
+              "attributes": []
+            }
+          ],
+          "key2": [
+            {
+              "id": "<CURIE/EdgeID/AuxGraphID>",
+              "attributes": []
+            }
+          ]
+        },
+...
 ```
+
+Details:
+* `attributes` were required for `NodeBinding` and `EdgeBinding`, not defined/included in `PathBinding`
+* NodeBinding had the optional property `query_id`, which supported an older implementation of subclassing.
+
+<details><summary>Example result with node/edge bindings</summary>
+<p>
+
+```json
+{
+    "node_bindings": {
+        "n0": [
+            {
+                "id": "NCBIGene:1234",
+                "attributes": []
+            }
+        ],
+        "n1": [
+            {
+                "id": "MONDO:1234",
+                "attributes": []
+            }
+        ]
+    },
+    "analyses": [
+        {
+            "resource_id": "infores:retriever",
+            "edge_bindings": {
+                "e0": [
+                    {
+                        "id": "edge-1234-1234-1234-1234",
+                        "attributes": []
+                    }
+                ]
+            }
+        }
+    ]
+}
+```
+
+</p>
+</details> 
+
+<details><summary>Example result with node/path bindings</summary>
+<p>
+
+```json
+{
+    "node_bindings": {
+        "n0": [
+            {
+                "id": "CHEBI:4567",
+                "attributes": []
+            }
+        ],
+        "n1": [
+            {
+                "id": "MONDO:4567",
+                "attributes": []
+            }
+        ]
+    },
+    "analyses": [
+        {
+            "resource_id": "infores:aragorn-shepherd",
+            "path_bindings": {
+                "p0": [
+                    {
+                        "id": "auxGraph-4567-4567-4567-4567"
+                    }
+                ]
+            }
+        }
+    ]
+}
+```
+
+</p>
+</details> 
+
+#### AFTER
+
+In 2.0, the format is simplified:
+
+```json
+"<node/edge/path>_bindings": {
+          "key1": {
+            "ids": ["<CURIE/EdgeID/AuxGraphID>"]
+          }
+          "key2": {
+            "ids": ["<CURIE/EdgeID/AuxGraphID>"]
+          }
+        },
+```
+
+Changes:
+* `node/edge/path>_bindings` are now `minProperties: 1` (AKA when these fields are present, they MUST contain data) 
+* `ids` arrays are `minItems: 1` (this property is still required)
+* `attributes` were removed from NodeBinding/EdgeBinding (were never used, empty arrays bloated responses)
+* `query_id` was removed from NodeBinding (obsolete with the current subclassing behavior)
+
+<details><summary>Same node/edge bindings result, converted to 2.0</summary>
+<p>
+
+```json
+{
+    "node_bindings": {
+        "n0": {
+            "ids": ["NCBIGene:1234"]
+        },
+        "n1": {
+            "ids": ["MONDO:1234"]
+        }
+    },
+    "analyses": [
+        {
+            "resource_id": "infores:retriever",
+            "edge_bindings": {
+                "e0": {
+                    "ids": ["edge-1234-1234-1234-1234"]
+                }
+            }
+        }
+    ]
+}
+```
+
+</p>
+</details>
+
+<details><summary>Same node/path bindings result, converted to 2.0</summary>
+<p>
+
+```json
+{
+    "node_bindings": {
+        "n0": {
+            "ids": ["CHEBI:4567"]
+        },
+        "n1": {
+            "ids": ["MONDO:4567"]
+        }
+    },
+    "analyses": [
+        {
+            "resource_id": "infores:aragorn-shepherd",
+            "path_bindings": {
+                "p0": {
+                    "ids": ["auxGraph-4567-4567-4567-4567"]
+                }
+            }
+        }
+    ]
+}
+```
+
+</p>
+</details>
+
 
 ## 4. Edge Output Now Requires `knowledge_level` and `agent_type`
 
