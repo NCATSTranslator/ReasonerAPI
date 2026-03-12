@@ -371,14 +371,23 @@ Example snippet of an `Edge` in 2.0, showing the top-level KL/AT:
 ```
 
 
-## 5. `QNode.set_interpretation` Adds `COLLATE`
+### 5. Add `COLLATE` option to `QNode.set_interpretation`
 
-TRAPI 2.0 adds `COLLATE` to `set_interpretation`, with updated expectations for `member_ids`.
+In 2.0, `COLLATE` is an option that is only allowed on QNodes with no `ids` set and indicates that multiple matching nodes MUST be collated into a single Result, rather than put into separate Results. This restores some of the `QNode.is_set` behavior that was removed in 1.5.0 (don't confuse with **Node**.is_set!). 
 
-```json
-// TODO: Insert QNode example using COLLATE and a separate MANY/ALL example using member_ids
-```
+When `COLLATE` is set, `QNode.member_ids` must not be used.
 
+Example scenario:
+
+For the query `Drug -interacts_with-> Gene -causes-> Diabetes`, if `Drug A` has matching paths to `Diabetes` through Genes A, B, and C, 3 results could be generated:
+* `Drug A -interacts_with-> Gene A -causes-> Diabetes`
+* `Drug A -interacts_with-> Gene B -causes-> Diabetes`
+* `Drug A -interacts_with-> Gene C -causes-> Diabetes`
+
+But if COLLATE was set on the Gene QNode as `Drug -interacts_with-> Gene (set_interpretation: COLLATE) -causes-> Diabetes`, in that scenario only 1 result should be generated:
+* `Drug A -interacts_with-> Gene [A, B, C] -causes-> Diabetes`
+
+The `node_bindings.[Gene QNode].ids` would include Genes A, B, and C. The edge_bindings would be collated accordingly. 
 
 
 ## Other Changes
