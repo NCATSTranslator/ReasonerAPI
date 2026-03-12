@@ -174,7 +174,7 @@ A single AuxiliaryGraph instance that is used by Knowledge Graph Edges, Result A
 | --- | :---: | --- |
 | edges | Array\[`string`\] | List of edges that form the Auxiliary Graph. Each item is a reference to a single Knowledge Graph Edge. This list is not ordered, nor is the order intended to convey any relationship between the edges that form this Auxiliary Graph. |
 
-#### KnowledgeGraph [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/discussion-fixes/TranslatorReasonerAPI.yaml#L777:L804)
+#### KnowledgeGraph [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/discussion-fixes/TranslatorReasonerAPI.yaml#L777:L803)
 
 The knowledge graph associated with a set of results. The instances of Node and Edge defining this graph represent instances of biolink:NamedThing (concept nodes) and biolink:Association (relationship edges) representing (Attribute) annotated knowledge returned from the knowledge sources and inference agents wrapped by the given TRAPI implementation.
 ##### Fixed Fields
@@ -184,7 +184,7 @@ The knowledge graph associated with a set of results. The instances of Node and 
 | nodes | Map\[`string`, [Node](#node-)\] | Dictionary of Node instances used in the KnowledgeGraph, referenced elsewhere in the TRAPI output by the dictionary key. |
 | edges | Map\[`string`, [Edge](#edge-)\] | Dictionary of Edge instances used in the KnowledgeGraph, referenced elsewhere in the TRAPI output by the dictionary key. |
 
-#### QueryGraph [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/discussion-fixes/TranslatorReasonerAPI.yaml#L805:L845)
+#### QueryGraph [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/discussion-fixes/TranslatorReasonerAPI.yaml#L804:L844)
 
 A graph representing a biomedical question. It serves as a template for each result (answer), where each bound knowledge graph node/edge is expected to obey the constraints of the associated query graph element.
 ##### Fixed Fields
@@ -195,7 +195,7 @@ A graph representing a biomedical question. It serves as a template for each res
 | edges | Map\[`string`, [QEdge](#qedge-)\] | The edge specifications. The keys of this map are unique edge identifiers and the corresponding values include the constraints on bound edges, in addition to specifying the subject and object QNodes. |
 | paths | Map\[`string`, [QPath](#qpath-)\] | The QueryGraph path specification, used only for pathfinder type queries. The keys of this map are unique path identifiers and the corresponding values include the constraints on bound paths, in addition to specifying the subject, object, and intermediate QNodes. |
 
-#### QNode [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/discussion-fixes/TranslatorReasonerAPI.yaml#L846:L921)
+#### QNode [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/discussion-fixes/TranslatorReasonerAPI.yaml#L845:L920)
 
 A node in the QueryGraph used to represent an entity in a query. If a CURIE is not specified, any nodes matching the category of the QNode will be returned in the Results.
 ##### Fixed Fields
@@ -208,7 +208,7 @@ A node in the QueryGraph used to represent an entity in a query. If a CURIE is n
 | member_ids | Array\[[CURIE](#curie-)\] | A list of CURIE identifiers for members of a queried set. This field MUST be populated under a set_interpretation of MANY or ALL, when the 'ids' field holds a UUID representing the set itself. This field MUST NOT be used under a set_interpretation of BATCH or COLLATE or when set_interpretation is absent. |
 | constraints | Array\[[AttributeConstraint](#attributeconstraint-)\] | A list of constraints applied to a query node. If there are multiple items, they must all be true (equivalent to AND) |
 
-#### QEdge [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/discussion-fixes/TranslatorReasonerAPI.yaml#L922:L982)
+#### QEdge [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/discussion-fixes/TranslatorReasonerAPI.yaml#L921:L981)
 
 An edge in the QueryGraph used as a filter pattern specification in a query. If the optional predicate property is not specified, it is assumed to be a wildcard match to the target knowledge space. If specified, the ontological inheritance hierarchy associated with the term provided is assumed, such that edge bindings returned may be an exact match to the given QEdge predicate term, or to a term that is a descendant of the QEdge predicate term.
 ##### Fixed Fields
@@ -221,7 +221,7 @@ An edge in the QueryGraph used as a filter pattern specification in a query. If 
 | object | `string` | Corresponds to the map key identifier of the object concept node anchoring the query filter pattern for the query relationship edge. |
 | constraints | [QEdgeConstraints](#qedgeconstraints-) | An object containing all constraints placed on the QEdge. ALL edges bound to this QEdge MUST conform to ALL given constraints; underlying edges (such as those appearing in supporting graphs) are not required to conform to the given constraints. |
 
-#### QEdgeConstraints [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/discussion-fixes/TranslatorReasonerAPI.yaml#L983:L1057)
+#### QEdgeConstraints [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/discussion-fixes/TranslatorReasonerAPI.yaml#L982:L1056)
 
 A subschema for constraints that may be placed on a given QEdge. ALL edges bound to the given QEdge MUST conform to ALL given constraints; underlying edges (such as those appearing in supporting graphs) are not required to conform to the given constraints.
 ##### Fixed Fields
@@ -234,7 +234,7 @@ A subschema for constraints that may be placed on a given QEdge. ALL edges bound
 | qualifiers | Array\[[QualifierSetConstraint](#qualifiersetconstraint-)\] | A list of QualifierSetConstraints applied to a QEdge. If multiple QualifierSetConstraints are provided, there is an OR relationship between them. If the QEdge has multiple predicates or if the QNodes that correspond to the subject or object of this QEdge have multiple categories or multiple curies, then constraints.qualifiers MUST NOT be specified because these complex use cases are not supported at this time. |
 | sources | [AllowDenyConstraint](#allowdenyconstraint-) \| `object` | A list of infores CURIEs which are either allowed or denied in the sources (resource_id) of the bound Edge. If `behavior` is set to "ALLOW", ANY (at least 1) of the given infores CURIEs MUST be present. If `behavior` is set to "DENY", then ALL given infores CURIEs MUST NOT be present. |
 
-#### AllowDenyConstraint [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/discussion-fixes/TranslatorReasonerAPI.yaml#L1058:L1081)
+#### AllowDenyConstraint [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/discussion-fixes/TranslatorReasonerAPI.yaml#L1057:L1080)
 
 A list of values which are to either be allowed or denied. If `behavior` is set to "ALLOW", then ANY (at least 1) of the given values MUST appear in the constrained property in order for it to meet the constraint (OR relationship). If `behavior` is set to "DENY", then ALL of the given values MUST NOT appear in the constrained property in order for it to meet the constraint (NOT (x OR y) relationship).
 ##### Fixed Fields
@@ -244,7 +244,7 @@ A list of values which are to either be allowed or denied. If `behavior` is set 
 | behavior | `string` |  |
 | values | Array\[`string`\] |  |
 
-#### QPath [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/discussion-fixes/TranslatorReasonerAPI.yaml#L1082:L1130)
+#### QPath [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/discussion-fixes/TranslatorReasonerAPI.yaml#L1081:L1129)
 
 A path in the QueryGraph used for pathfinder queries. Both subject and object MUST reference QNodes that have a CURIE in their ids field. Paths returned that bind to this QPath can represent some relationship between subject and object.
 ##### Fixed Fields
@@ -256,7 +256,7 @@ A path in the QueryGraph used for pathfinder queries. Both subject and object MU
 | predicates | Array\[[BiolinkPredicate](#biolinkpredicate-)\] | QPath predicates are intended to convey what type of paths are desired, NOT a constraint on the types of predicates that may be in result paths. If no predicate is listed, the ARA SHOULD find paths such that the relationship represented by the path is a "related_to" relationship. These should be Biolink Model predicates and are allowed to be of type 'abstract' or 'mixin' (only in QGraphs!). Use of 'deprecated' predicates should be avoided. |
 | constraints | Array\[[PathConstraint](#pathconstraint-)\] | A list of constraints for the QPath. If multiple constraints are listed, it should be interpreted as an OR relationship. Each path returned is required to comply with at least one constraint. |
 
-#### PathConstraint [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/discussion-fixes/TranslatorReasonerAPI.yaml#L1131:L1147)
+#### PathConstraint [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/discussion-fixes/TranslatorReasonerAPI.yaml#L1130:L1146)
 
 A constraint for paths. ARAs must comply with constraints when finding paths.
 ##### Fixed Fields
@@ -265,7 +265,7 @@ A constraint for paths. ARAs must comply with constraints when finding paths.
 | --- | :---: | --- |
 | intermediate_categories | Array\[[BiolinkEntity](#biolinkentity-)\] | A list of Biolink model categories by which to constrain paths returned. If multiple categories are listed, it should be interpreted as an AND relationship. Each path returned by ARAs MUST contain at least one node of each category listed. |
 
-#### Node [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/discussion-fixes/TranslatorReasonerAPI.yaml#L1148:L1182)
+#### Node [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/discussion-fixes/TranslatorReasonerAPI.yaml#L1147:L1181)
 
 A node in the KnowledgeGraph which represents some biomedical concept. Nodes are identified by the keys in the KnowledgeGraph Node mapping.
 ##### Fixed Fields
@@ -277,7 +277,7 @@ A node in the KnowledgeGraph which represents some biomedical concept. Nodes are
 | attributes | Array\[[Attribute](#attribute-)\] | A list of attributes describing the node |
 | is_set | `boolean` | Indicates that the node represents a set of entities. If this property is missing or null, it is assumed to be false. |
 
-#### Attribute [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/discussion-fixes/TranslatorReasonerAPI.yaml#L1183:L1268)
+#### Attribute [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/discussion-fixes/TranslatorReasonerAPI.yaml#L1182:L1267)
 
 Generic attribute for a node or an edge that expands the key-value pair concept by including fields for additional metadata. These fields can be used to describe the source of the statement made in a key-value pair of the attribute object, or describe the attribute's value itself including its semantic type, or a url providing additional information about it. An attribute may be further qualified with sub-attributes (for example to provide confidence intervals on a value).
 ##### Fixed Fields
@@ -293,7 +293,7 @@ Generic attribute for a node or an edge that expands the key-value pair concept 
 | description | `string` | Human-readable description for the attribute and its value. |
 | attributes | Array\[[Attribute](#attribute-)\] | A list of attributes providing further information about the parent attribute (for example to provide provenance information about the parent attribute). |
 
-#### Edge [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/discussion-fixes/TranslatorReasonerAPI.yaml#L1269:L1351)
+#### Edge [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/discussion-fixes/TranslatorReasonerAPI.yaml#L1268:L1350)
 
 A specification of the semantic relationship linking two concepts that are expressed as nodes in the knowledge "thought" graph resulting from a query upon the underlying knowledge source.
 ##### Fixed Fields
@@ -309,7 +309,7 @@ A specification of the semantic relationship linking two concepts that are expre
 | knowledge_level | `string` | One of the biolink-enumerated permissible values for `knowledge level` that provides the level of knowledge the Edge represents. (See https://biolink.github.io/biolink-model/KnowledgeLevelEnum/) |
 | agent_type | `string` | One of the biolink-enumerated permissible values for `agent type` that provides the kind of agent which originated the knowledge presented by the Edge. (See https://biolink.github.io/biolink-model/AgentTypeEnum/) |
 
-#### Qualifier [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/discussion-fixes/TranslatorReasonerAPI.yaml#L1352:L1388)
+#### Qualifier [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/discussion-fixes/TranslatorReasonerAPI.yaml#L1351:L1387)
 
 An additional nuance attached to an assertion
 ##### Fixed Fields
@@ -319,7 +319,7 @@ An additional nuance attached to an assertion
 | qualifier_type_id | [CURIE](#curie-) | CURIE for a Biolink 'qualifier' association slot, generally taken from Biolink association slots designated for this purpose (that is, association slots with names ending in 'qualifier') e.g. biolink:subject_aspect_qualifier, biolink:subject_direction_qualifier, biolink:object_aspect_qualifier, etc. Such qualifiers are used to elaborate a second layer of meaning of a knowledge graph edge. Available qualifiers are edge properties in the Biolink Model (see https://biolink.github.io/biolink-model/docs/edge_properties.html) which have slot names with the suffix string 'qualifier'. |
 | qualifier_value | `string` | The value associated with the type of the qualifier, drawn from a set of controlled values by the type as specified in the Biolink model (e.g. 'expression' or 'abundance' for the qualifier type 'biolink:subject_aspect_qualifier', etc). The enumeration of qualifier values for a given qualifier type is generally going to be constrained by the category of edge (i.e. biolink:Association subtype) of the (Q)Edge. |
 
-#### QualifierSetConstraint [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/discussion-fixes/TranslatorReasonerAPI.yaml#L1389:L1404)
+#### QualifierSetConstraint [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/discussion-fixes/TranslatorReasonerAPI.yaml#L1388:L1403)
 
 A constraint on the qualifiers of a bound Edge (types and values). A given key-value pair defines the required qualifier_type_id and qualifier_value of one Qualifier, respectively. For example, a QualifierSetConstraint can constrain a "ChemicalX - affects - ?Gene" query to return only edges where ChemicalX specifically affects the 'expression' of the Gene, by constraining on the qualifier_type "biolink:object_aspect_qualifier" with a qualifier_value of "expression". Multiple type-value pairs have an AND relationship.
 
@@ -329,19 +329,19 @@ A constraint on the qualifiers of a bound Edge (types and values). A given key-v
 | --- | :---: | --- |
 | ^biolink: | `string` |  |
 
-#### BiolinkEntity [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/discussion-fixes/TranslatorReasonerAPI.yaml#L1405:L1416)
+#### BiolinkEntity [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/discussion-fixes/TranslatorReasonerAPI.yaml#L1404:L1415)
 
 Compact URI (CURIE) for a Biolink class, biolink:NamedThing or a child thereof. The CURIE must use the prefix 'biolink:' followed by the PascalCase class name.
 `string` (pattern: `^biolink:[A-Z][a-zA-Z]*$`)
-#### BiolinkPredicate [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/discussion-fixes/TranslatorReasonerAPI.yaml#L1417:L1429)
+#### BiolinkPredicate [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/discussion-fixes/TranslatorReasonerAPI.yaml#L1416:L1428)
 
 CURIE for a Biolink 'predicate' slot, taken from the Biolink slot ('is_a') hierarchy rooted in biolink:related_to (snake_case). This predicate defines the Biolink relationship between the subject and object nodes of a biolink:Association defining a knowledge graph edge.
 `string` (pattern: `^biolink:[a-z][a-z_]*$`)
-#### CURIE [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/discussion-fixes/TranslatorReasonerAPI.yaml#L1430:L1439)
+#### CURIE [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/discussion-fixes/TranslatorReasonerAPI.yaml#L1429:L1438)
 
 A Compact URI, consisting of a prefix and a reference separated by a colon, such as UniProtKB:P00738. Via an external context definition, the CURIE prefix and colon may be replaced by a URI prefix, such as http://identifiers.org/uniprot/, to form a full URI.
 `string`
-#### MetaKnowledgeGraph [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/discussion-fixes/TranslatorReasonerAPI.yaml#L1440:L1467)
+#### MetaKnowledgeGraph [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/discussion-fixes/TranslatorReasonerAPI.yaml#L1439:L1466)
 
 Knowledge-map representation of this TRAPI web service. The meta knowledge graph is composed of the union of most specific categories and predicates for each node and edge.
 ##### Fixed Fields
@@ -351,7 +351,7 @@ Knowledge-map representation of this TRAPI web service. The meta knowledge graph
 | nodes | Map\[`string`, [MetaNode](#metanode-)\] | Collection of the most specific node categories provided by this TRAPI web service, indexed by Biolink class CURIEs. A node category is only exposed here if there is node for which that is the most specific category available. |
 | edges | Array\[[MetaEdge](#metaedge-)\] | List of the most specific edges/predicates provided by this TRAPI web service. A predicate is only exposed here if there is an edge for which the predicate is the most specific available. |
 
-#### MetaNode [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/discussion-fixes/TranslatorReasonerAPI.yaml#L1468:L1491)
+#### MetaNode [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/discussion-fixes/TranslatorReasonerAPI.yaml#L1467:L1490)
 
 Description of a node category provided by this TRAPI web service.
 ##### Fixed Fields
@@ -361,7 +361,7 @@ Description of a node category provided by this TRAPI web service.
 | id_prefixes | Array\[`string`\] | List of CURIE prefixes for the node category that this TRAPI web service understands and accepts on the input. |
 | attributes | Array\[[MetaAttribute](#metaattribute-)\] | Node attributes provided by this TRAPI web service. |
 
-#### MetaEdge [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/discussion-fixes/TranslatorReasonerAPI.yaml#L1492:L1556)
+#### MetaEdge [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/discussion-fixes/TranslatorReasonerAPI.yaml#L1491:L1555)
 
 Edge in a meta knowledge map describing relationship between a subject Biolink class and an object Biolink class.
 ##### Fixed Fields
@@ -376,7 +376,7 @@ Edge in a meta knowledge map describing relationship between a subject Biolink c
 | qualifiers | Array\[[MetaQualifier](#metaqualifier-)\] | Qualifiers that are possible to be found on this edge type. |
 | association | [BiolinkEntity](#biolinkentity-) | The Biolink association type (entity) that this edge represents. Associations are classes in Biolink that represent a relationship between two entities. For example, the association 'gene interacts with gene' is represented by the Biolink class, 'biolink:GeneToGeneAssociation'.  If association is filled out, then the testing harness can help validate that the qualifiers are being used correctly. |
 
-#### MetaQualifier [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/discussion-fixes/TranslatorReasonerAPI.yaml#L1557:L1576)
+#### MetaQualifier [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/discussion-fixes/TranslatorReasonerAPI.yaml#L1556:L1575)
 
 ##### Fixed Fields
 
@@ -385,7 +385,7 @@ Edge in a meta knowledge map describing relationship between a subject Biolink c
 | qualifier_type_id | [CURIE](#curie-) | The CURIE of the qualifier type. |
 | applicable_values | Array\[`string`\] | The list of values that are possible for this qualifier. |
 
-#### MetaAttribute [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/discussion-fixes/TranslatorReasonerAPI.yaml#L1577:L1614)
+#### MetaAttribute [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/discussion-fixes/TranslatorReasonerAPI.yaml#L1576:L1613)
 
 ##### Fixed Fields
 
@@ -397,7 +397,7 @@ Edge in a meta knowledge map describing relationship between a subject Biolink c
 | constraint_use | `boolean` | Indicates whether this attribute can be used as a query constraint. |
 | constraint_name | `string` | Human-readable name or label for the constraint concept. Required whenever constraint_use is true. |
 
-#### AttributeConstraint [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/discussion-fixes/TranslatorReasonerAPI.yaml#L1615:L1708)
+#### AttributeConstraint [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/discussion-fixes/TranslatorReasonerAPI.yaml#L1614:L1707)
 
 Generic query constraint for a query node or query edge
 ##### Fixed Fields
@@ -412,7 +412,7 @@ Generic query constraint for a query node or query edge
 | unit_id | any | CURIE of the units of the value or list of values in the 'value' property. The Units of Measurement Ontology (UO) should be used if possible. The unit_id MUST be provided for (lists of) numerical values that correspond to a quantity that has units. |
 | unit_name | any | Term name that is associated with the CURIE of the units of the value or list of values in the 'value' property. The Units of Measurement Ontology (UO) SHOULD be used if possible. This property SHOULD be provided if a unit_id is provided. This is redundant but recommended for human readability. |
 
-#### RetrievalSource [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/discussion-fixes/TranslatorReasonerAPI.yaml#L1709:L1766)
+#### RetrievalSource [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/discussion-fixes/TranslatorReasonerAPI.yaml#L1708:L1765)
 
 Provides information about how a particular InformationResource served as a source from which knowledge expressed in an Edge, or data used to generate this knowledge, was retrieved.
 ##### Fixed Fields
@@ -424,7 +424,7 @@ Provides information about how a particular InformationResource served as a sour
 | upstream_resource_ids | Array\[[CURIE](#curie-)\] | An upstream InformationResource from which the resource being described directly retrieved a record of the knowledge expressed in the Edge, or data used to generate this knowledge. This is an array because there are cases where a merged Edge holds knowledge that was retrieved from multiple sources. e.g. an Edge provided by the ARAGORN ARA can expressing knowledge it retrieved from both the automat-mychem-info and molepro KPs, which both provided it with records of this single fact. |
 | source_record_urls | Array\[`string`\] | A URL linking to a specific web page or document provided by the source, that contains a record of the knowledge expressed in the Edge. If the knowledge is contained in more than one web page on an Information Resource's site, urls MAY be provided for each. For example, Therapeutic Targets Database (TTD) has separate web pages for 'Imatinib' and its protein target KIT, both of which hold the claim that 'the KIT protein is a therapeutic target for Imatinib'. |
 
-#### ResourceRoleEnum [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/discussion-fixes/TranslatorReasonerAPI.yaml#L1767:L1778)
+#### ResourceRoleEnum [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/discussion-fixes/TranslatorReasonerAPI.yaml#L1766:L1777)
 
 The role played by the InformationResource in serving as a source for an Edge. Note that a given Edge should have one and only one 'primary' source, and may have any number of 'aggregator' or 'supporting data' sources.  This enumeration is found in Biolink Model, but is repeated here for convenience.
 `string`
