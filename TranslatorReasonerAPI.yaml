@@ -917,7 +917,7 @@ components:
             to AND)
           items:
             $ref: '#/components/schemas/AttributeConstraint'
-          default: []
+          minItems: 1
       additionalProperties: true
     QEdge:
       type: object
