@@ -400,6 +400,7 @@ The `node_bindings.[Gene QNode].ids` would include Genes A, B, and C. The edge_b
 4. These properties were changed to not required:
    * `Nodes.attributes`
    * `QueryGraph` `edges` and `paths`: to accommodate queries with only nodes
+   * `KnowledgeGraph.edges`: same reason as above
    * `Result.analyses`: same reason as above
 5. Analysis allows edge_bindings and path_bindings to be present together (for experimental use only, small change introduced when simplifying schema classes)
 
