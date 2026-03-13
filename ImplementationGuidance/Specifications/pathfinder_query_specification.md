@@ -434,6 +434,7 @@ and Results all included. The constrained version is shown after that.
                 },
                 "analyses": [
                     {
+                        "resource_id": "infores:shepherd-aragorn",
                         "path_bindings": {
                             "p0": {
                                 "ids": [
@@ -444,6 +445,7 @@ and Results all included. The constrained version is shown after that.
                         "score": 0.85
                     },
                     {
+                        "resource_id": "infores:shepherd-aragorn",
                         "path_bindings": {
                             "p0": {
                                 "ids": [
@@ -454,6 +456,7 @@ and Results all included. The constrained version is shown after that.
                         "score": 0.7
                     },
                     {
+                        "resource_id": "infores:shepherd-aragorn",
                         "path_bindings": {
                             "p0": {
                                 "ids": [
@@ -575,6 +578,7 @@ and Results all included. The constrained version is shown after that.
                 },
                 "analyses": [
                     {
+                        "resource_id": "infores:shepherd-aragorn",
                         "path_bindings": {
                             "p0": {
                                 "ids": [
@@ -585,6 +589,7 @@ and Results all included. The constrained version is shown after that.
                         "score": 0.85
                     },
                     {
+                        "resource_id": "infores:shepherd-aragorn",
                         "path_bindings": {
                             "p0": {
                                 "ids": [
