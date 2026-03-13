@@ -281,7 +281,7 @@ Details:
     },
     "analyses": [
         {
-            "resource_id": "infores:aragorn-shepherd",
+            "resource_id": "infores:shepherd-aragorn",
             "path_bindings": {
                 "p0": [
                     {
@@ -362,7 +362,7 @@ Changes:
     },
     "analyses": [
         {
-            "resource_id": "infores:aragorn-shepherd",
+            "resource_id": "infores:shepherd-aragorn",
             "path_bindings": {
                 "p0": {
                     "ids": ["auxGraph-4567-4567-4567-4567"]
