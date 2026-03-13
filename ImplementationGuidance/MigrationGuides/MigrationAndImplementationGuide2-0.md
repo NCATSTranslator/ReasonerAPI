@@ -14,7 +14,9 @@ TRAPI 2.0 includes many breaking changes, new/reintroduced functionality, and fo
 
 In 1.6.0-beta, you could include `attribute_constraints` and `qualifier_constraints` on QEdges. If you wanted to only include or exclude specific knowledge_level/agent_type (KL/AT) values, you'd use `attribute_constraints` because KL/AT are stored in Edge `attributes`. If you wanted to only include or exclude specific sources (infores), you may have used `attribute_constraints`. BUT this format no longer makes sense after we moved source info out of Edge `attributes` into its own top-level property `sources` several versions ago (1.4.0-beta). 
 
-A QEdge in 1.6.0-beta with all of these constraints would look like this:
+<details><summary>A QEdge in 1.6.0-beta with all of these constraints would look like this (click to expand)
+</summary>
+<p>
 
 ```json
 {
@@ -54,6 +56,9 @@ A QEdge in 1.6.0-beta with all of these constraints would look like this:
 }
 ```
 
+</p>
+</details> 
+
 #### AFTER
 
 In 2.0, there is instead one property on a QEdge, `constraints`, that holds all the types of constraints, organized by key. There are 5 keys currently specified:
@@ -67,7 +72,8 @@ In 2.0, there is instead one property on a QEdge, `constraints`, that holds all 
 * `attributes`: minItems 1, otherwise the same as previous `attribute_constraints`
 * `qualifiers`: simplified format to an array of objects but preserved previous behavior. Each object represents a qualifier-set, and multiple objects/sets have an `OR` relationship. Within an object, the keys are the "qualifier-type-ids" and their values are the "qualifier values". Multiple key/value pairs in one object/set have an `AND` relationship. 
 
-The same QEdge in 2.0 would look like this: 
+<details><summary>The same QEdge in 2.0 would look like this (click to expand)</summary>
+<p>
 
 ```json
 {
@@ -100,8 +106,13 @@ The same QEdge in 2.0 would look like this:
 }
 ```
 
-This example Edge (not real!) would fulfill the constraints (properties put in same order as constraints for easy comparison):
+</p>
+</details> 
 
+<br>
+
+<details><summary>This example Edge (not real!) would fulfill the constraints. Its properties are put in same order as constraints for easy comparison (click to expand)</summary>
+<p>
 
 ```json
 {
@@ -138,6 +149,9 @@ This example Edge (not real!) would fulfill the constraints (properties put in s
     ]
 }
 ```
+
+</p>
+</details> 
 
 
 ### 2. New Query/Response Parameters
