@@ -325,9 +325,9 @@ and Results all included. The constrained version is shown after that.
 
 ### Unconstrained
 
-```
+```json
 {
-    "message" {
+    "message": {
         "query_graph": {
             "nodes": {
                 "n0": {
@@ -364,12 +364,12 @@ and Results all included. The constrained version is shown after that.
                     "categories": ["biolink:Cell"]
                 }
             },
-            "edges" {
+            "edges": {
                 "e0": {
                     "subject": "MONDO:0005011",
                     "object": "NCBIGene:120892",
                     "predicate": "biolink:condition_associated_with_gene"
-                }
+                },
                 "e1": {
                     "subject": "NCBIGene:120892",
                     "object": "MONDO:0005180",
@@ -416,7 +416,7 @@ and Results all included. The constrained version is shown after that.
                 "edges": [
                     "e5"
                 ]
-            },
+            }
         },
         "results": [
             {
@@ -441,7 +441,7 @@ and Results all included. The constrained version is shown after that.
                                 ]
                             }
                         },
-                        "score": .85
+                        "score": 0.85
                     },
                     {
                         "path_bindings": {
@@ -451,7 +451,7 @@ and Results all included. The constrained version is shown after that.
                                 ]
                             }
                         },
-                        "score": .7
+                        "score": 0.7
                     },
                     {
                         "path_bindings": {
@@ -461,7 +461,7 @@ and Results all included. The constrained version is shown after that.
                                 ]
                             }
                         },
-                        "score": .9
+                        "score": 0.9
                     }
                 ]
             }
@@ -472,9 +472,9 @@ and Results all included. The constrained version is shown after that.
 
 ### Constrained
 
-```
+```json
 {
-    "message" {
+    "message": {
         "query_graph": {
             "nodes": {
                 "n0": {
@@ -515,12 +515,12 @@ and Results all included. The constrained version is shown after that.
                     "categories": ["biolink:Cell"]
                 }
             },
-            "edges" {
+            "edges": {
                 "e0": {
                     "subject": "MONDO:0005011",
                     "object": "NCBIGene:120892",
                     "predicate": "biolink:condition_associated_with_gene"
-                }
+                },
                 "e1": {
                     "subject": "NCBIGene:120892",
                     "object": "MONDO:0005180",
@@ -582,7 +582,7 @@ and Results all included. The constrained version is shown after that.
                                 ]
                             }
                         },
-                        "score": .85
+                        "score": 0.85
                     },
                     {
                         "path_bindings": {
@@ -592,7 +592,7 @@ and Results all included. The constrained version is shown after that.
                                 ]
                             }
                         },
-                        "score": .7
+                        "score": 0.7
                     }
                 ]
             }
