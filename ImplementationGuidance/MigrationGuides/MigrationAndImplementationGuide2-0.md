@@ -163,7 +163,11 @@ In 1.6.0-beta, `log_level` and `bypass_cache` were top-level properties in `Quer
 A query with them would look like this: 
 
 ```json
-// TO-DO: snippet of a query - include those two, message {...}. Don't include custom param like data tier? 
+{
+    "log_level": "DEBUG",
+    "bypass_cache": true,
+    "message": {...}
+}
 ```
 
 #### AFTER
@@ -177,7 +181,15 @@ Tools can also use the new `parameters` property to hold undefined query-time pa
 A query with the same parameters (plus timeout and custom data-tier) would look like this:
 
 ```json
-// TO-DO: AFTER snippet + timeout and custom data-tier
+{
+    "parameters": {
+        "log_level": "DEBUG",
+        "bypass_cache": true,
+        "timeout": 300,
+        "tiers": [ 1 ]
+    },
+    "message": {...}
+}
 ```
 
 
