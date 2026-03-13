@@ -245,7 +245,7 @@ This is similar to how EdgeBindings bind a KnowledgeGraph Edge, by id, to a Quer
                         ]
                     }
                 },
-                "score": .85
+                "score": 0.85
             },
             {
                 "path_bindings": {
@@ -255,7 +255,7 @@ This is similar to how EdgeBindings bind a KnowledgeGraph Edge, by id, to a Quer
                         ]
                     }
                 },
-                "score": .7
+                "score": 0.7
             },
             {
                 "path_bindings": {
@@ -265,7 +265,7 @@ This is similar to how EdgeBindings bind a KnowledgeGraph Edge, by id, to a Quer
                         ]
                     }
                 },
-                "score": .9
+                "score": 0.9
             }
         ]
     }
@@ -299,7 +299,7 @@ would look like this.
                         ]
                     }
                 },
-                "score": .85
+                "score": 0.85
             },
             {
                 "path_bindings": {
@@ -309,7 +309,7 @@ would look like this.
                         ]
                     }
                 },
-                "score": .7
+                "score": 0.7
             }
         ]
     }
