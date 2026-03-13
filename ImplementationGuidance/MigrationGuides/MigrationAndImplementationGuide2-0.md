@@ -431,14 +431,14 @@ The `node_bindings.[Gene QNode].ids` would include Genes A, B, and C. The edge_b
 5. Analysis allows edge_bindings and path_bindings to be present together (for experimental use only, small change introduced when simplifying schema classes)
 
 
-## Full Example: 1.6.0-beta Response
+## Full Examples
 
-```json
-// TODO: full-size 1.6.0-beta response example
-```
+This is an example of a 1.6.0-beta Response "transformed" into 2.0 (includes query_graph/parameters). Note that the 2.0 query/response has 2 functiona differences:
+* COLLATE was set on the intermediate QNode
+* new parameters were added (timeout, custom tiers)
 
-## Full Example: 2.0 Response
+These examples show the main changes 1-5 (#1: all types of constraints, #5: COLLATE in 2.0 only) and the other changes 1,2, and 4. 
 
-```json
-// TODO: full-size 2.0 response example
-```
+[1.6.0-beta Response](../DataExamples/1-6_example_response.json)
+
+2.0 corresponding Response
