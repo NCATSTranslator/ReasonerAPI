@@ -26,7 +26,7 @@ The QueryGraph still has a field for Nodes, as a traditional QueryGraph would, b
 has a field for Paths. This example shows a query that requests Paths connecting Crohn's
 Disease with Parkinson's. All paths returned must connect these two nodes.
 
-```
+```json
 "query_graph": {
     "nodes": {
         "n0": {
@@ -55,7 +55,7 @@ which requires that all returned paths contain at least one node matching the sp
 In the example below, the intermediate category constraint listed requires that paths have at least one `Gene`
 node between them.
 
-```
+```json
 "query_graph": {
     "nodes": {
         "n0": {
@@ -93,7 +93,7 @@ and Edges both follow the same rules as all other queries, although for the sake
 contain all the required information typically found in a valid knowledge graph node and edge, such as knowledge
 level or source.
 
-```
+```json
 "knowledge_graph": {
     "nodes": {
         "MONDO:0005011": {
@@ -109,12 +109,12 @@ level or source.
             "categories": ["biolink:Cell"]
         }
     },
-    "edges" {
+    "edges": {
         "e0": {
             "subject": "MONDO:0005011",
             "object": "NCBIGene:120892",
             "predicate": "biolink:condition_associated_with_gene"
-        }
+        },
         "e1": {
             "subject": "NCBIGene:120892",
             "object": "MONDO:0005180",
@@ -153,7 +153,7 @@ between two nodes are allowed.
 
 Using the Knowledge Graph above, we can construct the AuxiliaryGraphs shown in the example below:
 
-```
+```json
 "auxiliary_graphs": {
     "a0": {
         "edges": [
@@ -173,7 +173,7 @@ Using the Knowledge Graph above, we can construct the AuxiliaryGraphs shown in t
         "edges": [
             "e5"
         ]
-    },
+    }
 }
 ```
 
@@ -189,7 +189,7 @@ constraints would yield a slightly different set of paths. As show below in the 
 AuxiliaryGraphs, `a2` is  removed because it does not contain any `Gene` nodes. Therefore, it is not a valid Path 
 for the constrained version of the query.
 
-```
+```json
 "auxiliary_graphs": {
     "a0": {
         "edges": [
@@ -221,7 +221,7 @@ Each analysis no longer contains EdgeBindings, with no QueryGraph edges to bind 
 PathBindings to bind to QPath. Each Path Binding binds an Auxiliary Graph by `id` to a QPath.
 This is similar to how EdgeBindings bind a KnowledgeGraph Edge, by id, to a QueryGraph Edge.
 
-```
+```json
 "results": [
     {
         "node_bindings": {
@@ -238,6 +238,7 @@ This is similar to how EdgeBindings bind a KnowledgeGraph Edge, by id, to a Quer
         },
         "analyses": [
             {
+                "resource_id": "infores:shepherd-aragorn",
                 "path_bindings": {
                     "p0": {
                         "ids": [
@@ -248,6 +249,7 @@ This is similar to how EdgeBindings bind a KnowledgeGraph Edge, by id, to a Quer
                 "score": 0.85
             },
             {
+                "resource_id": "infores:shepherd-aragorn",
                 "path_bindings": {
                     "p0": {
                         "ids": [
@@ -258,6 +260,7 @@ This is similar to how EdgeBindings bind a KnowledgeGraph Edge, by id, to a Quer
                 "score": 0.7
             },
             {
+                "resource_id": "infores:shepherd-aragorn",
                 "path_bindings": {
                     "p0": {
                         "ids": [
@@ -275,7 +278,7 @@ This is similar to how EdgeBindings bind a KnowledgeGraph Edge, by id, to a Quer
 This is only valid for the unconstrained version of the query. The `intermediate_categories` constraint version
 would look like this.
 
-```
+```json
 "results": [
     {
         "node_bindings": {
@@ -292,6 +295,7 @@ would look like this.
         },
         "analyses": [
             {
+                "resource_id": "infores:shepherd-aragorn",
                 "path_bindings": {
                     "p0": {
                         "ids": [
@@ -302,6 +306,7 @@ would look like this.
                 "score": 0.85
             },
             {
+                "resource_id": "infores:shepherd-aragorn",
                 "path_bindings": {
                     "p0": {
                         "ids": [
