@@ -120,7 +120,7 @@ In 2.0, there is instead one property on a QEdge, `constraints`, that holds all 
     "object": "MONDO:1234",
     "predicate": "biolink:associated_with",
     "agent_type": "data_analysis_pipeline",    // matches AT constraint: this is a child of automated_agent
-    "knowledge_level": "statistical_association",
+    "knowledge_level": "text_co_occurrence",
     "sources": [    // matches source constraint: not semmeddb
         {
             "resource_id": "infores:diseases",
@@ -391,7 +391,7 @@ Example snippet of an `Edge` in 2.0, showing the top-level KL/AT:
     "object": "MONDO:1234",
     "predicate": "biolink:associated_with",
     "agent_type": "data_analysis_pipeline",    // top-level properties!
-    "knowledge_level": "statistical_association",
+    "knowledge_level": "text_co_occurrence",
     "sources": [...],
 }
 ```
