@@ -441,4 +441,4 @@ These examples show the main changes 1-5 (#1: all types of constraints, #5: COLL
 
 [1.6.0-beta Response](../DataExamples/1-6_example_response.json)
 
-2.0 corresponding Response
+[2.0 corresponding Response](../DataExamples/2-0_example_response.json)
