@@ -302,18 +302,20 @@ Details:
 In 2.0, the format is simplified:
 
 ```json
+...
 "<node/edge/path>_bindings": {
           "key1": {
             "ids": ["<CURIE/EdgeID/AuxGraphID>"]
-          }
+          },
           "key2": {
             "ids": ["<CURIE/EdgeID/AuxGraphID>"]
           }
         },
+...
 ```
 
 Changes:
-* `node/edge/path>_bindings` are now `minProperties: 1` (AKA when these fields are present, they MUST contain data) 
+* `<node/edge/path>_bindings` are now `minProperties: 1` (AKA when these fields are present, they MUST contain data) 
 * `ids` arrays are `minItems: 1` (this property is still required)
 * `attributes` were removed from NodeBinding/EdgeBinding (were never used, empty arrays bloated responses)
 * `query_id` was removed from NodeBinding (obsolete with the current subclassing behavior)
