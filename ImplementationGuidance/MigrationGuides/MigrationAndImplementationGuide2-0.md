@@ -407,13 +407,18 @@ When `COLLATE` is set, `QNode.member_ids` must not be used.
 
 Example scenario:
 
-For the query `Drug -interacts_with-> Gene -causes-> Diabetes`, if `Drug A` has matching paths to `Diabetes` through Genes A, B, and C, 3 results could be generated:
-* `Drug A -interacts_with-> Gene A -causes-> Diabetes`
-* `Drug A -interacts_with-> Gene B -causes-> Diabetes`
-* `Drug A -interacts_with-> Gene C -causes-> Diabetes`
+For the query `Drug -interacts_with→ Gene -causes→ Diabetes`, if `Drug A` has matching paths to `Diabetes` through Genes A, B, and C, 3 results could be generated:
+* `Drug A -interacts_with→ Gene A -causes→ Diabetes`
+* `Drug A -interacts_with→ Gene B -causes→ Diabetes`
+* `Drug A -interacts_with→ Gene C -causes→ Diabetes`
 
-But if COLLATE was set on the Gene QNode as `Drug -interacts_with-> Gene (set_interpretation: COLLATE) -causes-> Diabetes`, in that scenario only 1 result should be generated:
-* `Drug A -interacts_with-> Gene [A, B, C] -causes-> Diabetes`
+But if COLLATE was set on the Gene QNode as `Drug -interacts_with→ Gene (set_interpretation: COLLATE) -causes→ Diabetes`, in that scenario only 1 result should be generated:
+
+```
+       ↗interacts_with→ Gene A -causes↘
+Drug A -interacts_with→ Gene B -causes→ Diabetes
+       ↘interacts_with→ Gene C -causes↗
+```
 
 The `node_bindings.[Gene QNode].ids` would include Genes A, B, and C. The edge_bindings would be collated accordingly. 
 
