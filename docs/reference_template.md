@@ -27,7 +27,9 @@
 | --- | :---: | --- |
 {% for prop_name, prop_schema in props.items() -%}{%- if prop_schema is mapping -%}
     | {{ prop_name }} | {{ schema_summary(prop_schema) }} | {% if 'required' in schema and prop_name in schema.required %}**REQUIRED**. {% endif -%}
-    {{ prop_schema.description }} |
+            {% if 'minProperties' in prop_schema %}**Minimum properties: {{ prop_schema.minProperties }}** {% endif -%}
+            {% if 'minItems' in prop_schema %}**Minimum items: {{ prop_schema.minItems }}** {% endif -%}
+        {{ prop_schema.description }} |
 {% endif %}{% endfor %}
 {%- endmacro -%}
 
