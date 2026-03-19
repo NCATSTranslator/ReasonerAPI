@@ -4,7 +4,8 @@
       "n0": {
         "categories": [
           "biolink:ChemicalEntity"
-        ]
+        ],
+        "set_interpretation": "COLLATE"
       },
       "n1": {
         "categories": [
@@ -22,24 +23,16 @@
         "predicates": [
           "biolink:affects"
         ],
-        "qualifier_constraints": [
-          {
-            "qualifier_set": [
-              {
-                "qualifier_type_id": "biolink:object_aspect_qualifier",
-                "qualifier_value": "localization"
-              }
-            ]
-          },
-          {
-            "qualifier_set": [
-              {
-                "qualifier_type_id": "biolink:object_aspect_qualifier",
-                "qualifier_value": "transport"
-              }
-            ]
-          }
-        ]
+        "constraints": {
+          "qualifiers": [
+            {
+              "biolink:object_aspect_qualifier": "localization"
+            },
+            {
+              "biolink:object_aspect_qualifier": "transport"
+            }
+          ]
+        }
       }
     }
   },
@@ -74,7 +67,15 @@
             "qualifier_type_id": "biolink:object_aspect_qualifier",
             "qualifier_value": "localization"
           }
-        ]
+        ],
+        "sources": [
+          {
+            "resource_id": "infores:chembl",
+            "resource_role": "primary_knowledge_source"
+          }
+        ],
+        "knowledge_level": "knowledge_assertion",
+        "agent_type": "manual_agent"
       },
       "x17771": {
         "predicate": "biolink:affects",
@@ -85,37 +86,46 @@
             "qualifier_type_id": "biolink:object_aspect_qualifier",
             "qualifier_value": "transport"
           }
-        ]
+        ],
+        "sources": [
+          {
+            "resource_id": "infores:chembl",
+            "resource_role": "primary_knowledge_source"
+          }
+        ],
+        "knowledge_level": "knowledge_assertion",
+        "agent_type": "manual_agent"
       }
     }
   },
   "results": [
     {
       "node_bindings": {
-        "n0": [
-          {
-            "id": "PUBCHEM.COMPOUND:6623"
-          },
-          {
-            "id": "PUBCHEM.COMPOUND:6625"
-          }
-        ],
-        "n1": [
-          {
-            "id": "HGNC:3467"
-          }
-        ]
+        "n0": {
+          "ids": [
+            "PUBCHEM.COMPOUND:6623",
+            "PUBCHEM.COMPOUND:6625"
+          ]
+        },
+        "n1": {
+          "ids": [
+            "HGNC:3467"
+          ]
+        }
       },
-      "edge_bindings": {
-        "e01": [
-          {
-            "id": "x17770"
-          },
-          {
-            "id": "x17771"
+      "analyses": [
+        {
+          "resource_id": "infores:arax",
+          "edge_bindings": {
+            "e01": {
+              "ids": [
+                "x17770",
+                "x17771"
+              ]
+            }
           }
-        ]
-      }
+        }
+      ]
     }
   ]
 }
