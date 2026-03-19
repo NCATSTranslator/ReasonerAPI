@@ -85,6 +85,8 @@ _"What chemicals affect either the localization or the transport of ADRB2"_
 
 * [localization_or_transport.json](../DataExamples/localization_or_transport.json)
 
+Note: in this example we also specify set_interpretation to have results collated.
+
 
 ### When to use predicate=causes vs. qualified_predicate=causes
 

@@ -75,13 +75,14 @@ The terms MUST, SHOULD, MAY are used as defined in RFC 2119  https://tools.ietf.
   it MUST immediately respond with an error Code "UnsupportedConstraint" and list all constraint
   names that it does not support.
 
-## QEdge.qualifier_constraints
-- If a KP server receives any QEdge.qualifier_constraints, it MUST only return qualified
-  edges that are compatible with the constraints. It MUST NOT return any unqualified edges.
-  If a KP does not yet support QEdge.qualifier_constraints, it MUST return an empty response
+## QEdge.constraints
+- If a KP server receives any QEdge.constraints.qualifiers, it MUST only return 
+  edges that are compatible with the constraints.
+- If a KP server receives any QEdge.constraints.qualifiers, it MUST NOT return any unqualified edges.
+  If a KP does not yet support QEdge.qualifiers, it MUST return an empty response
   because no matches are possible.
-- If an ARA server receives any QEdge.qualifier_constraints, it MUST relay all
-  QEdge.qualifier_constraints to its KP(s) to satisfy.
+- If an ARA server receives any QEdge.constraints, it MUST relay all
+  QEdge.constraints to its KP(s) to satisfy.
 
 ## info.x-trapi.batch_size_limit
 - This batch size limit refers to the maximum length of any single QNode.ids list. The limit
