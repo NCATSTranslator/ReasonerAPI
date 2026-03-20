@@ -460,7 +460,7 @@ Analysis allows edge_bindings and path_bindings to be present together (for expe
 
 ## Full Examples
 
-This is an example of a 1.6.0-beta Response "transformed" into 2.0 (includes query_graph/parameters). Note that the 2.0 query/response has 2 functiona differences:
+This is an example of a 1.6.0-beta Response "transformed" into 2.0 (includes query_graph/parameters). Note that the 2.0 query/response has 2 functional differences:
 * COLLATE was set on the intermediate QNode
 * new parameters were added (timeout, custom tiers)
 
