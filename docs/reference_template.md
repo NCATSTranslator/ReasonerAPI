@@ -22,12 +22,14 @@
         any
     {%- endif -%}
 {%- endmacro -%}
-{%- macro props_table(props) -%}
+{%- macro props_table(props, schema) -%}
 | Field Name | Type | Description |
 | --- | :---: | --- |
 {% for prop_name, prop_schema in props.items() -%}{%- if prop_schema is mapping -%}
     | {{ prop_name }} | {{ schema_summary(prop_schema) }} | {% if 'required' in schema and prop_name in schema.required %}**REQUIRED**. {% endif -%}
-    {{ prop_schema.description }} |
+            {% if 'minProperties' in prop_schema %}**Minimum properties: {{ prop_schema.minProperties }}** {% endif -%}
+            {% if 'minItems' in prop_schema %}**Minimum items: {{ prop_schema.minItems }}** {% endif -%}
+        {{ prop_schema.description }} |
 {% endif %}{% endfor %}
 {%- endmacro -%}
 
@@ -57,12 +59,12 @@ one of:
 {% if 'properties' in schema -%}
 ##### Fixed Fields
 
-{{ props_table(schema['properties']) }}
+{{ props_table(schema['properties'], schema) }}
 {% endif -%}
 {%- if 'patternProperties' in schema %}
 ##### Pattern Fields
 
-{{ props_table(schema['patternProperties']) }}
+{{ props_table(schema['patternProperties'], schema) }}
 {% endif -%}
 {% endif -%}
 {%- if 'example' in schema %}
@@ -82,12 +84,12 @@ one of:
 {%- if 'properties' in subschema %}
 ##### Fixed Fields
 
-{{ props_table(subschema['properties']) }}
+{{ props_table(subschema['properties'], subschema) }}
 {% endif -%}
 {%- if 'patternProperties' in subschema %}
 ##### Pattern Fields
 
-{{ props_table(subschema['patternProperties']) }}
+{{ props_table(subschema['patternProperties'], subschema) }}
 {% endif -%}
 {% endfor %}{% endif -%}
 {%- endif -%}{%- endfor -%}
