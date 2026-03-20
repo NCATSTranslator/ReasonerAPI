@@ -72,6 +72,8 @@ In 2.0, there is instead one property on a QEdge, `constraints`, that holds all 
 * `attributes`: minItems 1, otherwise the same as previous `attribute_constraints`
 * `qualifiers`: simplified format to an array of objects but preserved previous behavior. Each object represents a qualifier-set, and multiple objects/sets have an `OR` relationship. Within an object, the keys are the "qualifier-type-ids" and their values are the "qualifier values". Multiple key/value pairs in one object/set have an `AND` relationship. 
 
+**NOTE on SUBCLASSING**: we haven't decided yet how QEdge constraints work with subclassing. For now, QEdge constraints should only apply to the bound Edges (constructed in subclassing cases), NOT to the bound Edge's support_graph edges. QNode constraints also has this ambiguity/confusion with subclassing. 
+
 <details><summary>The same QEdge in 2.0 would look like this (click to expand)</summary>
 <p>
 
