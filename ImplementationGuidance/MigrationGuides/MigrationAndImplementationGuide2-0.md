@@ -427,9 +427,9 @@ The `node_bindings.[Gene QNode].ids` would include Genes A, B, and C. The edge_b
 
 ## Other Changes
 
-1. `null` is no longer a valid value in queries and responses. To convey "no data", omit the field or use an empty array/object if the schema allows (doesn't set `minProperties`/`minItems`). However, unless the field's description explicitly states that the empty array/object should be used, we strongly encourage omitting fields instead to reduce needless bloat. Examples:
-   * `Message.knowledge_graph` should omitted, not be set to `null`, when there is no data (ex: a query, or a response with no data found).
-   * `Message.results` should not be set to `null` when there is no data. Its description states when it should be omitted (when not expected, like a query) VS an empty array (when it is expected and there's no data, like a response).
+1. `null` is no longer a valid value in queries and responses. To convey "no data", omit the field or use an empty array/object if the schema allows (doesn't set `minProperties`/`minItems`). However, unless the field's description explicitly states that the empty array/object MUST be used, we strongly encourage omitting fields instead to reduce needless bloat. Examples:
+   * `Message.knowledge_graph` MUST be omitted, not be set to `null`, when there is no data (ex: a query, or a response with no data found).
+   * `Message.results` MUST NOT be set to `null` when there is no data. Its description states when it MUST be omitted (when not expected, like a query) VS an empty array (when it is expected and there's no data, like a response).
 2. For many optional array and object properties, `minItems`/`minProperties` was set to 1. This was to reduce bloat (only include the field if there's data). See the Changelog for the list of changed properties.
 3. `AuxiliaryGraph.attributes` was removed. It was previously required, but never used and its empty arrays bloated responses.
 4. These properties were changed to not required:
