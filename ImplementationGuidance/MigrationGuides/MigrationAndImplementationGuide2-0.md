@@ -5,7 +5,7 @@ This guide lays out the format and functionality changes for queries and respons
 TRAPI 2.0 includes many breaking changes, new/reintroduced functionality, and format changes designed to slim down TRAPI messages. This guide provides before-after examples to illustrate the more complex changes and a list for the other important changes (mainly formatting).  
 
 
-## Changes with before-after examples
+## Changes
 
 
 ### 1. QEdge Constraints Refactor
@@ -425,19 +425,37 @@ Drug A -interacts_with→ Gene B -causes→ Diabetes
 The `node_bindings.[Gene QNode].ids` would include Genes A, B, and C. The edge_bindings would be collated accordingly. 
 
 
-## Other Changes
+### 6. `null` is no longer a valid value in queries and responses
 
-1. `null` is no longer a valid value in queries and responses. To convey "no data", omit the field or use an empty array/object if the schema allows (doesn't set `minProperties`/`minItems`). However, unless the field's description explicitly states that the empty array/object MUST be used, we strongly encourage omitting fields instead to reduce needless bloat. Examples:
-   * `Message.knowledge_graph` MUST be omitted, not be set to `null`, when there is no data (ex: a query, or a response with no data found).
-   * `Message.results` MUST NOT be set to `null` when there is no data. Its description states when it MUST be omitted (when not expected, like a query) VS an empty array (when it is expected and there's no data, like a response).
-2. For many optional array and object properties, `minItems`/`minProperties` was set to 1. This was to reduce bloat (only include the field if there's data). See the Changelog for the list of changed properties.
-3. `AuxiliaryGraph.attributes` was removed. It was previously required, but never used and its empty arrays bloated responses.
-4. These properties were changed to not required:
-   * `Nodes.attributes`
-   * `QueryGraph` `edges` and `paths`: to accommodate queries with only nodes
-   * `KnowledgeGraph.edges`: same reason as above
-   * `Result.analyses`: same reason as above
-5. Analysis allows edge_bindings and path_bindings to be present together (for experimental use only, small change introduced when simplifying schema classes)
+To convey "no data", instead omit the field or use an empty array/object if the schema allows (doesn't set `minProperties`/`minItems`). However, unless the field's description explicitly states that the empty array/object MUST be used, we strongly encourage omitting fields to reduce needless bloat. 
+
+Examples:
+* `Message.knowledge_graph` MUST be omitted, not be set to `null`, when there is no data (ex: a query, or a response with no data found).
+* `Message.results` MUST NOT be set to `null` when there is no data. Its description states when it MUST be omitted (when not expected, like a query) VS an empty array (when it is expected and there's no data, like a response).
+
+
+### 7. Many optional properties set to `<minItems/minProperties>: 1`
+
+For many optional array and object properties, `minItems`/`minProperties` was set to 1. This was to reduce bloat (only include the field if there's data). See the Changelog for the full list of changed properties.
+
+
+### 8. `AuxiliaryGraph.attributes` was removed
+
+It was previously required, but never used and its empty arrays bloated responses. Additional undefined properties are still allowed in `AuxiliaryGraph` objects. 
+
+
+### 9. Properties changed to not-required:
+
+These properties were changed to not required:
+* `Nodes.attributes`
+* `QueryGraph` `edges` and `paths`: to accommodate queries with only nodes
+* `KnowledgeGraph.edges`: same reason as above
+* `Result.analyses`: same reason as above
+
+
+### 10. Analysis is technically allowed to have edge + path bindings
+
+Analysis allows edge_bindings and path_bindings to be present together (for experimental use only, small change introduced when simplifying schema classes).
 
 
 ## Full Examples
