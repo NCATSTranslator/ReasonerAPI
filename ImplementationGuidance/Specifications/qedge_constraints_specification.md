@@ -16,7 +16,7 @@ The keys have an `AND` relationship (all must be met by a matched Edge).
 
 * Each object represents a qualifier-set, and multiple objects/sets have an `OR` relationship.
 * Within an object, the keys are the "qualifier-type-ids" and their values are the "qualifier values". Multiple key/value pairs in one object/set have an `AND` relationship. 
-* If a specified value has descendants (ex: `activity_or_abundance`), the tool MUST treat those descendants (ex: `abundance`, `expression`, etc.) as if they were included using an `OR` relationship (aka "hierarchy expansion"). 
+* If a specified value has descendants (ex: `activity_or_abundance`), the tool MUST treat those descendants (ex: `abundance`, `expression`, etc.) as if they were included using an `OR` relationship (i.e. "hierarchy expansion"). Links: [hierarchy for aspect-qualifier values](https://biolink.github.io/biolink-model/aspects.html), [enums](https://biolink.github.io/biolink-model/#enumerations) for qualifier values
 
 Example: the matched Edge's qualifier set should include either:
 * `causes` + `decreased` (or its child `downregulated`) + `activity_or_abundance` (or 1 of its descendants)
@@ -41,8 +41,8 @@ Example: the matched Edge's qualifier set should include either:
 * two required keys: `behavior` (`ALLOW` or `DENY`) and `values` (an array of strings)
 * `ALLOW` means "ANY (at least 1) of the `values` MUST be in the matched Edge's corresponding property". `DENY` means "ALL of the `values` MUST NOT be in the matched Edge's corresponding property".
   * Note that KnowledgeGraph Edges have only 1 value each in their `knowledge_level`/`agent_type` fields.
-* The `values` MUST be valid, from the corresponding biolink enum for the property.
-* If a specified value has descendants (ex: `automated_agent`), the tool MUST treat those descendants (ex: `text_mining_agent`, etc.) as if they were included in the `values` array (aka "hierarchy expansion"). 
+* The `values` MUST be valid, from the corresponding biolink enum for the property ([knowledge_level](https://biolink.github.io/biolink-model/KnowledgeLevelEnum/), [agent_type](https://biolink.github.io/biolink-model/AgentTypeEnum/))
+* If a specified value has descendants (ex: `automated_agent`), the tool MUST treat those descendants (ex: `text_mining_agent`, etc.) as if they were included in the `values` array (i.e. "hierarchy expansion"). 
 
 ```json
 "<knowledge_level/agent_type>": {
