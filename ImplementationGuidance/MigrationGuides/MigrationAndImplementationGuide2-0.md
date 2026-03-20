@@ -67,7 +67,7 @@ In 2.0, there is instead one property on a QEdge, `constraints`, that holds all 
    * `ALLOW` means "ANY (at least 1) of the `values` MUST be in the matched Edge's corresponding property". 
    * `DENY` means "ALL of the `values` MUST NOT be in the matched Edge's corresponding property". 
 * `agent_type`: see above (KL)
-   * FYI: if a specified value has descendants (ex: `automated_agent`), the tool MUST treat those descendants (ex: `text_mining_agent`, etc.) as if they were included in the `values` array (aka "hierarchy expansion").
+   * FYI: if a specified value has descendants (ex: `automated_agent`), the tool MUST treat those descendants (ex: `text_mining_agent`, etc.) as if they were included in the `values` array (i.e. "hierarchy expansion").
 * `sources`: this constrains the Edge `sources`. It has the same keys as KL/AT (`behavior`, `values`) plus the optional `primary_only` (if true, the constraint ONLY applies to the `primary_knowledge_source`). 
 * `attributes`: minItems 1, otherwise the same as previous `attribute_constraints`
 * `qualifiers`: simplified format to an array of objects but preserved previous behavior. Each object represents a qualifier-set, and multiple objects/sets have an `OR` relationship. Within an object, the keys are the "qualifier-type-ids" and their values are the "qualifier values". Multiple key/value pairs in one object/set have an `AND` relationship. 
@@ -317,7 +317,7 @@ In 2.0, the format is simplified:
 ```
 
 Changes:
-* `<node/edge/path>_bindings` are now `minProperties: 1` (AKA when these fields are present, they MUST contain data) 
+* `<node/edge/path>_bindings` are now `minProperties: 1` (i.e. when these fields are present, they MUST contain data) 
 * `ids` arrays are `minItems: 1` (this property is still required)
 * `attributes` were removed from NodeBinding/EdgeBinding (were never used, empty arrays bloated responses)
 * `query_id` was removed from NodeBinding (obsolete with the current subclassing behavior)
