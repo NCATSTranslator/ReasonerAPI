@@ -40,7 +40,7 @@ Example: the matched Edge's qualifier set should include either:
 
 * two required keys: `behavior` (`ALLOW` or `DENY`) and `values` (an array of strings)
 * `ALLOW` means "ANY (at least 1) of the `values` MUST be in the matched Edge's corresponding property". `DENY` means "ALL of the `values` MUST NOT be in the matched Edge's corresponding property".
-  * Note that KnowledgeGraph Edges have only 1 value each in their `knowledge_graph`/`agent_type` fields.
+  * Note that KnowledgeGraph Edges have only 1 value each in their `knowledge_level`/`agent_type` fields.
 * The `values` MUST be valid, from the corresponding biolink enum for the property.
 * If a specified value has descendants (ex: `automated_agent`), the tool MUST treat those descendants (ex: `text_mining_agent`, etc.) as if they were included in the `values` array (aka "hierarchy expansion"). 
 
