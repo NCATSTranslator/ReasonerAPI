@@ -60,9 +60,11 @@
 
 ### 12. BaseQueryGraph and BaseAnalysis base classes removed in favor of single QueryGraph and Analysis classes that support both pathfinder and regular queries
 
+.
 
+.
 
-
+.
 
 # Change Log TRAPI 1.5.0 (2024-05-26) -> 1.6.0-beta (2025-06-06)
 
