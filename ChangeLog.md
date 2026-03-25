@@ -1,18 +1,18 @@
 # Change Log  1.6.0-beta (2025-06-06) -> 2.0.0-dev (2026-03-25)
 
 ### 1. QEdge Constraints Refactor (see [migration guide entry](https://github.com/NCATSTranslator/ReasonerAPI/blob/2.0-migration-guide-plus/ImplementationGuidance/MigrationGuides/MigrationAndImplementationGuide2-0.md#1-qedge-constraints-refactor))
-- QEdge.attribute_constraints has been removed and replaced with QEdge.constraints, which is an object that can contain constraints for knowledge_level, agent_type, sources, attributes, and qualifiers
-- The new 'sources' constraint has ALLOW and DENY constructs with an optional 'primary_only' flag
+- `QEdge.attribute_constraints` has been removed and replaced with `QEdge.constraints`, which is an object that can contain constraints for `knowledge_level`, `agent_type`, `sources`, `attributes`, and `qualifiers`
+- The new `sources` constraint has ALLOW and DENY constructs with an optional `primary_only` flag
 
 ### 2. Add Query.parameters to contain existing log_level and bypass_cache parameters and add timeout query parameter (see [migration guide entry](https://github.com/NCATSTranslator/ReasonerAPI/blob/2.0-migration-guide-plus/ImplementationGuidance/MigrationGuides/MigrationAndImplementationGuide2-0.md#2-new-queryresponse-parameters))
-- Move Query.log_level to Query.parameters.log_level
-- Move Query.bypass_cache to Query.parameters.bypass_cache
-- Add Query.parameters.timeout
-- Add Response.parameters that conveys the same parameters as Query.parameters
+- Move `Query.log_level` to` Query.parameters.log_level`
+- Move `Query.bypass_cache` to `Query.parameters.bypass_cache`
+- Add `Query.parameters.timeout`
+- Add `Response.parameters` that conveys the same parameters as `Query.parameters`
 - Add HTTP 409 code
 
 ### 3. Binding Structure Changes (NodeBinding/EdgeBinding/PathBinding) (see [migration guide entry](https://github.com/NCATSTranslator/ReasonerAPI/blob/2.0-migration-guide-plus/ImplementationGuidance/MigrationGuides/MigrationAndImplementationGuide2-0.md#3-binding-structure-changes-nodeedgepath))
-- <node/edge/path>_bindings are now minProperties: 1 (i.e. when these fields are present, they MUST contain data)
+- `<node/edge/path>_bindings` are now minProperties: 1 (i.e. when these fields are present, they MUST contain data)
 - `id` properties renamed to `ids` and is now a list
 - `ids` arrays are minItems: 1 (this property is required)
 - `attributes` property completely removed
@@ -20,7 +20,7 @@
 - Each binding is now an object containing only `ids` (which contains is a list), instead of a list of objects each with `id` and `attributes`
 
 ### 4. KL/AT turned into top-level Edge properties, now required (see [migration guide entry](https://github.com/NCATSTranslator/ReasonerAPI/blob/2.0-migration-guide-plus/ImplementationGuidance/MigrationGuides/MigrationAndImplementationGuide2-0.md#4-klat-turned-into-top-level-edge-properties-now-required))
-- Edge.knowledge_level and Edge.agent_type are now required Edge properties instead of being located within 'attributes'
+- `Edge.knowledge_level` and `Edge.agent_type` are now required `Edge` properties instead of being located within `attributes`
 
 ### 5. Add COLLATE option to QNode.set_interpretation enum (see [migration guide entry](https://github.com/NCATSTranslator/ReasonerAPI/blob/2.0-migration-guide-plus/ImplementationGuidance/MigrationGuides/MigrationAndImplementationGuide2-0.md#5-add-collate-option-to-qnodeset_interpretation))
 
@@ -28,21 +28,22 @@
 - Remove `nullable: true/false` designations for all properties. Properties with no data must now be *absent* from TRAPI JSON rather than allowed to be present but with a null value
 
 ### 7. Many optional properties set to <minItems/minProperties>: 1 
-- Empty lists are no longer permitted to say "no data". "No data" is now expressed with an absent property
-- QueryGraph.nodes
-- QueryGraph.edges
-- Response.logs
-- Message.auxiliary_graphs
-- Result.analyses
-- Analysis.support_graphs
-- QNode.member_ids
-- QNode.constraints
-- Edge.qualifiers
-- MetaKnowledgeGraph.nodes
-- MetaEdge.qualifiers
-- MetaQualifier.applicable_values
-- RetrievalSource.upstream_resource_ids
-- RetrievalSource.source_record_urls
+- Empty lists are no longer permitted to say "no data here". "No data" is now expressed with an absent property
+- This affects the following properties:
+- `QueryGraph.nodes`
+- `QueryGraph.edges`
+- `Response.logs`
+- `Message.auxiliary_graphs`
+- `Result.analyses`
+- `Analysis.support_graphs`
+- `QNode.member_ids`
+- `QNode.constraints`
+- `Edge.qualifiers`
+- `MetaKnowledgeGraph.nodes`
+- `MetaEdge.qualifiers`
+- `MetaQualifier.applicable_values`
+- `RetrievalSource.upstream_resource_ids`
+- `RetrievalSource.source_record_urls`
 
 ### 8. Remove AuxiliaryGraph.attributes property
 
@@ -54,7 +55,7 @@
 
 ### 10. Analysis is technically allowed to have both edge and path bindings (experimental use)
 
-### 11. YAML specification document5 migrated from OpenAPI 3.0.1 to OpenAPI 3.1.2
+### 11. YAML specification document migrated from OpenAPI 3.0.1 to OpenAPI 3.1.2
 - All `example` attributes become `examples` in OpenAPI 3.1.2
 
 ### 12. BaseQueryGraph and BaseAnalysis base classes removed in favor of single QueryGraph and Analysis classes that support both pathfinder and regular queries
