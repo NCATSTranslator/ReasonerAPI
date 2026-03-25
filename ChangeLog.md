@@ -5,6 +5,11 @@
 - The new 'sources' constraint has ALLOW and DENY constructs with an optional 'primary_only' flag
 
 ### 2. Add Query.parameters to contain existing log_level and bypass_cache parameters and add timeout query parameter (see [migration guide entry](https://github.com/NCATSTranslator/ReasonerAPI/blob/2.0-migration-guide-plus/ImplementationGuidance/MigrationGuides/MigrationAndImplementationGuide2-0.md#2-new-queryresponse-parameters))
+- Move Query.log_level to Query.parameters.log_level
+- Move Query.bypass_cache to Query.parameters.bypass_cache
+- Add Query.parameters.timeout
+- Add Response.parameters that conveys the same parameters as Query.parameters
+- Add HTTP 409 code
 
 ### 3. Binding Structure Changes (NodeBinding/EdgeBinding/PathBinding) (see [migration guide entry](https://github.com/NCATSTranslator/ReasonerAPI/blob/2.0-migration-guide-plus/ImplementationGuidance/MigrationGuides/MigrationAndImplementationGuide2-0.md#3-binding-structure-changes-nodeedgepath))
 - <node/edge/path>_bindings are now minProperties: 1 (i.e. when these fields are present, they MUST contain data)
@@ -24,7 +29,20 @@
 
 ### 7. Many optional properties set to <minItems/minProperties>: 1 
 - Empty lists are no longer permitted to say "no data". "No data" is now expressed with an absent property
-- ****** list them
+- QueryGraph.nodes
+- QueryGraph.edges
+- Response.logs
+- Message.auxiliary_graphs
+- Result.analyses
+- Analysis.support_graphs
+- QNode.member_ids
+- QNode.constraints
+- Edge.qualifiers
+- MetaKnowledgeGraph.nodes
+- MetaEdge.qualifiers
+- MetaQualifier.applicable_values
+- RetrievalSource.upstream_resource_ids
+- RetrievalSource.source_record_urls
 
 ### 8. Remove AuxiliaryGraph.attributes property
 
