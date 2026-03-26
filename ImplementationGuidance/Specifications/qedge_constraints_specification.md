@@ -107,7 +107,7 @@ The matched Edge's `primary_knowledge_source` should NOT be `infores:semmeddb` o
 
 ## Attributes
 
-Each attribute constraint object constrains a specific attribute type. Multiple attribute constraints together represent an AND relationship, such that all attribute constraints must be met.
+Attribute constraints are presented as a list of attribute constraint objects. Each attribute constraint object constrains a specific attribute type. Multiple attribute constraints together represent an AND relationship, such that all attribute constraints must be met.
 
 Every attribute constraint must supply a `name`, `id`, `value`, and `operator`:
 
@@ -117,6 +117,8 @@ Every attribute constraint must supply a `name`, `id`, `value`, and `operator`:
 - `operator`: Provides the relationship to the `value` that targeted attributes must fulfill.
 
 Additionally, `not` allows the operator relationship to be inverted.
+
+### `===` "Strict equality"
 
 In the most simple case, the operator `===` requires that edges must have an attribute exactly matching the given value:
 
@@ -137,32 +139,50 @@ Other operators exist which provide specific expressions, detailed below:
 
 ### `==` "Equals"
 
-The operator `==` means 'is equal to', in a very broad sense. It is applied list-wise for both the constraint value, and the value of attributes being compared, in an OR fashion, such that any equality fulfills it.
-
-To give a few examples of matching cases, consider the following constraint == value pairs:
-
-- `1 == 1`
-- `1 == [1, 2, 3]`
-- `[1, 2, 3] == 1`
-- `[1, 2, 3] == [3, 4, 5]`
-
-All following operators follow this same list-wise comparison logic.
-
-`not` would make this operator mean 'not equal to, in any comparison.'
+The operator `==` means 'is equal to'. `not` would make this operator mean 'not equal to, in any comparison.'
 
 ### `>` "Greater than"
 
-The operator `>` means "greater than", and the same list-wise logic applies. `not` makes this operator mean 'less than or equal to' for all comparisons.
+The operator `>` means "greater than". `not` makes this operator mean 'less than or equal to' for all comparisons.
 
 ### `<` "Less than"
 
-The operator `<` means "less than", and the same list-wise logic applies. `not` makes this operator mean 'greater than or equal to' for all comparisons.
+The operator `<` means "less than". `not` makes this operator mean 'greater than or equal to' for all comparisons.
 
 ### `matches` "Matches by regular expression"
 
-The operator `matches` invokes a regular expression for the comparison (again, following the list-wise comparison, meaning a list of regular expressions may be supplied), using python-like regex syntax.
+The operator `matches` invokes a regular expression for the comparison, using python-like regex syntax. `not` means that no regex match is found for all comparisons.
 
-`not` means that no regex match is found for all comparisons.
+### List-wise comparison
+
+The operators `==`, `>`, `<`, and `matches` all are compared list-wise. Let's look at this using `==` as an example.
+
+In the most basic case, simple equality satisfies the operator (each example shall be constraint value == attribute value):
+
+- `1 == 1` constraint met!
+- `1 == 2` constraint failed.
+
+However, if the constraint value is a list, each item in the list may be compared against the attribute value:
+
+- `[1, 2, 3] == 1` constraint met!
+- `[1, 2, 3] == 2` constraint met!
+- `[1, 2, 3] == 3` constraint met!
+- `[1, 2, 3] == 4` constraint failed.
+
+Similarly, if the attribute value is a list, each item may be compared against the constraint:
+
+- `1 == [1, 2, 3]` constraint met!
+- `2 == [1, 2, 3]` constraint met!
+- `3 == [1, 2, 3]` constraint met!
+- `4 == [1, 2, 3]` constraint failed.
+
+Finally, both may be lists, in which case every pair must be compared:
+
+- `[1, 2, 3] == [3, 4, 5]` constraint met!
+- `[1, 2, 3] == [4, 6, 6]` constraint failed.
+
+The only operator for which this behavior is not held is `===` (strict equality), it exists to allow exact list comparison.
+
 
 ## Full Examples
 
