@@ -25,11 +25,10 @@
 ### 5. Add COLLATE option to QNode.set_interpretation enum (see [migration guide entry](https://github.com/NCATSTranslator/ReasonerAPI/blob/2.0/ImplementationGuidance/MigrationGuides/MigrationAndImplementationGuide2-0.md#5-add-collate-option-to-qnodeset_interpretation))
 
 ### 6. null is no longer a valid value in queries and responses (see [migration guide entry](https://github.com/NCATSTranslator/ReasonerAPI/blob/2.0/ImplementationGuidance/MigrationGuides/MigrationAndImplementationGuide2-0.md#6-null-is-no-longer-a-valid-value-in-queries-and-responses))
-- Remove `nullable: true/false` designations for all properties. Properties with no data must now be *absent* from TRAPI JSON rather than allowed to be present but with a null value
+- Remove `nullable: true/false` designations for all properties. Properties with no data must now be *absent* from TRAPI JSON or an empty array/object if the schema allows, rather than allowed to be present but with a null value. Some field descriptions explicitly state that the empty array/object MUST be used in certain circumstances.
 
 ### 7. Many optional properties set to <minItems/minProperties>: 1 
-- Empty lists are no longer permitted to say "no data here". "No data" is now expressed with an absent property
-- This affects the following properties:
+In the following properties, empty lists are no longer permitted to say "no data here". "No data" is now expressed with an absent property:
 - `QueryGraph.nodes`
 - `QueryGraph.edges`
 - `Response.logs`
