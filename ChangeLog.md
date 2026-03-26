@@ -67,9 +67,10 @@
 # Change Log TRAPI 1.5.0 (2024-05-26) -> 1.6.0-beta (2025-06-06)
 
 - Diff: https://github.com/NCATSTranslator/ReasonerAPI/compare/1.5...1.6
+- TRAPI 1.6.0-beta was designed to be backwards compatible while adding support for Pathfinder queries. Any valid TRAPI 1.5.0 document is also a valid TRAPI 1.6.0 document.
 - Split `QueryGraph` into `BaseQueryGraph`, `PathfinderQueryGraph` (for Pathfinder support), and `QueryGraph` (for all other queries). The latter two classes inherit from `BaseQueryGraph`
 - Split `Analysis` into `BaseAnalysis`, `PathfinderAnalysis` (for Pathfinder support), and `Analysis` (for all other queries). The latter two classes inherit from `BaseAnalysis`
-- Add `PathfinderQueryGraph.QPath` class containing properties `subject`, `objec`t, `predicates`, and `constraints`
+- Add `PathfinderQueryGraph.QPath` class containing properties `subject`, `object`, `predicates`, and `constraints`
 
 =============
 
