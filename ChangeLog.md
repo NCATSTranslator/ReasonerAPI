@@ -5,7 +5,7 @@
 - The new `sources` constraint has ALLOW and DENY constructs with an optional `primary_only` flag
 
 ### 2. Add Query.parameters and Response.parameters to contain existing log_level and bypass_cache parameters and add timeout query parameter (see [migration guide entry](https://github.com/NCATSTranslator/ReasonerAPI/blob/2.0/ImplementationGuidance/MigrationGuides/MigrationAndImplementationGuide2-0.md#2-new-queryresponse-parameters))
-- Move `Query.log_level` to` Query.parameters.log_level`
+- Move `Query.log_level` to `Query.parameters.log_level`
 - Move `Query.bypass_cache` to `Query.parameters.bypass_cache`
 - Add `Query.parameters.timeout`
 - Add `Response.parameters` that conveys the same parameters as `Query.parameters`
