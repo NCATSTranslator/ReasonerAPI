@@ -16,11 +16,19 @@ The terms MUST, SHOULD, MAY are used as defined in RFC 2119  https://tools.ietf.
 ## QNode.ids
 - MAY be null, or MAY be missing. The meaning is the same.
 - MUST NOT be an empty array (#199)
-- If more than one element is present, the elements MUST be treated in the sense of an "or" list.
-  This effectively creates a simple batch query mechanism.
+- If more than one element is present, the elements MUST be treated accoring to Qnode.set_interpretation.
 - The list SHOULD NOT be used by the client to provide equivalent CURIEs to the server
 - If the server considers a subset of items in the list as equivalent CURIEs,
   the server SHOULD merge the subset into a single KnowledgeGraph Node
+
+## QNode.set_interpretation
+- MAY be null, or MAY be missing. If null or missing, the default is "BATCH".
+- MUST be one of the following values: "BATCH", "ALL", "MANY", or "COLLATE"
+- If set_interpretation is "BATCH", each CURIE in the ids list is treated independently. Results MUST include answers for each queried CURIE separately.
+- If set_interpretation is "ALL", all specified CURIEs MUST appear in each Result. Multiple CURIEs are combined into a set, and the ids field MUST hold a single UUID representing this set, with individual members in member_ids.
+- If set_interpretation is "MANY", member CURIEs MUST form one or more sets in the Results. Multiple CURIEs are combined into a set, and the ids field MUST hold a single UUID representing this set, with individual members in member_ids. Sets with more members are generally considered more desirable than sets with fewer members.
+- If set_interpretation is "COLLATE", it MAY only be used when no ids are provided (QNode.ids is null or missing). Multiple matching nodes MUST be collated into a single Result rather than separated into separate Results.
+
 
 ## QNode.categories
 - MAY be null, or MAY be missing. The meaning is the same: matching Nodes may be any category
@@ -67,13 +75,14 @@ The terms MUST, SHOULD, MAY are used as defined in RFC 2119  https://tools.ietf.
   it MUST immediately respond with an error Code "UnsupportedConstraint" and list all constraint
   names that it does not support.
 
-## QEdge.qualifier_constraints
-- If a KP server receives any QEdge.qualifier_constraints, it MUST only return qualified
-  edges that are compatible with the constraints. It MUST NOT return any unqualified edges.
-  If a KP does not yet support QEdge.qualifier_constraints, it MUST return an empty response
-  because no matches are possible.
-- If an ARA server receives any QEdge.qualifier_constraints, it MUST relay all
-  QEdge.qualifier_constraints to its KP(s) to satisfy.
+## QEdge.constraints
+- If a KP server receives any QEdge.constraints, it MUST only return 
+  edges that are compatible with the constraints. If a KP server receives a query that contains QEdge
+  constraints that it does not support yet, it MUST immediately respond with an error Code "UnsupportedConstraint" and list all the specified constraints that it does not support.
+- If a KP server receives any QEdge.constraints.qualifiers, it MUST NOT return any edges that 
+  don't have qualifiers.
+- If an ARA server receives any QEdge.constraints, it MUST relay all
+  QEdge.constraints to its KP(s) to satisfy.
 
   See [QEdge constraints specification for details](qedge_constraints_specification.md).
 
@@ -84,9 +93,9 @@ The terms MUST, SHOULD, MAY are used as defined in RFC 2119  https://tools.ietf.
   large (e.g., if the client specified `MONDO:0000001: disease or disorder`), the server SHOULD
   return a runtime error gracefully.
 
-## Specifying permitted and excluded KPs to an ARA
-- The proper syntax for specifying or excluding specific KPs to consult to an ARA MUST be done
-  via a `attribute_constraint` on a QEdge. The following is a complete Query example that disallows the
+## Specifying permitted and excluded sources to an ARA
+- The proper syntax for specifying or excluding specific knowledge sources (infores CURIEs) to an ARA MUST be done
+  via a `sources` constraint on a QEdge within the `constraints` object. The following is a complete Query example that disallows the
   use of SemMedDB:
 
 ```
@@ -100,15 +109,14 @@ The terms MUST, SHOULD, MAY are used as defined in RFC 2119  https://tools.ietf.
           "predicates": [
             "biolink:entity_negatively_regulates_entity"
           ],
-          "attribute_constraints": [
-            {
-              "id": "biolink:knowledge_source",
-              "name": "knowledge source",
-              "value": "infores:semmeddb",
-              "not": true,
-              "operator": "=="
+          "constraints": {
+            "sources": {
+              "behavior": "DENY",
+              "values": [
+                "infores:semmeddb"
+              ]
             }
-          ]
+          }
         }
       },
       "nodes": {
@@ -131,38 +139,29 @@ The terms MUST, SHOULD, MAY are used as defined in RFC 2119  https://tools.ietf.
 }
 ```
 
-A general "allowlist" SHOULD look like this:
+An allowlist with `behavior` set to "ALLOW" requires at least one of the specified infores CURIEs to be present in the sources of bound edges:
 ```
-      "attribute_constraints": [
-        {
-          "id": "biolink:knowledge_source",
-          "name": "knowledge source",
-          "value": [
-            "infores:rtx-kg2",
-            "infores:biothings-explorer",
-          ],
-          "operator": "=="
+      "constraints": {
+        "sources": {
+          "behavior": "ALLOW",
+          "values": [
+            "infores:chembl",
+            "infores:chebi"
+          ]
         }
-      ],
+      },
 ```
 
-(when the value is a list, the "==" operator works like a SQL "IN" clause, as clearly documented in the TRAPI yaml)
-
-Here is what a general "denylist" should look like:
+A denylist with `behavior` set to "DENY" excludes all of the specified infores CURIEs from the sources of bound edges:
 ```
-      "attribute_constraints": [
-        {
-          "id": "biolink:knowledge_source",
-          "name": "knowledge source",
-          "value": [
-            "infores:rtx-kg2",
-            "infores:biothings-explorer",
-          ],
-          "not": true,
-          "operator": "=="
+      "constraints": {
+        "sources": {
+          "behavior": "DENY",
+          "values": [
+            "infores:ctd",
+            "infores:reactome"
+          ]
         }
-      ],
+      },
 ```
-
-(when the value is a list, the "==" operator combined with ' "not": true ' works like a SQL "NOT IN" clause, as clearly documented in the TRAPI yaml)
 
