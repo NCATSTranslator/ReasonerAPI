@@ -48,20 +48,17 @@ NOTE that the notion of a 'level' of knowledge can in one sense relate to the st
 
 ## Implementation Guidance
 
-1. Knowledge Providers MUST report one and only one `agent type` on each Edge they return in a TRAPI message, using an Attribute object keyed on the `agent_type` property. The value of this property MUST come from the biolink:AgentTypeEnum.
+1. Knowledge Providers MUST report one and only one `agent type` on each Edge they return in a TRAPI message, using an `agent_type` property. The value of this property MUST come from the [biolink:AgentTypeEnum](https://biolink.github.io/biolink-model/AgentTypeEnum/).
 
-       {
-          "attribute_type_id": "biolink:agent_type",
-          "value": "manual_agent",
-          "attribute_source": "infores:molepro"
-       }
+2. Knowledge Providers MUST report one and only one `knowledge level` for each Edge returned in a TRAPI message, using a `knowledge_level` property. The value MUST come from the [biolink:KnowledgeLevelEnum](https://biolink.github.io/biolink-model/KnowledgeLevelEnum/).
 
-2. Knowledge Providers MUST report one and only one `knowledge level` for each Edge returned in a TRAPI message, using an Attribute object keyed on the  `knowledge_level` property. The value MUST come from the biolink:KnowledgeLevelEnum.
-
-       {   
-       "attribute_type_id": "biolink:knowledge_level",
-       "value": "knowledge_assertion",
-       "attribute_source": "infores:molepro"
+       "edge_id": {
+           "subject": "PUBCHEM.COMPOUND:6623",
+           "predicate": "biolink:affects",
+           "object": "HGNC:3467",
+           "sources": { . . . }
+           "knowledge_level": "knowledge_assertion",
+           "agent_type": "manual_agent"
        }
 
 3. The main challenge in applying this standard concerns selecting appropriate agent type and knowledge level terms for a given Edge. To assist KPs in this task, a [Supplemental Guidance document](https://docs.google.com/document/d/140dtM5CjWM97JiBRdAmDT-9IKqHoOj-xbE_5TWkdYqg/edit) provides additional implementation support beyond the base specification above. This includes clarification of key distinctions, tips for proper term selection, and a corpus of examples illustrating how agent type and knowledge level terms are applied to the diverse kinds of Edges provided in Translator knowledge graphs.
