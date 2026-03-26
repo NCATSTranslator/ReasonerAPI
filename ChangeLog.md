@@ -45,6 +45,7 @@ In the following properties, empty lists are no longer permitted to say "no data
 - `RetrievalSource.source_record_urls`
 
 ### 8. Removed AuxiliaryGraph.attributes property
+- It was previously required, but never used and its empty arrays bloated responses. Additional undefined properties are still allowed in AuxiliaryGraph objects.
 
 ### 9. The following properties changed to not-required
 - `Nodes.attributes` (to reduce bloat)
