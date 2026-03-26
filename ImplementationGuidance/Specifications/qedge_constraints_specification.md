@@ -107,8 +107,62 @@ The matched Edge's `primary_knowledge_source` should NOT be `infores:semmeddb` o
 
 ## Attributes
 
-Format didn't change in TRAPI 2.0, see docs for details. 
+Each attribute constraint object constrains a specific attribute type. Multiple attribute constraints together represent an AND relationship, such that all attribute constraints must be met.
 
+Every attribute constraint must supply a `name`, `id`, `value`, and `operator`:
+
+- `name`: For human use, this just specifies the intent of the constraint.
+- `id`: This targets the constraint to attributes with a specific `attribute_type_id`.
+- `value`: Provides a value with which the targeted attribute types must agree.
+- `operator`: Provides the relationship to the `value` that targeted attributes must fulfill.
+
+Additionally, `not` allows the operator relationship to be inverted.
+
+In the most simple case, the operator `===` requires that edges must have an attribute exactly matching the given value:
+
+```json
+{
+    "name": "Must have the exact given publication list",
+    "id": "biolink:publications",
+    "operator": "===",
+    "value": ["PMID:1234", "PMID:4567"]
+}
+```
+
+would only allow edges that have the `attribute_type_id` 'biolink:publications', where the attribute value is exactly `["PMID:1234", "PMID:4567"]`.
+
+`"not": true` would make this operator mean 'not exactly equal to'.
+
+Other operators exist which provide specific expressions, detailed below:
+
+### `==` "Equals"
+
+The operator `==` means 'is equal to', in a very broad sense. It is applied list-wise for both the constraint value, and the value of attributes being compared, in an OR fashion, such that any equality fulfills it.
+
+To give a few examples of matching cases, consider the following constraint == value pairs:
+
+- `1 == 1`
+- `1 == [1, 2, 3]`
+- `[1, 2, 3] == 1`
+- `[1, 2, 3] == [3, 4, 5]`
+
+All following operators follow this same list-wise comparison logic.
+
+`not` would make this operator mean 'not equal to, in any comparison.'
+
+### `>` "Greater than"
+
+The operator `>` means "greater than", and the same list-wise logic applies. `not` makes this operator mean 'less than or equal to' for all comparisons.
+
+### `<` "Less than"
+
+The operator `<` means "less than", and the same list-wise logic applies. `not` makes this operator mean 'greater than or equal to' for all comparisons.
+
+### `matches` "Matches by regular expression"
+
+The operator `matches` invokes a regular expression for the comparison (again, following the list-wise comparison, meaning a list of regular expressions may be supplied), using python-like regex syntax.
+
+`not` means that no regex match is found for all comparisons.
 
 ## Full Examples
 
