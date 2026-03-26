@@ -84,6 +84,8 @@ The terms MUST, SHOULD, MAY are used as defined in RFC 2119  https://tools.ietf.
 - If an ARA server receives any QEdge.constraints, it MUST relay all
   QEdge.constraints to its KP(s) to satisfy.
 
+  See [QEdge constraints specification for details](qedge_constraints_specification.md).
+
 ## info.x-trapi.batch_size_limit
 - This batch size limit refers to the maximum length of any single QNode.ids list. The limit
   applies to the length of the list as supplied by the client, with the understanding that the server
