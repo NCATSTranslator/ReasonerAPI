@@ -44,7 +44,7 @@ In the following properties, empty lists are no longer permitted to say "no data
 - `RetrievalSource.upstream_resource_ids`
 - `RetrievalSource.source_record_urls`
 
-### 8. Remove AuxiliaryGraph.attributes property
+### 8. Removed AuxiliaryGraph.attributes property
 
 ### 9. The following properties changed to not-required
 - `Nodes.attributes` (to reduce bloat)
