@@ -1,4 +1,80 @@
-# Change Log TRAPI 1.4.0 (2023-06-23) -> 1.5.0 (2023-05-26)
+# Change Log  1.6.0-beta (2025-06-06) -> 2.0.0-dev (2026-03-25)
+
+### 1. QEdge Constraints Refactor (see [migration guide entry](https://github.com/NCATSTranslator/ReasonerAPI/blob/2.0/ImplementationGuidance/MigrationGuides/MigrationAndImplementationGuide2-0.md#1-qedge-constraints-refactor))
+- `QEdge.attribute_constraints` and `QEdge.qualifier_constraints`have been removed and replaced with `QEdge.constraints`, which is an object that can contain constraints for `knowledge_level`, `agent_type`, `sources`, `attributes`, and `qualifiers`
+- The new `sources` constraint has ALLOW and DENY constructs with an optional `primary_only` flag
+
+### 2. Add Query.parameters and Response.parameters to contain existing log_level and bypass_cache parameters and add timeout query parameter (see [migration guide entry](https://github.com/NCATSTranslator/ReasonerAPI/blob/2.0/ImplementationGuidance/MigrationGuides/MigrationAndImplementationGuide2-0.md#2-new-queryresponse-parameters))
+- Move `Query.log_level` to `Query.parameters.log_level`
+- Move `Query.bypass_cache` to `Query.parameters.bypass_cache`
+- Add `Query.parameters.timeout`
+- Add `Response.parameters` that conveys the same parameters as `Query.parameters`
+- Add HTTP 409 code
+
+### 3. Binding Structure Changes (NodeBinding/EdgeBinding/PathBinding) (see [migration guide entry](https://github.com/NCATSTranslator/ReasonerAPI/blob/2.0/ImplementationGuidance/MigrationGuides/MigrationAndImplementationGuide2-0.md#3-binding-structure-changes-nodeedgepath))
+- `<node/edge/path>_bindings` are now minProperties: 1 (i.e. when these fields are present, they MUST contain data)
+- `id` properties renamed to `ids` and is now a list
+- `ids` arrays are minItems: 1 (this property is required)
+- `attributes` property completely removed
+- `query_id` was removed from NodeBinding (obsolete with the current subclassing behavior)
+- Each binding is now an object containing only `ids` (which is a list), instead of a list of objects each with `id` and `attributes`
+
+### 4. KL/AT turned into top-level Edge properties, now required (see [migration guide entry](https://github.com/NCATSTranslator/ReasonerAPI/blob/2.0/ImplementationGuidance/MigrationGuides/MigrationAndImplementationGuide2-0.md#4-klat-turned-into-top-level-edge-properties-now-required))
+- `Edge.knowledge_level` and `Edge.agent_type` are now required `Edge` properties instead of being located within `attributes`
+
+### 5. Add COLLATE option to QNode.set_interpretation enum (see [migration guide entry](https://github.com/NCATSTranslator/ReasonerAPI/blob/2.0/ImplementationGuidance/MigrationGuides/MigrationAndImplementationGuide2-0.md#5-add-collate-option-to-qnodeset_interpretation))
+
+### 6. null is no longer a valid value in queries and responses (see [migration guide entry](https://github.com/NCATSTranslator/ReasonerAPI/blob/2.0/ImplementationGuidance/MigrationGuides/MigrationAndImplementationGuide2-0.md#6-null-is-no-longer-a-valid-value-in-queries-and-responses))
+- Remove `nullable: true/false` designations for all properties. Properties with no data must now be *absent* from TRAPI JSON or an empty array/object if the schema allows, rather than allowed to be present but with a null value. Some field descriptions explicitly state that the empty array/object MUST be used in certain circumstances.
+
+### 7. Many optional properties set to <minItems/minProperties>: 1 
+In the following properties, empty lists are no longer permitted to say "no data here". "No data" is now expressed with an absent property:
+- `QueryGraph.nodes`
+- `QueryGraph.edges`
+- `Response.logs`
+- `Message.auxiliary_graphs`
+- `Result.analyses`
+- `Analysis.support_graphs`
+- `QNode.member_ids`
+- `QNode.constraints`
+- `Edge.qualifiers`
+- `MetaKnowledgeGraph.nodes`
+- `MetaEdge.qualifiers`
+- `MetaQualifier.applicable_values`
+- `RetrievalSource.upstream_resource_ids`
+- `RetrievalSource.source_record_urls`
+
+### 8. Removed AuxiliaryGraph.attributes property
+- It was previously required, but never used and its empty arrays bloated responses. Additional undefined properties are still allowed in AuxiliaryGraph objects.
+
+### 9. The following properties changed to not-required
+- `Nodes.attributes` (to reduce bloat)
+- `QueryGraph.edges` and `QueryGraph.paths` (to accommodate queries with only nodes) (e.g. "what are the attributes of CURIE:123?")
+- `KnowledgeGraph.edges` (to accommodate queries with only nodes)
+- `Result.analyses` (to accommodate queries with only nodes)
+
+### 10. Analysis is technically allowed to have both edge and path bindings (experimental use)
+
+### 11. YAML specification document migrated from OpenAPI 3.0.1 to OpenAPI 3.1.2
+- All `example` attributes become `examples` in OpenAPI 3.1.2
+
+### 12. BaseQueryGraph and BaseAnalysis base classes removed in favor of single QueryGraph and Analysis classes that support both pathfinder and regular queries
+
+=============
+
+
+
+# Change Log TRAPI 1.5.0 (2024-05-26) -> 1.6.0-beta (2025-06-06)
+
+- Diff: https://github.com/NCATSTranslator/ReasonerAPI/compare/1.5...1.6
+- TRAPI 1.6.0-beta was designed to be backwards compatible while adding support for Pathfinder queries. Any valid TRAPI 1.5.0 document is also a valid TRAPI 1.6.0 document.
+- Split `QueryGraph` into `BaseQueryGraph`, `PathfinderQueryGraph` (for Pathfinder support), and `QueryGraph` (for all other queries). The latter two classes inherit from `BaseQueryGraph`
+- Split `Analysis` into `BaseAnalysis`, `PathfinderAnalysis` (for Pathfinder support), and `Analysis` (for all other queries). The latter two classes inherit from `BaseAnalysis`
+- Add `PathfinderQueryGraph.QPath` class containing properties `subject`, `object`, `predicates`, and `constraints`
+
+=============
+
+# Change Log TRAPI 1.4.0 (2023-06-23) -> 1.5.0 (2024-05-26)
 
 https://github.com/NCATSTranslator/ReasonerAPI/compare/v1.4.0...1.5
   
