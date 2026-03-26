@@ -17,7 +17,7 @@
 - `ids` arrays are minItems: 1 (this property is required)
 - `attributes` property completely removed
 - `query_id` was removed from NodeBinding (obsolete with the current subclassing behavior)
-- Each binding is now an object containing only `ids` (which contains a list), instead of a list of objects each with `id` and `attributes`
+- Each binding is now an object containing only `ids` (which is a list), instead of a list of objects each with `id` and `attributes`
 
 ### 4. KL/AT turned into top-level Edge properties, now required (see [migration guide entry](https://github.com/NCATSTranslator/ReasonerAPI/blob/2.0/ImplementationGuidance/MigrationGuides/MigrationAndImplementationGuide2-0.md#4-klat-turned-into-top-level-edge-properties-now-required))
 - `Edge.knowledge_level` and `Edge.agent_type` are now required `Edge` properties instead of being located within `attributes`
