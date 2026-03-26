@@ -3,7 +3,7 @@ name: PR checks
 on:
   pull_request:
   push:
-    branches: [master, main, 'v?[0-9]+.[0-9]+**']
+    branches: [master, main, 'v?[0-9]+.[0-9]+']
 jobs:
   linting:
     name: Check Yamllint

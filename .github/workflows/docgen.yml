@@ -1,0 +1,30 @@
+---
+name: Generate Reference
+on:
+  pull_request:
+  push:
+    branches: [master, main, 'v?[0-9]+.[0-9]+']
+jobs:
+  docgen:
+    name: Run generator script
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+      - name: Set up Python 3.13
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - name: Install deps
+        run: |
+          pip install -r docs/requirements.txt
+      - name: Run script
+        run: python docs/generate_reference.py ${{ github.head_ref || github.ref_name }}
+      - name: commit changes
+        uses: stefanzweifel/git-auto-commit-action@v7
+        with:
+          commit_message: Update docs/reference.md [no ci]
+          file_pattern: docs/reference.md

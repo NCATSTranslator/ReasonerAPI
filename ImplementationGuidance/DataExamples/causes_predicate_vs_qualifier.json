@@ -22,24 +22,15 @@
         "predicates": [
           "biolink:affects"
         ],
-        "qualifier_constraints": [
-          {
-            "qualifier_set": [
-              {
-                "qualifier_type_id": "biolink:object_aspect_qualifier",
-                "qualifier_value": "activity"
-              },
-              {
-                "qualifier_type_id": "biolink:object_modifier_qualifier",
-                "qualifier_value": "increased"
-              },
-              {
-                "qualifier_type_id": "biolink:qualified_predicate",
-                "qualifier_value": "biolink:causes"
-              }
-            ]
-          }
-        ]
+        "constraints": {
+          "qualifiers": [
+            {
+              "biolink:object_aspect_qualifier": "activity",
+              "biolink:object_modifier_qualifier": "increased",
+              "biolink:qualified_predicate": "biolink:causes"
+            }
+          ]
+        }
       }
     }
   },
@@ -80,30 +71,43 @@
             "qualifier_type_id": "biolink:causal_mechanism_qualifier",
             "qualifier_value": "binding"
           }
-        ]
+        ],
+        "sources": [
+          {
+            "resource_id": "infores:chembl",
+            "resource_role": "primary_knowledge_source"
+          }
+        ],
+        "knowledge_level": "knowledge_assertion",
+        "agent_type": "manual_agent"
       }
     },
     "results": [
       {
         "node_bindings": {
-          "n0": [
-            {
-              "id": "PUBCHEM.COMPOUND:6623"
-            }
-          ],
-          "n1": [
-            {
-              "id": "HGNC:3467"
-            }
-          ]
+          "n0": {
+            "ids": [
+              "PUBCHEM.COMPOUND:6623"
+            ]
+          },
+          "n1": {
+            "ids": [
+              "HGNC:3467"
+            ]
+          }
         },
-        "edge_bindings": {
-          "e01": [
-            {
-              "id": "x17770"
+        "analyses": [
+          {
+            "resource_id": "infores:arax",
+            "edge_bindings": {
+              "e01": {
+                "ids": [
+                  "x17770"
+                ]
+              }
             }
-          ]
-        }
+          }
+        ]
       }
     ]
   }
