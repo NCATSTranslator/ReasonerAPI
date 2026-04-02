@@ -434,9 +434,9 @@ Examples:
 * `Message.results` MUST NOT be set to `null` when there is no data. Its description states when it MUST be omitted (when not expected, like a query) VS an empty array (when it is expected and there's no data, like a response).
 
 
-### 7. Many optional properties set to `<minItems/minProperties>: 1`
+### 7. Many properties set to `<minItems/minProperties>: 1`
 
-For many optional array and object properties, `minItems`/`minProperties` was set to 1. This was to reduce bloat (only include the field if there's data). See the Changelog for the full list of changed properties.
+For many array and object properties, `minItems`/`minProperties` was set to 1. This was to reduce bloat (only include the field if there's data). See the Changelog for the full list of changed properties.
 
 
 ### 8. `AuxiliaryGraph.attributes` was removed
