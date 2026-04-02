@@ -29,7 +29,7 @@
 
 ### 7. Many properties set to <minItems/minProperties>: 1 
 In the following properties, empty lists are no longer permitted to say "no data here". "No data" is now expressed with an absent property:
-- [`QueryGraph.nodes`](https://github.com/NCATSTranslator/ReasonerAPI/blob/2.0/docs/reference.md#querygraph-)
+- [`QueryGraph.nodes`](https://github.com/NCATSTranslator/ReasonerAPI/blob/2.0/docs/reference.md#querygraph-): [PR](https://github.com/NCATSTranslator/ReasonerAPI/pull/548)
 - `QueryGraph.edges`
 - [`Response.logs`](https://github.com/NCATSTranslator/ReasonerAPI/blob/2.0/docs/reference.md#response-)
 - [`Message.auxiliary_graphs`](https://github.com/NCATSTranslator/ReasonerAPI/blob/2.0/docs/reference.md#message-)
@@ -53,12 +53,14 @@ In the following properties, empty lists are no longer permitted to say "no data
 - `KnowledgeGraph.edges` (to accommodate queries with only nodes)
 - `Result.analyses` (to accommodate queries with only nodes)
 
-### 10. Analysis is technically allowed to have both edge and path bindings (experimental use)
+### 10. Analysis is technically allowed to have both edge and path bindings (experimental use, [PR](https://github.com/NCATSTranslator/ReasonerAPI/pull/547))
 
-### 11. YAML specification document migrated from OpenAPI 3.0.1 to OpenAPI 3.1.2
+### 11. YAML specification document migrated from OpenAPI 3.0.1 to OpenAPI 3.1.2 ([PR](https://github.com/NCATSTranslator/ReasonerAPI/pull/533))
 - All `example` attributes become `examples` in OpenAPI 3.1.2
 
 ### 12. BaseQueryGraph and BaseAnalysis base classes removed in favor of single QueryGraph and Analysis classes that support both pathfinder and regular queries
+
+[PR](https://github.com/NCATSTranslator/ReasonerAPI/pull/544), but look at 2.0 yaml for up-to-date versions of those sub-schemas. 
 
 =============
 
