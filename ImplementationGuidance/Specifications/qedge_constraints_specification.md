@@ -113,7 +113,7 @@ Every attribute constraint must supply a `name`, `id`, `value`, and `operator`:
 
 - `name`: For human use, this just specifies the intent of the constraint.
 - `id`: This targets the constraint to attributes with a specific `attribute_type_id`.
-- `value`: Provides a value with which the targeted attribute types must agree.
+- `value`: Provides a value with which the targeted attribute must agree.
 - `operator`: Provides the relationship to the `value` that targeted attributes must fulfill.
 
 Additionally, `not` allows the operator relationship to be inverted.
@@ -143,11 +143,11 @@ The operator `==` means 'is equal to'. `not` would make this operator mean 'not 
 
 ### `>` "Greater than"
 
-The operator `>` means "greater than". `not` makes this operator mean 'less than or equal to' for all comparisons.
+The operator `>` means "greater than". `not` makes this operator mean `<=` 'less than or equal to' for all comparisons.
 
 ### `<` "Less than"
 
-The operator `<` means "less than". `not` makes this operator mean 'greater than or equal to' for all comparisons.
+The operator `<` means "less than". `not` makes this operator mean `>=` 'greater than or equal to' for all comparisons.
 
 ### `matches` "Matches by regular expression"
 
@@ -155,30 +155,30 @@ The operator `matches` invokes a regular expression for the comparison, using py
 
 ### List-wise comparison
 
-The operators `==`, `>`, `<`, and `matches` all are compared list-wise. Let's look at this using `==` as an example.
+When either the constraint value, or the value of the targeted attribute, is a list, comparisons are made against each item of the list. The operators `==`, `>`, `<`, and `matches` all are compared list-wise. Using `==` as an example, where constraint value == attribute value:
 
-In the most basic case, simple equality satisfies the operator (each example shall be constraint value == attribute value):
+In the most basic case, simple equality satisfies the operator:
 
 - `1 == 1` constraint met!
 - `1 == 2` constraint failed.
 
-However, if the constraint value is a list, each item in the list may be compared against the attribute value:
+However, if the constraint value is a list, each item in the list is compared against the attribute value. Any successful comparison means the constraint is met:
 
-- `[1, 2, 3] == 1` constraint met!
-- `[1, 2, 3] == 2` constraint met!
-- `[1, 2, 3] == 3` constraint met!
+- `[1, 2, 3] == 1` constraint met! (1 == 1)
+- `[1, 2, 3] == 2` constraint met! (2 == 2)
+- `[1, 2, 3] == 3` constraint met! (3 == 3)
 - `[1, 2, 3] == 4` constraint failed.
 
-Similarly, if the attribute value is a list, each item may be compared against the constraint:
+Similarly, if the attribute value is a list, each item is compared against the constraint. Any successful comparison means the constraint is met:
 
-- `1 == [1, 2, 3]` constraint met!
-- `2 == [1, 2, 3]` constraint met!
-- `3 == [1, 2, 3]` constraint met!
+- `1 == [1, 2, 3]` constraint met! (1 == 1)
+- `2 == [1, 2, 3]` constraint met! (2 == 2)
+- `3 == [1, 2, 3]` constraint met! (3 == 3)
 - `4 == [1, 2, 3]` constraint failed.
 
-Finally, both may be lists, in which case every pair must be compared:
+Finally, both may be lists, in which case every pair must be compared. Any pair that meets the constraint means the constraint is satisfied:
 
-- `[1, 2, 3] == [3, 4, 5]` constraint met!
+- `[1, 2, 3] == [3, 4, 5]` constraint met! (3 == 3)
 - `[1, 2, 3] == [4, 6, 6]` constraint failed.
 
 The only operator for which this behavior is not held is `===` (strict equality), it exists to allow exact list comparison.
