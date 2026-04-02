@@ -44,14 +44,14 @@ In the following properties, empty lists are no longer permitted to say "no data
 - [`RetrievalSource.upstream_resource_ids`](https://github.com/NCATSTranslator/ReasonerAPI/blob/2.0/docs/reference.md#retrievalsource-)
 - `RetrievalSource.source_record_urls`
 
-### 8. Removed AuxiliaryGraph.attributes property
+### 8. Removed AuxiliaryGraph.attributes property ([reference doc entry](https://github.com/NCATSTranslator/ReasonerAPI/blob/2.0/docs/reference.md#auxiliarygraph-))
 - It was previously required, but never used and its empty arrays bloated responses. Additional undefined properties are still allowed in AuxiliaryGraph objects.
 
 ### 9. The following properties changed to not-required
-- `Nodes.attributes` (to reduce bloat)
-- `QueryGraph.edges` and `QueryGraph.paths` (to accommodate queries with only nodes) (e.g. "what are the attributes of CURIE:123?")
-- `KnowledgeGraph.edges` (to accommodate queries with only nodes)
-- `Result.analyses` (to accommodate queries with only nodes)
+- [`Nodes.attributes`](https://github.com/NCATSTranslator/ReasonerAPI/blob/2.0/docs/reference.md#node-) (to reduce bloat)
+- [`QueryGraph.edges`](https://github.com/NCATSTranslator/ReasonerAPI/blob/2.0/docs/reference.md#querygraph-) and `QueryGraph.paths` (to accommodate queries with only nodes) (e.g. "what are the attributes of CURIE:123?")
+- [`KnowledgeGraph.edges`](https://github.com/NCATSTranslator/ReasonerAPI/blob/2.0/docs/reference.md#knowledgegraph-) (to accommodate queries with only nodes)
+- [`Result.analyses`](https://github.com/NCATSTranslator/ReasonerAPI/blob/2.0/docs/reference.md#result-) (to accommodate queries with only nodes)
 
 ### 10. Analysis is technically allowed to have both edge and path bindings (experimental use, [PR](https://github.com/NCATSTranslator/ReasonerAPI/pull/547))
 
