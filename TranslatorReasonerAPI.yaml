@@ -290,7 +290,7 @@ components:
           type: string
           description: >-
             Any string for self-identifying the submitter of a query. The
-            purpose of this optional field is to aid in the tracking of
+            purpose of this optional property is to aid in the tracking of
             the source of queries for development and issue resolution.
         parameters:
           $ref: '#/components/schemas/QueryParameters'
@@ -304,9 +304,9 @@ components:
           description: >-
             The query Message is a serialization of the user request. Content
             of the Message object depends on the intended TRAPI operation. For
-            example, the fill operation requires a non-empty query_graph field
+            example, the fill operation requires a non-empty query_graph property
             as part of the Message, whereas other operations, e.g. overlay,
-            require non-empty results and knowledge_graph fields.
+            require non-empty results and knowledge_graph properties.
         workflow:
           $ref: https://standards.ncats.io/workflow/1.3.5/schema
           description: List of workflow steps to be executed.
@@ -857,12 +857,12 @@ components:
             - [OMIM:603903]
           description: >-
             A CURIE identifier (or list of identifiers) for this node.
-            The 'ids' field will hold a list of CURIEs only in the case of a
+            The 'ids' property will hold a list of CURIEs only in the case of a
             BATCH set_interpretation, where each CURIE is queried
             separately. If a list of queried CURIEs is to be considered as a
-            set (as under a MANY or ALL set_interpretation), the 'ids' field
+            set (as under a MANY or ALL set_interpretation), the 'ids' property
             will hold a single id representing this set, and the individual members
-            of this set will be captured in a separate 'member_ids' field.
+            of this set will be captured in a separate 'member_ids' property.
             Note that the set id MUST be created as a UUID by the system that
             defines the queried set, using a centralized nodenorm service.
             Note also that downstream systems MUST re-use the original set UUID
@@ -901,9 +901,9 @@ components:
           type: array
           description: >-
             A list of CURIE identifiers for members of a queried set. This
-            field MUST be populated under a set_interpretation of MANY
-            or ALL, when the 'ids' field holds a UUID representing the set
-            itself. This field MUST NOT be used under a set_interpretation
+            property MUST be populated under a set_interpretation of MANY
+            or ALL, when the 'ids' property holds a UUID representing the set
+            itself. This property MUST NOT be used under a set_interpretation
             of BATCH or COLLATE or when set_interpretation is absent.
           minItems: 1
           items:
@@ -1082,7 +1082,7 @@ components:
       type: object
       description: >-
         A path in the QueryGraph used for pathfinder queries. Both subject and
-        object MUST reference QNodes that have a CURIE in their ids field.
+        object MUST reference QNodes that have a CURIE in their ids property.
         Paths returned that bind to this QPath can represent some
         relationship between subject and object.
       properties:
@@ -1183,7 +1183,7 @@ components:
       type: object
       description: >-
         Generic attribute for a node or an edge that expands the key-value
-        pair concept by including fields for additional metadata. These fields
+        pair concept by including properties for additional metadata. These properties
         can be used to describe the source of the statement made in a key-value
         pair of the attribute object, or describe the attribute's value itself
         including its semantic type, or a url providing additional information
@@ -1212,7 +1212,7 @@ components:
             document for the field in the data that held the attribute's
             value. Capturing this information  where possible lets us preserve
             what the original source said. Note that the data type is string'
-            but the contents of the field could also be a CURIE of a third
+            but the contents of the property could also be a CURIE of a third
             party ontology term.
           examples:
             - p-value
