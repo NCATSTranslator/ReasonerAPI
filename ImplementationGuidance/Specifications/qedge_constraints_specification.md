@@ -107,7 +107,81 @@ The matched Edge's `primary_knowledge_source` should NOT be `infores:semmeddb` o
 
 ## Attributes
 
-Format didn't change in TRAPI 2.0, see docs for details. 
+Attribute constraints are presented as a list of attribute constraint objects. Each attribute constraint object constrains a specific attribute type. Multiple attribute constraints together represent an AND relationship, such that all attribute constraints must be met.
+
+Every attribute constraint must supply a `name`, `id`, `value`, and `operator`:
+
+- `name`: For human use, this just specifies the intent of the constraint.
+- `id`: This targets the constraint to attributes with a specific `attribute_type_id`.
+- `value`: Provides a value with which the targeted attribute must agree.
+- `operator`: Provides the relationship to the `value` that targeted attributes must fulfill.
+
+Additionally, `not` allows the operator relationship to be inverted.
+
+### `===` "Strict equality"
+
+In the most simple case, the operator `===` requires that edges must have an attribute exactly matching the given value:
+
+```json
+{
+    "name": "Must have the exact given publication list",
+    "id": "biolink:publications",
+    "operator": "===",
+    "value": ["PMID:1234", "PMID:4567"]
+}
+```
+
+would only allow edges that have the `attribute_type_id` 'biolink:publications', where the attribute value is exactly `["PMID:1234", "PMID:4567"]`.
+
+`"not": true` would make this operator mean 'not exactly equal to'.
+
+Other operators exist which provide specific expressions, detailed below:
+
+### `==` "Equals"
+
+The operator `==` means 'is equal to'. `not` would make this operator mean 'not equal to, in any comparison.'
+
+### `>` "Greater than"
+
+The operator `>` means "greater than". `not` makes this operator mean `<=` 'less than or equal to' for all comparisons.
+
+### `<` "Less than"
+
+The operator `<` means "less than". `not` makes this operator mean `>=` 'greater than or equal to' for all comparisons.
+
+### `matches` "Matches by regular expression"
+
+The operator `matches` invokes a regular expression for the comparison, using python-like regex syntax. `not` means that no regex match is found for all comparisons.
+
+### List-wise comparison
+
+When either the constraint value, or the value of the targeted attribute, is a list, comparisons are made against each item of the list. The operators `==`, `>`, `<`, and `matches` all are compared list-wise. Using `==` as an example, where constraint value == attribute value:
+
+In the most basic case, simple equality satisfies the operator:
+
+- `1 == 1` constraint met!
+- `1 == 2` constraint failed.
+
+However, if the constraint value is a list, each item in the list is compared against the attribute value. Any successful comparison means the constraint is met:
+
+- `[1, 2, 3] == 1` constraint met! (1 == 1)
+- `[1, 2, 3] == 2` constraint met! (2 == 2)
+- `[1, 2, 3] == 3` constraint met! (3 == 3)
+- `[1, 2, 3] == 4` constraint failed.
+
+Similarly, if the attribute value is a list, each item is compared against the constraint. Any successful comparison means the constraint is met:
+
+- `1 == [1, 2, 3]` constraint met! (1 == 1)
+- `2 == [1, 2, 3]` constraint met! (2 == 2)
+- `3 == [1, 2, 3]` constraint met! (3 == 3)
+- `4 == [1, 2, 3]` constraint failed.
+
+Finally, both may be lists, in which case every pair must be compared. Any pair that meets the constraint means the constraint is satisfied:
+
+- `[1, 2, 3] == [3, 4, 5]` constraint met! (3 == 3)
+- `[1, 2, 3] == [4, 6, 6]` constraint failed.
+
+The only operator for which this behavior is not held is `===` (strict equality), it exists to allow exact list comparison.
 
 
 ## Full Examples
