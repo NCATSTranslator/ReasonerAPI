@@ -29,19 +29,19 @@
 
 ### 7. Many properties set to <minItems/minProperties>: 1 
 In the following properties, empty lists are no longer permitted to say "no data here". "No data" is now expressed with an absent property:
-- `QueryGraph.nodes`
+- [`QueryGraph.nodes`](https://github.com/NCATSTranslator/ReasonerAPI/blob/2.0/docs/reference.md#querygraph-)
 - `QueryGraph.edges`
-- `Response.logs`
-- `Message.auxiliary_graphs`
-- `Result.analyses`
-- `Analysis.support_graphs`
-- `QNode.member_ids`
+- [`Response.logs`](https://github.com/NCATSTranslator/ReasonerAPI/blob/2.0/docs/reference.md#response-)
+- [`Message.auxiliary_graphs`](https://github.com/NCATSTranslator/ReasonerAPI/blob/2.0/docs/reference.md#message-)
+- [`Result.analyses`](https://github.com/NCATSTranslator/ReasonerAPI/blob/2.0/docs/reference.md#result-)
+- [`Analysis.support_graphs`](https://github.com/NCATSTranslator/ReasonerAPI/blob/2.0/docs/reference.md#analysis-)
+- [`QNode.member_ids`](https://github.com/NCATSTranslator/ReasonerAPI/blob/2.0/docs/reference.md#qnode-)
 - `QNode.constraints`
-- `Edge.qualifiers`
-- `MetaKnowledgeGraph.nodes`
-- `MetaEdge.qualifiers`
-- `MetaQualifier.applicable_values`
-- `RetrievalSource.upstream_resource_ids`
+- [`Edge.qualifiers`](https://github.com/NCATSTranslator/ReasonerAPI/blob/2.0/docs/reference.md#edge-)
+- [`MetaKnowledgeGraph.nodes`](https://github.com/NCATSTranslator/ReasonerAPI/blob/2.0/docs/reference.md#metaknowledgegraph-)
+- [`MetaEdge.qualifiers`](https://github.com/NCATSTranslator/ReasonerAPI/blob/2.0/docs/reference.md#metaedge-)
+- [`MetaQualifier.applicable_values`](https://github.com/NCATSTranslator/ReasonerAPI/blob/2.0/docs/reference.md#metaqualifier-)
+- [`RetrievalSource.upstream_resource_ids`](https://github.com/NCATSTranslator/ReasonerAPI/blob/2.0/docs/reference.md#retrievalsource-)
 - `RetrievalSource.source_record_urls`
 
 ### 8. Removed AuxiliaryGraph.attributes property
