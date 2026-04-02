@@ -518,7 +518,7 @@ components:
             The list SHOULD NOT be assumed to be ordered. The 'score' property,
             if present, MAY be used to infer result rankings. If Results are
             not expected (such as for a query Message), this property SHOULD
-            be null or absent. If Results are expected (such as for a response
+            be absent. If Results are expected (such as for a response
             Message) and no Results are available, this property SHOULD be an
             array with 0 Results in it.
           type: array
@@ -937,7 +937,7 @@ components:
             knowledge sources. If the value is 'inferred', then the client
             wants the server to get creative and connect the subject and
             object in more speculative and non-direct-lookup ways. If this
-            property is absent or null, it MUST be assumed to mean
+            property is absent, it MUST be assumed to mean
             'lookup'. This feature is currently experimental and may be
             further extended in the future.
           examples:
@@ -1174,7 +1174,7 @@ components:
           type: boolean
           description: >-
             Indicates that the node represents a set of entities.
-            If this property is missing or null, it is assumed to be
+            If this property is absent, it is assumed to be
             false.
       required:
         - categories
@@ -1515,7 +1515,7 @@ components:
         knowledge_types:
           description: >-
             A list of knowledge_types that are supported by the service.
-            If the knowledge_types is null, this means that only 'lookup'
+            If this property is absent, this means that only 'lookup'
             is supported. Currently allowed values are 'lookup' or 'inferred'.
           items:
             type: string
