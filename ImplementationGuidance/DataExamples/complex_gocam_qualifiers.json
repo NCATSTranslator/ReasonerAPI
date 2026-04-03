@@ -25,36 +25,18 @@
         "predicates": [
           "biolink:regulates"
         ],
-        "qualifier_constraints": [
-          {
-            "qualifier_set": [
-              {
-                "qualifier_type_id": "biolink:subject_aspect_qualifier",
-                "qualifier_value": "GO:0043539"
-              },
-              {
-                "qualifier_type_id": "biolink:subject_context_qualifier",
-                "qualifier_value": "GO:0005886"
-              },
-              {
-                "qualifier_type_id": "biolink:object_aspect_qualifier",
-                "qualifier_value": "GO:0004708"
-              },
-              {
-                "qualifier_type_id": "biolink:object_context_qualifier",
-                "qualifier_value": "GO:0005737"
-              },
-              {
-                "qualifier_type_id": "biolink:object_direction_qualifier",
-                "qualifier_value": "increased"
-              },
-              {
-                "qualifier_type_id": "biolink:pathway_context_qualifier",
-                "qualifier_value": "GO:0038134"
-              }
-            ]
-          }
-        ]
+        "constraints": {
+          "qualifiers": [
+            {
+              "biolink:subject_aspect_qualifier": "GO:0043539",
+              "biolink:subject_context_qualifier": "GO:0005886",
+              "biolink:object_aspect_qualifier": "GO:0004708",
+              "biolink:object_context_qualifier": "GO:0005737",
+              "biolink:object_direction_qualifier": "increased",
+              "biolink:pathway_context_qualifier": "GO:0038134"
+            }
+          ]
+        }
       }
     }
   },
@@ -103,31 +85,44 @@
             "qualifier_type_id": "biolink:pathway_context_qualifier",
             "qualifier_value": "GO:0038134"
           }
-        ]
+        ],
+        "sources": [
+          {
+            "resource_id": "infores:chembl",
+            "resource_role": "primary_knowledge_source"
+          }
+        ],
+        "knowledge_level": "knowledge_assertion",
+        "agent_type": "manual_agent"
       }
     }
   },
   "results": [
     {
       "node_bindings": {
-        "n0": [
-          {
-            "id": "FB:FBgn0003205"
-          }
-        ],
-        "n1": [
-          {
-            "id": "FB:FBgn0003079"
-          }
-        ]
+        "n0": {
+          "ids": [
+            "FB:FBgn0003205"
+          ]
+        },
+        "n1": {
+          "ids": [
+            "FB:FBgn0003079"
+          ]
+        }
       },
-      "edge_bindings": {
-        "e01": [
-          {
-            "id": "x17770"
+      "analyses": [
+        {
+          "resource_id": "infores:arax",
+          "edge_bindings": {
+            "e01": {
+              "ids": [
+                "x17770"
+              ]
+            }
           }
-        ]
-      }
+        }
+      ]
     }
   ]
 }

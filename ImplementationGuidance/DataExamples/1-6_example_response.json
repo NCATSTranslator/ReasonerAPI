@@ -1,0 +1,357 @@
+{
+  "message": {
+    "query_graph": {
+      "nodes": {
+        "nA": {
+          "ids": null,
+          "categories": [
+            "biolink:Drug"
+          ],
+          "set_interpretation": "BATCH",
+          "constraints": [],
+          "member_ids": []
+        },
+        "nI": {
+          "ids": null,
+          "categories": [
+            "biolink:Gene"
+          ],
+          "set_interpretation": "BATCH",
+          "constraints": [],
+          "member_ids": []
+        },
+        "nB": {
+          "ids": [
+            "MONDO:111"
+          ],
+          "categories": [
+            "biolink:Disease"
+          ],
+          "set_interpretation": "BATCH",
+          "constraints": [],
+          "member_ids": []
+        }
+      },
+      "edges": {
+        "e1": {
+          "subject": "nA",
+          "object": "nI",
+          "knowledge_type": null,
+          "predicates": null,
+          "attribute_constraints": [
+            {
+              "id": "biolink:knowledge_source",
+              "name": "special key to query on sources info",
+              "not": true,
+              "operator": "==",
+              "value": "infores:semmeddb"
+            }
+          ],
+          "qualifier_constraints": [
+            {
+              "qualifier_set": [
+                {
+                  "qualifier_type_id": "biolink:object_direction_qualifier",
+                  "qualifier_value": "increased"
+                },
+                {
+                  "qualifier_type_id": "biolink:object_aspect_qualifier",
+                  "qualifier_value": "activity_or_abundance"
+                }
+              ]
+            }
+          ]
+        },
+        "e2": {
+          "subject": "nI",
+          "object": "nB",
+          "knowledge_type": null,
+          "predicates": null,
+          "attribute_constraints": [
+            {
+              "id": "biolink:knowledge_level",
+              "name": "knowledge level",
+              "operator": "==",
+              "value": [
+                "knowledge_assertion",
+                "text_co_occurrence"
+              ]
+            },
+            {
+              "id": "biolink:agent_type",
+              "name": "agent type",
+              "operator": "==",
+              "value": "automated_agent"
+            },
+            {
+              "id": "biolink:z_score",
+              "name": "z-score",
+              "operator": ">",
+              "value": 5
+            }
+          ],
+          "qualifier_constraints": []
+        }
+      }
+    },
+    "knowledge_graph": {
+      "nodes": {
+        "MONDO:111": {
+          "categories": [
+            "biolink:Disease"
+          ],
+          "attributes": [],
+          "name": "type 1 diabetes mellitus"
+        },
+        "CHEBI:1234": {
+          "categories": [
+            "biolink:Drug"
+          ],
+          "attributes": [],
+          "name": "Metformin"
+        },
+        "NCBIGene:7777": {
+          "categories": [
+            "biolink:Gene"
+          ],
+          "attributes": [],
+          "name": "EIF2_AK3"
+        },
+        "NCBIGene:5555": {
+          "categories": [
+            "biolink:Gene"
+          ],
+          "attributes": [],
+          "name": "HMOX1"
+        }
+      },
+      "edges": {
+        "e2_B": {
+          "predicate": "biolink:affects",
+          "subject": "NCBIGene:7777",
+          "object": "MONDO:111",
+          "sources": [
+            {
+              "resource_id": "infores:ctd",
+              "resource_role": "primary_knowledge_source"
+            }
+          ],
+          "attributes": [
+            {
+              "attribute_type_id": "biolink:knowledge_level",
+              "value": "knowledge_assertion"
+            },
+            {
+              "attribute_type_id": "biolink:agent_type",
+              "value": "automated_agent"
+            },
+            {
+              "attribute_type_id": "biolink:z_score",
+              "value": 7.963
+            }
+          ],
+          "qualifiers": []
+        },
+        "e1_B": {
+          "predicate": "biolink:affects",
+          "subject": "CHEBI:1234",
+          "object": "NCBIGene:7777",
+          "sources": [
+            {
+              "resource_id": "infores:text-mining-provider-targeted",
+              "resource_role": "primary_knowledge_source"
+            }
+          ],
+          "attributes": [
+            {
+              "attribute_type_id": "biolink:knowledge_level",
+              "value": "not_provided"
+            },
+            {
+              "attribute_type_id": "biolink:agent_type",
+              "value": "text_mining_agent"
+            }
+          ],
+          "qualifiers": [
+            {
+              "qualifier_type_id": "biolink:qualified_predicate",
+              "qualifier_value": "biolink:causes"
+            },
+            {
+              "qualifier_type_id": "biolink:object_direction_qualifier",
+              "qualifier_value": "increased"
+            },
+            {
+              "qualifier_type_id": "biolink:object_aspect_qualifier",
+              "qualifier_value": "activity_or_abundance"
+            }
+          ]
+        },
+        "e2_A": {
+          "predicate": "biolink:occurs_together_in_literature_with",
+          "subject": "NCBIGene:5555",
+          "object": "MONDO:111",
+          "sources": [
+            {
+              "resource_id": "infores:diseases",
+              "resource_role": "primary_knowledge_source"
+            }
+          ],
+          "attributes": [
+            {
+              "attribute_type_id": "biolink:knowledge_level",
+              "value": "text_co_occurrence"
+            },
+            {
+              "attribute_type_id": "biolink:agent_type",
+              "value": "data_analysis_pipeline"
+            },
+            {
+              "attribute_type_id": "biolink:z_score",
+              "value": 6.435
+            }
+          ],
+          "qualifiers": []
+        },
+        "e1_A": {
+          "predicate": "biolink:affects",
+          "subject": "CHEBI:1234",
+          "object": "NCBIGene:5555",
+          "sources": [
+            {
+              "resource_id": "infores:chembl",
+              "resource_role": "primary_knowledge_source"
+            }
+          ],
+          "attributes": [
+            {
+              "attribute_type_id": "biolink:knowledge_level",
+              "value": "knowledge_assertion"
+            },
+            {
+              "attribute_type_id": "biolink:agent_type",
+              "value": "manual_agent"
+            }
+          ],
+          "qualifiers": [
+            {
+              "qualifier_type_id": "biolink:qualified_predicate",
+              "qualifier_value": "biolink:causes"
+            },
+            {
+              "qualifier_type_id": "biolink:object_direction_qualifier",
+              "qualifier_value": "increased"
+            },
+            {
+              "qualifier_type_id": "biolink:object_aspect_qualifier",
+              "qualifier_value": "activity_or_abundance"
+            }
+          ]
+        }
+      }
+    },
+    "results": [
+      {
+        "node_bindings": {
+          "nA": [
+            {
+              "id": "CHEBI:1234",
+              "attributes": []
+            }
+          ],
+          "nI": [
+            {
+              "id": "NCBIGene:5555",
+              "attributes": []
+            }
+          ],
+          "nB": [
+            {
+              "id": "MONDO:111",
+              "attributes": []
+            }
+          ]
+        },
+        "analyses": [
+          {
+            "resource_id": "infores:retriever",
+            "edge_bindings": {
+              "e1": [
+                {
+                  "id": "e1_A",
+                  "attributes": []
+                }
+              ],
+              "e2": [
+                {
+                  "id": "e2_A",
+                  "attributes": []
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "node_bindings": {
+          "nA": [
+            {
+              "id": "CHEBI:1234",
+              "attributes": []
+            }
+          ],
+          "nI": [
+            {
+              "id": "NCBIGene:7777",
+              "attributes": []
+            }
+          ],
+          "nB": [
+            {
+              "id": "MONDO:111",
+              "attributes": []
+            }
+          ]
+        },
+        "analyses": [
+          {
+            "resource_id": "infores:retriever",
+            "edge_bindings": {
+              "e1": [
+                {
+                  "id": "e1_B",
+                  "attributes": []
+                }
+              ]
+            },
+            "e2": [
+              {
+                "id": "e2_B",
+                "attributes": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "auxiliary_graphs": {}
+  },
+  "log_level": "DEBUG",
+  "bypass_cache": true,
+  "biolink_version": "4.3.2",
+  "schema_version": "1.6.0",
+  "workflow": null,
+  "status": "Complete",
+  "logs": [
+    {
+      "level": "INFO",
+      "message": "Begin processing...",
+      "timestamp": "1"
+    },
+    {
+      "level": "DEBUG",
+      "message": "Found 2 starting branches...",
+      "timestamp": "2"
+    }
+  ]
+}
