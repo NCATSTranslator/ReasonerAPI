@@ -1,4 +1,4 @@
-# Change Log  1.6.0-beta (2025-06-06) -> 2.0.0-dev (2026-03-25)
+# Change Log  1.6.0-beta (2025-06-06) -> 2.0.0-beta (2026-04-02)
 
 ### 1. QEdge Constraints Refactor (see [migration guide entry](https://github.com/NCATSTranslator/ReasonerAPI/blob/2.0/ImplementationGuidance/MigrationGuides/MigrationAndImplementationGuide2-0.md#1-qedge-constraints-refactor), [reference doc entry](https://github.com/NCATSTranslator/ReasonerAPI/blob/2.0/docs/reference.md#qedge-))
 - `QEdge.attribute_constraints` and `QEdge.qualifier_constraints`have been removed and replaced with `QEdge.constraints`, which is an object that can contain constraints for `knowledge_level`, `agent_type`, `sources`, `attributes`, and `qualifiers`
