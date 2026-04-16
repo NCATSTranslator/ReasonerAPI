@@ -1631,8 +1631,9 @@ components:
           type: string
           description: >-
             Human-readable name or label for the constraint concept.
-            If appropriate, it SHOULD be the term name of the CURIE used
-            as the 'id'. This is redundant but required for human
+            It SHOULD be the term name of the CURIE used
+            as the 'id' and SHOULD NOT supersede the use of AttributeConstraint.id (which
+            is required). This is redundant but required for human
             readability.
           examples:
             - molecular mass
@@ -1700,7 +1701,6 @@ components:
             if possible. This property SHOULD be provided if a unit_id is
             provided. This is redundant but recommended for human readability.
       required:
-        - name
         - id
         - operator
         - value
