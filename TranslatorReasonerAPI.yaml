@@ -1198,9 +1198,7 @@ components:
             Biolink association slot). This property captures the relationship
             asserted to hold between the value of the attribute, and the node
             or edge from  which it hangs. For example, that a value of
-            '0.000153' represents a p-value supporting an edge, or that
-            a value of 'ChEMBL' represents the original source of the knowledge
-            expressed in the edge.
+            '0.000153' represents a p-value supporting an edge.
           examples:
             - biolink:synonym
         original_attribute_name:
