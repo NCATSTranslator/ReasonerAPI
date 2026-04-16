@@ -1193,14 +1193,12 @@ components:
         attribute_type_id:
           $ref: '#/components/schemas/CURIE'
           description: >-
-            The 'key' of the attribute object, holding a CURIE of an ontology
-            property defining the attribute (preferably the CURIE of a
+            The main 'key' of the attribute object, holding a CURIE of an ontology
+            property defining the specific attribute (preferably the CURIE of a
             Biolink association slot). This property captures the relationship
             asserted to hold between the value of the attribute, and the node
             or edge from  which it hangs. For example, that a value of
-            '0.000153' represents a p-value supporting an edge, or that
-            a value of 'ChEMBL' represents the original source of the knowledge
-            expressed in the edge.
+            '0.000153' represents a p-value supporting an edge.
           examples:
             - biolink:synonym
         original_attribute_name:
@@ -1631,8 +1629,9 @@ components:
           type: string
           description: >-
             Human-readable name or label for the constraint concept.
-            If appropriate, it SHOULD be the term name of the CURIE used
-            as the 'id'. This is redundant but required for human
+            It SHOULD be the term name of the CURIE used
+            as the 'id' and SHOULD NOT supersede the use of AttributeConstraint.id (which
+            is required). This is redundant but recommended for human
             readability.
           examples:
             - molecular mass
@@ -1700,7 +1699,6 @@ components:
             if possible. This property SHOULD be provided if a unit_id is
             provided. This is redundant but recommended for human readability.
       required:
-        - name
         - id
         - operator
         - value
