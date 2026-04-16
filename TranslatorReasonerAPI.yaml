@@ -1193,8 +1193,8 @@ components:
         attribute_type_id:
           $ref: '#/components/schemas/CURIE'
           description: >-
-            The 'key' of the attribute object, holding a CURIE of an ontology
-            property defining the attribute (preferably the CURIE of a
+            The primary 'key' of the attribute object, holding a CURIE of an ontology
+            property defining the specific attribute (preferably the CURIE of a
             Biolink association slot). This property captures the relationship
             asserted to hold between the value of the attribute, and the node
             or edge from  which it hangs. For example, that a value of
