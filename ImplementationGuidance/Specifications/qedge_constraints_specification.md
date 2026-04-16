@@ -109,9 +109,8 @@ The matched Edge's `primary_knowledge_source` should NOT be `infores:semmeddb` o
 
 Attribute constraints are presented as a list of attribute constraint objects. Each attribute constraint object constrains a specific attribute type. Multiple attribute constraints together represent an AND relationship, such that all attribute constraints must be met.
 
-Every attribute constraint must supply a `name`, `id`, `value`, and `operator`:
+Every attribute constraint must supply a `id`, `value`, and `operator`:
 
-- `name`: For human use, this just specifies the intent of the constraint.
 - `id`: This targets the constraint to attributes with a specific `attribute_type_id`.
 - `value`: Provides a value with which the targeted attribute must agree.
 - `operator`: Provides the relationship to the `value` that targeted attributes must fulfill.
@@ -124,7 +123,6 @@ In the most simple case, the operator `===` requires that edges must have an att
 
 ```json
 {
-    "name": "Must have the exact given publication list",
     "id": "biolink:publications",
     "operator": "===",
     "value": ["PMID:1234", "PMID:4567"]
@@ -205,7 +203,6 @@ The only operator for which this behavior is not held is `===` (strict equality)
         "attributes": [
             {
                 "id": "biolink:z_score",    // regular attribute constraint
-                "name": "z-score",
                 "operator": ">",
                 "value": 5
             }
