@@ -846,8 +846,8 @@ components:
     QNode:
       type: object
       description: A node in the QueryGraph used to represent an entity in a
-        query. If no CURIEs are not specified, any nodes matching the category of
-        the QNode will be returned in the Results.
+        query. If no CURIEs are not specified, any nodes matching the category
+        of the QNode will be returned in the Results.
       properties:
         ids:
           type: array
@@ -858,8 +858,8 @@ components:
             - [OMIM:603903]
           description: >-
             A list of one or more CURIE identifiers for this node.
-            The 'ids' property will hold a list of CURIEs only in the case of a
-            BATCH set_interpretation, where each CURIE is queried
+            The 'ids' property will hold a list of CURIEs only in the case of
+            a BATCH set_interpretation, where each CURIE is queried
             separately. If a list of queried CURIEs is to be considered as a
             set (as under a MANY or ALL set_interpretation), the 'ids' property
             will hold a single id representing this set, and the individual members
@@ -1194,8 +1194,8 @@ components:
           $ref: '#/components/schemas/CURIE'
           description: >-
             The main 'key' of the attribute object, holding a CURIE of an ontology
-            property defining the specific attribute (preferably the CURIE of a
-            Biolink association slot). This property captures the relationship
+            property defining the specific attribute (preferably the CURIE of
+            a Biolink association slot). This property captures the relationship
             asserted to hold between the value of the attribute, and the node
             or edge from  which it hangs. For example, that a value of
             '0.000153' represents a p-value supporting an edge.
