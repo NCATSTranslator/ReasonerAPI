@@ -10,10 +10,10 @@
 
 These properties are complemented by a larger model that is being developed to support a more detailed representation of evidence and provenance metadata, and will be documented elsewhere.
    
-The scope of this initial specification covers only **Agent Type** and **Knowledge Level** metadata - which describes the type of knowledge expressed in an edge based on type of agent that originally generated a statement of knowledge encoded in an Edge, and the level of knowledge expressed in an Edge. It is complemented by a [Supplemental Guidance document](https://docs.google.com/document/d/140dtM5CjWM97JiBRdAmDT-9IKqHoOj-xbE_5TWkdYqg/edit) that provides detailed examples implementation support.
+The scope of this initial specification covers only **Agent Type** and **Knowledge Level** metadata - which describes the type of knowledge expressed in an edge based on the type of agent that originally generated a statement of knowledge encoded in an Edge, and the level of knowledge expressed in an Edge. It is complemented by a [Supplemental Guidance document](https://docs.google.com/document/d/140dtM5CjWM97JiBRdAmDT-9IKqHoOj-xbE_5TWkdYqg/edit) that provides detailed examples and implementation support.
 
 ## Biolink properties and enumerations
-Biolink defines hte following properties and enumerations for classifying agent type and knowledge level, which are used to annotate individual edges in knowledge graphs. 
+Biolink defines the following properties and enumerations for classifying agent type and knowledge level, which are used to annotate individual edges in knowledge graphs. 
 
 ### Agent Type
 **Biolink Edge Property**:
