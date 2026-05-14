@@ -14,7 +14,7 @@ The terms MUST, SHOULD, MAY are used as defined in RFC 2119  https://tools.ietf.
 ## QNode.ids
 - MAY be absent.
 - MUST NOT be an empty array (#199)
-- If more than one element is present, the elements MUST be treated accoring to Qnode.set_interpretation.
+- If more than one element is present, the elements MUST be treated according to QNode.set_interpretation.
 - The list SHOULD NOT be used by the client to provide equivalent CURIEs to the server
 - If the server considers a subset of items in the list as equivalent CURIEs,
   the server SHOULD merge the subset into a single KnowledgeGraph Node
@@ -25,19 +25,19 @@ The terms MUST, SHOULD, MAY are used as defined in RFC 2119  https://tools.ietf.
 - If set_interpretation is "BATCH", each CURIE in the ids list is treated independently. Results MUST include answers for each queried CURIE separately.
 - If set_interpretation is "ALL", all specified CURIEs MUST appear in each Result. Multiple CURIEs are combined into a set, and the ids field MUST hold a single UUID representing this set, with individual members in member_ids.
 - If set_interpretation is "MANY", member CURIEs MUST form one or more sets in the Results. Multiple CURIEs are combined into a set, and the ids field MUST hold a single UUID representing this set, with individual members in member_ids. Sets with more members are generally considered more desirable than sets with fewer members.
-- If set_interpretation is "COLLATE", it MAY only be used when no ids are provided (QNode.ids is absent). Multiple matching nodes MUST be collated into a single Result rather than separated into separate Results.
+- If set_interpretation is "COLLATE", it MAY only be used when no ids are provided (QNode.ids is absent). Multiple matching nodes MUST be collated into a single Result rather than put into separate Results.
 
 
 ## QNode.categories
 - MAY be absent, meaning the matching Nodes may be any category
-- If QNode.categories is [ 'biolink:NamedThing' ], it means matching Nodes may be any category
-  (any descendent biolink category NamedThing)
+- If QNode.categories is `[ 'biolink:NamedThing' ]`, it means matching Nodes may be any category
+  (any descendant of Biolink base category NamedThing)
 - MUST NOT be an empty array (#199)
-- If more than one element is present, the elements MUST be treated in the sense of an "or" list.
+- If more than one element is present, the elements MUST be treated in the sense of an "OR" list.
   Matching Nodes may be any of the listed QNode.categories
-- Biolink category descendents do not need to be specified separately. Queries MUST automatically
-  match descendents. (e.g. QNode.categories is [ 'biolink:BiologicalEntity' ], then the KP MUST return
-  Nodes with category biolink:Protein and biolink:Disease if present)
+- Biolink category descendants do not need to be specified separately. Queries MUST automatically
+  match descendants. (e.g. QNode.categories is `[ 'biolink:BiologicalEntity' ]`, then the KP MUST return
+  Nodes with descendant categories like biolink:Protein or biolink:Disease)
 - IF a QNode has QNode.ids (CURIEs), the client SHOULD NOT provide QNode.categories, and
   the server SHOULD NOT require that categories are provided to function, and the server MAY provide
   different answers for different provided categories.
@@ -49,8 +49,8 @@ The terms MUST, SHOULD, MAY are used as defined in RFC 2119  https://tools.ietf.
   Matching Edges may be any of the listed QEdge.predicates. 
   This effectively creates a simple batch query mechanism where the response may contain multiple
   edges, where each one matches at least one of the specified QEdge.predicates.
-- Biolink predicate descendents do not need to be specified separately. Queries MUST automatically
-  match descendents. (e.g. QEdge.predicates is [ 'biolink:regulates' ], then the KP MUST return
+- Biolink predicate descendants do not need to be specified separately. Queries MUST automatically
+  match descendants. (e.g. QEdge.predicates is [ 'biolink:regulates' ], then the KP MUST return
   Edges with biolink:positively_regulates and biolink:negatively_regulates if present)
 
 ## QNode.xxxxx
