@@ -43,13 +43,13 @@ The terms MUST, SHOULD, MAY are used as defined in RFC 2119  https://tools.ietf.
 ## QEdge.predicates
 - MAY be absent.
 - MUST NOT be an empty array (#199)
-- If more than one element is present, the elements MUST be treated in the sense of an "or" list.
+- If more than one element is present, the elements MUST be treated in the sense of an "OR" list.
   Matching Edges may be any of the listed QEdge.predicates. 
   This effectively creates a simple batch query mechanism where the response may contain multiple
   edges, where each one matches at least one of the specified QEdge.predicates.
 - Biolink predicate descendants do not need to be specified separately. Queries MUST automatically
-  match descendants. (e.g. QEdge.predicates is [ 'biolink:regulates' ], then the KP MUST return
-  Edges with biolink:positively_regulates and biolink:negatively_regulates if present)
+  match descendants. (e.g. QEdge.predicates is `[ 'biolink:has_participant' ]`, then the KP MUST return
+  Edges with descendant predicates like biolink:has_substrate and biolink:has_input)
 
 ## QNode.xxxxx
 - If a server receives a property on a QNode that it does not recognize, it SHOULD generate
@@ -61,26 +61,26 @@ The terms MUST, SHOULD, MAY are used as defined in RFC 2119  https://tools.ietf.
 
 ## QNode.constraints
 - If a KP server receives any QNode.constraints, if it does not support all of them,
-  it MUST immediately respond with an error Code "UnsupportedConstraint" and list
+  it MUST immediately respond with an error code "UnsupportedConstraint" and list
   all the specified constraint names that it does not support.
 - If an ARA server receives any QNode.constraints, it MUST perform one of the following:
   - Relay all constraints to its KP(s) to satisfy
   - Withhold one or more constraints from its KP queries and satisfy those constraints itself
-- An ARA server MUST ensure that all constraints are satisifed by either trusting its KPs to satisfy them
-  or by performing the constraining itself. If the ARA cannot ensure this,
-  it MUST immediately respond with an error Code "UnsupportedConstraint" and list all constraint
+- An ARA server MUST ensure that all constraints are satisfied by either trusting its KPs to satisfy them
+  or by implementing the constraints itself. If the ARA cannot ensure this,
+  it MUST immediately respond with an error code "UnsupportedConstraint" and list all constraint
   names that it does not support.
 
 ## QEdge.constraints
 - If a KP server receives any QEdge.constraints, it MUST only return 
   edges that are compatible with the constraints. If a KP server receives a query that contains QEdge
-  constraints that it does not support yet, it MUST immediately respond with an error Code "UnsupportedConstraint" and list all the specified constraints that it does not support.
+  constraints that it does not support yet, it MUST immediately respond with an error code "UnsupportedConstraint" and list all the specified constraints that it does not support.
 - If a KP server receives any QEdge.constraints.qualifiers, it MUST NOT return any edges that 
   don't have qualifiers.
 - If an ARA server receives any QEdge.constraints, it MUST relay all
   QEdge.constraints to its KP(s) to satisfy.
 
-  See [QEdge constraints specification for details](qedge_constraints_specification.md).
+See [QEdge constraints specification for details](qedge_constraints_specification.md).
 
 ## info.x-trapi.batch_size_limit
 - This batch size limit refers to the maximum length of any single QNode.ids list. The limit
@@ -91,10 +91,10 @@ The terms MUST, SHOULD, MAY are used as defined in RFC 2119  https://tools.ietf.
 
 ## Specifying permitted and excluded sources to an ARA
 - The proper syntax for specifying or excluding specific knowledge sources (infores CURIEs) to an ARA MUST be done
-  via a `sources` constraint on a QEdge within the `constraints` object. The following is a complete Query example that disallows the
+  via `constraints.sources` on QEdges. The following is a complete Query example that disallows the
   use of SemMedDB:
 
-```
+```json
 {
   "message": {
     "query_graph": {
@@ -103,7 +103,7 @@ The terms MUST, SHOULD, MAY are used as defined in RFC 2119  https://tools.ietf.
           "object": "n0",
           "subject": "n1",
           "predicates": [
-            "biolink:entity_negatively_regulates_entity"
+            "biolink:affects"
           ],
           "constraints": {
             "sources": {
@@ -135,8 +135,8 @@ The terms MUST, SHOULD, MAY are used as defined in RFC 2119  https://tools.ietf.
 }
 ```
 
-An allowlist with `behavior` set to "ALLOW" requires at least one of the specified infores CURIEs to be present in the sources of bound edges:
-```
+An allowlist (`behavior` set to "ALLOW") requires at least one of the specified infores CURIEs to be present in the `sources` of bound edges:
+```json
       "constraints": {
         "sources": {
           "behavior": "ALLOW",
@@ -148,8 +148,8 @@ An allowlist with `behavior` set to "ALLOW" requires at least one of the specifi
       },
 ```
 
-A denylist with `behavior` set to "DENY" excludes all of the specified infores CURIEs from the sources of bound edges:
-```
+A denylist (`behavior` set to "DENY") excludes all of the specified infores CURIEs from the `sources` of bound edges:
+```json
       "constraints": {
         "sources": {
           "behavior": "DENY",
