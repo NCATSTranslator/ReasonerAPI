@@ -872,7 +872,7 @@ components:
         categories:
           type: array
           description: >-
-            Biolink Model categories that are allowed
+            Biolink Model categories, which are allowed
             to be of type 'abstract' or 'mixin' (only in QGraphs!).
             Use of deprecated categories SHOULD be avoided.
           items:
