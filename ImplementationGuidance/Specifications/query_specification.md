@@ -8,8 +8,6 @@ The terms MUST, SHOULD, MAY are used as defined in RFC 2119  https://tools.ietf.
 ## /asyncquery
 - Knowledge Providers (KPs) MAY implement /asyncquery
 - Autonomous Reasoning Agents (ARAs) SHOULD implement /asyncquery
-- The /asyncquery endpoint SHOULD be left in an OpenAPI definition for a TRAPI endpoint even if
-  if it is not implemented, since it is part of the TRAPI core schema
 - Each TRAPI server MUST indicate with true or false if the /asyncquery endpoint is implemented
   by the server via the x-trapi asyncquery property as found in the TRAPI core schema template.
 
