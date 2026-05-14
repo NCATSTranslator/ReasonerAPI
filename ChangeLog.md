@@ -1,3 +1,8 @@
+# Change Log  2.0.0-beta (2026-04-02) -> 2.0.0 (TBD)
+
+- Make AttributeConstraint.name optional, adjust descriptions in AttributeConstraint and Attribute specs ([PR](https://github.com/NCATSTranslator/ReasonerAPI/pull/563/changes))
+
+
 # Change Log  1.6.0-beta (2025-06-06) -> 2.0.0-beta (2026-04-02)
 
 ### 1. QEdge Constraints Refactor (see [migration guide entry](https://github.com/NCATSTranslator/ReasonerAPI/blob/2.0/ImplementationGuidance/MigrationGuides/MigrationAndImplementationGuide2-0.md#1-qedge-constraints-refactor), [reference doc entry](https://github.com/NCATSTranslator/ReasonerAPI/blob/2.0/docs/reference.md#qedge-))
