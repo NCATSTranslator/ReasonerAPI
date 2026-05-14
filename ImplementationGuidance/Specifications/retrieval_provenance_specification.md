@@ -107,17 +107,17 @@ Each arrow (R1-R5) represents a distinct retrieval event (grey arrows/text indic
       "resource_id": "infores:DB_2",
       "resource_role": "supporting_data_source",
       },
-      {                                            # R1, R2                
+      {                                            # R1, R2
       "resource_id": "infores:KP_1",
       "resource_role": "primary_knowledge_source",
       "upstream_resource_ids": ["infores:DB_1", "infores:DB_2"]
       },
-      {                                            # R3    
+      {                                            # R3
       "resource_id": "infores:ARA_1",
       "resource_role": "aggregator_knowledge_source",
       "upstream_resource_ids": ["infores:KP_1"] 
       },
-      {                                            # R4         
+      {                                            # R4
       "resource_id": "infores:UI",
       "resource_role": "aggregator_knowledge_source",
       "upstream_resource_ids": ["infores:ARA_1"] 
