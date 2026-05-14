@@ -601,12 +601,12 @@ components:
         node_bindings:
           type: object
           description: >-
-            The dictionary of input query graph to result knowledge graph node
+            The dictionary of input QueryGraph to result KnowledgeGraph Node
             bindings where the dictionary keys are the key identifiers of the
-            query graph nodes and the associated values of those keys are
+            QueryGraph Nodes and the associated values of those keys are
             instances of NodeBinding schema type (see below). Because a given
-            QNode may have multiple knowledge graph Nodes bound in the result,
-            the NodeBinding object may list multiple knowledge graph Nodes.
+            QNode may have multiple KnowledgeGraph Nodes bound in the result,
+            the NodeBinding object may list multiple KnowledgeGraph Nodes.
           additionalProperties:
             $ref: '#/components/schemas/NodeBinding'
           minProperties: 1
