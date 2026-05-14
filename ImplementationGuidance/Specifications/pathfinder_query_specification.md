@@ -148,7 +148,7 @@ Paths are represented within AuxiliaryGraphs. Each Path references edges from th
 AuxiliaryGraph's `edges` field. These Edges are unordered; their sequence does not convey Path structure. Instead, the
 Path must be reconstructed from the graph itself.
 
-Paths are expected to be linear—there should be no way to skip or bypass any node in the Path. However, parallel edges
+Paths are expected to be linear — there should be no way to skip or bypass any node in the Path. However, parallel edges
 between two nodes are allowed.
 
 Using the Knowledge Graph above, we can construct the AuxiliaryGraphs shown in the example below:
@@ -185,7 +185,7 @@ Path `a2` represents a direct lookup edge between Crohn’s and Parkinson’s. I
 input nodes, it should be included as a valid path.
 
 The Paths shown correspond to the unconstrained version of the initial query. Applying `intermediate_categories` 
-constraints would yield a slightly different set of paths. As show below in the constrained version of the 
+constraints would yield a slightly different set of paths. As shown below in the constrained version of the 
 AuxiliaryGraphs, `a2` is  removed because it does not contain any `Gene` nodes. Therefore, it is not a valid Path 
 for the constrained version of the query.
 
@@ -212,7 +212,7 @@ for the constrained version of the query.
 ## Results
 
 Each individual Result is structured similarly, with NodeBindings and Analyses. Both input
-nodes must be pinned, and therefor no unpinned nodes will exist in the QueryGraph.  This means there is only one result
+nodes must be pinned, and therefore no unpinned nodes will exist in the QueryGraph.  This means there is only one result
 for each query, contained within the Results field of the Message. This Result can have many Analyses, each one
 corresponding to a different Path. This follows the same Result-merging rules used in other query types, where results
 that contain the same nodes but different analyses are combined into a single result, with their analyses concatenated.

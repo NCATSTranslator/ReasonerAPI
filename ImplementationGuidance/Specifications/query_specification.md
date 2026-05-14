@@ -8,52 +8,48 @@ The terms MUST, SHOULD, MAY are used as defined in RFC 2119  https://tools.ietf.
 ## /asyncquery
 - Knowledge Providers (KPs) MAY implement /asyncquery
 - Autonomous Reasoning Agents (ARAs) SHOULD implement /asyncquery
-- The /asyncquery endpoint SHOULD be left in an OpenAPI definition for a TRAPI endpoint even if
-  if it is not implemented, since it is part of the TRAPI core schema
 - Each TRAPI server MUST indicate with true or false if the /asyncquery endpoint is implemented
   by the server via the x-trapi asyncquery property as found in the TRAPI core schema template.
 
 ## QNode.ids
-- MAY be null, or MAY be missing. The meaning is the same.
+- MAY be absent.
 - MUST NOT be an empty array (#199)
-- If more than one element is present, the elements MUST be treated accoring to Qnode.set_interpretation.
+- If more than one element is present, the elements MUST be treated according to QNode.set_interpretation.
 - The list SHOULD NOT be used by the client to provide equivalent CURIEs to the server
 - If the server considers a subset of items in the list as equivalent CURIEs,
   the server SHOULD merge the subset into a single KnowledgeGraph Node
 
 ## QNode.set_interpretation
-- MAY be null, or MAY be missing. If null or missing, the default is "BATCH".
+- MAY be absent; then the default is "BATCH".
 - MUST be one of the following values: "BATCH", "ALL", "MANY", or "COLLATE"
 - If set_interpretation is "BATCH", each CURIE in the ids list is treated independently. Results MUST include answers for each queried CURIE separately.
 - If set_interpretation is "ALL", all specified CURIEs MUST appear in each Result. Multiple CURIEs are combined into a set, and the ids field MUST hold a single UUID representing this set, with individual members in member_ids.
 - If set_interpretation is "MANY", member CURIEs MUST form one or more sets in the Results. Multiple CURIEs are combined into a set, and the ids field MUST hold a single UUID representing this set, with individual members in member_ids. Sets with more members are generally considered more desirable than sets with fewer members.
-- If set_interpretation is "COLLATE", it MAY only be used when no ids are provided (QNode.ids is null or missing). Multiple matching nodes MUST be collated into a single Result rather than separated into separate Results.
+- If set_interpretation is "COLLATE", it MAY only be used when no ids are provided (QNode.ids is absent). Multiple matching nodes MUST be collated into a single Result rather than put into separate Results.
 
 
 ## QNode.categories
-- MAY be null, or MAY be missing. The meaning is the same: matching Nodes may be any category
-- If QNode.categories is [ 'biolink:NamedThing' ], it means matching Nodes may be any category
-  (any descendent biolink category NamedThing)
+- MAY be absent, meaning the matching Nodes may be any category
+- If QNode.categories is `[ 'biolink:NamedThing' ]`, it means matching Nodes may be any category
+  (any descendant of Biolink base category NamedThing)
 - MUST NOT be an empty array (#199)
-- If more than one element is present, the elements MUST be treated in the sense of an "or" list.
+- If more than one element is present, the elements MUST be treated in the sense of an "OR" list.
   Matching Nodes may be any of the listed QNode.categories
-- Biolink category descendents do not need to be specified separately. Queries MUST automatically
-  match descendents. (e.g. QNode.categories is [ 'biolink:BiologicalEntity' ], then the KP MUST return
-  Nodes with category biolink:Protein and biolink:Disease if present)
-- IF a QNode has non-null QNode.ids (CURIEs), the client SHOULD NOT provide QNode.categories, and
-  the server SHOULD NOT require that categories are provided to function, and the server MAY provide
-  different answers for different provided categories.
+- Biolink category descendants do not need to be specified separately. Queries MUST automatically
+  match descendants. (e.g. QNode.categories is `[ 'biolink:BiologicalEntity' ]`, then the KP MUST return
+  Nodes with descendant categories like biolink:Protein or biolink:Disease)
+- IF a QNode has QNode.ids (CURIEs), the client SHOULD NOT provide QNode.categories.
 
 ## QEdge.predicates
-- MAY be null, or MAY be missing. The meaning is the same.
+- MAY be absent.
 - MUST NOT be an empty array (#199)
-- If more than one element is present, the elements MUST be treated in the sense of an "or" list.
+- If more than one element is present, the elements MUST be treated in the sense of an "OR" list.
   Matching Edges may be any of the listed QEdge.predicates. 
   This effectively creates a simple batch query mechanism where the response may contain multiple
   edges, where each one matches at least one of the specified QEdge.predicates.
-- Biolink predicate descendents do not need to be specified separately. Queries MUST automatically
-  match descendents. (e.g. QEdge.predicates is [ 'biolink:regulates' ], then the KP MUST return
-  Edges with biolink:positively_regulates and biolink:negatively_regulates if present)
+- Biolink predicate descendants do not need to be specified separately. Queries MUST automatically
+  match descendants. (e.g. QEdge.predicates is `[ 'biolink:has_participant' ]`, then the KP MUST return
+  Edges with descendant predicates like biolink:has_substrate and biolink:has_input)
 
 ## QNode.xxxxx
 - If a server receives a property on a QNode that it does not recognize, it SHOULD generate
@@ -65,26 +61,26 @@ The terms MUST, SHOULD, MAY are used as defined in RFC 2119  https://tools.ietf.
 
 ## QNode.constraints
 - If a KP server receives any QNode.constraints, if it does not support all of them,
-  it MUST immediately respond with an error Code "UnsupportedConstraint" and list
+  it MUST immediately respond with an error code "UnsupportedConstraint" and list
   all the specified constraint names that it does not support.
 - If an ARA server receives any QNode.constraints, it MUST perform one of the following:
   - Relay all constraints to its KP(s) to satisfy
   - Withhold one or more constraints from its KP queries and satisfy those constraints itself
-- An ARA server MUST ensure that all constraints are satisifed by either trusting its KPs to satisfy them
-  or by performing the constraining itself. If the ARA cannot ensure this,
-  it MUST immediately respond with an error Code "UnsupportedConstraint" and list all constraint
+- An ARA server MUST ensure that all constraints are satisfied by either trusting its KPs to satisfy them
+  or by implementing the constraints itself. If the ARA cannot ensure this,
+  it MUST immediately respond with an error code "UnsupportedConstraint" and list all constraint
   names that it does not support.
 
 ## QEdge.constraints
 - If a KP server receives any QEdge.constraints, it MUST only return 
   edges that are compatible with the constraints. If a KP server receives a query that contains QEdge
-  constraints that it does not support yet, it MUST immediately respond with an error Code "UnsupportedConstraint" and list all the specified constraints that it does not support.
+  constraints that it does not support yet, it MUST immediately respond with an error code "UnsupportedConstraint" and list all the specified constraints that it does not support.
 - If a KP server receives any QEdge.constraints.qualifiers, it MUST NOT return any edges that 
   don't have qualifiers.
 - If an ARA server receives any QEdge.constraints, it MUST relay all
   QEdge.constraints to its KP(s) to satisfy.
 
-  See [QEdge constraints specification for details](qedge_constraints_specification.md).
+See [QEdge constraints specification for details](qedge_constraints_specification.md).
 
 ## info.x-trapi.batch_size_limit
 - This batch size limit refers to the maximum length of any single QNode.ids list. The limit
@@ -95,10 +91,10 @@ The terms MUST, SHOULD, MAY are used as defined in RFC 2119  https://tools.ietf.
 
 ## Specifying permitted and excluded sources to an ARA
 - The proper syntax for specifying or excluding specific knowledge sources (infores CURIEs) to an ARA MUST be done
-  via a `sources` constraint on a QEdge within the `constraints` object. The following is a complete Query example that disallows the
+  via `constraints.sources` on QEdges. The following is a complete Query example that disallows the
   use of SemMedDB:
 
-```
+```json
 {
   "message": {
     "query_graph": {
@@ -107,7 +103,7 @@ The terms MUST, SHOULD, MAY are used as defined in RFC 2119  https://tools.ietf.
           "object": "n0",
           "subject": "n1",
           "predicates": [
-            "biolink:entity_negatively_regulates_entity"
+            "biolink:affects"
           ],
           "constraints": {
             "sources": {
@@ -139,8 +135,8 @@ The terms MUST, SHOULD, MAY are used as defined in RFC 2119  https://tools.ietf.
 }
 ```
 
-An allowlist with `behavior` set to "ALLOW" requires at least one of the specified infores CURIEs to be present in the sources of bound edges:
-```
+An allowlist (`behavior` set to "ALLOW") requires at least one of the specified infores CURIEs to be present in the `sources` of bound edges:
+```json
       "constraints": {
         "sources": {
           "behavior": "ALLOW",
@@ -152,8 +148,8 @@ An allowlist with `behavior` set to "ALLOW" requires at least one of the specifi
       },
 ```
 
-A denylist with `behavior` set to "DENY" excludes all of the specified infores CURIEs from the sources of bound edges:
-```
+A denylist (`behavior` set to "DENY") excludes all of the specified infores CURIEs from the `sources` of bound edges:
+```json
       "constraints": {
         "sources": {
           "behavior": "DENY",

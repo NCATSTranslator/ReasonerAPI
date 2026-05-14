@@ -2,28 +2,18 @@
 
 These rules can not be enforced in the schema for TRAPI, but should be implemented in a validation layer.
 
-1. __general rules__
-   1. There MUST be only one of each type of qualifier in any edges.qualifier_constraints.qualifier_set
-      1. There MUST be only one qualified_predicate for each set of qualifiers in a QualifierConstraint. 
-      2. qualified_predicate is an optional qualifier. (see [localization_or_transport.json](../DataExamples/localization_or_transport.json))
-         1. Both the qualified_predicate and the predicate edge properties SHOULD be queried when a predicate is provided. 
-         see [causes_predicate_vs_qualifier.json](../DataExamples/causes_predicate_vs_qualifier.json)
-   2. If a KP receives non-empty QEdge.qualifier_constraints, it MUST only return edges that satisfy the entire set of 
-   qualifier_constraints. If a KP does not yet support QEdge.qualifier_constraints, it MUST return an empty response 
-   because no matches are found.
-      1. If a knowledge statement contains more qualifiers or differently typed qualifiers than those specified in
-      edges.qualifier_constraints.qualifier_set in addition to the entire set of qualifier_constraints, the knowledge 
-      statement MAY also be returned.
-   3. Qualifier constraints should be treated as "or" constraints.
-2. __qualifier_value__  
-   1. is constrained by either: an enumeration in biolink, or an ontology term.  
-      1. When an ontology term is used, the assumption is that annotations that use this term or any of its children 
+1. __general rules for constraints__
+   1. There MUST be only one instance of each qualifier type in a single `QEdge.constraints.qualifiers` object (qualifier-set)
+      1. `qualified_predicate` is an optional qualifier (see [localization_or_transport.json](../DataExamples/localization_or_transport.json)). Both the `qualified_predicate` and the `predicates` constraint SHOULD be met when both are present on the same QEdge (see [causes_predicate_vs_qualifier.json](../DataExamples/causes_predicate_vs_qualifier.json)).
+   2. If a KP receives a query with `constraints.qualifiers` on a QEdge, the edges it returns for that QEdge MUST satisfy at least 1 of `constraints.qualifiers` objects (qualifier-set) - meaning all constraints within that object.
+      1. If an Edge satisfies a `constraints.qualifiers` object and contains other qualifiers not specified in that object, it MAY also be returned.
+2. __for the constraint qualifier values__  
+   1. They may be from a Biolink enum for the qualifier type or from an ontology.  
+      1. When an ontology term is used, the assumption is that edges that use this term or any of its descendants 
       should be returned.
-      2. When an enumerated value is used, the assumption is that annotations that use this enumerated value or any 
-      of its children should be returned. 
-         1. For example, if a query asks for "biolink:object_aspect_qualifier" = "abundance", 
-         then, aspects matching any child of "abundance" should also be returned (if the other qualifiers used in this
-         query are also satisfied).
+      2. When an Biolink enum value is used, the assumption is that edges that use this value or any 
+      of its descendants should be returned. 
+         1. For example, if a query asks for "biolink:object_aspect_qualifier" = "abundance", then edges with object_aspect_qualifier matching any descendant of "abundance" should also be returned.
 
 
 ## Biolink Qualifiers Examples
@@ -31,7 +21,7 @@ These rules can not be enforced in the schema for TRAPI, but should be implement
 ### Object qualifiers
 _“Bisphenol A results in decreased degradation of ESR1 protein”_
 
-```
+```yaml
 subject: CHEBI:33216 # Bisphenol A
 predicate: biolink:affects 
 qualified_predicate: biolink:causes
@@ -39,6 +29,7 @@ object: NCBIGene:2099  # ESR1
 object_aspect_qualifier: degradation
 object_direction_qualifier: decreased
 ```
+
 * [object_qualifiers.json](../DataExamples/object_qualifiers.json)
 
 Note: the predicate chosen should reflect the relationship between the subject and the object, and is not required
@@ -47,7 +38,7 @@ not causal.
 
 _"Bisphenol A is associated with decreased degradation of ESR1 protein"_
 
-```
+```yaml
 subject: CHEBI:33216 # Bisphenol A
 predicate: biolink:associated_with
 object: NCBIGene:2099  # ESR1
@@ -59,8 +50,8 @@ object_direction_qualifier: decreased
 ### Subject and object qualifiers
 _“Methionine deficiency results in increased expression of ADRB2”_
 
-```
-subject: "CHEBI:16811", # methionine
+```yaml
+subject: "CHEBI:16811" # methionine
 subject_aspect_qualifier: abundance
 subject_direction_qualifier: decreased
 predicate: biolink:affects 
@@ -74,7 +65,7 @@ object_direction_qualifier: increased
 
 _"Fenofibrate is an agonist of PPARA protein"_
 
-```
+```yaml
 subject: "CHEBI:5001"  # Fenofibrate
 predicate: biolink:affects             
 qualified_predicate: biolink:causes
@@ -86,10 +77,9 @@ causal_mechanism_qualifier: agonism
 
 ### Complex statement
 
-_"The protein ser/thr kinase activator activity of Ras85D in the plasma membrane directly positively regulates MAPKKK 
-activity of Raf in the cytoplasm within the EGFR signaling pathway"_
+_"The protein ser/thr kinase activator activity of Ras85D in the plasma membrane directly positively regulates MAPKKK activity of Raf in the cytoplasm within the EGFR signaling pathway"_
 
-```
+```yaml
 subject: FB:FBgn0003205 # Dmel Ras85D
 subject_aspect_qualifier: GO:0043539 # protein ser/thr kinase activator activity
 subject_context_qualifier: GO:0005886 # plasma membrane
@@ -101,6 +91,7 @@ object_context_qualifier: GO:0005737 #cytoplasm
 object_direction_qualifier: increased
 pathway_context_qualifier: GO:0038134 # ERBB2-EGFR signaling pathway
 ```
+
 Please note, pathway_context_qualifier is still under discussion in the Biolink Model. If you are trying to 
 represent GO-CAMs, please contact the Biolink Model team for more information.
 
