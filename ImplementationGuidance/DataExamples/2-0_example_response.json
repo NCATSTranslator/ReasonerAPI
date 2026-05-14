@@ -61,7 +61,6 @@
             "attributes": [
               {
                 "id": "biolink:z_score",
-                "name": "z-score",
                 "operator": ">",
                 "value": 5
               }

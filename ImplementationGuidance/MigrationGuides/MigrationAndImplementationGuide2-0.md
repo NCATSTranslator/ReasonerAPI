@@ -69,7 +69,7 @@ In 2.0, there is instead one property on a QEdge, `constraints`, that holds all 
 * `agent_type`: see above (KL)
    * FYI: if a specified value has descendants (ex: `automated_agent`), the tool MUST treat those descendants (ex: `text_mining_agent`, etc.) as if they were included in the `values` array (i.e. "hierarchy expansion").
 * `sources`: this constrains the Edge `sources`. It has the same keys as KL/AT (`behavior`, `values`) plus the optional `primary_only` (if true, the constraint ONLY applies to the `primary_knowledge_source`). 
-* `attributes`: minItems 1, otherwise the same as previous `attribute_constraints`
+* `attributes`: minItems 1 and `name` no longer required, otherwise the same as previous `attribute_constraints`
 * `qualifiers`: simplified format to an array of objects but preserved previous behavior. Each object represents a qualifier-set, and multiple objects/sets have an `OR` relationship. Within an object, the keys are the "qualifier-type-ids" and their values are the "qualifier values". Multiple key/value pairs in one object/set have an `AND` relationship. 
 
 **NOTE on SUBCLASSING**: we haven't decided yet how QEdge constraints work with subclassing. For now, QEdge constraints should only apply to the bound Edges (constructed in subclassing cases), NOT to the bound Edge's support_graph edges. QNode constraints also has this ambiguity/confusion with subclassing. 
@@ -93,7 +93,6 @@ In 2.0, there is instead one property on a QEdge, `constraints`, that holds all 
         "attributes": [
             {
                 "id": "biolink:z_score",    // regular attribute constraint
-                "name": "z-score",
                 "operator": ">",
                 "value": 5
             }
@@ -448,6 +447,7 @@ It was previously required, but never used and its empty arrays bloated response
 
 These properties were changed to not required:
 * `Nodes.attributes`
+* `AttributeConstraint.name` ([PR](https://github.com/NCATSTranslator/ReasonerAPI/pull/563/changes))
 * `QueryGraph` `edges` and `paths`: to accommodate queries with only nodes
 * `KnowledgeGraph.edges`: same reason as above
 * `Result.analyses`: same reason as above
