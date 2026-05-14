@@ -47,7 +47,7 @@ A single Edge originates in primary source KS1, and is retrieved through multipl
 ![image](https://github.com/NCATSTranslator/ReasonerAPI/assets/5184212/39f08657-f4a5-4410-b2c4-244a9558ef4b)
 
 *KS = an external Knowledge Source. KP = a Translator Knowledge Provider.  ARA = a Translator Automated Reasoning Agent, UI  = the Translator User Interface.
-Each arrow in the diagram below (R1-R5) represents the distinct retrieval of one edge.
+Each arrow in the diagram below (R1-R5) represents the distinct retrieval of one edge.*
 
   ````json
   {
@@ -91,8 +91,7 @@ In the scenario diagrammed below, data from two sources (DB1, DB2) is retrieved 
 ![image](https://github.com/NCATSTranslator/ReasonerAPI/assets/5184212/40cce738-1235-4ab3-8628-fca92e348761)
 
 *DB = an external data source. KP = a Translator Knowledge Provider.  ARA = a Translator Automated Reasoning Agent, UI  = the Translator User Interface.
-
-Each arrow (R1-R5) represents a distinct retrieval event (grey arrows/text indicates the retrieval of *data* rather than knowledge).
+Each arrow (R1-R5) represents a distinct retrieval event (grey arrows/text indicates the retrieval of **data** rather than knowledge).*
 
 ````json
   {
