@@ -1209,7 +1209,7 @@ components:
             a column name in a source tsv file, or a key in a source json
             document for the field in the data that held the attribute's
             value. Capturing this information where possible preserves
-            original source meaning. Note that the data type is string'
+            original source meaning. Note that the data type is string
             but the contents of the property MAY be a CURIE of a third
             party ontology term.
           examples:
