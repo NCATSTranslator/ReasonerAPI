@@ -1361,9 +1361,9 @@ components:
             biolink:subject_direction_qualifier,
             biolink:object_aspect_qualifier, etc. Such qualifiers are used
             to elaborate a second layer of meaning of a knowledge graph edge.
-            Available qualifiers are edge properties in the Biolink Model (see
-            https://biolink.github.io/biolink-model/docs/edge_properties.html),
-            which have slot names with the suffix string 'qualifier'.
+            Available qualifiers can be found at
+            https://biolink.github.io/biolink-model/qualifiers.html,
+            which mostly have slot names with the suffix string 'qualifier'.
           pattern: ^biolink:[a-z][a-z_]*$
           examples:
             - biolink:subject_aspect_qualifier
