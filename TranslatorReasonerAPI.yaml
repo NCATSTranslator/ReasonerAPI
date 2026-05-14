@@ -1376,7 +1376,7 @@ components:
             qualifier type 'biolink:subject_aspect_qualifier', etc).
             The enumeration of qualifier values for a given qualifier
             type is generally constrained by the category
-            of edge (i.e. biolink:Association subtype) of the (Q)Edge.
+            of the edge (i.e. biolink:Association subtype).
           examples:
             - expression
       required:
