@@ -601,7 +601,7 @@ components:
         node_bindings:
           type: object
           description: >-
-            The dictionary of input QNodes to result KnowledgeGraph Node
+            The dictionary of input QNodes to KnowledgeGraph Node
             bindings where the dictionary keys are the key identifiers of the
             QNodes and the associated values of those keys are
             instances of NodeBinding schema type (see below). Because a given
