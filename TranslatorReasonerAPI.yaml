@@ -497,6 +497,12 @@ components:
           examples:
             - 4.4.0
           description: Version label of the Biolink model used in this document
+        kgx_release_version:
+          type: string
+          examples:
+          ## may change in future to semantic versioning, not date based
+            - 2026_06_21
+          description: Version of the DINGO KGX release used in this document.
       additionalProperties: true
       required:
         - message
