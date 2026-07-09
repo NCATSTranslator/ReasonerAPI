@@ -9,3 +9,5 @@ rules:
   quoted-strings:
     quote-type: single
     required: only-when-needed
+    extra-allowed:
+      - "^.*:.*$"
