@@ -853,7 +853,8 @@ components:
         - nodes
     QNode:
       type: object
-      description: A node in the QueryGraph used to represent an entity in a
+      description: >-
+        A node in the QueryGraph used to represent an entity in a
         query. If no CURIEs are not specified, any nodes matching the category
         of the QNode will be returned in the Results.
       properties:
@@ -863,7 +864,7 @@ components:
             $ref: '#/components/schemas/CURIE'
           minItems: 1
           examples:
-            - [OMIM:603903]
+            - ['OMIM:603903']
           description: >-
             A list of one or more CURIE identifiers for this node.
             The 'ids' property will hold a list of CURIEs only in the case of
@@ -1747,7 +1748,7 @@ components:
             retrieved from both the automat-mychem-info and molepro KPs,
             which both provided it with records of this single fact.
           examples:
-            - [infores:automat-mychem-info, infores:molepro]
+            - ['infores:automat-mychem-info', 'infores:molepro']
         source_record_urls:
           type: array
           minItems: 1
