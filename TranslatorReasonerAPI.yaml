@@ -1133,7 +1133,7 @@ components:
         A constraint for paths. ARAs must comply with constraints when finding
         paths.
       properties:
-        intermediate_categories:
+        required_intermediate_categories:
           type: array
           description: >-
             A list of Biolink Model categories by which to constrain paths returned.
