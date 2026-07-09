@@ -498,7 +498,7 @@ components:
             - 4.4.0
           description: Version label of the Biolink model used in this document
         data_release_versions:
-          description: Version of data sources used in this document.
+          description: Versions of data sources used in this document.
           type: object
           minProperties: 1
           additionalProperties:
