@@ -76,7 +76,7 @@ The Response object contains the main payload when a TRAPI query endpoint interp
 | workflow | [workflow](#workflow-) | List of workflow steps that were executed. |
 | schema_version | `string` | Version label of the TRAPI schema used in this document |
 | biolink_version | `string` | Version label of the Biolink model used in this document |
-| data_release_version | Map\[`string`, `string`\] | **Minimum properties: 1.** Version of data sources used in this document. |
+| data_release_versions | Map\[`string`, `string`\] | **Minimum properties: 1.** Version of data sources used in this document. |
 
 #### Message [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/add-kgx-version/TranslatorReasonerAPI.yaml#L511:L554)
 
