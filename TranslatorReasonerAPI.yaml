@@ -497,7 +497,7 @@ components:
           examples:
             - 4.4.0
           description: Version label of the Biolink model used in this document
-        data_release_version:
+        data_release_versions:
           description: Version of data sources used in this document.
           type: object
           minProperties: 1
