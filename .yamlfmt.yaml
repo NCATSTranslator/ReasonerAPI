@@ -1,0 +1,6 @@
+---
+formatter:
+  type: basic
+  include_document_start: true
+  trim_trailing_whitespace: true # Prevents weird multiline block squashing
+  scan_folded_as_literal: true # Prevents folded style (>-) multiline blocks from being squashed
