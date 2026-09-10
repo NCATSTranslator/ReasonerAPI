@@ -362,7 +362,7 @@ Description of a node category provided by this TRAPI web service.
 | id_prefixes | Array\[`string`\] | **REQUIRED**. **Minimum items: 1.** List of CURIE prefixes for the node category that this TRAPI web service understands and accepts on the input. |
 | attributes | Array\[[MetaAttribute](#metaattribute-)\] | Node attributes provided by this TRAPI web service. |
 
-#### MetaEdge [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/metakg-updates/TranslatorReasonerAPI.yaml#L1497:L1589)
+#### MetaEdge [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/metakg-updates/TranslatorReasonerAPI.yaml#L1497:L1591)
 
 Edge in a meta knowledge map describing relationship between a subject Biolink class and an object Biolink class.
 ##### Fixed Fields
@@ -376,11 +376,11 @@ Edge in a meta knowledge map describing relationship between a subject Biolink c
 | attributes | Array\[[MetaAttribute](#metaattribute-)\] | Edge attributes provided by this TRAPI web service. |
 | qualifiers | Array\[[MetaQualifier](#metaqualifier-)\] | **Minimum items: 1.** Qualifiers that are possible to be found on this edge type. |
 | association | [BiolinkEntity](#biolinkentity-) | The Biolink association type (entity) that this edge represents. Associations are classes in Biolink that represent a relationship between two entities. For example, the association 'gene interacts with gene' is represented by the Biolink class, 'biolink:GeneToGeneAssociation'.  If association is filled out, then the testing harness can help validate that the qualifiers are being used correctly. |
-| knowledge_levels | Array\[any\] | **Minimum items: 1.** The knowledge levels contributing to this meta edge. If provided, this property SHOULD contain all possible knowledge_levels relevant edges might return. (See https://biolink.github.io/biolink-model/KnowledgeLevelEnum/) |
-| agent_types | Array\[any\] | **Minimum items: 1.** The agent types contributing to this meta edge. If provided, this property SHOULD contain all possible agent_types relevant edges might return. (See https://biolink.github.io/biolink-model/AgentTypeEnum/) |
-| sources | Array\[[CURIE](#curie-)\] | **Minimum items: 1.** The infores CURIE for sources contributing to this meta edge. If provided, this property SHOULD contain resource_ids for all relevant resource_roles. Services MAY choose to omit their own aggregator sources. |
+| knowledge_levels | Array\[`string`\] | **Minimum items: 1.** The knowledge levels contributing to this meta edge. If provided, this property SHOULD contain all possible knowledge_levels relevant edges might return. (See https://biolink.github.io/biolink-model/KnowledgeLevelEnum/) |
+| agent_types | Array\[`string`\] | **Minimum items: 1.** The agent types contributing to this meta edge. If provided, this property SHOULD contain all possible agent_types relevant edges might return. (See https://biolink.github.io/biolink-model/AgentTypeEnum/) |
+| sources | Array\[[CURIE](#curie-)\] | **Minimum items: 1.** The infores CURIEs for sources contributing to this meta edge. If provided, this property SHOULD contain resource_ids for all relevant resource_roles. Services MAY choose to omit their own aggregator resource_ids. |
 
-#### MetaQualifier [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/metakg-updates/TranslatorReasonerAPI.yaml#L1590:L1609)
+#### MetaQualifier [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/metakg-updates/TranslatorReasonerAPI.yaml#L1592:L1611)
 
 ##### Fixed Fields
 
@@ -389,7 +389,7 @@ Edge in a meta knowledge map describing relationship between a subject Biolink c
 | qualifier_type_id | [CURIE](#curie-) | **REQUIRED**. The CURIE of the qualifier type. |
 | applicable_values | Array\[`string`\] | **Minimum items: 1.** The list of values that are possible for this qualifier. |
 
-#### MetaAttribute [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/metakg-updates/TranslatorReasonerAPI.yaml#L1610:L1647)
+#### MetaAttribute [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/metakg-updates/TranslatorReasonerAPI.yaml#L1612:L1649)
 
 ##### Fixed Fields
 
@@ -401,7 +401,7 @@ Edge in a meta knowledge map describing relationship between a subject Biolink c
 | constraint_use | `boolean` | Indicates whether this attribute can be used as a query constraint. |
 | constraint_name | `string` | Human-readable name or label for the constraint concept. Required whenever constraint_use is true. |
 
-#### AttributeConstraint [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/metakg-updates/TranslatorReasonerAPI.yaml#L1648:L1741)
+#### AttributeConstraint [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/metakg-updates/TranslatorReasonerAPI.yaml#L1650:L1743)
 
 Generic query constraint for a query node or query edge
 ##### Fixed Fields
@@ -416,7 +416,7 @@ Generic query constraint for a query node or query edge
 | unit_id | any | CURIE of the units of the value or list of values in the 'value' property. The Units of Measurement Ontology (UO) should be used if possible. The unit_id MUST be provided for (lists of) numerical values that correspond to a quantity that has units. |
 | unit_name | any | Term name that is associated with the CURIE of the units of the value or list of values in the 'value' property. The Units of Measurement Ontology (UO) SHOULD be used if possible. This property SHOULD be provided if a unit_id is provided. This is redundant but recommended for human readability. |
 
-#### RetrievalSource [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/metakg-updates/TranslatorReasonerAPI.yaml#L1742:L1799)
+#### RetrievalSource [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/metakg-updates/TranslatorReasonerAPI.yaml#L1744:L1801)
 
 Provides information about how a particular InformationResource served as a source from which knowledge expressed in an Edge, or data used to generate this knowledge, was retrieved.
 ##### Fixed Fields
@@ -428,7 +428,7 @@ Provides information about how a particular InformationResource served as a sour
 | upstream_resource_ids | Array\[[CURIE](#curie-)\] | **Minimum items: 1.** An upstream InformationResource from which the resource being described directly retrieved a record of the knowledge expressed in the Edge, or data used to generate this knowledge. This is an array because there are cases where a merged Edge holds knowledge that was retrieved from multiple sources. e.g. an Edge provided by the ARAGORN ARA can express knowledge it retrieved from both the automat-mychem-info and molepro KPs, which both provided it with records of this single fact. |
 | source_record_urls | Array\[`string`\] | **Minimum items: 1.** A URL linking to a specific web page or document provided by the source that contains a record of the knowledge expressed in the Edge. If the knowledge is contained in more than one web page on an information resource's site, urls MAY be provided for each. For example, Therapeutic Targets Database (TTD) has separate web pages for 'Imatinib' and its protein target KIT, both of which hold the claim that 'the KIT protein is a therapeutic target for Imatinib'. |
 
-#### ResourceRoleEnum [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/metakg-updates/TranslatorReasonerAPI.yaml#L1800:L1812)
+#### ResourceRoleEnum [↗](https://github.com/NCATSTranslator/ReasonerAPI/blob/metakg-updates/TranslatorReasonerAPI.yaml#L1802:L1814)
 
 The role played by the information resource in serving as a source for an Edge. Note that a given Edge should have one and only one 'primary_knowledge_source' source, and may have any number of 'aggregator_knowledge_source' or 'supporting_data_source' sources.  This enumeration is found in Biolink Model, but is repeated here for convenience.
 `string`
