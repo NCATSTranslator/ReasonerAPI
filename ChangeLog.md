@@ -4,6 +4,7 @@
 - Update yaml descriptions to match 2.0.0 changes and clarify desired behavior. ([PR](https://github.com/NCATSTranslator/ReasonerAPI/pull/565/changes))
 - Added `Response.data_release_versions` ([PR](https://github.com/NCATSTranslator/ReasonerAPI/pull/569/changes))
 - Renamed `PathConstraint.intermediate_categories` to `PathConstraint.required_intermediate_categories` ([PR](https://github.com/NCATSTranslator/ReasonerAPI/pull/570/changes))
+- Added `MetaEdge.knowledge_levels`, `MetaEdge.agent_types`, `MetaEdge.sources` to MetaKnowledgeGraph [PR](https://github.com/NCATSTranslator/ReasonerAPI/pull/574)
 
 Documentation/Git action updates:
 - Adjust spec docs to reflect making `AttributeConstraint.name` optional ([PR](https://github.com/NCATSTranslator/ReasonerAPI/pull/564/changes))
