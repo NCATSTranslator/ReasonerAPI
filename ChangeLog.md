@@ -1,4 +1,4 @@
-# Change Log  2.0.0-beta (2026-04-02) -> 2.0.0-beta2 (TBD)
+# Change Log  2.0.0-beta (2026-04-02) -> 2.0.0-beta2 (2026-09-10)
 
 - Make `AttributeConstraint.name` optional ([PR](https://github.com/NCATSTranslator/ReasonerAPI/pull/563/changes))
 - Update yaml descriptions to match 2.0.0 changes and clarify desired behavior. ([PR](https://github.com/NCATSTranslator/ReasonerAPI/pull/565/changes))
