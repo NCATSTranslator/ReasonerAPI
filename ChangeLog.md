@@ -1,3 +1,17 @@
+# Change Log  2.0.0-beta (2026-04-02) -> 2.0.0-beta2 (TBD)
+
+- Make `AttributeConstraint.name` optional ([PR](https://github.com/NCATSTranslator/ReasonerAPI/pull/563/changes))
+- Update yaml descriptions to match 2.0.0 changes and clarify desired behavior. ([PR](https://github.com/NCATSTranslator/ReasonerAPI/pull/565/changes))
+- Added `Response.data_release_versions` ([PR](https://github.com/NCATSTranslator/ReasonerAPI/pull/569/changes))
+- Renamed `PathConstraint.intermediate_categories` to `PathConstraint.required_intermediate_categories` ([PR](https://github.com/NCATSTranslator/ReasonerAPI/pull/570/changes))
+- Added `MetaEdge.knowledge_levels`, `MetaEdge.agent_types`, `MetaEdge.sources` to MetaKnowledgeGraph [PR](https://github.com/NCATSTranslator/ReasonerAPI/pull/574)
+
+Documentation/Git action updates:
+- Adjust spec docs to reflect making `AttributeConstraint.name` optional ([PR](https://github.com/NCATSTranslator/ReasonerAPI/pull/564/changes))
+- More updates to spec docs ([PR](https://github.com/NCATSTranslator/ReasonerAPI/pull/566/changes))
+- Changes to auto-documentation/auto-yaml formatting actions ([PR 1](https://github.com/NCATSTranslator/ReasonerAPI/pull/571/changes), [PR 2](https://github.com/NCATSTranslator/ReasonerAPI/pull/572/changes))
+
+
 # Change Log  1.6.0-beta (2025-06-06) -> 2.0.0-beta (2026-04-02)
 
 ### 1. QEdge Constraints Refactor (see [migration guide entry](https://github.com/NCATSTranslator/ReasonerAPI/blob/2.0/ImplementationGuidance/MigrationGuides/MigrationAndImplementationGuide2-0.md#1-qedge-constraints-refactor), [reference doc entry](https://github.com/NCATSTranslator/ReasonerAPI/blob/2.0/docs/reference.md#qedge-))

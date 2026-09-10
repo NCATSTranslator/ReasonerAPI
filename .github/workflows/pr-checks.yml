@@ -20,14 +20,14 @@ jobs:
           python-version: '3.13'
       - name: Install deps
         run: |
-          pip install yamllint yamlfix
+          pip install yamllint
       - name: Add yamllint annotator
         uses: pr-annotators/yamllint-pr-annotator@v1.0.0
       - name: Run yamllint
         run: |-
           yamllint -f parsable TranslatorReasonerAPI.yaml
   format_check:
-    name: Check Yamlfix
+    name: Check Yamlfmt
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the repository
@@ -41,10 +41,10 @@ jobs:
           python-version: '3.13'
       - name: Install deps
         run: |
-          pip install yamllint yamlfix
-      - name: Run yamlfix
+          pip install google-yamlfmt
+      - name: Run yamlfmt
         run: |-
-          yamlfix TranslatorReasonerAPI.yaml
+          yamlfmt TranslatorReasonerAPI.yaml
       - name: Verify no format changes
         uses: tj-actions/verify-changed-files@v20.0.4
         id: verify-changed-files
