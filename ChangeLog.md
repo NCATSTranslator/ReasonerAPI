@@ -1,7 +1,8 @@
-# Change Log  2.0.0-beta (2026-04-02) -> 2.0.0 (TBD)
+# Change Log  2.0.0-beta (2026-04-02) -> 2.0.0-beta2 (TBD)
 
 - Make AttributeConstraint.name optional, adjust descriptions in AttributeConstraint and Attribute specs ([PR](https://github.com/NCATSTranslator/ReasonerAPI/pull/563/changes))
-
+- Added data release versions ([PR](https://github.com/NCATSTranslator/ReasonerAPI/pull/569/changes))
+- Renamed intermediate_categories to "required_intermediate_categories ([PR](https://github.com/NCATSTranslator/ReasonerAPI/pull/570/changes))
 
 # Change Log  1.6.0-beta (2025-06-06) -> 2.0.0-beta (2026-04-02)
 
