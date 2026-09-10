@@ -1,12 +1,12 @@
 # Change Log  2.0.0-beta (2026-04-02) -> 2.0.0-beta2 (TBD)
 
-- Make AttributeConstraint.name optional ([PR](https://github.com/NCATSTranslator/ReasonerAPI/pull/563/changes))
+- Make `AttributeConstraint.name` optional ([PR](https://github.com/NCATSTranslator/ReasonerAPI/pull/563/changes))
 - Update yaml descriptions to match 2.0.0 changes and clarify desired behavior. ([PR](https://github.com/NCATSTranslator/ReasonerAPI/pull/565/changes))
 - Added data release versions ([PR](https://github.com/NCATSTranslator/ReasonerAPI/pull/569/changes))
-- Renamed intermediate_categories to "required_intermediate_categories ([PR](https://github.com/NCATSTranslator/ReasonerAPI/pull/570/changes))
+- Renamed `intermediate_categories` to `required_intermediate_categories` ([PR](https://github.com/NCATSTranslator/ReasonerAPI/pull/570/changes))
 
 Documentation/Git action updates:
-- Adjust spec docs to reflect making AttributeConstraint.name optional ([PR](https://github.com/NCATSTranslator/ReasonerAPI/pull/564/changes))
+- Adjust spec docs to reflect making `AttributeConstraint.name` optional ([PR](https://github.com/NCATSTranslator/ReasonerAPI/pull/564/changes))
 - More updates to spec docs ([PR](https://github.com/NCATSTranslator/ReasonerAPI/pull/566/changes))
 - Changes to auto-documentation/auto-yaml formatting actions ([PR 1](https://github.com/NCATSTranslator/ReasonerAPI/pull/571/changes), [PR 2](https://github.com/NCATSTranslator/ReasonerAPI/pull/572/changes))
 
