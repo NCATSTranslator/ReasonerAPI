@@ -1554,6 +1554,32 @@ components:
           examples:
             - biolink:ChemicalToGeneAssociation
           $ref: '#/components/schemas/BiolinkEntity'
+        knowledge_levels:
+          description: >-
+            The knowledge levels contributing to this meta edge.
+            If provided, this property SHOULD contain all possible
+            knowledge_levels relevant edges might return.
+          type: array
+          items: string
+          minItems: 1
+        agent_types:
+          description: >-
+            The agent types contributing to this meta edge.
+            If provided, this property SHOULD contain all possible
+            agent_types relevant edges might return.
+          type: array
+          items: string
+          minItems: 1
+        sources:
+          description: >-
+            The infores CURIE for sources contributing to this meta edge.
+            If provided, this property SHOULD contain resource_ids for
+            all relevant resource_roles. Services MAY choose to omit
+            their own aggregator sources.
+          type: array
+          items:
+            $ref: '#/components/schemas/CURIE'
+          minItems: 1
       required:
         - subject
         - predicate
