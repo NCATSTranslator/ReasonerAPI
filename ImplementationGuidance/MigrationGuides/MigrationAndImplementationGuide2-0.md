@@ -465,7 +465,7 @@ Three properties were added to `MetaEdge`:
 * `sources`: Should contain all the source inforeses that contribute to this meta edge, regardless of role.
   May omit aggregator resource_ids created by the service producing the meta knowledge graph.
 
-These properties allow a service to advertise filterable values for the new`QEdge` KL/AT and source filtering.
+These properties allow a service to advertise filterable values for the new `QEdge` KL/AT and source filtering.
 
 ## Full Examples
 
