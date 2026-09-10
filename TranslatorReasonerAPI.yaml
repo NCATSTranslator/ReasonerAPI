@@ -1561,7 +1561,8 @@ components:
             knowledge_levels relevant edges might return.
             (See https://biolink.github.io/biolink-model/KnowledgeLevelEnum/)
           type: array
-          items: string
+          items:
+            type: string
           minItems: 1
         agent_types:
           description: >-
@@ -1570,14 +1571,15 @@ components:
             agent_types relevant edges might return.
             (See https://biolink.github.io/biolink-model/AgentTypeEnum/)
           type: array
-          items: string
+          items:
+            type: string
           minItems: 1
         sources:
           description: >-
-            The infores CURIE for sources contributing to this meta edge.
+            The infores CURIEs for sources contributing to this meta edge.
             If provided, this property SHOULD contain resource_ids for
             all relevant resource_roles. Services MAY choose to omit
-            their own aggregator sources.
+            their own aggregator resource_ids.
           type: array
           items:
             $ref: '#/components/schemas/CURIE'
