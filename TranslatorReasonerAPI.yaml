@@ -1559,6 +1559,7 @@ components:
             The knowledge levels contributing to this meta edge.
             If provided, this property SHOULD contain all possible
             knowledge_levels relevant edges might return.
+            (See https://biolink.github.io/biolink-model/KnowledgeLevelEnum/)
           type: array
           items: string
           minItems: 1
@@ -1567,6 +1568,7 @@ components:
             The agent types contributing to this meta edge.
             If provided, this property SHOULD contain all possible
             agent_types relevant edges might return.
+            (See https://biolink.github.io/biolink-model/AgentTypeEnum/)
           type: array
           items: string
           minItems: 1
