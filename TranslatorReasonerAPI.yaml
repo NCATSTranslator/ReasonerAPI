@@ -724,8 +724,8 @@ components:
       type: object
       description: >-
         An EdgeBinding object defines all relevant KnowledgeGraph Edge mappings,
-        identified by the corresponding 'id' object key identifier of the
-        Edge within the knowledge graph. Instances of EdgeBinding may include
+        identified by the corresponding object key identifiers of the
+        Edges within the knowledge graph. Instances of EdgeBinding may include
         extra annotation (such annotation is not yet fully standardized).
         EdgeBindings are captured within a specific reasoner's Analysis
         object because the Edges in the KnowledgeGraph that get bound to
