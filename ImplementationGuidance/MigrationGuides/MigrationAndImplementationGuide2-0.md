@@ -467,6 +467,12 @@ Three properties were added to `MetaEdge`:
 
 These properties allow a service to advertise filterable values for the new `QEdge` KL/AT and source filtering.
 
+### 12. Response now has a `data_release_versions` field
+
+`Response.data_release_versions` is an optional field which allows APIs to propagate the data versions that their knowledge is sourced from.
+It is an object, where keys are the names of the data sources and values are the versions.
+A TRAPI API SHOULD propagate any versions in responses from other TRAPI APIs it calls.
+
 ## Full Examples
 
 This is an example of a 1.6.0-beta Response "transformed" into 2.0 (includes query_graph/parameters). Note that the 2.0 query/response has 2 functional differences:
