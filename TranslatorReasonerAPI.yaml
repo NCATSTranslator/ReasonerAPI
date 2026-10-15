@@ -42,7 +42,15 @@ info:
         https://github.com/NCATSTranslator/translator_extensions/blob/production/x-trapi/
 servers:
   - url: INSERT-URL-HERE
+    x-maturity: REPLACE-WITH-ONE-OF-THE-FOLLOWING-production-testing-staging-development
     description: INSERT-SERVER-DESCRIPTION-HERE
+    externalDocs:
+      description: >- 
+        x-maturity is REQUIRED on every server url for a Translator resource. The values
+        correspond to the 4 possible Translator environments: production (ITRB prod), 
+        testing (ITRB Test), staging (ITRB CI), and development (non-ITRB).
+      url: >-
+        https://github.com/NCATSTranslator/TranslatorEngineering/blob/master/SmartAPIRegistration.md#environments
 externalDocs:
   description: >-
     Documentation for the NCATS Biomedical Translator Reasoners web services
