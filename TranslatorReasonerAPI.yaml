@@ -38,9 +38,9 @@ info:
     test_data_location: ADD-URL-THAT-RESOLVES-TO-SRI-TESTING-HARNESS-DATA
     externalDocs:
       description: >-
-        This field and its corresponding tag (trapi) are only required for components with
-        a TRAPI interface (accept TRAPI messages or queries / return TRAPI responses).
-        The values for version are restricted according to the regex in
+        This field and its corresponding tag (trapi) are only required for components
+        with a TRAPI interface (accept TRAPI messages or queries / return TRAPI
+        responses). The values for version are restricted according to the regex in
         this external JSON schema. See schema and examples at url
       url: >-
         https://github.com/NCATSTranslator/translator_extensions/blob/production/x-trapi/
