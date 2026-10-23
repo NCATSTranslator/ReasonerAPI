@@ -19,7 +19,7 @@ info:
     externalDocs:
       description: >-
         This field and its corresponding tag (translator) are REQUIRED for all
-        Translator resources. 
+        Translator resources.
         The values for component and team are restricted according to this
         external JSON schema. See schema and examples at url
       url: >-
@@ -39,7 +39,7 @@ info:
     externalDocs:
       description: >-
         This field and its corresponding tag (trapi) are only required for components with
-        a TRAPI interface (accept TRAPI messages or queries / return TRAPI responses). 
+        a TRAPI interface (accept TRAPI messages or queries / return TRAPI responses).
         The values for version are restricted according to the regex in
         this external JSON schema. See schema and examples at url
       url: >-
@@ -49,9 +49,9 @@ servers:
     x-maturity: REPLACE-WITH-ONE-OF-THE-FOLLOWING-production-testing-staging-development
     description: INSERT-SERVER-DESCRIPTION-HERE
     externalDocs:
-      description: >- 
+      description: >-
         x-maturity is REQUIRED on every server url for a Translator resource. The values
-        correspond to the 4 possible Translator environments: production (ITRB prod), 
+        correspond to the 4 possible Translator environments: production (ITRB prod),
         testing (ITRB Test), staging (ITRB CI), and development (non-ITRB).
       url: >-
         https://github.com/NCATSTranslator/TranslatorEngineering/blob/master/SmartAPIRegistration.md#environments
